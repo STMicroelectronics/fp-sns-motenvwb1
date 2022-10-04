@@ -1,8 +1,8 @@
 | Component                                			| Copyright            | License   |
 |:---------                                			|:-------              |:----------|
 | Core CMSIS                               			| ARM Limited          | Apache 2.0 |
-| CMSIS                                    			| ARM Limited          | Apache License 2.0 |
-| CMSIS Device                             			| ARM Limited - STMicroelectronics   | Apache License 2.0 |
+| CMSIS                                    			| ARM Limited          | Apache-2.0 |
+| CMSIS Device                             			| ARM Limited - STMicroelectronics   | Apache-2.0 |
 | STM32WBxx_HAL_Driver								| STMicroelectronics   | BSD-3-Clause |
 | BSP Component Common								| STMicroelectronics   | BSD-3-Clause |
 | BSP Component hts221								| STMicroelectronics   | BSD-3-Clause |
