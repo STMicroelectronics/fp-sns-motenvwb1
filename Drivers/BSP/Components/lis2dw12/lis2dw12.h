@@ -6,13 +6,12 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2019 STMicroelectronics.
-  * All rights reserved.</center></h2>
+  * Copyright (c) 2019 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under BSD 3-Clause license,
-  * the "License"; You may not use this file except in compliance with the
-  * License. You may obtain a copy of the License at:
-  *                        opensource.org/licenses/BSD-3-Clause
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
   */
@@ -49,6 +48,7 @@ extern "C"
 typedef int32_t (*LIS2DW12_Init_Func)(void);
 typedef int32_t (*LIS2DW12_DeInit_Func)(void);
 typedef int32_t (*LIS2DW12_GetTick_Func)(void);
+typedef void    (*LIS2DW12_Delay_Func)(uint32_t);
 typedef int32_t (*LIS2DW12_WriteReg_Func)(uint16_t, uint16_t, uint8_t *, uint16_t);
 typedef int32_t (*LIS2DW12_ReadReg_Func)(uint16_t, uint16_t, uint8_t *, uint16_t);
 
@@ -67,6 +67,7 @@ typedef struct
   LIS2DW12_WriteReg_Func     WriteReg;
   LIS2DW12_ReadReg_Func      ReadReg;
   LIS2DW12_GetTick_Func      GetTick;
+  LIS2DW12_Delay_Func        Delay;
 } LIS2DW12_IO_t;
 
 
@@ -302,5 +303,3 @@ extern LIS2DW12_ACC_Drv_t LIS2DW12_ACC_Driver;
 /**
   * @}
   */
-
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

@@ -27,7 +27,7 @@ extern "C" {
 
   /* Includes ------------------------------------------------------------------*/
 #include "mbox_def.h" /* Requested to expose the MB_WirelessFwInfoTable_t structure */
-
+  
   /* Exported types ------------------------------------------------------------*/
 
   /* SYSTEM EVENT */
@@ -495,6 +495,7 @@ extern "C" {
    * Some information for Low speed clock mapped in bits field
    * - bit 0:   1: Calibration for the RF system wakeup clock source   0: No calibration for the RF system wakeup clock source
    * - bit 1:   1: STM32W5M Module device                              0: Other devices as STM32WBxx SOC, STM32WB1M module
+   * - bit 2:   1: HSE/1024 Clock config                               0: LSE Clock config   
    */
   uint8_t LsSource;
 
@@ -532,8 +533,10 @@ extern "C" {
    * - bit 2:   1: device name Read-Only            0: device name R/W
    * - bit 3:   1: extended advertizing supported   0: extended advertizing not supported
    * - bit 4:   1: CS Algo #2 supported             0: CS Algo #2 not supported
-   * - bit 7:   1: LE Power Class 1                 0: LE Power Classe 2-3
-   * - other bits: reserved ( shall be set to 0)
+   * - bit 5:   1: Reduced GATT database in NVM     0: Full GATT database in NVM 
+   * - bit 6:   1: GATT caching is used             0: GATT caching is not used
+   * - bit 7:   1: LE Power Class 1                 0: LE Power Class 2-3
+   * - other bits: complete with Options_extension flag
    */
   uint8_t Options;
 
@@ -598,7 +601,15 @@ extern "C" {
    * values as: 11(5.2), 12(5.3)
    */
   uint8_t ble_core_version; 
-  
+ 
+   /**
+   * Options flags extension
+   * - bit 0:   1: appearance Writable              0: appearance Read-Only
+   * - bit 1:   1: Enhanced ATT supported           0: Enhanced ATT not supported
+   * - other bits: reserved ( shall be set to 0)
+   */
+  uint8_t Options_extension;
+
       } SHCI_C2_Ble_Init_Cmd_Param_t;
 
   typedef PACKED_STRUCT{
@@ -625,10 +636,27 @@ extern "C" {
   
 #define SHCI_C2_BLE_INIT_OPTIONS_CS_ALGO2                             (1<<4)
 #define SHCI_C2_BLE_INIT_OPTIONS_NO_CS_ALGO2                          (0<<4)
+
+#define SHCI_C2_BLE_INIT_OPTIONS_REDUC_GATTDB_NVM                     (1<<5)
+#define SHCI_C2_BLE_INIT_OPTIONS_FULL_GATTDB_NVM                      (0<<5) 
+
+#define SHCI_C2_BLE_INIT_OPTIONS_GATT_CACHING_USED                    (1<<6)
+#define SHCI_C2_BLE_INIT_OPTIONS_GATT_CACHING_NOTUSED                 (0<<6)
   
 #define SHCI_C2_BLE_INIT_OPTIONS_POWER_CLASS_1                        (1<<7)
 #define SHCI_C2_BLE_INIT_OPTIONS_POWER_CLASS_2_3                      (0<<7)
 
+  /**
+   * Options extension
+   * Each definition below may be added together to build the Options value
+   * WARNING : Only one definition per bit shall be added to build the Options value
+   */
+#define SHCI_C2_BLE_INIT_OPTIONS_APPEARANCE_WRITABLE                  (1<<0)
+#define SHCI_C2_BLE_INIT_OPTIONS_APPEARANCE_READONLY                  (0<<0)
+
+#define SHCI_C2_BLE_INIT_OPTIONS_ENHANCED_ATT_SUPPORTED               (1<<1)
+#define SHCI_C2_BLE_INIT_OPTIONS_ENHANCED_ATT_NOTSUPPORTED            (0<<1)
+  
     /**
    * RX models configuration
    */
@@ -638,16 +666,19 @@ extern "C" {
   /**
    * BLE core version
    */
-#define SHCI_C2_BLE_INIT_BLE_CORE_5_2               11 
+#define SHCI_C2_BLE_INIT_BLE_CORE_5_2               11
 #define SHCI_C2_BLE_INIT_BLE_CORE_5_3               12
+#define SHCI_C2_BLE_INIT_BLE_CORE_5_4               13
   
    /**
    * LsSource information
    */
-#define SHCI_C2_BLE_INIT_CFG_BLE_LSE_NOCALIB                     (0<<0)
-#define SHCI_C2_BLE_INIT_CFG_BLE_LSE_CALIB                       (1<<0)
-#define SHCI_C2_BLE_INIT_CFG_BLE_LSE_OTHER_DEV                   (0<<1)  
-#define SHCI_C2_BLE_INIT_CFG_BLE_LSE_MOD5MM_DEV                  (1<<1)
+#define SHCI_C2_BLE_INIT_CFG_BLE_LS_NOCALIB                     (0<<0)
+#define SHCI_C2_BLE_INIT_CFG_BLE_LS_CALIB                       (1<<0)
+#define SHCI_C2_BLE_INIT_CFG_BLE_LS_OTHER_DEV                   (0<<1)  
+#define SHCI_C2_BLE_INIT_CFG_BLE_LS_MOD5MM_DEV                  (1<<1)
+#define SHCI_C2_BLE_INIT_CFG_BLE_LS_CLK_LSE                     (0<<2)  
+#define SHCI_C2_BLE_INIT_CFG_BLE_LS_CLK_HSE_1024                (1<<2)
   
 #define SHCI_OPCODE_C2_THREAD_INIT              (( SHCI_OGF << 10) + SHCI_OCF_C2_THREAD_INIT)
 /** No command parameters */
@@ -807,6 +838,7 @@ extern "C" {
       uint32_t BleNvmRamAddress;
       uint32_t ThreadNvmRamAddress;
       uint16_t RevisionID;
+      uint16_t DeviceID;
     } SHCI_C2_CONFIG_Cmd_Param_t;
 
 #define SHCI_OPCODE_C2_802_15_4_DEINIT    (( SHCI_OGF << 10) + SHCI_OCF_C2_802_15_4_DEINIT)
@@ -823,6 +855,12 @@ extern "C" {
 #define SHCI_C2_CONFIG_CUT2_0                        (0x2000)
 #define SHCI_C2_CONFIG_CUT2_1                        (0x2001)
 #define SHCI_C2_CONFIG_CUT2_2                        (0x2003)
+ 
+/**
+ * Device ID
+ */
+#define SHCI_C2_CONFIG_STM32WB55xx                   (0x495)    
+#define SHCI_C2_CONFIG_STM32WB15xx                   (0x494)
     
 /**
  * Config1
@@ -867,7 +905,7 @@ extern "C" {
 #define FUS_DEVICE_INFO_TABLE_VALIDITY_KEYWORD    (0xA94656B9)
 
 /*
-  *   At startup, the informations relative to the wireless binary are stored in RAM trough a structure defined by
+  *   At startup, the information relative to the wireless binary are stored in RAM through a structure defined by
   *   MB_WirelessFwInfoTable_t.This structure contains 4 fields (Version,MemorySize, Stack_info and a reserved part)
   *   each of those coded on 32 bits as shown on the table below:
   *
@@ -1113,7 +1151,7 @@ typedef struct {
   * @brief Starts the LLD tests CLI
   *
   * @param  param_size : Nb of bytes
-  * @param  p_param : pointeur with data to give from M4 to M0
+  * @param  p_param : pointer with data to give from M4 to M0
   * @retval Status
   */
   SHCI_CmdStatus_t SHCI_C2_LLDTESTS_Init( uint8_t param_size, uint8_t * p_param );
@@ -1123,7 +1161,7 @@ typedef struct {
   * @brief Starts the LLD tests BLE
   *
   * @param  param_size : Nb of bytes
-  * @param  p_param : pointeur with data to give from M4 to M0
+  * @param  p_param : pointer with data to give from M4 to M0
   * @retval Status
   */
   SHCI_CmdStatus_t SHCI_C2_BLE_LLD_Init( uint8_t param_size, uint8_t * p_param );
@@ -1223,7 +1261,7 @@ typedef struct {
 
   /**
    * SHCI_GetWirelessFwInfo
-   * @brief This function read back the informations relative to the wireless binary loaded.
+   * @brief This function read back the information relative to the wireless binary loaded.
    *         Refer yourself to MB_WirelessFwInfoTable_t structure to get the significance
    *         of the different parameters returned.
    * @param  pWirelessInfo : Pointer to WirelessFwInfo_t.

@@ -7,13 +7,12 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2021 STMicroelectronics.
-  * All rights reserved.</center></h2>
+  * Copyright (c) 2019 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under BSD 3-Clause license,
-  * the "License"; You may not use this file except in compliance with the
-  * License. You may obtain a copy of the License at:
-  *                        opensource.org/licenses/BSD-3-Clause
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
   */
@@ -111,12 +110,15 @@ typedef struct
 
 typedef int32_t (*stmdev_write_ptr)(void *, uint8_t, uint8_t *, uint16_t);
 typedef int32_t (*stmdev_read_ptr)(void *, uint8_t, uint8_t *, uint16_t);
+typedef void (*stmdev_mdelay_ptr)(uint32_t millisec);
 
 typedef struct
 {
   /** Component mandatory fields **/
   stmdev_write_ptr  write_reg;
   stmdev_read_ptr   read_reg;
+  /** Component optional fields **/
+  stmdev_mdelay_ptr   mdelay;
   /** Customizable optional pointer **/
   void *handle;
 } stmdev_ctx_t;
@@ -1060,5 +1062,3 @@ int32_t lis2dw12_fifo_wtm_flag_get(stmdev_ctx_t *ctx, uint8_t *val);
 #endif
 
 #endif /*LIS2DW12_REGS_H */
-
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

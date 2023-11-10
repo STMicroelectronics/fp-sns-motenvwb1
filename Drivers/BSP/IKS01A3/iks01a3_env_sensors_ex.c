@@ -6,13 +6,12 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2022 STMicroelectronics.
-  * All rights reserved.</center></h2>
+  * Copyright (c) 2019 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under BSD 3-Clause license,
-  * the "License"; You may not use this file except in compliance with the
-  * License. You may obtain a copy of the License at:
-  *                        opensource.org/licenses/BSD-3-Clause
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
   */
@@ -79,6 +78,37 @@ int32_t IKS01A3_ENV_SENSOR_Get_DRDY_Status(uint32_t Instance, uint32_t Function,
       else if ((Function & ENV_TEMPERATURE) == ENV_TEMPERATURE)
       {
         if (HTS221_TEMP_Get_DRDY_Status(EnvCompObj[Instance], Status) != BSP_ERROR_NONE)
+        {
+          ret = BSP_ERROR_COMPONENT_FAILURE;
+        }
+        else
+        {
+          ret = BSP_ERROR_NONE;
+        }
+      }
+      else
+      {
+        ret = BSP_ERROR_COMPONENT_FAILURE;
+      }
+      break;
+#endif
+
+#if (USE_IKS01A3_ENV_SENSOR_SHT40AD1B_0 == 1)
+    case IKS01A3_SHT40AD1B_0:
+      if ((Function & ENV_HUMIDITY) == ENV_HUMIDITY)
+      {
+        if (SHT40AD1B_HUM_Get_DRDY_Status(EnvCompObj[Instance], Status) != BSP_ERROR_NONE)
+        {
+          ret = BSP_ERROR_COMPONENT_FAILURE;
+        }
+        else
+        {
+          ret = BSP_ERROR_NONE;
+        }
+      }
+      else if ((Function & ENV_TEMPERATURE) == ENV_TEMPERATURE)
+      {
+        if (SHT40AD1B_TEMP_Get_DRDY_Status(EnvCompObj[Instance], Status) != BSP_ERROR_NONE)
         {
           ret = BSP_ERROR_COMPONENT_FAILURE;
         }
@@ -1817,5 +1847,3 @@ int32_t IKS01A3_ENV_SENSOR_Get_One_Shot_Status(uint32_t Instance, uint8_t *Statu
 /**
   * @}
   */
-
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

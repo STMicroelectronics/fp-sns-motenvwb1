@@ -33,8 +33,8 @@ This driver is composed of the descriptions of the registers under "Include" dir
 Various template file are provided to easily build an application. They can be adapted to fit applications requirements.
 
 - Templates/system_stm32wbxx.c contains the initialization code referred as SystemInit.
-- Startup files are provided as example for IAR&copy;, KEIL&copy; and SW4STM32&copy;.
-- Linker files are provided as example for IAR&copy;, KEIL&copy; and SW4STM32&copy;.
+- Startup files are provided as example for IAR©, KEIL© and STM32CubeIDE©.
+- Linker files are provided as example for IAR©, KEIL© and STM32CubeIDE©.
 
 # Specific consideration for available FLASH size inside linker file
 
@@ -98,7 +98,25 @@ Note:
 # Update History
 
 ::: {.collapse}
-<input type="checkbox" id="collapse-section12" checked aria-hidden="true">
+<input type="checkbox" id="collapse-section13" checked aria-hidden="true">
+<label for="collapse-section13" aria-hidden="true">V1.12.0 / 09-November-2022</label>
+<div>
+
+## Main Changes
+
+- Fix incorrect USB_BASE and USB_PMAADDR addresses
+- Fix initialization missing of data in RAM2 memory
+- Add specific LSE_VALUE for STM32WB5Mxx
+
+## Supported Devices and boards
+
+- STM32WB55xx, STM32WB5Mxx, STM32WB50xx, STM32WB35xx, STM32WB30xx, STM32WB15xx, STM32WB10xx and STM32WB1Mxx devices.
+
+</div>
+:::
+
+::: {.collapse}
+<input type="checkbox" id="collapse-section12" aria-hidden="true">
 <label for="collapse-section12" aria-hidden="true">V1.11.0 / 08-June-2022</label>
 <div>
 

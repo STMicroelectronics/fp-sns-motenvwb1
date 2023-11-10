@@ -27,15 +27,112 @@
 <a href="https://www.st.com" class="logo"><img src="../_htmresc/st_logo_2020.png" alt="ST logo" /></a>
 </center>
 <h1 id="purpose">Purpose</h1>
-<p>The <mark>FP-SNS-MOTENVWB1</mark> Projects provide applications to aid understanding how to develop an application using the STM32_WPAN Middleware and Motion libraries middlewares. Projects include STM32CubeMX project file (.ioc) for the graphical visualization of the STM32 microcontroller pins, peripherals and supported expansion nucleo boards.</p>
+<p>The <mark>FP-SNS-MOTENVWB1</mark> Projects provide applications to aid understanding how to develop an application using the STM32_WPAN Middleware and Motion libraries middlewares. Projects include STM32CubeMX project file (.ioc) for the graphical visualization of the STM32 microcontroller pins, peripherals and supported expansion nucleo boards. STM32CubeMX project files (.ioc) can be used for generate the MOTENV1 and MOTENV1_OTA application for each supported board.</p>
 </div>
 <div class="col-sm-12 col-lg-8">
 <h1 id="update-history">Update History</h1>
 <div class="collapse">
-<input type="checkbox" id="collapse-section1" checked aria-hidden="true"> <label for="collapse-section1" aria-hidden="true">V1.2.0 / 29-July-2022</label>
+<input type="checkbox" id="collapse-section2" checked aria-hidden="true"> <label for="collapse-section2" aria-hidden="true">V1.3.0 / 10-July-2023</label>
 <div>
 <h2 id="main-changes">Main Changes</h2>
 <h3 id="maintenance-release">Maintenance release</h3>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Headline</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Added support for X-NUCLEO-IKS4A1 Motion MEMS and environmental sensor expansion board for STM32 Nucleo</td>
+</tr>
+</tbody>
+</table>
+<h2 id="contents">Contents</h2>
+<p><small>The components flagged by “<span class="icon-st-update"></span>” have changed since the previous release. “<span class="icon-st-add"></span>” are new.</small></p>
+<p>Projects</p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Board/Device</th>
+<th style="text-align: left;">Category</th>
+<th style="text-align: left;">Expansion Board</th>
+<th style="text-align: left;">Name</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">P-NUCLEO-WB55-NUCLEO</td>
+<td style="text-align: left;">Applications <span class="icon-st-update"></span></td>
+<td style="text-align: left;">X-NUCLEO-IKS01A3</td>
+<td style="text-align: left;"><a href="P-NUCLEO-WB55-NUCLEO\Applications\IKS01A3\MOTENV1">MOTENV1</a></td>
+<td style="text-align: left;"><a href="P-NUCLEO-WB55-NUCLEO\Applications\IKS01A3\MOTENV1\readme.html">readme</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">P-NUCLEO-WB55-NUCLEO</td>
+<td style="text-align: left;">Applications <span class="icon-st-update"></span></td>
+<td style="text-align: left;">X-NUCLEO-IKS01A3</td>
+<td style="text-align: left;"><a href="P-NUCLEO-WB55-NUCLEO\Applications\IKS01A3\MOTENV1_OTA">MOTENV1_OTA</a></td>
+<td style="text-align: left;"><a href="P-NUCLEO-WB55-NUCLEO\Applications\IKS01A3\MOTENV1_OTA\readme.html">readme</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">P-NUCLEO-WB55-NUCLEO</td>
+<td style="text-align: left;">Applications <span class="icon-st-add"></span></td>
+<td style="text-align: left;">X-NUCLEO-IKS4A1</td>
+<td style="text-align: left;"><a href="P-NUCLEO-WB55-NUCLEO\Applications\IKS4A1\MOTENV1">MOTENV1</a></td>
+<td style="text-align: left;"><a href="P-NUCLEO-WB55-NUCLEO\Applications\IKS4A1\MOTENV1\readme.html">readme</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">P-NUCLEO-WB55-NUCLEO</td>
+<td style="text-align: left;">Applications <span class="icon-st-add"></span></td>
+<td style="text-align: left;">X-NUCLEO-IKS4A1</td>
+<td style="text-align: left;"><a href="P-NUCLEO-WB55-NUCLEO\Applications\IKS4A1\MOTENV1_OTA">MOTENV1_OTA</a></td>
+<td style="text-align: left;"><a href="P-NUCLEO-WB55-NUCLEO\Applications\IKS4A1\MOTENV1_OTA\readme.html">readme</a></td>
+</tr>
+</tbody>
+</table>
+<h2 id="development-toolchains-and-compilers">Development Toolchains and Compilers</h2>
+<ul>
+<li>IAR Embedded Workbench for ARM (EWARM) toolchain V9.20.1</li>
+<li>RealView Microcontroller Development Kit (Open Keil µVision 5 - MDK-ARM) toolchain V5.37.0</li>
+<li>STM32CubeIDE V1.12.1</li>
+</ul>
+<h2 id="supported-devices-and-boards">Supported Devices and Boards</h2>
+<ul>
+<li>P-NUCLEO-WB55RG Nucleo-68 board with STM32WB55 MCU supporting Bluetooth™ 5 and 802.15.4 connectivity</li>
+<li>X-NUCLEO-IKS01A3 Expansion board for four MEMS sensor devices:
+<ul>
+<li>HTS221, LPS22HH, LSM6DSO, LIS2MDL</li>
+</ul></li>
+<li>X-NUCLEO-IKS4A1 Expansion board for four MEMS sensor devices:
+<ul>
+<li>STTS22H, SHT40AD1B, LPS22DF, LSM6DSV16X, LIS2MDL</li>
+</ul></li>
+<li>X-NUCLEO-53L3A2 Multi-targets ranging sensor expansion board based on VL53L3CX for STM32 Nucleo (Optional).</li>
+</ul>
+<h2 id="issues">Issues</h2>
+<ul>
+<li><p>After code generation MOTENV1 from STM32CubeMX tool for STM32CubeIDE toolchain, after building if the generated binary doesn’t work, replace the linker scripts with the scripts in the folder LinkerScript.</p></li>
+<li><p>After code generation MOTENV1_OTA from STM32CubeMX software before building:</p>
+<ul>
+<li>for IAR, Keil and STM32CubeIDE replace the linker scripts with the scripts in the folder LinkerScript</li>
+<li>for Keil, open the “Options for Target” and in the tab “Target” set start= 0x8007000 and sixe= 0x79000.</li>
+</ul></li>
+</ul>
+<h2 id="very-iimportant">Very Iimportant</h2>
+<p>MOTENV1_OTA allow the Firmware-Over-The-Air (FOTA). To support OTA you need:</p>
+<ol type="1">
+<li>to flash BLE_Ota_reference.hex from 0x8000000 at the beginning of the FLASH (address 0x08000000)</li>
+<li>flash user application from 0x8007000</li>
+</ol>
+</div>
+</div>
+<div class="collapse">
+<input type="checkbox" id="collapse-section1" aria-hidden="true"> <label for="collapse-section1" aria-hidden="true">V1.2.0 / 29-July-2022</label>
+<div>
+<h2 id="main-changes-1">Main Changes</h2>
+<h3 id="maintenance-release-1">Maintenance release</h3>
 <table>
 <thead>
 <tr class="header">
@@ -51,7 +148,7 @@
 </tr>
 </tbody>
 </table>
-<h2 id="contents">Contents</h2>
+<h2 id="contents-1">Contents</h2>
 <p><small>The components flagged by “<span class="icon-st-update"></span>” have changed since the previous release. “<span class="icon-st-add"></span>” are new.</small></p>
 <p>Projects</p>
 <table>
@@ -78,13 +175,13 @@
 </tr>
 </tbody>
 </table>
-<h2 id="development-toolchains-and-compilers">Development Toolchains and Compilers</h2>
+<h2 id="development-toolchains-and-compilers-1">Development Toolchains and Compilers</h2>
 <ul>
 <li>IAR Embedded Workbench for ARM (EWARM) toolchain V9.20.1</li>
 <li>RealView Microcontroller Development Kit (Open Keil µVision 5 - MDK-ARM) toolchain V5.37.0</li>
 <li>STM32CubeIDE V1.10.1</li>
 </ul>
-<h2 id="supported-devices-and-boards">Supported Devices and Boards</h2>
+<h2 id="supported-devices-and-boards-1">Supported Devices and Boards</h2>
 <ul>
 <li>P-NUCLEO-WB55RG Nucleo-68 board with STM32WB55 MCU supporting Bluetooth™ 5 and 802.15.4 connectivity</li>
 <li>X-NUCLEO-IKS01A3 Expansion board for four MEMS sensor devices:
@@ -93,7 +190,7 @@
 </ul></li>
 <li>X-NUCLEO-53L3A2 Multi-targets ranging sensor expansion board based on VL53L3CX for STM32 Nucleo (Optional).</li>
 </ul>
-<h2 id="issues">Issues</h2>
+<h2 id="issues-1">Issues</h2>
 <p>Related to Keil µVision 5:</p>
 <ul>
 <li>If the constant CFG_DEBUG_APP_TRACE is egual to 1 for enabling the printf, the application doesnt’t work</li>

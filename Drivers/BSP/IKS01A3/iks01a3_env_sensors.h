@@ -6,13 +6,12 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2022 STMicroelectronics.
-  * All rights reserved.</center></h2>
+  * Copyright (c) 2019 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under BSD 3-Clause license,
-  * the "License"; You may not use this file except in compliance with the
-  * License. You may obtain a copy of the License at:
-  *                        opensource.org/licenses/BSD-3-Clause
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
   */
@@ -77,6 +76,10 @@ extern "C" {
 #define USE_IKS01A3_ENV_SENSOR_LPS28DFW_0        0
 #endif
 
+#ifndef USE_IKS01A3_ENV_SENSOR_SHT40AD1B_0
+#define USE_IKS01A3_ENV_SENSOR_SHT40AD1B_0       0
+#endif
+
 #if (USE_IKS01A3_ENV_SENSOR_HTS221_0 == 1)
 #include "hts221.h"
 #endif
@@ -123,6 +126,10 @@ extern "C" {
 
 #if (USE_IKS01A3_ENV_SENSOR_LPS28DFW_0 == 1)
 #include "lps28dfw.h"
+#endif
+
+#if (USE_IKS01A3_ENV_SENSOR_SHT40AD1B_0 == 1)
+#include "sht40ad1b.h"
 #endif
 
 /** @addtogroup BSP BSP
@@ -269,6 +276,21 @@ typedef struct
                             USE_IKS01A3_ENV_SENSOR_ILPS28QSW_0)
 #endif
 
+#if (USE_IKS01A3_ENV_SENSOR_SHT40AD1B_0 == 1)
+#define IKS01A3_SHT40AD1B_0 (USE_IKS01A3_ENV_SENSOR_HTS221_0 + \
+                            USE_IKS01A3_ENV_SENSOR_LPS22HH_0 + \
+                            USE_IKS01A3_ENV_SENSOR_STTS751_0 + \
+                            USE_IKS01A3_ENV_SENSOR_LPS33HW_0 + \
+                            USE_IKS01A3_ENV_SENSOR_STTS22H_0 + \
+                            USE_IKS01A3_ENV_SENSOR_LPS33K_0 + \
+                            USE_IKS01A3_ENV_SENSOR_LPS22CH_0 + \
+                            USE_IKS01A3_ENV_SENSOR_LPS27HHTW_0 + \
+                            USE_IKS01A3_ENV_SENSOR_LPS22DF_0 + \
+                            USE_IKS01A3_ENV_SENSOR_ILPS22QS_0 + \
+                            USE_IKS01A3_ENV_SENSOR_ILPS28QSW_0 + \
+                            USE_IKS01A3_ENV_SENSOR_LPS28DFW_0)
+#endif
+
 #ifndef ENV_TEMPERATURE
 #define ENV_TEMPERATURE      1U
 #endif
@@ -291,7 +313,8 @@ typedef struct
                                       USE_IKS01A3_ENV_SENSOR_LPS22DF_0 + \
                                       USE_IKS01A3_ENV_SENSOR_ILPS22QS_0 + \
                                       USE_IKS01A3_ENV_SENSOR_ILPS28QSW_0 + \
-                                      USE_IKS01A3_ENV_SENSOR_LPS28DFW_0)
+                                      USE_IKS01A3_ENV_SENSOR_LPS28DFW_0 + \
+                                      USE_IKS01A3_ENV_SENSOR_SHT40AD1B_0)
 
 #if (IKS01A3_ENV_INSTANCES_NBR == 0)
 #error "No environmental sensor instance has been selected"
@@ -336,5 +359,3 @@ int32_t IKS01A3_ENV_SENSOR_GetValue(uint32_t Instance, uint32_t Function, float 
 #endif
 
 #endif /* IKS01A3_ENV_SENSORS_H */
-
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

@@ -77,6 +77,34 @@ Update History
 
 ::: {.collapse}
 <input type="checkbox" id="collapse-section2" checked aria-hidden="true">
+<label for="collapse-section2" aria-hidden="false">V1.4.0 / 13-September-2022</label>
+<div>
+
+## Main Changes
+
+OpenThread version based on commit :
+
+-   SHA-1: 32ac6ddfad2bc196e216c42249c73420542daac0 (July 26th 2022)
+
+</div>
+:::
+
+::: {.collapse}
+<input type="checkbox" id="collapse-section2" checked aria-hidden="true">
+<label for="collapse-section2" aria-hidden="false">V1.3.0 / 19-April-2022</label>
+<div>
+
+## Main Changes
+
+OpenThread version based on commit :
+
+-   SHA-1: ec02abc47c6d7663f82132d64555839a5c93e018 (February 22th 2022)
+
+</div>
+:::
+
+::: {.collapse}
+<input type="checkbox" id="collapse-section2" checked aria-hidden="true">
 <label for="collapse-section2" aria-hidden="false">V1.1.0 / 17-November-2020</label>
 <div>
 

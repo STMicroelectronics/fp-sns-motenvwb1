@@ -50,7 +50,8 @@ __attribute__((aligned(4)))Elements_Page0_t aNodeElements[CLIENT_MAX_ELEMENTS_PE
 /* ALIGN(4)*/
 __attribute__((aligned(4)))NodeInfo_t NodeInfo;
 
-const MODEL_OpcodeTableParam_t Config_Client_Opcodes_Table[] = {
+const MODEL_OpcodeTableParam_t Config_Client_Opcodes_Table[] = 
+{
   /*    MOBLEUINT32 opcode, MOBLEBOOL reliable, MOBLEUINT16 min_payload_size, 
   MOBLEUINT16 max_payload_size;
   Here in this array, Handler is not defined; */
@@ -211,7 +212,7 @@ MOBLE_RESULT ConfigClient_CompositionDataGet(MOBLE_ADDRESS dst_peer)
     
   configClientGetCompositionMsg_t ccGetCompositionMsg;
   
-  TRACE_M(TF_CONFIG_CLIENT_M, "Config CompositionDataGet Message \r\n");  
+  TRACE_M(TF_CONFIG_CLIENT_M, "Config CompositionDataGet Message of Node %d\r\n", dst_peer);  
   ccGetCompositionMsg.Opcode = OPCODE_CONFIG_COMPOSITION_DATA_GET;
   ccGetCompositionMsg.page = COMPOSITION_PAGE0;
 
@@ -291,7 +292,7 @@ MOBLE_RESULT ConfigClient_CompositionDataStatusResponse(MOBLEUINT8 const *pSrcCo
 
     /******************* Copy the SIG Models **********************************/    
     /* Prepare the variables to find the number of SIG Models, SInce header is already copied,
-       it can use used directly for the comparision */
+       it can use used directly for the comparison */
     /* This is to be used for running the loop for data copy */
       
     if (length >= (parsedDataLength+2))
@@ -445,7 +446,7 @@ MOBLEUINT32 GetVendorModelFromCompositionData(MOBLEUINT8 elementIdx, MOBLEUINT8 
   MOBLEUINT32 model;
 
   model = aNodeElements[elementIdx].aVendorModels[idxVendor]; 
-  /* Maybe little endien conversion may be needed */
+  /* Maybe little endian conversion may be needed */
   
   return model;
 }
@@ -584,7 +585,7 @@ AppKey 16B : AppKey value
   pConfigData = (MOBLEUINT8*) &(configClientAppKeyAdd);
   dataLength = sizeof(configClientAppKeyAdd_t);
   
-  TRACE_M(TF_CONFIG_CLIENT_M, "Config Client App Key Add  \r\n");  
+  TRACE_M(TF_CONFIG_CLIENT_M, "Config Client App Key Add of Node %d\r\n", dst_peer);  
   ConfigClientModel_SendMessage(dst_peer,msg_opcode,pConfigData,dataLength);
 
   return result;
@@ -795,7 +796,7 @@ MOBLE_RESULT ConfigClient_PublicationSet (MOBLEUINT16 elementAddress,
   TRACE_M(TF_CONFIG_CLIENT_M, "Config Client Publication Add  \r\n");  
   TRACE_M(TF_CONFIG_CLIENT_M, "elementAddr = [%04x]\r\n", elementAddress);  
   TRACE_M(TF_CONFIG_CLIENT_M, "publishAddress = [%04x]\r\n", publishAddress); 
-  TRACE_M(TF_CONFIG_CLIENT_M, "modelIdentifier = [%08x]\r\n", modelIdentifier);
+  TRACE_M(TF_CONFIG_CLIENT_M, "modelIdentifier = [%08lx]\r\n", modelIdentifier);
   
   TRACE_I(TF_CONFIG_CLIENT_M, "Publication Set buffer \r\n");
   
@@ -902,7 +903,7 @@ MOBLE_RESULT ConfigClient_PublicationStatus(MOBLEUINT8 const *pPublicationStatus
   }  
   TRACE_M(TF_CONFIG_CLIENT_M, "elementAddr = [%04x]\r\n", configClientPublicationStatus.elementAddr);  
   TRACE_M(TF_CONFIG_CLIENT_M, "publishAddress = [%04x]\r\n", configClientPublicationStatus.publishAddr); 
-  TRACE_M(TF_CONFIG_CLIENT_M, "modelIdentifier = [%08x]\r\n", configClientPublicationStatus.modelIdentifier);
+  TRACE_M(TF_CONFIG_CLIENT_M, "modelIdentifier = [%08lx]\r\n", configClientPublicationStatus.modelIdentifier);
   TRACE_M(TF_CONFIG_CLIENT_M, "status = [%02x]\r\n", configClientPublicationStatus.Status);  
 
   Appli_PublicationStatusCb(configClientPublicationStatus.Status);
@@ -992,7 +993,7 @@ Config Model Subscription Status message.
    
   TRACE_M(TF_CONFIG_CLIENT_M, "elementAddr = [%04x]\r\n", elementAddress);  
   TRACE_M(TF_CONFIG_CLIENT_M, "SubscriptionAddress = [%04x]\r\n", address); 
-  TRACE_M(TF_CONFIG_CLIENT_M, "modelIdentifier = [%08x]\r\n", modelIdentifier);
+  TRACE_M(TF_CONFIG_CLIENT_M, "modelIdentifier = [%08lx]\r\n", modelIdentifier);
    
   self_addr = BLEMesh_GetAddress();
 
@@ -1127,7 +1128,7 @@ MOBLE_RESULT ConfigClient_SubscriptionStatus(MOBLEUINT8 const *pSrcSubscriptionS
   
   TRACE_M(TF_CONFIG_CLIENT_M, "elementAddr = [%04x]\r\n", configClientSubscriptionStatus.elementAddress);  
   TRACE_M(TF_CONFIG_CLIENT_M, "SubscriptionAddress = [%04x]\r\n", configClientSubscriptionStatus.address); 
-  TRACE_M(TF_CONFIG_CLIENT_M, "modelIdentifier = [%08x]\r\n", configClientSubscriptionStatus.modelIdentifier);
+  TRACE_M(TF_CONFIG_CLIENT_M, "modelIdentifier = [%08lx]\r\n", configClientSubscriptionStatus.modelIdentifier);
   TRACE_M(TF_CONFIG_CLIENT_M, "subscription status = [%02x]\r\n", configClientSubscriptionStatus.Status);
   
   Appli_SubscriptionAddStatusCb(configClientSubscriptionStatus.Status);
@@ -1221,7 +1222,7 @@ The response to a Config Model App Bind message is a Config Model App Status mes
 
   TRACE_M(TF_CONFIG_CLIENT_M, "Config Client App Key Bind message  \r\n");   
   TRACE_M(TF_CONFIG_CLIENT_M, "elementAddr = [%04x]\r\n", elementAddress);  
-  TRACE_M(TF_CONFIG_CLIENT_M, "modelIdentifier = [%08x]\r\n", modelIdentifier);
+  TRACE_M(TF_CONFIG_CLIENT_M, "modelIdentifier = [%08lx]\r\n", modelIdentifier);
   
   if(ADDRESS_IS_UNASSIGNED(elementAddress))
   {
@@ -1413,7 +1414,7 @@ MOBLE_RESULT ConfigClientModel_SendMessage(MOBLE_ADDRESS dst_peer ,
   pTargetDevKey = (MOBLEUINT8 *)AppliPrvnNvm_GetNodeDevKey(dst_peer);
   
   result = ConfigModel_SendMessage(peer_addr, dst_peer, opcode, 
-                            pData, dataLength, pTargetDevKey); 
+                                   pData, dataLength, pTargetDevKey); 
   return result;
 }
 
@@ -1462,7 +1463,7 @@ MOBLEUINT8 ConfigClient_ChkRetrialState (eServerRespRecdState_t* peRespRecdState
   nowClockTime = Clock_Time();
   if(( (nowClockTime - NodeInfo.Initial_time) >= CONFIGCLIENT_RESPONSE_TIMEOUT))
   {
-    /* Timeout occured, Do retry or enter the error state  */
+    /* Timeout occurred, Do retry or enter the error state  */
     NodeInfo.numberOfAttemptsTx++;
     
     if (NodeInfo.numberOfAttemptsTx >= CONFIGCLIENT_MAX_TRIALS)
@@ -1499,7 +1500,7 @@ MOBLEUINT8 ConfigClient_ChkRetries (void)
   nowClockTime = Clock_Time();
   if(( (nowClockTime - NodeInfo.Initial_time) >= CONFIGCLIENT_RESPONSE_TIMEOUT))
   {
-    /* Timeout occured, Do retry or enter the error state  */
+    /* Timeout occurred, Do retry or enter the error state  */
     NodeInfo.numberOfAttemptsTx++;
     
     if (NodeInfo.numberOfAttemptsTx >= CONFIGCLIENT_MAX_TRIALS)
@@ -1571,7 +1572,7 @@ from the library to send response to the message from peer
 * @param  plength: Pointer to the Length of the data, to be updated by application
 * @param  pRxData: Pointer to the data received in packet.
 * @param  dataLength: length of the data in packet.
-* @param  response: Value to indicate wheather message is acknowledged meassage or not.
+* @param  response: Value to indicate wether message is acknowledged meassage or not.
 * @retval MOBLE_RESULT
 */ 
 MOBLE_RESULT ConfigClientModel_GetStatusRequestCb(MODEL_MessageHeader_t *pmsgParam,
@@ -1612,7 +1613,7 @@ the library whenever a Generic Model message is received
 * @param  response: if TRUE, the message is an acknowledged message
 * @param  pRxData: Pointer to the data received in packet.
 * @param  dataLength: length of the data in packet.
-* @param  response: Value to indicate wheather message is acknowledged meassage or not.
+* @param  response: Value to indicate wether message is acknowledged meassage or not.
 * @retval MOBLE_RESULT
 */ 
 MOBLE_RESULT ConfigClientModel_ProcessMessageCb(MODEL_MessageHeader_t *pmsgParam, 

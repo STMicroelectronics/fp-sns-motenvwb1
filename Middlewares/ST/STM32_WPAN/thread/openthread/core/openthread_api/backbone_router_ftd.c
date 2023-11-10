@@ -328,18 +328,4 @@ otError otBackboneRouterMulticastListenerAdd(otInstance *aInstance, const otIp6A
 #endif // OPENTHREAD_CONFIG_BACKBONE_ROUTER_MULTICAST_ROUTING_ENABLE
 #endif // OPENTHREAD_CONFIG_REFERENCE_DEVICE_ENABLE
 
-void otBackboneRouterConfigSkipSeqNumIncrease(otInstance *aInstance, bool aSkip)
-{
-  Pre_OtCmdProcessing();
-  /* prepare buffer */
-  Thread_OT_Cmd_Request_t* p_ot_req = THREAD_Get_OTCmdPayloadBuffer();
-
-  p_ot_req->ID = MSG_M4TOM0_OT_BACKBONE_ROUTER_CONFIG_SKIP_SEQ_NUM_INCREASE;
-
-  p_ot_req->Size=1;
-  p_ot_req->Data[0] = (uint32_t) aSkip;
-
-  Ot_Cmd_Transfer();
-}
-
 #endif // OPENTHREAD_FTD && OPENTHREAD_CONFIG_BACKBONE_ROUTER_ENABLE

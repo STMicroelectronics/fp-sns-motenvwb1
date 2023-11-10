@@ -115,7 +115,7 @@ void SerialPrvn_Process(char *rcvdStringBuff, uint16_t rcvdStringSize)
      /* Command to start the unprovisioned devices */
   else if (!strncmp(rcvdStringBuff+COMMAND_OFFSET, "RESET",5))
   {
-        BLEMesh_PrintStringCb("Reseting Board...\r\n");
+        BLEMesh_PrintStringCb("Resetting Board...\r\n");
         NVIC_SystemReset();
   }
   /* Command to scan the unprovisioned devices - Used By node only */
@@ -203,11 +203,22 @@ static MOBLE_RESULT SerialPrvn_UnProvisionDevice(char *text)
   sscanf(text, "UNPV %hd", &na);  
   if(na>1)
   {
-      result = ConfigClient_NodeReset(na);
+    result = ConfigClient_NodeReset(na);
+  }
+  else if(na == 1)
+  {
+    if(!BLEMesh_IsUnprovisioned())
+    {
+      Appli_Unprovision();
+    }
+    else
+    {
+      BLEMesh_PrintStringCb("Device is already unprovisioned !\r\n");
+    }
   }
   else 
   {
-      result = MOBLE_RESULT_INVALIDARG;
+    result = MOBLE_RESULT_INVALIDARG;
   }
 
   return result;

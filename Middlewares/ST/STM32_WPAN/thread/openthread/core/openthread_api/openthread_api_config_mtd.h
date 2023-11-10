@@ -26,60 +26,20 @@
 #define OPENTHREAD_MTD 1
 #endif
 
-/* Define to 1 if you want to enable support for multiple OpenThread
-   instances. */
-#define OPENTHREAD_CONFIG_MULTIPLE_INSTANCE_ENABLE 0
-
 /* Define to 1 if you want to enable default log output. */
 #define OPENTHREAD_CONFIG_LOG_OUTPUT  OPENTHREAD_CONFIG_LOG_OUTPUT_APP
 
 /* Define to 1 to enable COAP. */
 #define OPENTHREAD_CONFIG_COAP_API_ENABLE 1
 
-/* Define to 1 to enable the commissioner role. */
-#define OPENTHREAD_CONFIG_COMMISSIONER_ENABLE 1
-
-/* Define to 1 if you want to use diagnostics module */
-#define OPENTHREAD_CONFIG_DIAG_ENABLE 0
-
-/* Define to 1 if you want to enable legacy network. */
-#define OPENTHREAD_CONFIG_LEGACY_ENABLE 0
-
-/* Define to 1 to enable dtls support. */
-#define OPENTHREAD_CONFIG_DTLS_ENABLE 1
-
 /* Define to 1 to enable the joiner role. */
 #define OPENTHREAD_CONFIG_JOINER_ENABLE 1
-
-/* Define to 1 to enable the jam detection. */
-#define OPENTHREAD_CONFIG_JAM_DETECTION_ENABLE 0
-
-/* Define to 1 to enable channel manager. */
-#define OPENTHREAD_CONFIG_CHANNEL_MANAGER_ENABLE 0
-
-/* Define to 1 to enable channel monitor. */
-#define OPENTHREAD_CONFIG_CHANNEL_MONITOR_ENABLE 0
-
-/* Define to 1 to enable child supervision. */
-#define OPENTHREAD_CONFIG_CHILD_SUPERVISION_ENABLE 0
 
 /* Define to 1 to enable DHCPv6 Client. */
 #define OPENTHREAD_CONFIG_DHCP6_CLIENT_ENABLE 1
 
-/* Define to 1 to enable DHCPv6 SERVER. */
-#define OPENTHREAD_CONFIG_DHCP6_SERVER_ENABLE 1
-
 /* Define to 1 to enable MAC whitelist/blacklist feature. */
 #define OPENTHREAD_CONFIG_MAC_FILTER_ENABLE 1
-
-/* Define to 1 to enable TMF proxy feature. */
-//#define OPENTHREAD_ENABLE_TMF_PROXY 0
-
-/* Define to 1 to enable raw link-layer API. */
-#define OPENTHREAD_CONFIG_LINK_RAW_ENABLE 0
-
-/* Define to 1 to enable Border Router feature. */
-#define OPENTHREAD_CONFIG_BORDER_ROUTER_ENABLE 1
 
 /* Define to 1 to enable Service feature. */
 #define OPENTHREAD_CONFIG_TMF_NETDATA_SERVICE_ENABLE 1
@@ -108,12 +68,6 @@
 /* Define to 1 to enable Mle Link Metrics Initiator */
 #define OPENTHREAD_CONFIG_MLE_LINK_METRICS_INITIATOR_ENABLE 1
 
-/* Define to 1 to enable Mle Link Metrics Subject */
-#define OPENTHREAD_CONFIG_MLE_LINK_METRICS_SUBJECT_ENABLE 1
-
-/* Define to 1 to enable Backbone Router feature */
-#define OPENTHREAD_CONFIG_BACKBONE_ROUTER_ENABLE 1
-
 /* Define to 1 to support CSL feature */
 #define OPENTHREAD_CONFIG_MAC_CSL_RECEIVER_ENABLE 1
 
@@ -123,16 +77,40 @@
 /* Define to 1 to support DUA feature */
 #define OPENTHREAD_CONFIG_DUA_ENABLE 1
 
-/* Define to 1 to enable Backbone router DUA ND Proxy */
-#define OPENTHREAD_CONFIG_BACKBONE_ROUTER_DUA_NDPROXYING_ENABLE 1
-
-/* Define to 1 to enable Backbone Router Multicast Routing */
-#define OPENTHREAD_CONFIG_BACKBONE_ROUTER_MULTICAST_ROUTING_ENABLE 1
-
 /* Define to 1 to enable Thread Test Harness reference device support. */
 #define OPENTHREAD_CONFIG_REFERENCE_DEVICE_ENABLE 1
 
-/* Define to 1 to eanble Config MLR */
+/* Define to 1 to enable Config MLR */
 #define OPENTHREAD_CONFIG_MLR_ENABLE 1
+
+/* Define to 1 to enable DNS Client support */
+#define OPENTHREAD_CONFIG_DNS_CLIENT_ENABLE 1
+
+/* Define to 1 to enable SRP Client support */
+#define OPENTHREAD_CONFIG_SRP_CLIENT_ENABLE 1
+
+/* Define to 1 for the SRP client implementation to provide APIs that get/set the domain name */
+#define OPENTHREAD_CONFIG_SRP_CLIENT_DOMAIN_NAME_API_ENABLE 1
+
+/* Define to 1 to enable ECDSA support */
+#define OPENTHREAD_CONFIG_ECDSA_ENABLE 1
+
+/* Define if OPENTHREAD_CONFIG_SRP_CLIENT_ENABLE defined to enable SRP Client buffer support */
+#define OPENTHREAD_CONFIG_SRP_CLIENT_BUFFERS_ENABLE OPENTHREAD_CONFIG_SRP_CLIENT_ENABLE
+
+/* Define to 1 to enable SRP Client AutoStart mode support */
+#define OPENTHREAD_CONFIG_SRP_CLIENT_AUTO_START_API_ENABLE 1
+
+/* Define to 1 to enable TCP support */
+#define OPENTHREAD_CONFIG_TCP_ENABLE 1
+
+/* Define to 1 to enable DNS CLIENT NAT64 mode support */
+#define OPENTHREAD_CONFIG_DNS_CLIENT_NAT64_ENABLE 1
+
+/* Define to 1 to enable DNS CLIENT NAT64 mode support */
+#define OPENTHREAD_CONFIG_DNS_CLIENT_DEFAULT_NAT64_ALLOWED 1
+
+/* Define to 1 to enable DNS CLIENT SD mode support */
+#define OPENTHREAD_CONFIG_DNS_CLIENT_SERVICE_DISCOVERY_ENABLE 1
 
 #endif /* OPENTHREAD_API_CONFIG_MTD_H_ */
