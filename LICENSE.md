@@ -17,7 +17,6 @@
 | BSP IKS4A1										| STMicroelectronics   | BSD-3-Clause |
 | BSP 53L3A2                             			| STMicroelectronics   | BSD-3-Clause |
 | STM32_MotionAR_Library Middleware					| STMicroelectronics   | SLA0077 |
-| STM32_MotionAW_Library Middleware					| STMicroelectronics   | SLA0077 |
 | STM32_MotionCP_Library Middleware					| STMicroelectronics   | SLA0077 |
 | STM32_MotionFX_Library Middleware					| STMicroelectronics   | SLA0077 |
 | STM32_MotionGR_Library Middleware					| STMicroelectronics   | SLA0077 |

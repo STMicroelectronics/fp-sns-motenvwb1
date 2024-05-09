@@ -40,8 +40,16 @@ To support OTA you need:
 ### <b>Issue</b>
 
 After code generation from STM32CubeMX software before building:
+
  - for IAR, Keil and STM32CubeIDE replace the linker scripts with the scripts in the folder LinkerScript
- - for Keil, open the "Options for Target" and in the tab "Target" set start= 0x8007000 and sixe= 0x79000. 
+ - for Keil, open the "Options for Target" and in the tab "Target" set start= 0x8007000 and size= 0x79000.
+ - for Keil, open the "Options for Target" and in the tab "Linker" in "Misc controls" insert:
+ 
+   --keep *.o(TAG_OTA_START)
+   
+   --keep *.o(TAG_OTA_END)
+ 
+ 
 
 ### <b>Keywords</b>
 
@@ -78,7 +86,7 @@ ADDITIONAL_COMP : STTS751 https://www.st.com/content/st_com/en/products/mems-and
 
 STM32Cube packages:
 
-  - STM32WBxx drivers from STM32ubeWB V1.17.0
+  - STM32WBxx drivers from STM32ubeWB V1.19.0
   
 X-CUBE packages:
 

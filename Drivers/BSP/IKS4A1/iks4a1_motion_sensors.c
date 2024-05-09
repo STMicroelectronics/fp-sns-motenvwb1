@@ -3374,11 +3374,11 @@ static int32_t AIS2IH_0_Probe(uint32_t Functions)
   io_ctx.GetTick     = IKS4A1_GetTick;
   io_ctx.Delay       = IKS4A1_Delay;
 
-  if (AIS2IH_RegisterBusIO(&AIS2IH_obj_0, &io_ctx) != AIS2IH_OK)
+  if (AIS2IH_RegisterBusIO(&ais2ih_obj_0, &io_ctx) != AIS2IH_OK)
   {
     ret = BSP_ERROR_UNKNOWN_COMPONENT;
   }
-  else if (AIS2IH_ReadID(&AIS2IH_obj_0, &id) != AIS2IH_OK)
+  else if (AIS2IH_ReadID(&ais2ih_obj_0, &id) != AIS2IH_OK)
   {
     ret = BSP_ERROR_UNKNOWN_COMPONENT;
   }
@@ -3388,10 +3388,10 @@ static int32_t AIS2IH_0_Probe(uint32_t Functions)
   }
   else
   {
-    (void)AIS2IH_GetCapabilities(&AIS2IH_obj_0, &cap);
+    (void)AIS2IH_GetCapabilities(&ais2ih_obj_0, &cap);
     MotionCtx[IKS4A1_AIS2IH_0].Functions = ((uint32_t)cap.Gyro) | ((uint32_t)cap.Acc << 1) | ((uint32_t)cap.Magneto << 2);
 
-    MotionCompObj[IKS4A1_AIS2IH_0] = &AIS2IH_obj_0;
+    MotionCompObj[IKS4A1_AIS2IH_0] = &ais2ih_obj_0;
     /* The second cast (void *) is added to bypass Misra R11.3 rule */
     MotionDrv[IKS4A1_AIS2IH_0] = (MOTION_SENSOR_CommonDrv_t *)(void *)&AIS2IH_COMMON_Driver;
 
@@ -4132,10 +4132,6 @@ static int32_t LIS2DUX12_0_Probe(uint32_t Functions)
   {
     ret = BSP_ERROR_UNKNOWN_COMPONENT;
   }
-  else if (LIS2DUX12_DisableI3C(&lis2dux12_obj_0) != LIS2DUX12_OK)
-  {
-    ret = BSP_ERROR_UNKNOWN_COMPONENT;
-  }
   else if (LIS2DUX12_ReadID(&lis2dux12_obj_0, &id) != LIS2DUX12_OK)
   {
     ret = BSP_ERROR_UNKNOWN_COMPONENT;
@@ -4210,10 +4206,6 @@ static int32_t LIS2DUXS12_0_Probe(uint32_t Functions)
   io_ctx.Delay       = IKS4A1_Delay;
 
   if (LIS2DUXS12_RegisterBusIO(&lis2duxs12_obj_0, &io_ctx) != LIS2DUXS12_OK)
-  {
-    ret = BSP_ERROR_UNKNOWN_COMPONENT;
-  }
-  else if (LIS2DUXS12_DisableI3C(&lis2duxs12_obj_0) != LIS2DUXS12_OK)
   {
     ret = BSP_ERROR_UNKNOWN_COMPONENT;
   }

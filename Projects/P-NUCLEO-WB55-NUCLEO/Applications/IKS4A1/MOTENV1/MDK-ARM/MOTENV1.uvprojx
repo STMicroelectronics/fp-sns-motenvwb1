@@ -18,7 +18,7 @@
           <Vendor>STMicroelectronics</Vendor>
           <PackID>Keil.STM32WBxx_DFP.1.2.0</PackID>
           <PackURL>http://www.keil.com/pack/</PackURL>
-          <Cpu>IRAM(0x20000000-0x2003FFFF) IROM(0x8000000-0x80FFFFF) CLOCK(8000000) FPU2 CPUTYPE("Cortex-M4") TZ</Cpu>
+          <Cpu>IRAM(0x20000008-0x2002FC07) IROM(0x08000000-0x807FFFF) IRAM2(0x20030000-0x200323FF) CLOCK(8000000) FPU2 CPUTYPE("Cortex-M4") TZ</Cpu>
           <FlashUtilSpec></FlashUtilSpec>
           <StartupFile></StartupFile>
           <FlashDriverDll></FlashDriverDll>
@@ -187,7 +187,7 @@
             <RvdsMve>0</RvdsMve>
             <RvdsCdeCp>0</RvdsCdeCp>
             <nBranchProt>0</nBranchProt>
-            <hadIRAM2>0</hadIRAM2>
+            <hadIRAM2>1</hadIRAM2>
             <hadIROM2>0</hadIROM2>
             <StupSel>8</StupSel>
             <useUlib>1</useUlib>
@@ -212,7 +212,7 @@
             <Ra2Chk>0</Ra2Chk>
             <Ra3Chk>0</Ra3Chk>
             <Im1Chk>1</Im1Chk>
-            <Im2Chk>0</Im2Chk>
+            <Im2Chk>1</Im2Chk>
             <OnChipMemories>
               <Ocm1>
                 <Type>0</Type>
@@ -246,13 +246,13 @@
               </Ocm6>
               <IRAM>
                 <Type>0</Type>
-                <StartAddress>0x20000000</StartAddress>
-                <Size>0x40000</Size>
+                <StartAddress>0x20000008</StartAddress>
+                <Size>0x2fc00</Size>
               </IRAM>
               <IROM>
                 <Type>1</Type>
                 <StartAddress>0x8000000</StartAddress>
-                <Size>0x100000</Size>
+                <Size>0x80000</Size>
               </IROM>
               <XRAM>
                 <Type>0</Type>
@@ -277,7 +277,7 @@
               <OCR_RVCT4>
                 <Type>1</Type>
                 <StartAddress>0x8000000</StartAddress>
-                <Size>0x100000</Size>
+                <Size>0x80000</Size>
               </OCR_RVCT4>
               <OCR_RVCT5>
                 <Type>1</Type>
@@ -301,13 +301,13 @@
               </OCR_RVCT8>
               <OCR_RVCT9>
                 <Type>0</Type>
-                <StartAddress>0x20000000</StartAddress>
-                <Size>0x40000</Size>
+                <StartAddress>0x20000008</StartAddress>
+                <Size>0x2fc00</Size>
               </OCR_RVCT9>
               <OCR_RVCT10>
                 <Type>0</Type>
-                <StartAddress>0x0</StartAddress>
-                <Size>0x0</Size>
+                <StartAddress>0x20030000</StartAddress>
+                <Size>0x2400</Size>
               </OCR_RVCT10>
             </OnChipMemories>
             <RvctStartVector></RvctStartVector>
@@ -340,7 +340,7 @@
               <MiscControls>-Wno-format</MiscControls>
               <Define>USE_HAL_DRIVER,STM32WB55xx</Define>
               <Undefine></Undefine>
-              <IncludePath>../Inc;../../../../../../Drivers/STM32WBxx_HAL_Driver/Inc;../../../../../../Drivers/STM32WBxx_HAL_Driver/Inc/Legacy;../../../../../../Utilities/lpm/tiny_lpm;../../../../../../Middlewares/ST/STM32_WPAN;../../../../../../Middlewares/ST/STM32_WPAN/interface/patterns/ble_thread;../../../../../../Middlewares/ST/STM32_WPAN/interface/patterns/ble_thread/tl;../../../../../../Middlewares/ST/STM32_WPAN/interface/patterns/ble_thread/shci;../../../../../../Middlewares/ST/STM32_WPAN/utilities;../../../../../../Middlewares/ST/STM32_WPAN/ble/core;../../../../../../Middlewares/ST/STM32_WPAN/ble/core/auto;../../../../../../Middlewares/ST/STM32_WPAN/ble/core/template;../../../../../../Middlewares/ST/STM32_WPAN/ble/svc/Inc;../../../../../../Middlewares/ST/STM32_WPAN/ble/svc/Src;../../../../../../Drivers/CMSIS/Device/ST/STM32WBxx/Include;../../../../../../Utilities/sequencer;../../../../../../Middlewares/ST/STM32_WPAN/ble;../../../../../../Drivers/CMSIS/Include;../../../../../../Middlewares/ST/STM32_MotionID_Library/Inc;../../../../../../Middlewares/ST/STM32_MotionGR_Library/Inc;../../../../../../Drivers/BSP/Components/lsm6dsv16x;../../../../../../Drivers/BSP/Components/lis2duxs12;../../../../../../Drivers/BSP/Components/lis2mdl;../../../../../../Drivers/BSP/Components/lsm6dso16is;../../../../../../Drivers/BSP/Components/sht40ad1b;../../../../../../Drivers/BSP/Components/lps22df;../../../../../../Drivers/BSP/Components/stts22h;../../../../../../Drivers/BSP/IKS4A1;../../../../../../Drivers/BSP/Components/Common;../../../../../../Middlewares/ST/STM32_MotionCP_Library/Inc;../../../../../../Middlewares/ST/STM32_MotionFX_Library/Inc;../../../../../../Middlewares/ST/STM32_MotionPM_Library/Inc;../../../../../../Middlewares/ST/STM32_MotionAR_Library/Inc;../../../../../../Middlewares/ST/STM32_MotionAW_Library/Inc;../../../../../../Drivers/BSP/53L3A2;../../../../../../Drivers/BSP/Components/vl53l3cx/modules;../../../../../../Drivers/BSP/Components/vl53l3cx/porting;../../../../../../Drivers/BSP/Components/vl53l3cx</IncludePath>
+              <IncludePath>../Inc;../../../../../../Drivers/STM32WBxx_HAL_Driver/Inc;../../../../../../Drivers/STM32WBxx_HAL_Driver/Inc/Legacy;../../../../../../Utilities/lpm/tiny_lpm;../../../../../../Middlewares/ST/STM32_WPAN;../../../../../../Middlewares/ST/STM32_WPAN/interface/patterns/ble_thread;../../../../../../Middlewares/ST/STM32_WPAN/interface/patterns/ble_thread/tl;../../../../../../Middlewares/ST/STM32_WPAN/interface/patterns/ble_thread/shci;../../../../../../Middlewares/ST/STM32_WPAN/utilities;../../../../../../Middlewares/ST/STM32_WPAN/ble/core;../../../../../../Middlewares/ST/STM32_WPAN/ble/core/auto;../../../../../../Middlewares/ST/STM32_WPAN/ble/core/template;../../../../../../Middlewares/ST/STM32_WPAN/ble/svc/Inc;../../../../../../Middlewares/ST/STM32_WPAN/ble/svc/Src;../../../../../../Drivers/CMSIS/Device/ST/STM32WBxx/Include;../../../../../../Utilities/sequencer;../../../../../../Middlewares/ST/STM32_WPAN/ble;../../../../../../Drivers/CMSIS/Include;../../../../../../Middlewares/ST/STM32_MotionID_Library/Inc;../../../../../../Middlewares/ST/STM32_MotionGR_Library/Inc;../../../../../../Drivers/BSP/Components/lsm6dsv16x;../../../../../../Drivers/BSP/Components/lis2duxs12;../../../../../../Drivers/BSP/Components/lis2mdl;../../../../../../Drivers/BSP/Components/lsm6dso16is;../../../../../../Drivers/BSP/Components/sht40ad1b;../../../../../../Drivers/BSP/Components/lps22df;../../../../../../Drivers/BSP/Components/stts22h;../../../../../../Drivers/BSP/IKS4A1;../../../../../../Drivers/BSP/Components/Common;../../../../../../Middlewares/ST/STM32_MotionCP_Library/Inc;../../../../../../Middlewares/ST/STM32_MotionFX_Library/Inc;../../../../../../Middlewares/ST/STM32_MotionPM_Library/Inc;../../../../../../Middlewares/ST/STM32_MotionAR_Library/Inc;../../../../../../Drivers/BSP/53L3A2;../../../../../../Drivers/BSP/Components/vl53l3cx/modules;../../../../../../Drivers/BSP/Components/vl53l3cx/porting;../../../../../../Drivers/BSP/Components/vl53l3cx</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -489,16 +489,6 @@
               <FileName>motionfx_server_app.c</FileName>
               <FileType>1</FileType>
               <FilePath>../Src/motionfx_server_app.c</FilePath>
-            </File>
-            <File>
-              <FileName>MotionAW_Manager.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>../Src/MotionAW_Manager.c</FilePath>
-            </File>
-            <File>
-              <FileName>motionaw_server_app.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>../Src/motionaw_server_app.c</FilePath>
             </File>
             <File>
               <FileName>MotionGR_Manager.c</FileName>
@@ -1114,16 +1104,6 @@
               <FileName>MotionAR_CM4F_wc16_ot.a</FileName>
               <FileType>4</FileType>
               <FilePath>../../../../../../Middlewares/ST/STM32_MotionAR_Library/Lib/MotionAR_CM4F_wc16_ot.a</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>Middlewares/X-CUBE-MEMS1/Sensors/STM32_MotionAW_Library/Core</GroupName>
-          <Files>
-            <File>
-              <FileName>MotionAW_CM4F_wc16_ot.a</FileName>
-              <FileType>4</FileType>
-              <FilePath>../../../../../../Middlewares/ST/STM32_MotionAW_Library/Lib/MotionAW_CM4F_wc16_ot.a</FilePath>
             </File>
           </Files>
         </Group>

@@ -1,4 +1,3 @@
-
 /* USER CODE BEGIN Header */
 /**
   ******************************************************************************
@@ -7,7 +6,7 @@
   ******************************************************************************
   * @attention
   *
-  * Copyright (c) 2022 STMicroelectronics.
+  * Copyright (c) 2024 STMicroelectronics.
   * All rights reserved.
   *
   * This software is licensed under terms that can be found in the LICENSE file
@@ -16,7 +15,9 @@
   *
   ******************************************************************************
   */
+
 /* USER CODE END Header */
+
 /* USER CODE BEGIN UserCode */
 /* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef __MOTENV_SERVER_APP_H
@@ -61,9 +62,6 @@ extern "C" {
                                    ((buf)[1] =  (uint8_t) (val>>16) ) , \
                                    ((buf)[0] =  (uint8_t) (val>>24) ) )
 
-//#define MCR_BLUEMS_F2I_1D(in, out_int, out_dec) {out_int = (int32_t)in; out_dec= (int32_t)((in-out_int)*10);};
-//#define MCR_BLUEMS_F2I_2D(in, out_int, out_dec) {out_int = (int32_t)in; out_dec= (int32_t)((in-out_int)*100);};
-
 #define FROM_MG_TO_G                    0.001f
 #define FROM_G_TO_MG                    1000.0f
 #define FROM_MDPS_TO_DPS                0.001f
@@ -72,8 +70,8 @@ extern "C" {
 #define FROM_UT50_TO_MGAUSS             500.0f
 
 /* Exported functions ------------------------------------------------------- */
-void MOTENV_APP_Init( void );
-void MOTENV_APP_HandleDisconnection( void );
+void MOTENV_APP_Init(void);
+void MOTENV_APP_HandleDisconnection(void);
 
 #ifdef __cplusplus
 }

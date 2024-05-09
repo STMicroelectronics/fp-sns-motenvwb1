@@ -1,4 +1,4 @@
-
+/* USER CODE BEGIN Header */
 /**
   ******************************************************************************
   * @file    motionar_server_app.c
@@ -6,7 +6,7 @@
   ******************************************************************************
   * @attention
   *
-  * Copyright (c) 2023 STMicroelectronics.
+  * Copyright (c) 2024 STMicroelectronics.
   * All rights reserved.
   *
   * This software is licensed under terms that can be found in the LICENSE file
@@ -15,6 +15,9 @@
   *
   ******************************************************************************
   */
+
+/* USER CODE END Header */
+
 /* Includes ------------------------------------------------------------------*/
 #include "app_common.h"
 #include "ble.h"
@@ -34,8 +37,8 @@
 
 /* Private typedef -----------------------------------------------------------*/
 /**
- * @brief  SW/Activity Recognition Service/Char Context structure definition
- */
+  * @brief  SW/Activity Recognition Service/Char Context structure definition
+  */
 typedef struct
 {
   uint8_t  NotificationStatus;
@@ -62,11 +65,11 @@ static void ActivityRec_Update(MAR_output_t ActivityCode);
 /* Public functions ----------------------------------------------------------*/
 
 /**
- * @brief  Init the SW/Activity Recognition Service/Char Context
- *         and update the ADV data accordingly
- * @param  None
- * @retval None
- */
+  * @brief  Init the SW/Activity Recognition Service/Char Context
+  *         and update the ADV data accordingly
+  * @param  None
+  * @retval None
+  */
 void MOTIONAR_Context_Init(void)
 {
   /* Activity Rec API initialization function */
@@ -82,14 +85,14 @@ void MOTIONAR_Context_Init(void)
 }
 
 /**
- * @brief  Set the notification status (enabled/disabled) and full scale
- * @param  status The new notification status
- * @retval None
- */
+  * @brief  Set the notification status (enabled/disabled) and full scale
+  * @param  status The new notification status
+  * @retval None
+  */
 void MOTIONAR_Set_Notification_Status(uint8_t status)
 {
   MOTIONAR_Server_App_Context.NotificationStatus = status;
-  if(status == 1)
+  if (status == 1)
   {
     /* Set accelerometer:
      *   - FS   = <-4g, 4g>
@@ -106,10 +109,10 @@ void MOTIONAR_Set_Notification_Status(uint8_t status)
 }
 
 /**
- * @brief  Send a notification for Activity Recognition events
- * @param  None
- * @retval None
- */
+  * @brief  Send a notification for Activity Recognition events
+  * @param  None
+  * @retval None
+  */
 void MOTIONAR_Send_Notification_Task(void)
 {
   ComputeMotionAR();
@@ -117,10 +120,10 @@ void MOTIONAR_Send_Notification_Task(void)
 }
 
 /**
- * @brief  Update the Activity Recognition char value
- * @param  None
- * @retval None
- */
+  * @brief  Update the Activity Recognition char value
+  * @param  None
+  * @retval None
+  */
 void MOTIONAR_ActivityRec_Update(void)
 {
   ActivityRec_Update(MOTIONAR_Server_App_Context.ActivityCode);
@@ -129,10 +132,10 @@ void MOTIONAR_ActivityRec_Update(void)
 /* Private functions ---------------------------------------------------------*/
 
 /**
- * @brief  Run the AR Manager and update the Activity Recognition char value
- * @param  None
- * @retval None
- */
+  * @brief  Run the AR Manager and update the Activity Recognition char value
+  * @param  None
+  * @retval None
+  */
 static void ComputeMotionAR(void)
 {
   MOTION_SENSOR_Axes_t ACC_Value;
@@ -149,41 +152,40 @@ static void ComputeMotionAR(void)
 
   MotionAR_manager_run(&data_in, &MOTIONAR_Server_App_Context.ActivityCode, MOTIONAR_Server_App_Context.TimeStamp);
 
-  if(ActivityCodePrev != MOTIONAR_Server_App_Context.ActivityCode)
+  if (ActivityCodePrev != MOTIONAR_Server_App_Context.ActivityCode)
   {
     ActivityCodePrev = MOTIONAR_Server_App_Context.ActivityCode;
-    if(MOTIONAR_Server_App_Context.NotificationStatus)
+    if (MOTIONAR_Server_App_Context.NotificationStatus)
     {
       ActivityRec_Update(MOTIONAR_Server_App_Context.ActivityCode);
     }
     else
     {
-#if(CFG_DEBUG_APP_TRACE != 0)
+#if (CFG_DEBUG_APP_TRACE != 0)
       APP_DBG_MSG("-- MOTIONAR APPLICATION SERVER : CAN'T INFORM CLIENT - NOTIFICATION DISABLED\n ");
-#endif
+#endif /* CFG_DEBUG_APP_TRACE != 0 */
     }
   }
 }
 
 /**
- * @brief  Update the Activity Recognition char value
- * @param  ActivityCode Activity Recognized
- * @retval None
- */
+  * @brief  Update the Activity Recognition char value
+  * @param  ActivityCode Activity Recognized
+  * @retval None
+  */
 static void ActivityRec_Update(MAR_output_t ActivityCode)
 {
   uint8_t value[VALUE_LEN_AR];
 
   /* Timestamp */
-  STORE_LE_16(value, (HAL_GetTick()>>3));
+  STORE_LE_16(value, (HAL_GetTick() >> 3));
   value[2] = ActivityCode;
 
-#if(CFG_DEBUG_APP_TRACE != 0)
+#if (CFG_DEBUG_APP_TRACE != 0)
   APP_DBG_MSG("-- MOTIONAR APPLICATION SERVER : NOTIFY CLIENT WITH NEW PARAMETER VALUE \n ");
   APP_DBG_MSG(" \n\r");
-#endif
+#endif /* CFG_DEBUG_APP_TRACE != 0 */
   MOTENV_STM_App_Update_Char(ACTIVITY_REC_CHAR_UUID, VALUE_LEN_AR, (uint8_t *)&value);
 
   return;
 }
-

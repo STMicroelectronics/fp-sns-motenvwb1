@@ -1,4 +1,4 @@
-
+/* USER CODE BEGIN Header */
 /**
   ******************************************************************************
   * @file    MotionFX_Manager.c
@@ -7,7 +7,7 @@
   ******************************************************************************
   * @attention
   *
-  * Copyright (c) 2023 STMicroelectronics.
+  * Copyright (c) 2024 STMicroelectronics.
   * All rights reserved.
   *
   * This software is licensed under terms that can be found in the LICENSE file
@@ -17,16 +17,18 @@
   ******************************************************************************
   */
 
+/* USER CODE END Header */
+
 /* Includes ------------------------------------------------------------------*/
 #include "MotionFX_Manager.h"
 
 /** @addtogroup MOTION_APPLICATIONS MOTION APPLICATIONS
- * @{
- */
+  * @{
+  */
 
 /** @addtogroup DATALOG_FUSION DATALOG FUSION
- * @{
- */
+  * @{
+  */
 
 /* Extern variables ----------------------------------------------------------*/
 /* Private defines -----------------------------------------------------------*/
@@ -47,17 +49,17 @@ static uint8_t mfxstate_pt[STATE_SIZE];
 static MFX_knobs_t iKnobs;
 static MFX_knobs_t *ipKnobs = &iKnobs;
 
-static volatile int sampleToDiscard = SAMPLETODISCARD;
-static int discardedCount = 0;
+static volatile uint32_t sampleToDiscard = SAMPLETODISCARD;
+static uint32_t discardedCount = 0;
 
 /* Private typedef -----------------------------------------------------------*/
 /* Exported function prototypes ----------------------------------------------*/
 /* Exported functions --------------------------------------------------------*/
 /**
- * @brief  Initialises MotionFX algorithm
- * @param  None
- * @retval None
- */
+  * @brief  Initialises MotionFX algorithm
+  * @param  None
+  * @retval None
+  */
 void MotionFX_manager_init(void)
 {
   char acc_orientation[4];
@@ -103,10 +105,10 @@ void MotionFX_manager_init(void)
 }
 
 /**
- * @brief  Run sensor fusion algorithm
- * @param  None
- * @retval None
- */
+  * @brief  Run sensor fusion algorithm
+  * @param  None
+  * @retval None
+  */
 void MotionFX_manager_run(MFX_input_t *data_in, MFX_output_t *data_out, float delta_time)
 {
   if (discardedCount == sampleToDiscard)
@@ -121,61 +123,61 @@ void MotionFX_manager_run(MFX_input_t *data_in, MFX_output_t *data_out, float de
 }
 
 /**
- * @brief  Start 6 axes MotionFX engine
- * @param  None
- * @retval None
- */
+  * @brief  Start 6 axes MotionFX engine
+  * @param  None
+  * @retval None
+  */
 void MotionFX_manager_start_6X(void)
 {
   MotionFX_enable_6X(mfxstate_pt, MFX_ENGINE_ENABLE);
 }
 
 /**
- * @brief  Stop 6 axes MotionFX engine
- * @param  None
- * @retval None
- */
+  * @brief  Stop 6 axes MotionFX engine
+  * @param  None
+  * @retval None
+  */
 void MotionFX_manager_stop_6X(void)
 {
   MotionFX_enable_6X(mfxstate_pt, MFX_ENGINE_DISABLE);
 }
 
 /**
- * @brief  Start 9 axes MotionFX engine
- * @param  None
- * @retval None
- */
+  * @brief  Start 9 axes MotionFX engine
+  * @param  None
+  * @retval None
+  */
 void MotionFX_manager_start_9X(void)
 {
   MotionFX_enable_9X(mfxstate_pt, MFX_ENGINE_ENABLE);
 }
 
 /**
- * @brief  Stop 9 axes MotionFX engine
- * @param  None
- * @retval None
- */
+  * @brief  Stop 9 axes MotionFX engine
+  * @param  None
+  * @retval None
+  */
 void MotionFX_manager_stop_9X(void)
 {
   MotionFX_enable_9X(mfxstate_pt, MFX_ENGINE_DISABLE);
 }
 
 /**
- * @brief  Get the library version
- * @param  version  Library version string (must be array of 35 char)
- * @param  length  Library version string length
- * @retval None
- */
-void MotionFX_manager_get_version(char *version, int *length)
+  * @brief  Get the library version
+  * @param  version  Library version string (must be array of 35 char)
+  * @param  length  Library version string length
+  * @retval None
+  */
+void MotionFX_manager_get_version(char *version, uint8_t *length)
 {
- *length = (int)MotionFX_GetLibVersion(version);
+  *length = (uint8_t)MotionFX_GetLibVersion(version);
 }
 
 /**
- * @brief  Run magnetometer calibration algorithm
- * @param  None
- * @retval None
- */
+  * @brief  Run magnetometer calibration algorithm
+  * @param  None
+  * @retval None
+  */
 void MotionFX_manager_MagCal_run(MFX_MagCal_input_t *data_in, MFX_MagCal_output_t *data_out)
 {
   MotionFX_MagCal_run(data_in);
@@ -183,62 +185,61 @@ void MotionFX_manager_MagCal_run(MFX_MagCal_input_t *data_in, MFX_MagCal_output_
 }
 
 /**
- * @brief  Start magnetometer calibration
- * @param  None
- * @retval None
- */
+  * @brief  Start magnetometer calibration
+  * @param  None
+  * @retval None
+  */
 void MotionFX_manager_MagCal_start(int sampletime)
 {
   MotionFX_MagCal_init(sampletime, 1);
 }
 
 /**
- * @brief  Stop magnetometer calibration
- * @param  None
- * @retval None
- */
+  * @brief  Stop magnetometer calibration
+  * @param  None
+  * @retval None
+  */
 void MotionFX_manager_MagCal_stop(int sampletime)
 {
   MotionFX_MagCal_init(sampletime, 0);
 }
 
 /**
- * @brief  Load calibration parameter from memory
- * @param  dataSize length ot the data
- * @param  data pointer to the data
- * @retval (1) fail, (0) success
- */
-char MotionFX_LoadMagCalFromNVM(unsigned short int dataSize, unsigned int *data)
+  * @brief  Load calibration parameter from memory
+  * @param  dataSize length of the data
+  * @param  data pointer to the data
+  * @retval (1) fail, (0) success
+  */
+char MotionFX_LoadMagCalFromNVM(uint16_t dataSize, uint32_t *data)
 {
 #if ((defined (MOTION_FX_STORE_CALIB_FLASH)))
   RecallCalibrationFromMemory(dataSize / 4, (uint32_t *) data);
   return (char)0;
 #else
   return (char)1;
-#endif
+#endif /* defined (MOTION_FX_STORE_CALIB_FLASH) */
 }
 
 /**
- * @brief  Save calibration parameter to memory
- * @param  dataSize length ot the data
- * @param  data pointer to the data
- * @retval (1) fail, (0) success
- */
-char MotionFX_SaveMagCalInNVM(unsigned short int dataSize, unsigned int *data)
+  * @brief  Save calibration parameter to memory
+  * @param  dataSize length of the data
+  * @param  data pointer to the data
+  * @retval (1) fail, (0) success
+  */
+char MotionFX_SaveMagCalInNVM(uint16_t dataSize, uint32_t *data)
 {
 #if ((defined (MOTION_FX_STORE_CALIB_FLASH)))
   SaveCalibrationToMemory(dataSize / 4, (uint32_t *) data);
   return (char)0;
 #else
   return (char)1;
-#endif
+#endif /* defined (MOTION_FX_STORE_CALIB_FLASH) */
 }
 
 /**
- * @}
- */
+  * @}
+  */
 
 /**
- * @}
- */
-
+  * @}
+  */

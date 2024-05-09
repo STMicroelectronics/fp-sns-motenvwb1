@@ -24,14 +24,16 @@ This directory contains the LSM6DSV16X component drivers.
 
 ::: {.collapse}
 <input type="checkbox" id="collapse-section5" checked aria-hidden="true">
-<label for="collapse-section5" aria-hidden="true">V1.4.0 / 16-June-2023</label>
+<label for="collapse-section5" aria-hidden="true">V1.4.0 / 18-August-2023</label>
 <div>
 
 ## Main changes
 
 ### Maintenance release
 
+- Synchronize PID with currently latest version on ST GitHub
 - Add DRDY APIs and I3C define
+- Add 4 QVAR functions
 
 ##
 

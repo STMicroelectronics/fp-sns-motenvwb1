@@ -1,4 +1,3 @@
-
 /* USER CODE BEGIN Header */
 /**
   ******************************************************************************
@@ -9,7 +8,7 @@
   ******************************************************************************
   * @attention
   *
-  * Copyright (c) 2023 STMicroelectronics.
+  * Copyright (c) 2024 STMicroelectronics.
   * All rights reserved.
   *
   * This software is licensed under terms that can be found in the LICENSE file
@@ -60,13 +59,13 @@ EXTI_HandleTypeDef H_EXTI_MEMS = {.Line = H_EXTI_LINE_MEMS};
 EXTI_HandleTypeDef exti_handle;
 
 /* Private function prototypes -----------------------------------------------*/
-static void Init_Debug( void );
+static void Init_Debug(void);
 static void User_Init(void);
 static void Sensors_Init(void);
 
 /* Section specific to button management using UART */
-static void Led_Init( void );
-static void Button_Init( void );
+static void Led_Init(void);
+static void Button_Init(void);
 
 /* Section specific to button management using UART */
 static void RxUART_Init(void);
@@ -95,12 +94,12 @@ void MX_MOTENV1_OTA_Process(void)
 
 }
 
-static void Init_Debug( void )
+static void Init_Debug(void)
 {
 #if (CFG_DEBUGGER_SUPPORTED == 1)
   /**
-   * Keep debugger enabled while in any low power mode
-   */
+    * Keep debugger enabled while in any low power mode
+    */
   HAL_DBGMCU_EnableDBGSleepMode();
 
   /***************** ENABLE DEBUGGER *************************************/
@@ -130,39 +129,39 @@ static void Init_Debug( void )
 
 #endif /* (CFG_DEBUGGER_SUPPORTED == 1) */
 
-#if(CFG_DEBUG_TRACE != 0)
+#if (CFG_DEBUG_TRACE != 0)
   DbgTraceInit();
-#endif
+#endif /* CFG_DEBUG_TRACE != 0 */
 
   return;
 }
 
-static void Led_Init( void )
+static void Led_Init(void)
 {
 #if (CFG_LED_SUPPORTED == 1)
   /**
-   * Leds Initialization
-   */
+    * Leds Initialization
+    */
 
   BSP_LED_Init(LED_BLUE);
   BSP_LED_Init(LED_GREEN);
 
   BSP_LED_On(LED_GREEN);
-#endif
+#endif /* CFG_LED_SUPPORTED == 1 */
 
   return;
 }
 
-static void Button_Init( void )
+static void Button_Init(void)
 {
 #if (CFG_BUTTON_SUPPORTED == 1)
   /**
-   * Button Initialization
-   */
+    * Button Initialization
+    */
 
   BSP_PB_Init(BUTTON_USER, BUTTON_MODE_EXTI);
 
-#endif
+#endif /* CFG_BUTTON_SUPPORTED == 1 */
 
   return;
 }
@@ -200,22 +199,20 @@ static void RxCpltCallback(void)
 static void UartCmdExecute(void)
 {
   /* Parse received CommandString */
-  if(strcmp((char const*)CommandString, "SW1") == 0)
+  if (strcmp((char const *)CommandString, "SW1") == 0)
   {
     APP_DBG_MSG("SW1 OK\n");
     exti_handle.Line = USER_BUTTON_EXTI_LINE;
     HAL_EXTI_GenerateSWI(&exti_handle);
   }
-  else if (strcmp((char const*)CommandString, "SW2") == 0)
+  else if (strcmp((char const *)CommandString, "SW2") == 0)
   {
     APP_DBG_MSG("SW2 OK\n");
-  //exti_handle.Line = USER_BUTTON_SW2_EXTI_LINE;
     HAL_EXTI_GenerateSWI(&exti_handle);
   }
-  else if (strcmp((char const*)CommandString, "SW3") == 0)
+  else if (strcmp((char const *)CommandString, "SW3") == 0)
   {
     APP_DBG_MSG("SW3 OK\n");
-  //exti_handle.Line = USER_BUTTON_SW3_EXTI_LINE;
     HAL_EXTI_GenerateSWI(&exti_handle);
   }
   else
@@ -238,6 +235,29 @@ static void User_Init(void)
 {
   Init_Debug();
 
+  APP_DBG_MSG("\033[2J\033[1;1f");
+  APP_DBG_MSG("\r\nSTMicroelectronics %s:\r\n"
+                 "\tVersion 1.4.0\r\n"
+                 "\t%s board"
+                 "\r\n",
+                 "FP-SNS-MOTENVWB1",
+                 "NUCLEO-WB55RG");
+
+  APP_DBG_MSG("\n\t(HAL %ld.%ld.%ld_%ld)\r\n"
+                 "\tCompiled %s %s"
+#if defined (__IAR_SYSTEMS_ICC__)
+                 " (IAR)\r\n\n",
+#elif defined (__CC_ARM) || (defined(__ARMCC_VERSION) && (__ARMCC_VERSION >= 6010050)) /* For ARM Compiler 5 and 6 */
+                 " (KEIL)\r\n\n",
+#elif defined (__GNUC__)
+                 " (STM32CubeIDE)\r\n\n",
+#endif /* IDE */
+                 HAL_GetHalVersion() >> 24,
+                 (HAL_GetHalVersion() >> 16) & 0xFF,
+                 (HAL_GetHalVersion() >> 8) & 0xFF,
+                 HAL_GetHalVersion()      & 0xFF,
+                 __DATE__, __TIME__);
+
   /* Initialize 53L3A2 board */
   HW_ToF_Init();
 
@@ -249,8 +269,8 @@ static void User_Init(void)
   APPD_Init();
 
   /**
-  * The Standby mode should not be entered before the initialization is over
-  * The default state of the Low Power Manager is to allow the Standby Mode so an request is needed here
+    * The Standby mode should not be entered before the initialization is over
+    * The default state of the Low Power Manager is to allow the Standby Mode so an request is needed here
   */
   UTIL_LPM_SetOffMode(1 << CFG_LPM_APP, UTIL_LPM_DISABLE);
 
@@ -270,16 +290,16 @@ static void Sensors_Init(void)
   ENV_Server_App_Context.hasHumidity = 0;
   ENV_Server_App_Context.hasTemperature = 0;
 
-  if(ENV_SENSOR_Init(TEMPERATURE_INSTANCE_1, ENV_TEMPERATURE) == BSP_ERROR_NONE)
+  if( ENV_SENSOR_Init(TEMPERATURE_INSTANCE_1, ENV_TEMPERATURE) == BSP_ERROR_NONE)
   {
     ENV_Server_App_Context.hasTemperature++;
   }
-  if(ENV_SENSOR_Init(HUMIDITY_INSTANCE, ENV_HUMIDITY) == BSP_ERROR_NONE)
+  if( ENV_SENSOR_Init(HUMIDITY_INSTANCE, ENV_HUMIDITY) == BSP_ERROR_NONE)
   {
     ENV_Server_App_Context.hasHumidity = 1;
   }
 
-  if(ENV_SENSOR_Init(PRESS_AND_TEMP_INSTANCE, ENV_TEMPERATURE | ENV_PRESSURE) == BSP_ERROR_NONE)
+  if (ENV_SENSOR_Init(PRESS_AND_TEMP_INSTANCE, ENV_TEMPERATURE | ENV_PRESSURE) == BSP_ERROR_NONE)
   {
     ENV_Server_App_Context.hasPressure = 1;
     ENV_Server_App_Context.hasTemperature++;
@@ -293,18 +313,18 @@ static void Sensors_Init(void)
 
   MOTION_Set2G_Accelerometer_FullScale();
 
-  if(MOTION_SENSOR_Init(ACCELERO_AND_GYRO_INSTANCE, MOTION_ACCELERO | MOTION_GYRO) == BSP_ERROR_NONE)
+  if (MOTION_SENSOR_Init(ACCELERO_AND_GYRO_INSTANCE, MOTION_ACCELERO | MOTION_GYRO) == BSP_ERROR_NONE)
   {
     MOTION_Server_App_Context.hasGyro = 1;
     MOTION_Server_App_Context.hasAcc = 1;
   }
 
-  if(MOTION_SENSOR_Init(ACCELERO_INSTANCE_2, MOTION_ACCELERO) == BSP_ERROR_NONE)
+  if (MOTION_SENSOR_Init(ACCELERO_INSTANCE_2, MOTION_ACCELERO) == BSP_ERROR_NONE)
   {
     MOTION_Server_App_Context.hasAcc = 1;
   }
 
-  if(MOTION_SENSOR_Init(MAGNETO_INSTANCE, MOTION_MAGNETO) == BSP_ERROR_NONE)
+  if (MOTION_SENSOR_Init(MAGNETO_INSTANCE, MOTION_MAGNETO) == BSP_ERROR_NONE)
   {
     MOTION_Server_App_Context.hasMag = 1;
   }
@@ -318,51 +338,51 @@ void set_mems_int_pin(void)
 
 void mems_int_isr(void)
 {
-  UTIL_SEQ_SetTask(1<<CFG_TASK_HANDLE_MEMS_IT_ID, CFG_SCH_PRIO_0);
+  UTIL_SEQ_SetTask(1 << CFG_TASK_HANDLE_MEMS_IT_ID, CFG_SCH_PRIO_0);
 }
 
 /**
- * @brief  Parse the values read by Environmental sensors
- * @param  None
- * @retval None
- */
+  * @brief  Parse the values read by Environmental sensors
+  * @param  None
+  * @retval None
+  */
 void ENV_Handle_Sensor(void)
 {
   uint8_t tempIndex = 0;
   float pressure, humidity, temperature;
   int32_t decPart, intPart;
 
-  if(ENV_Server_App_Context.hasPressure == 1)
+  if (ENV_Server_App_Context.hasPressure == 1)
   {
     if (ENV_SENSOR_Get_Value(PRESSURE_INSTANCE, ENV_PRESSURE, &pressure) == BSP_ERROR_NONE)
     {
       MCR_BLUEMS_F2I_2D(pressure, intPart, decPart);
-      ENV_Server_App_Context.PressureValue = intPart*100+decPart;
+      ENV_Server_App_Context.PressureValue = intPart * 100 + decPart;
     }
   }
 
-  if(ENV_Server_App_Context.hasHumidity == 1)
+  if (ENV_Server_App_Context.hasHumidity == 1)
   {
     if (ENV_SENSOR_Get_Value(HUMIDITY_INSTANCE, ENV_HUMIDITY, &humidity) == BSP_ERROR_NONE)
     {
       MCR_BLUEMS_F2I_1D(humidity, intPart, decPart);
-      ENV_Server_App_Context.HumidityValue = intPart*10+decPart;
+      ENV_Server_App_Context.HumidityValue = intPart * 10 + decPart;
     }
   }
 
-  if(ENV_Server_App_Context.hasTemperature >= 1)
+  if (ENV_Server_App_Context.hasTemperature >= 1)
   {
     if (ENV_SENSOR_Get_Value(TEMPERATURE_INSTANCE_2, ENV_TEMPERATURE, &temperature) == BSP_ERROR_NONE)
     {
       MCR_BLUEMS_F2I_1D(temperature, intPart, decPart);
-      ENV_Server_App_Context.TemperatureValue[tempIndex] = intPart*10+decPart;
+      ENV_Server_App_Context.TemperatureValue[tempIndex] = intPart * 10 + decPart;
       tempIndex++;
     }
 
     if (ENV_SENSOR_Get_Value(TEMPERATURE_INSTANCE_1, ENV_TEMPERATURE, &temperature) == BSP_ERROR_NONE)
     {
       MCR_BLUEMS_F2I_1D(temperature, intPart, decPart);
-      ENV_Server_App_Context.TemperatureValue[tempIndex] = intPart*10+decPart;
+      ENV_Server_App_Context.TemperatureValue[tempIndex] = intPart * 10 + decPart;
       tempIndex++;
     }
   }
@@ -380,10 +400,10 @@ void MOTION_Set2G_Accelerometer_FullScale(void)
 }
 
 /**
- * @brief  Parse the values read by Motion sensors
- * @param  None
- * @retval None
- */
+  * @brief  Parse the values read by Motion sensors
+  * @param  None
+  * @retval None
+  */
 void MOTION_Handle_Sensor(void)
 {
 
@@ -391,7 +411,7 @@ void MOTION_Handle_Sensor(void)
   MOTION_SENSOR_Axes_t angular_velocity;
   MOTION_SENSOR_Axes_t magnetic_field;
 
-  if(MOTION_Server_App_Context.hasAcc == 1)
+  if (MOTION_Server_App_Context.hasAcc == 1)
   {
     if (MOTION_SENSOR_GetAxes(ACCELERO_INSTANCE, MOTION_ACCELERO, &acceleration) == BSP_ERROR_NONE)
     {
@@ -403,7 +423,7 @@ void MOTION_Handle_Sensor(void)
     }
   }
 
-  if(MOTION_Server_App_Context.hasGyro == 1)
+  if (MOTION_Server_App_Context.hasGyro == 1)
   {
     if (MOTION_SENSOR_GetAxes(GYRO_INSTANCE, MOTION_GYRO, &angular_velocity) == BSP_ERROR_NONE)
     {
@@ -411,7 +431,7 @@ void MOTION_Handle_Sensor(void)
     }
   }
 
-  if(MOTION_Server_App_Context.hasMag == 1)
+  if (MOTION_Server_App_Context.hasMag == 1)
   {
     if (MOTION_SENSOR_GetAxes(MAGNETO_INSTANCE, MOTION_MAGNETO, &magnetic_field) == BSP_ERROR_NONE)
     {

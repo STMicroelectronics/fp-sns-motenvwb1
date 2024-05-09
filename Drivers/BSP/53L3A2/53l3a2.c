@@ -232,7 +232,7 @@ int32_t VL53L3A2_Init(void)
   if (InitCounter++ == 0U)
   {
     status |= _I2cFailRecover();
-    status |= VL53L3A2_I2C_Init();
+    status |= VL53L3A2_I2C_INIT();
 
     if (status != BSP_ERROR_NONE)
     {
@@ -307,7 +307,7 @@ int32_t VL53L3A2_DeInit(void)
   {
 	if (--InitCounter == 0U)
 	{
-      status = VL53L3A2_I2C_DeInit();
+      status = VL53L3A2_I2C_DEINIT();
 	}
   }
 
@@ -524,14 +524,14 @@ static int32_t _ExpanderRd(uint32_t I2cExpAddr, uint32_t index, uint8_t *data, u
 
   do
   {
-    status = HAL_I2C_Master_Transmit(&VL53L3A2_hi2c, I2cExpAddr, &RegAddr, 1, 100);
+    status = HAL_I2C_Master_Transmit(&VL53L3A2_HI2C, I2cExpAddr, &RegAddr, 1, 100);
 
     if (status)
     {
       break;
     }
 
-    status = HAL_I2C_Master_Receive(&VL53L3A2_hi2c, I2cExpAddr, data, n_data, n_data * 100);
+    status = HAL_I2C_Master_Receive(&VL53L3A2_HI2C, I2cExpAddr, data, n_data, n_data * 100);
   } while (0);
 
   VL53L3A2_PutI2cBus();
@@ -556,7 +556,7 @@ static int32_t _ExpanderWR(uint32_t I2cExpAddr, uint32_t index, uint8_t *data, u
   memcpy(RegAddr + 1, data, n_data);
 
   VL53L3A2_GetI2cBus();
-  status = HAL_I2C_Master_Transmit(&VL53L3A2_hi2c, I2cExpAddr, RegAddr, n_data + 1, 100);
+  status = HAL_I2C_Master_Transmit(&VL53L3A2_HI2C, I2cExpAddr, RegAddr, n_data + 1, 100);
   VL53L3A2_PutI2cBus();
 
   return status;

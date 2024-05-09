@@ -7,7 +7,7 @@
   ******************************************************************************
   * @attention
   *
-  * Copyright (c) 2023 STMicroelectronics.
+  * Copyright (c) 2024 STMicroelectronics.
   * All rights reserved.
   *
   * This software is licensed under terms that can be found in the LICENSE file
@@ -24,7 +24,7 @@
 /* Defines ------------------------------------------------------------------*/
 /* STMicroelectronics.X-CUBE-MEMS1.10.0.0 */
 #define IKS4A1
-/* STMicroelectronics.X-CUBE-TOF1.3.3.0 */
+/* STMicroelectronics.X-CUBE-TOF1.3.4.0 */
 #define _53L3A2
 
 #endif /* __RTE_COMPONENTS_H__ */

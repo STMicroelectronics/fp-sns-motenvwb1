@@ -26,7 +26,7 @@ The example application allows the user to control the initialization phase via 
 Launch a terminal application and set the UART port to 115200 bps, 8 bit, No Parity, 1 stop bit.
 For this, in the file app_conf.h change the define CFG_DEBUG_APP_TRACE from 0 to 1.
  
-This example must be used with the related ST BLE Sensor Android (Version 4.20.0 or higher) or iOS (Version 4.20.0 or higher) application available on Play/itune store,
+This example must be used with the related ST BLE Sensor Android (Version 5.0.0 or higher) or iOS (Version 5.0.0 or higher) application available on Play/itune store,
 in order to read the sent information by Bluetooth Low Energy protocol
 
 ### <b>Very Iimportant</b>
@@ -42,7 +42,12 @@ To support OTA you need:
 After code generation from STM32CubeMX software before building:
 
  - for IAR, Keil and STM32CubeIDE replace the linker scripts with the scripts in the folder LinkerScript
- - for Keil, open the "Options for Target" and in the tab "Target" set start= 0x8007000 and sixe= 0x79000. 
+ - for Keil, open the "Options for Target" and in the tab "Target" set start= 0x8007000 and size= 0x79000.
+ - for Keil, open the "Options for Target" and in the tab "Linker" in "Misc controls" insert:
+ 
+   --keep *.o(TAG_OTA_START)
+   
+   --keep *.o(TAG_OTA_END)
    
 ### <b>Keywords</b>
 
@@ -77,12 +82,12 @@ ADDITIONAL_COMP : STTS22H https://www.st.com/en/mems-and-sensors/stts22h.html
 
 STM32Cube packages:
 
-  - STM32WBxx drivers from STM32ubeWB V1.17.0
+  - STM32WBxx drivers from STM32ubeWB V1.19.0
   
 X-CUBE packages:
 
   - X-CUBE-MEMS1 V10.0.0
-  - X-CUBE-TOF1 V3.3.0
+  - X-CUBE-TOF1 V3.4.0
 
 ### <b>How to use it?</b>
 
@@ -107,7 +112,7 @@ For Keil µVision 5:
  
 For Integrated Development Environment for STM32:
 
- - Open STM32CubeIDE (this firmware has been successfully tested with Version 1.12.1).
+ - Open STM32CubeIDE (this firmware has been successfully tested with Version 1.14.0).
  - Set the default workspace proposed by the IDE (please be sure that there are not spaces in the workspace path).
  - Press "File" -> "Import" -> "Existing Projects into Workspace"; press "Browse" in the "Select root directory" and choose the path where the System
    Workbench project is located (it should be STM32CubeIDE). 
@@ -119,7 +124,7 @@ SRA Application Team
 
 ### <b>License</b>
 
-Copyright (c) 2023 STMicroelectronics.
+Copyright (c) 2024 STMicroelectronics.
 All rights reserved.
 
 This software is licensed under terms that can be found in the LICENSE file

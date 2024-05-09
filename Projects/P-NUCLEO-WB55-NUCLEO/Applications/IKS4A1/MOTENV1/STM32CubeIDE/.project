@@ -51,11 +51,6 @@
 			<locationURI>PARENT-1-PROJECT_LOC/Src/MotionAR_Manager.c</locationURI>
 		</link>
 		<link>
-			<name>Application/User/MotionAW_Manager.c</name>
-			<type>1</type>
-			<locationURI>PARENT-1-PROJECT_LOC/Src/MotionAW_Manager.c</locationURI>
-		</link>
-		<link>
 			<name>Application/User/MotionCP_Manager.c</name>
 			<type>1</type>
 			<locationURI>PARENT-1-PROJECT_LOC/Src/MotionCP_Manager.c</locationURI>
@@ -164,11 +159,6 @@
 			<name>Application/User/motionar_server_app.c</name>
 			<type>1</type>
 			<locationURI>PARENT-1-PROJECT_LOC/Src/motionar_server_app.c</locationURI>
-		</link>
-		<link>
-			<name>Application/User/motionaw_server_app.c</name>
-			<type>1</type>
-			<locationURI>PARENT-1-PROJECT_LOC/Src/motionaw_server_app.c</locationURI>
 		</link>
 		<link>
 			<name>Application/User/motioncp_server_app.c</name>

@@ -1,4 +1,4 @@
-
+/* USER CODE BEGIN Header */
 /**
   ******************************************************************************
   * @file    env_server_app.h
@@ -6,7 +6,7 @@
   ******************************************************************************
   * @attention
   *
-  * Copyright (c) 2023 STMicroelectronics.
+  * Copyright (c) 2024 STMicroelectronics.
   * All rights reserved.
   *
   * This software is licensed under terms that can be found in the LICENSE file
@@ -15,6 +15,9 @@
   *
   ******************************************************************************
   */
+
+/* USER CODE END Header */
+
 /* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef ENV_SERVER_APP_H
 #define ENV_SERVER_APP_H
@@ -27,8 +30,8 @@ extern "C" {
 /* Exported types ------------------------------------------------------------*/
 
 /**
- * @brief  HW/Environmental Service/Char Context structure definition
- */
+  * @brief  HW/Environmental Service/Char Context structure definition
+  */
 typedef struct
 {
   uint8_t  NotificationStatus;

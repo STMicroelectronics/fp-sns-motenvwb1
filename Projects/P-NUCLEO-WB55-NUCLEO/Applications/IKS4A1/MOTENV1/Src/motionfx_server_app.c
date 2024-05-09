@@ -1,4 +1,4 @@
-
+/* USER CODE BEGIN Header */
 /**
   ******************************************************************************
   * @file    motionfx_server_app.c
@@ -6,7 +6,7 @@
   ******************************************************************************
   * @attention
   *
-  * Copyright (c) 2023 STMicroelectronics.
+  * Copyright (c) 2024 STMicroelectronics.
   * All rights reserved.
   *
   * This software is licensed under terms that can be found in the LICENSE file
@@ -15,6 +15,9 @@
   *
   ******************************************************************************
   */
+
+/* USER CODE END Header */
+
 /* Includes ------------------------------------------------------------------*/
 #include "app_common.h"
 #include "ble.h"
@@ -28,18 +31,18 @@
 
 /* Private defines -----------------------------------------------------------*/
 /**
- * @brief Define The transmission interval in Multiple of 10ms for quaternions
- */
+  * @brief Define The transmission interval in Multiple of 10ms for quaternions
+  */
 #define QUAT_UPDATE_MUL_10MS (3)
 /**
- * @brief Define How Many quaterions you want to trasmit (from 1 to 3)
- */
+  * @brief Define How Many quaterions you want to transmit (from 1 to 3)
+  */
 #define SEND_N_QUATERNIONS (3)
 
 #define MOTIONFX_ENGINE_DELTATIME       0.01f
 /**
- * @brief Algorithm period [ms]
- */
+  * @brief Algorithm period [ms]
+  */
 #define MOTIONFX_ALGO_PERIOD            (10)
 
 #define VALUE_LEN_QUAT          (2+6*SEND_N_QUATERNIONS)
@@ -47,8 +50,8 @@
 
 /* Private typedef -----------------------------------------------------------*/
 /**
- * @brief  SW/Sensor Data Fusion Service/Char Context structure definition
- */
+  * @brief  SW/Sensor Data Fusion Service/Char Context structure definition
+  */
 typedef struct
 {
   uint8_t  QuatNotificationStatus;
@@ -87,11 +90,11 @@ static void Magneto_Sensor_Handler(MOTION_SENSOR_Axes_t *MAG_Value);
 /* Public functions ----------------------------------------------------------*/
 
 /**
- * @brief  Init the SW/Sensor Data Fusion Service/Char Context
- *         and update the ADV data accordingly
- * @param  None
- * @retval None
- */
+  * @brief  Init the SW/Sensor Data Fusion Service/Char Context
+  *         and update the ADV data accordingly
+  * @param  None
+  * @retval None
+  */
 void MOTIONFX_Context_Init(void)
 {
   MOTIONFX_Server_App_Context.MagTimeStamp = 0;
@@ -113,70 +116,70 @@ void MOTIONFX_Context_Init(void)
 }
 
 /**
- * @brief  Set the notification status (enabled/disabled) for Sensor Data Fusion
- * @param  status The new notification status
- * @retval None
- */
+  * @brief  Set the notification status (enabled/disabled) for Sensor Data Fusion
+  * @param  status The new notification status
+  * @retval None
+  */
 void MOTIONFX_Set_Quat_Notification_Status(uint8_t status)
 {
   MOTIONFX_Server_App_Context.QuatNotificationStatus = status;
 }
 
 /**
- * @brief  Set the notification status (enabled/disabled) for ECompass
- * @param  status The new notification status
- * @retval None
- */
+  * @brief  Set the notification status (enabled/disabled) for ECompass
+  * @param  status The new notification status
+  * @retval None
+  */
 void MOTIONFX_Set_ECompass_Notification_Status(uint8_t status)
 {
   MOTIONFX_Server_App_Context.ECompassNotificationStatus = status;
 }
 
 /**
- * @brief  Send a notification for Quaternions (Sensor Data Fusion case)
- * @param  None
- * @retval None
- */
+  * @brief  Send a notification for Quaternions (Sensor Data Fusion case)
+  * @param  None
+  * @retval None
+  */
 void MOTIONFX_Send_Quat_Notification_Task(void)
 {
   ComputeQuaternions();
 }
 
 /**
- * @brief  Send a notification for Quaternions (ECompass case)
- * @param  None
- * @retval None
- */
+  * @brief  Send a notification for Quaternions (ECompass case)
+  * @param  None
+  * @retval None
+  */
 void MOTIONFX_Send_ECompass_Notification_Task(void)
 {
   ComputeQuaternions();
 }
 
 /**
- * @brief  Return the Magneto Calibration status
- * @param  None
- * @retval Magneto Calibration status
- */
+  * @brief  Return the Magneto Calibration status
+  * @param  None
+  * @retval Magneto Calibration status
+  */
 uint8_t MOTIONFX_Get_MagCalStatus(void)
 {
   return MOTIONFX_Server_App_Context.MagCalStatus;
 }
 
 /**
- * @brief  Return the Magneto Calibration offset
- * @param  None
- * @retval Magneto Calibration offset
- */
+  * @brief  Return the Magneto Calibration offset
+  * @param  None
+  * @retval Magneto Calibration offset
+  */
 MOTION_SENSOR_Axes_t *MOTIONFX_Get_MAG_Offset(void)
 {
   return &(MOTIONFX_Server_App_Context.MAG_Offset);
 }
 
 /**
- * @brief  Force Magneto Calibration
- * @param  None
- * @retval None
- */
+  * @brief  Force Magneto Calibration
+  * @param  None
+  * @retval None
+  */
 void MOTIONFX_ReCalibration(void)
 {
   /* Reset Magneto Calibration */
@@ -192,10 +195,10 @@ void MOTIONFX_ReCalibration(void)
 /* Private functions ---------------------------------------------------------*/
 
 /**
- * @brief  MotionFX Working function
- * @param  None
- * @retval None
- */
+  * @brief  MotionFX Working function
+  * @param  None
+  * @retval None
+  */
 static void ComputeQuaternions(void)
 {
   MFX_input_t data_in;
@@ -209,12 +212,12 @@ static void ComputeQuaternions(void)
   MOTION_SENSOR_Axes_t GYR_Value;
   MOTION_SENSOR_Axes_t MAG_Value;
 
-   /* Increment the Counter */
-  if(MOTIONFX_Server_App_Context.QuatNotificationStatus)
+  /* Increment the Counter */
+  if (MOTIONFX_Server_App_Context.QuatNotificationStatus)
   {
     CounterFX++;
   }
-  else if(MOTIONFX_Server_App_Context.ECompassNotificationStatus)
+  else if (MOTIONFX_Server_App_Context.ECompassNotificationStatus)
   {
     CounterEC++;
   }
@@ -241,15 +244,15 @@ static void ComputeQuaternions(void)
   /* Run Sensor Fusion algorithm */
   MotionFX_manager_run(pdata_in, pdata_out, MOTIONFX_ENGINE_DELTATIME);
 
-  if(MOTIONFX_Server_App_Context.QuatNotificationStatus)
+  if (MOTIONFX_Server_App_Context.QuatNotificationStatus)
   {
-    int32_t QuaternionNumber = (CounterFX>SEND_N_QUATERNIONS) ? (SEND_N_QUATERNIONS-1) : (CounterFX-1);
+    int32_t QuaternionNumber = (CounterFX > SEND_N_QUATERNIONS) ? (SEND_N_QUATERNIONS - 1) : (CounterFX - 1);
 
     /* Scaling quaternions data by a factor of 10000
       (Scale factor to handle float during data transfer BT) */
 
     /* Save the quaternions values */
-    if(pdata_out->quaternion[3] < 0)
+    if (pdata_out->quaternion[3] < 0)
     {
       MOTIONFX_Server_App_Context.quat_axes[QuaternionNumber].x = (int32_t)(pdata_out->quaternion[0] * (-10000));
       MOTIONFX_Server_App_Context.quat_axes[QuaternionNumber].y = (int32_t)(pdata_out->quaternion[1] * (-10000));
@@ -262,19 +265,19 @@ static void ComputeQuaternions(void)
       MOTIONFX_Server_App_Context.quat_axes[QuaternionNumber].z = (int32_t)(pdata_out->quaternion[2] * 10000);
     }
 
-    /* Every QUAT_UPDATE_MUL_10MS*10 mSeconds Send Quaternions informations via bluetooth */
-    if(CounterFX == QUAT_UPDATE_MUL_10MS)
+    /* Every QUAT_UPDATE_MUL_10MS*10 mSeconds Send Quaternions information via bluetooth */
+    if (CounterFX == QUAT_UPDATE_MUL_10MS)
     {
       Quat_Update(MOTIONFX_Server_App_Context.quat_axes);
       CounterFX = 0;
     }
   }
-  else if(MOTIONFX_Server_App_Context.ECompassNotificationStatus)
+  else if (MOTIONFX_Server_App_Context.ECompassNotificationStatus)
   {
     /* E-Compass Updated every 0.1 Seconds*/
-    if(CounterEC == 10)
+    if (CounterEC == 10)
     {
-      MOTIONFX_Server_App_Context.Angle = (uint16_t)trunc(100*pdata_out->heading);
+      MOTIONFX_Server_App_Context.Angle = (uint16_t)trunc(100 * pdata_out->heading);
       ECompass_Update(MOTIONFX_Server_App_Context.Angle);
       CounterEC = 0;
     }
@@ -282,30 +285,30 @@ static void ComputeQuaternions(void)
 }
 
 /**
- * @brief  Handle the ACC axes data getting
- * @param  ACC_Value Accelerometer value to be read
- * @retval None
- */
+  * @brief  Handle the ACC axes data getting
+  * @param  ACC_Value Accelerometer value to be read
+  * @retval None
+  */
 static void Accelero_Sensor_Handler(MOTION_SENSOR_Axes_t *ACC_Value)
 {
   (void)MOTION_SENSOR_GetAxes(ACCELERO_INSTANCE, MOTION_ACCELERO, ACC_Value);
 }
 
 /**
- * @brief  Handle the GYRO axes data getting
- * @param  GYR_Value Gyro value to be read
- * @retval None
- */
+  * @brief  Handle the GYRO axes data getting
+  * @param  GYR_Value Gyro value to be read
+  * @retval None
+  */
 static void Gyro_Sensor_Handler(MOTION_SENSOR_Axes_t *GYR_Value)
 {
   (void)MOTION_SENSOR_GetAxes(GYRO_INSTANCE, MOTION_GYRO, GYR_Value);
 }
 
 /**
- * @brief  Handle the MAGNETO axes data getting
- * @param  MAG_Value Magneto value to be read
- * @retval None
- */
+  * @brief  Handle the MAGNETO axes data getting
+  * @param  MAG_Value Magneto value to be read
+  * @retval None
+  */
 static void Magneto_Sensor_Handler(MOTION_SENSOR_Axes_t *MAG_Value)
 {
   float ans_float;
@@ -346,7 +349,7 @@ static void Magneto_Sensor_Handler(MOTION_SENSOR_Axes_t *MAG_Value)
         MotionFX_manager_MagCal_stop(MOTIONFX_ALGO_PERIOD);
       }
 
-      if(MOTIONFX_Server_App_Context.MagCalStatus == 1)
+      if (MOTIONFX_Server_App_Context.MagCalStatus == 1)
       {
         /* Notifications of Compass Calibration */
         CONFIG_Send_Notification(FEATURE_MASK_SENSORFUSION_SHORT, W2ST_COMMAND_CAL_STATUS, 100);
@@ -354,9 +357,9 @@ static void Magneto_Sensor_Handler(MOTION_SENSOR_Axes_t *MAG_Value)
       }
       else
       {
-#if(CFG_DEBUG_APP_TRACE != 0)
-    //APP_DBG_MSG("-- MOTIONFX APPLICATION SERVER : Magneto Calibration quality is not good\r\n");
-#endif
+#if (CFG_DEBUG_APP_TRACE != 0)
+        /* APP_DBG_MSG("-- MOTIONFX APPLICATION SERVER : Magneto Calibration quality is not good\r\n"); */
+#endif /* CFG_DEBUG_APP_TRACE != 0 */
       }
     }
   }
@@ -371,82 +374,82 @@ static void Magneto_Sensor_Handler(MOTION_SENSOR_Axes_t *MAG_Value)
 }
 
 /**
- * @brief  Update quaternions characteristic value
- * @param  data Structure containing the quaterions
- * @retval None
- */
+  * @brief  Update quaternions characteristic value
+  * @param  data Structure containing the quaterions
+  * @retval None
+  */
 static void Quat_Update(MOTION_SENSOR_Axes_t *data)
 {
   uint8_t value[VALUE_LEN_QUAT];
 
   /* Timestamp */
-  STORE_LE_16(value, (HAL_GetTick()>>3));
+  STORE_LE_16(value, (HAL_GetTick() >> 3));
 
-  STORE_LE_16(value+2,data[0].x);
-  STORE_LE_16(value+4,data[0].y);
-  STORE_LE_16(value+6,data[0].z);
+  STORE_LE_16(value + 2, data[0].x);
+  STORE_LE_16(value + 4, data[0].y);
+  STORE_LE_16(value + 6, data[0].z);
 
-  STORE_LE_16(value+8 ,data[1].x);
-  STORE_LE_16(value+10,data[1].y);
-  STORE_LE_16(value+12,data[1].z);
+  STORE_LE_16(value + 8, data[1].x);
+  STORE_LE_16(value + 10, data[1].y);
+  STORE_LE_16(value + 12, data[1].z);
 
-  STORE_LE_16(value+14,data[2].x);
-  STORE_LE_16(value+16,data[2].y);
-  STORE_LE_16(value+18,data[2].z);
+  STORE_LE_16(value + 14, data[2].x);
+  STORE_LE_16(value + 16, data[2].y);
+  STORE_LE_16(value + 18, data[2].z);
 
-  if(MOTIONFX_Server_App_Context.QuatNotificationStatus)
+  if (MOTIONFX_Server_App_Context.QuatNotificationStatus)
   {
-#if(CFG_DEBUG_APP_TRACE != 0)
-    //APP_DBG_MSG("-- MOTIONFX APPLICATION SERVER : NOTIFY CLIENT WITH NEW QUAT PARAMETER VALUE \n ");
-    //APP_DBG_MSG(" \n\r");
-#endif
+#if (CFG_DEBUG_APP_TRACE != 0)
+    /* APP_DBG_MSG("-- MOTIONFX APPLICATION SERVER : NOTIFY CLIENT WITH NEW QUAT PARAMETER VALUE \n "); */
+    /* APP_DBG_MSG(" \n\r"); */
+#endif /* CFG_DEBUG_APP_TRACE != 0 */
     MOTENV_STM_App_Update_Char(MOTION_FX_CHAR_UUID, VALUE_LEN_QUAT, (uint8_t *)&value);
   }
   else
   {
-#if(CFG_DEBUG_APP_TRACE != 0)
+#if (CFG_DEBUG_APP_TRACE != 0)
     APP_DBG_MSG("-- MOTIONFX APPLICATION SERVER : CAN'T INFORM CLIENT - NOTIFICATION DISABLED\n ");
-#endif
+#endif /* CFG_DEBUG_APP_TRACE != 0 */
   }
 
   return;
 }
 
 /**
- * @brief  Update E-Compass characteristic value
- * @param  Angle To Magnetic North in cents of degree [0.00 -> 259,99]
- * @retval None
- */
+  * @brief  Update E-Compass characteristic value
+  * @param  Angle To Magnetic North in cents of degree [0.00 -> 259,99]
+  * @retval None
+  */
 static void ECompass_Update(uint16_t Angle)
 {
   uint8_t value[VALUE_LEN_ECOMPASS];
 
   /* Timestamp */
-  STORE_LE_16(value, (HAL_GetTick()>>3));
+  STORE_LE_16(value, (HAL_GetTick() >> 3));
 
-  STORE_LE_16(value+2, Angle);
+  STORE_LE_16(value + 2, Angle);
 
-  if(MOTIONFX_Server_App_Context.ECompassNotificationStatus)
+  if (MOTIONFX_Server_App_Context.ECompassNotificationStatus)
   {
-#if(CFG_DEBUG_APP_TRACE != 0)
-    //APP_DBG_MSG("-- MOTIONFX APPLICATION SERVER : NOTIFY CLIENT WITH NEW ECOMPASS PARAMETER VALUE \n ");
-    //APP_DBG_MSG(" \n\r");
-#endif
+#if (CFG_DEBUG_APP_TRACE != 0)
+    /* APP_DBG_MSG("-- MOTIONFX APPLICATION SERVER : NOTIFY CLIENT WITH NEW ECOMPASS PARAMETER VALUE \n "); */
+    /* APP_DBG_MSG(" \n\r"); */
+#endif /* CFG_DEBUG_APP_TRACE != 0 */
     MOTENV_STM_App_Update_Char(ECOMPASS_CHAR_UUID, VALUE_LEN_ECOMPASS, (uint8_t *)&value);
   }
   else
   {
-#if(CFG_DEBUG_APP_TRACE != 0)
+#if (CFG_DEBUG_APP_TRACE != 0)
     APP_DBG_MSG("-- MOTIONFX APPLICATION SERVER : CAN'T INFORM CLIENT - NOTIFICATION DISABLED\n ");
-#endif
+#endif /* CFG_DEBUG_APP_TRACE != 0 */
   }
 }
 
 /**
- * @brief  Test if calibration data are available
- * @param  None
- * @retval None
- */
+  * @brief  Test if calibration data are available
+  * @param  None
+  * @retval None
+  */
 static void MagCalibTest(void)
 {
   MFX_MagCal_output_t mag_cal_test;
@@ -455,31 +458,30 @@ static void MagCalibTest(void)
   MotionFX_manager_MagCal_start(MOTIONFX_ALGO_PERIOD);
   MotionFX_MagCal_getParams(&mag_cal_test);
 
-  if(mag_cal_test.cal_quality == MFX_MAGCALGOOD)
+  if (mag_cal_test.cal_quality == MFX_MAGCALGOOD)
   {
-    MOTIONFX_Server_App_Context.MAG_Offset.x = (int32_t) (mag_cal_test.hi_bias[0] * FROM_UT50_TO_MGAUSS);
-    MOTIONFX_Server_App_Context.MAG_Offset.y = (int32_t) (mag_cal_test.hi_bias[1] * FROM_UT50_TO_MGAUSS);
-    MOTIONFX_Server_App_Context.MAG_Offset.z = (int32_t) (mag_cal_test.hi_bias[2] * FROM_UT50_TO_MGAUSS);
+    MOTIONFX_Server_App_Context.MAG_Offset.x = (int32_t)(mag_cal_test.hi_bias[0] * FROM_UT50_TO_MGAUSS);
+    MOTIONFX_Server_App_Context.MAG_Offset.y = (int32_t)(mag_cal_test.hi_bias[1] * FROM_UT50_TO_MGAUSS);
+    MOTIONFX_Server_App_Context.MAG_Offset.z = (int32_t)(mag_cal_test.hi_bias[2] * FROM_UT50_TO_MGAUSS);
 
     MOTIONFX_Server_App_Context.MagCalStatus = 1;
 
-#if(CFG_DEBUG_APP_TRACE != 0)
+#if (CFG_DEBUG_APP_TRACE != 0)
     APP_DBG_MSG("-- MOTIONFX APPLICATION SERVER : Magneto Calibration Read\r\n");
-#endif
+#endif /* CFG_DEBUG_APP_TRACE != 0 */
   }
   else
   {
     MOTIONFX_Server_App_Context.MagCalStatus = 0;
-#if(CFG_DEBUG_APP_TRACE != 0)
+#if (CFG_DEBUG_APP_TRACE != 0)
     APP_DBG_MSG("-- MOTIONFX APPLICATION SERVER : Magneto Calibration quality is not good\r\n");
-#endif
+#endif /* CFG_DEBUG_APP_TRACE != 0 */
   }
 
-  if(!MOTIONFX_Server_App_Context.MagCalStatus)
+  if (!MOTIONFX_Server_App_Context.MagCalStatus)
   {
     MOTIONFX_Server_App_Context.MAG_Offset.x = 0;
     MOTIONFX_Server_App_Context.MAG_Offset.y = 0;
     MOTIONFX_Server_App_Context.MAG_Offset.z = 0;
   }
 }
-

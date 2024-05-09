@@ -50,13 +50,13 @@ typedef struct
 {
   int32_t (*Init)(void *);
   int32_t (*DeInit)(void *);
-  int32_t (*GestureConfig)(void *, const void *);
+  int32_t (*GestureConfig)(void *, void *);
   int32_t (*ReadID)(void *, uint32_t *);
   int32_t (*GetState)(void *, void *);
   int32_t (*GetMultiTouchState)(void *, void *);
-  int32_t (*GetGesture)(void *, uint8_t *);
-  int32_t (*GetCapabilities)(void *, const void *);
-  int32_t (*EnableIT)(void *, uint8_t);
+  int32_t (*GetGesture)(void *, void *);
+  int32_t (*GetCapabilities)(void *, void *);
+  int32_t (*EnableIT)(void *);
   int32_t (*DisableIT)(void *);
   int32_t (*ClearIT)(void *);
   int32_t (*ITStatus)(void *);

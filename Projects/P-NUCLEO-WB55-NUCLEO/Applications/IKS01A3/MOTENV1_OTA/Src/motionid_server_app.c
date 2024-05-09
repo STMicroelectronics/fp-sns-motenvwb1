@@ -1,4 +1,4 @@
-
+/* USER CODE BEGIN Header */
 /**
   ******************************************************************************
   * @file    motionid_server_app.c
@@ -6,7 +6,7 @@
   ******************************************************************************
   * @attention
   *
-  * Copyright (c) 2023 STMicroelectronics.
+  * Copyright (c) 2024 STMicroelectronics.
   * All rights reserved.
   *
   * This software is licensed under terms that can be found in the LICENSE file
@@ -15,6 +15,9 @@
   *
   ******************************************************************************
   */
+
+/* USER CODE END Header */
+
 /* Includes ------------------------------------------------------------------*/
 #include "app_common.h"
 #include "ble.h"
@@ -31,8 +34,8 @@
 
 /* Private typedef -----------------------------------------------------------*/
 /**
- * @brief  SW/Motion Intensity Service/Char Context structure definition
- */
+  * @brief  SW/Motion Intensity Service/Char Context structure definition
+  */
 typedef struct
 {
   uint8_t  NotificationStatus;
@@ -58,11 +61,11 @@ static void IntensityDet_Update(MID_output_t MIDCode);
 /* Public functions ----------------------------------------------------------*/
 
 /**
- * @brief  Init the SW/Motion Intensity Service/Char Context
- *         and update the ADV data accordingly
- * @param  None
- * @retval None
- */
+  * @brief  Init the SW/Motion Intensity Service/Char Context
+  *         and update the ADV data accordingly
+  * @param  None
+  * @retval None
+  */
 void MOTIONID_Context_Init(void)
 {
   /* CarryPosition API initialization function */
@@ -77,14 +80,14 @@ void MOTIONID_Context_Init(void)
 }
 
 /**
- * @brief  Set the notification status (enabled/disabled) and full scale
- * @param  status The new notification status
- * @retval None
- */
+  * @brief  Set the notification status (enabled/disabled) and full scale
+  * @param  status The new notification status
+  * @retval None
+  */
 void MOTIONID_Set_Notification_Status(uint8_t status)
 {
   MOTIONID_Server_App_Context.NotificationStatus = status;
-  if(status == 1)
+  if (status == 1)
   {
     /* Set accelerometer:
      *   - FS   = <-4g, 4g>
@@ -101,20 +104,20 @@ void MOTIONID_Set_Notification_Status(uint8_t status)
 }
 
 /**
- * @brief  Send a notification for Motion Intensity events
- * @param  None
- * @retval None
- */
+  * @brief  Send a notification for Motion Intensity events
+  * @param  None
+  * @retval None
+  */
 void MOTIONID_Send_Notification_Task(void)
 {
   ComputeMotionID();
 }
 
 /**
- * @brief  Update the Motion Intensity char value
- * @param  None
- * @retval None
- */
+  * @brief  Update the Motion Intensity char value
+  * @param  None
+  * @retval None
+  */
 void MOTIONID_IntensityDet_Update(void)
 {
   IntensityDet_Update(MOTIONID_Server_App_Context.MIDCode);
@@ -123,10 +126,10 @@ void MOTIONID_IntensityDet_Update(void)
 /* Private functions ---------------------------------------------------------*/
 
 /**
- * @brief  Run the MID Manager and update the Motion Intensity char value
- * @param  None
- * @retval None
- */
+  * @brief  Run the MID Manager and update the Motion Intensity char value
+  * @param  None
+  * @retval None
+  */
 static void ComputeMotionID(void)
 {
   MOTION_SENSOR_Axes_t ACC_Value;
@@ -143,41 +146,40 @@ static void ComputeMotionID(void)
 
   MotionID_manager_run(&data_in, &MOTIONID_Server_App_Context.MIDCode);
 
-  if(MIDCodePrev != MOTIONID_Server_App_Context.MIDCode)
+  if (MIDCodePrev != MOTIONID_Server_App_Context.MIDCode)
   {
     MIDCodePrev = MOTIONID_Server_App_Context.MIDCode;
-    if(MOTIONID_Server_App_Context.NotificationStatus)
+    if (MOTIONID_Server_App_Context.NotificationStatus)
     {
       IntensityDet_Update(MOTIONID_Server_App_Context.MIDCode);
     }
     else
     {
-#if(CFG_DEBUG_APP_TRACE != 0)
+#if (CFG_DEBUG_APP_TRACE != 0)
       APP_DBG_MSG("-- MOTIONID APPLICATION SERVER : CAN'T INFORM CLIENT - NOTIFICATION DISABLED\n ");
-#endif
+#endif /* CFG_DEBUG_APP_TRACE != 0 */
     }
   }
 }
 
 /**
- * @brief  Update the Motion Intensity char value
- * @param  MIDCode Motion Intensity Detected
- * @retval None
- */
+  * @brief  Update the Motion Intensity char value
+  * @param  MIDCode Motion Intensity Detected
+  * @retval None
+  */
 static void IntensityDet_Update(MID_output_t MIDCode)
 {
   uint8_t value[VALUE_LEN_ID];
 
   /* Timestamp */
-  STORE_LE_16(value, (HAL_GetTick()>>3));
+  STORE_LE_16(value, (HAL_GetTick() >> 3));
   value[2] = MIDCode;
 
-#if(CFG_DEBUG_APP_TRACE != 0)
+#if (CFG_DEBUG_APP_TRACE != 0)
   APP_DBG_MSG("-- MOTIONID APPLICATION SERVER : NOTIFY CLIENT WITH NEW PARAMETER VALUE \n ");
   APP_DBG_MSG(" \n\r");
-#endif
+#endif /* CFG_DEBUG_APP_TRACE != 0 */
   MOTENV_STM_App_Update_Char(INTENSITY_DET_CHAR_UUID, VALUE_LEN_ID, (uint8_t *)&value);
 
   return;
 }
-

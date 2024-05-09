@@ -24,7 +24,7 @@ This directory contains the LPS22DF component drivers.
 
 ::: {.collapse}
 <input type="checkbox" id="collapse-section4" checked aria-hidden="true">
-<label for="collapse-section4" aria-hidden="true">V1.3.0 / 16-June-2023</label>
+<label for="collapse-section4" aria-hidden="true">V1.3.0 / 18-August-2023</label>
 <div>
 
 ## Main changes
@@ -32,6 +32,7 @@ This directory contains the LPS22DF component drivers.
 ### Maintenance release
 
 - Add I3C define
+- Add Gas to Capability struct
 
 ##
 

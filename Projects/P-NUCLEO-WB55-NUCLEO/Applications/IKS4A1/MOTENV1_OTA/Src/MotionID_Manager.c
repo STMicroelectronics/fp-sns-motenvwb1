@@ -1,4 +1,4 @@
-
+/* USER CODE BEGIN Header */
 /**
   ******************************************************************************
   * @file    MotionID_Manager.c
@@ -7,7 +7,7 @@
   ******************************************************************************
   * @attention
   *
-  * Copyright (c) 2023 STMicroelectronics.
+  * Copyright (c) 2024 STMicroelectronics.
   * All rights reserved.
   *
   * This software is licensed under terms that can be found in the LICENSE file
@@ -17,57 +17,58 @@
   ******************************************************************************
   */
 
+/* USER CODE END Header */
+
 /* Includes ------------------------------------------------------------------*/
 #include "MotionID_Manager.h"
 
 /** @addtogroup MOTION_APPLICATIONS MOTION APPLICATIONS
- * @{
- */
+  * @{
+  */
 
 /** @addtogroup INTENSITY_DETECTION INTENSITY DETECTION
- * @{
- */
+  * @{
+  */
 
 /* Private typedef -----------------------------------------------------------*/
 /* Exported function prototypes ----------------------------------------------*/
 /* Exported functions --------------------------------------------------------*/
 /**
- * @brief  Initialize the MotionID engine
- * @param  None
- * @retval None
- */
+  * @brief  Initialize the MotionID engine
+  * @param  None
+  * @retval None
+  */
 void MotionID_manager_init(void)
 {
   MotionID_Initialize(MID_MCU_STM32);
 }
 
 /**
- * @brief  Run Intensity Detection algorithm
- * @param  data_in  Structure containing input data
- * @param  data_out Structure containing output data
- * @retval None
- */
+  * @brief  Run Intensity Detection algorithm
+  * @param  data_in  Structure containing input data
+  * @param  data_out Structure containing output data
+  * @retval None
+  */
 void MotionID_manager_run(MID_input_t *data_in, MID_output_t *data_out)
 {
   MotionID_Update(data_in, data_out);
 }
 
 /**
- * @brief  Get the library version
- * @param  version  Library version string (must be array of 35 char)
- * @param  length  Library version string length
- * @retval None
- */
-void MotionID_manager_get_version(char *version, int *length)
+  * @brief  Get the library version
+  * @param  version  Library version string (must be array of 35 char)
+  * @param  length  Library version string length
+  * @retval None
+  */
+void MotionID_manager_get_version(char *version, uint8_t *length)
 {
-  *length = (int)MotionID_GetLibVersion(version);
+  *length = (uint8_t)MotionID_GetLibVersion(version);
 }
 
 /**
- * @}
- */
+  * @}
+  */
 
 /**
- * @}
- */
-
+  * @}
+  */

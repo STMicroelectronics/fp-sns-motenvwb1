@@ -1,4 +1,4 @@
-
+/* USER CODE BEGIN Header */
 /**
   ******************************************************************************
   * @file    motionpm_server_app.c
@@ -6,7 +6,7 @@
   ******************************************************************************
   * @attention
   *
-  * Copyright (c) 2023 STMicroelectronics.
+  * Copyright (c) 2024 STMicroelectronics.
   * All rights reserved.
   *
   * This software is licensed under terms that can be found in the LICENSE file
@@ -15,6 +15,9 @@
   *
   ******************************************************************************
   */
+
+/* USER CODE END Header */
+
 /* Includes ------------------------------------------------------------------*/
 #include "app_common.h"
 #include "ble.h"
@@ -31,8 +34,8 @@
 
 /* Private typedef -----------------------------------------------------------*/
 /**
- * @brief  SW/Motion Pedometer Service/Char Context structure definition
- */
+  * @brief  SW/Motion Pedometer Service/Char Context structure definition
+  */
 typedef struct
 {
   uint8_t  NotificationStatus;
@@ -58,11 +61,11 @@ static void Pedometer_Update(MPM_output_t *PM_Data);
 /* Public functions ----------------------------------------------------------*/
 
 /**
- * @brief  Init the SW/Motion Pedometer Service/Char Context
- *         and update the ADV data accordingly
- * @param  None
- * @retval None
- */
+  * @brief  Init the SW/Motion Pedometer Service/Char Context
+  *         and update the ADV data accordingly
+  * @param  None
+  * @retval None
+  */
 void MOTIONPM_Context_Init(void)
 {
   /* Pedometer API initialization function */
@@ -78,14 +81,14 @@ void MOTIONPM_Context_Init(void)
 }
 
 /**
- * @brief  Set the notification status (enabled/disabled) and full scale
- * @param  status The new notification status
- * @retval None
- */
+  * @brief  Set the notification status (enabled/disabled) and full scale
+  * @param  status The new notification status
+  * @retval None
+  */
 void MOTIONPM_Set_Notification_Status(uint8_t status)
 {
   MOTIONPM_Server_App_Context.NotificationStatus = status;
-  if(status == 1)
+  if (status == 1)
   {
     /* Set accelerometer:
      *   - FS   = <-4g, 4g>
@@ -102,20 +105,20 @@ void MOTIONPM_Set_Notification_Status(uint8_t status)
 }
 
 /**
- * @brief  Send a notification for Motion Pedometer events
- * @param  None
- * @retval None
- */
+  * @brief  Send a notification for Motion Pedometer events
+  * @param  None
+  * @retval None
+  */
 void MOTIONPM_Send_Notification_Task(void)
 {
   ComputeMotionPM();
 }
 
 /**
- * @brief  Update the Motion Pedometer char value
- * @param  None
- * @retval None
- */
+  * @brief  Update the Motion Pedometer char value
+  * @param  None
+  * @retval None
+  */
 void MOTIONPM_Pedometer_Update(void)
 {
   Pedometer_Update(&MOTIONPM_Server_App_Context.PMData);
@@ -124,10 +127,10 @@ void MOTIONPM_Pedometer_Update(void)
 /* Private functions ---------------------------------------------------------*/
 
 /**
- * @brief  Run the MPM Manager and update the Motion Pedometer char value
- * @param  None
- * @retval None
- */
+  * @brief  Run the MPM Manager and update the Motion Pedometer char value
+  * @param  None
+  * @retval None
+  */
 static void ComputeMotionPM(void)
 {
   MOTION_SENSOR_Axes_t ACC_Value;
@@ -144,44 +147,43 @@ static void ComputeMotionPM(void)
 
   MotionPM_manager_run(&data_in, &MOTIONPM_Server_App_Context.PMData);
 
-  if((PMDataPrev.Cadence != MOTIONPM_Server_App_Context.PMData.Cadence) ||
-     (PMDataPrev.Nsteps != MOTIONPM_Server_App_Context.PMData.Nsteps))
+  if ((PMDataPrev.Cadence != MOTIONPM_Server_App_Context.PMData.Cadence) ||
+      (PMDataPrev.Nsteps != MOTIONPM_Server_App_Context.PMData.Nsteps))
   {
     PMDataPrev = MOTIONPM_Server_App_Context.PMData;
-    if(MOTIONPM_Server_App_Context.NotificationStatus)
+    if (MOTIONPM_Server_App_Context.NotificationStatus)
     {
       Pedometer_Update(&MOTIONPM_Server_App_Context.PMData);
     }
     else
     {
-#if(CFG_DEBUG_APP_TRACE != 0)
+#if (CFG_DEBUG_APP_TRACE != 0)
       APP_DBG_MSG("-- MOTIONPM APPLICATION SERVER : CAN'T INFORM CLIENT - NOTIFICATION DISABLED\n ");
-#endif
+#endif /* CFG_DEBUG_APP_TRACE != 0 */
     }
   }
 }
 
 /**
- * @brief  Update the Motion Pedometer char value
- * @param  PMData Motion Pedometer Data
- * @retval None
- */
+  * @brief  Update the Motion Pedometer char value
+  * @param  PMData Motion Pedometer Data
+  * @retval None
+  */
 static void Pedometer_Update(MPM_output_t *PMData)
 {
   uint8_t value[VALUE_LEN_PM];
   uint16_t Cadence = (uint16_t) PMData->Cadence;
 
   /* Timestamp */
-  STORE_LE_16(value, (HAL_GetTick()>>3));
-  STORE_LE_32(value+2,PMData->Nsteps);
-  STORE_LE_16(value+6,Cadence);
+  STORE_LE_16(value, (HAL_GetTick() >> 3));
+  STORE_LE_32(value + 2, PMData->Nsteps);
+  STORE_LE_16(value + 6, Cadence);
 
-#if(CFG_DEBUG_APP_TRACE != 0)
+#if (CFG_DEBUG_APP_TRACE != 0)
   APP_DBG_MSG("-- MOTIONPM APPLICATION SERVER : NOTIFY CLIENT WITH NEW PARAMETER VALUE \n ");
   APP_DBG_MSG(" \n\r");
-#endif
+#endif /* CFG_DEBUG_APP_TRACE != 0 */
   MOTENV_STM_App_Update_Char(PEDOMETER_CHAR_UUID, VALUE_LEN_PM, (uint8_t *)&value);
 
   return;
 }
-

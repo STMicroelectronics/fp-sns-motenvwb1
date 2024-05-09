@@ -1,3 +1,4 @@
+/* USER CODE BEGIN Header */
 /**
   ******************************************************************************
   * @file    motenv_stm_conf.h
@@ -6,7 +7,7 @@
   ******************************************************************************
   * @attention
   *
-  * Copyright (c) 2023 STMicroelectronics.
+  * Copyright (c) 2024 STMicroelectronics.
   * All rights reserved.
   *
   * This software is licensed under terms that can be found in the LICENSE file
@@ -16,12 +17,14 @@
   ******************************************************************************
   */
 
+/* USER CODE END Header */
+
 /* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef MOTENV_STM_CONF_H
 #define MOTENV_STM_CONF_H
 
 #ifdef __cplusplus
- extern "C" {
+extern "C" {
 #endif
 
 /* Private typedef -----------------------------------------------------------*/

@@ -32,6 +32,8 @@ This directory contains the LIS2DUXS12 component drivers.
 ### Maintenance release
 
 - Add I3C define
+- Synchronize PID with currently latest version on ST GitHub
+- Update some APIs
 
 ##
 

@@ -1,3 +1,4 @@
+/* USER CODE BEGIN Header */
 /**
   ******************************************************************************
   * @file    motenvwb1_app_ble.h
@@ -6,7 +7,7 @@
   ******************************************************************************
   * @attention
   *
-  * Copyright (c) 2023 STMicroelectronics.
+  * Copyright (c) 2024 STMicroelectronics.
   * All rights reserved.
   *
   * This software is licensed under terms that can be found in the LICENSE file
@@ -16,12 +17,14 @@
   ******************************************************************************
   */
 
+/* USER CODE END Header */
+
 /* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef MOTENVWB1_APP_BLE_H
 #define MOTENVWB1_APP_BLE_H
 
 #ifdef __cplusplus
- extern "C" {
+extern "C" {
 #endif
 
 /* Includes ------------------------------------------------------------------*/

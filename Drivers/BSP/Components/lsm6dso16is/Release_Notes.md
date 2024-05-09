@@ -23,7 +23,24 @@ This directory contains the LSM6DSO16IS component drivers.
 # Update history
 
 ::: {.collapse}
-<input type="checkbox" id="collapse-section2" checked aria-hidden="true">
+<input type="checkbox" id="collapse-section3" checked aria-hidden="true">
+<label for="collapse-section3" aria-hidden="true">V1.2.0 / 18-August-2023</label>
+<div>
+
+## Main changes
+
+### Maintenance release
+
+- Add missing Delay function to the structure
+- Add Set Mem Bank function and it's call to Init function
+
+##
+
+</div>
+:::
+
+::: {.collapse}
+<input type="checkbox" id="collapse-section2" aria-hidden="true">
 <label for="collapse-section2" aria-hidden="true">V1.1.0 / 02-December-2022</label>
 <div>
 

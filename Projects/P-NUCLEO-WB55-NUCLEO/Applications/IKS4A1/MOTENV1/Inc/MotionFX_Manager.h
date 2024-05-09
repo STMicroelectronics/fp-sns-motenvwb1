@@ -1,4 +1,4 @@
-
+/* USER CODE BEGIN Header */
 /**
   ******************************************************************************
   * @file    MotionFX_Manager.h
@@ -7,7 +7,7 @@
   ******************************************************************************
   * @attention
   *
-  * Copyright (c) 2023 STMicroelectronics.
+  * Copyright (c) 2024 STMicroelectronics.
   * All rights reserved.
   *
   * This software is licensed under terms that can be found in the LICENSE file
@@ -16,6 +16,8 @@
   *
   ******************************************************************************
   */
+
+/* USER CODE END Header */
 
 /* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef MOTIONFX_MANAGER_H
@@ -43,15 +45,15 @@ void MotionFX_manager_start_6X(void);
 void MotionFX_manager_stop_6X(void);
 void MotionFX_manager_start_9X(void);
 void MotionFX_manager_stop_9X(void);
-void MotionFX_manager_get_version(char *version, int *length);
+void MotionFX_manager_get_version(char *version, uint8_t *length);
 
 void MotionFX_manager_MagCal_run(MFX_MagCal_input_t *data_in, MFX_MagCal_output_t *data_out);
 
 void MotionFX_manager_MagCal_start(int sampletime);
 void MotionFX_manager_MagCal_stop(int sampletime);
 
-char MotionFX_LoadMagCalFromNVM(unsigned short int dataSize, unsigned int *data);
-char MotionFX_SaveMagCalInNVM(unsigned short int dataSize, unsigned int *data);
+char MotionFX_LoadMagCalFromNVM(uint16_t dataSize, uint32_t *data);
+char MotionFX_SaveMagCalInNVM(uint16_t dataSize, uint32_t *data);
 
 #ifdef __cplusplus
 }

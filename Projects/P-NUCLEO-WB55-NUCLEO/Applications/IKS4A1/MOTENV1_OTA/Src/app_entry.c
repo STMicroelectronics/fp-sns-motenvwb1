@@ -7,7 +7,7 @@
   ******************************************************************************
   * @attention
   *
-  * Copyright (c) 2023 STMicroelectronics.
+  * Copyright (c) 2024 STMicroelectronics.
   * All rights reserved.
   *
   * This software is licensed under terms that can be found in the LICENSE file
@@ -311,7 +311,6 @@ static void appe_Tl_Init(void)
 {
   TL_MM_Config_t tl_mm_config;
   SHCI_TL_HciInitConf_t SHci_Tl_Init_Conf;
-
   /**< Reference table initialization */
   TL_Init();
 
@@ -539,9 +538,9 @@ void HAL_Delay(uint32_t Delay)
     /**
      * This option is used to ensure that store operations are completed
      */
-  #if defined (__CC_ARM)
+  #if defined (__CC_ARM) || defined (__ARMCC_VERSION)
     __force_stores();
-  #endif /* __CC_ARM */
+  #endif /* __ARMCC_VERSION */
 
     __WFI();
   }

@@ -51,11 +51,6 @@
 			<locationURI>PARENT-1-PROJECT_LOC/Src/MotionAR_Manager.c</locationURI>
 		</link>
 		<link>
-			<name>Application/User/MotionAW_Manager.c</name>
-			<type>1</type>
-			<locationURI>PARENT-1-PROJECT_LOC/Src/MotionAW_Manager.c</locationURI>
-		</link>
-		<link>
 			<name>Application/User/MotionCP_Manager.c</name>
 			<type>1</type>
 			<locationURI>PARENT-1-PROJECT_LOC/Src/MotionCP_Manager.c</locationURI>
@@ -164,11 +159,6 @@
 			<name>Application/User/motionar_server_app.c</name>
 			<type>1</type>
 			<locationURI>PARENT-1-PROJECT_LOC/Src/motionar_server_app.c</locationURI>
-		</link>
-		<link>
-			<name>Application/User/motionaw_server_app.c</name>
-			<type>1</type>
-			<locationURI>PARENT-1-PROJECT_LOC/Src/motionaw_server_app.c</locationURI>
 		</link>
 		<link>
 			<name>Application/User/motioncp_server_app.c</name>
@@ -663,7 +653,7 @@
 		<link>
 			<name>Middlewares/X-CUBE-TOF1/Documentation/LICENSE.txt</name>
 			<type>1</type>
-			<locationURI>PARENT-6-PROJECT_LOC/Drivers/BSP/53L3A2/LICENSE.txt</locationURI>
+			<locationURI>PARENT-6-PROJECT_LOC/Drivers/BSP/Components/vl53l3cx/LICENSE.txt</locationURI>
 		</link>
 		<link>
 			<name>Middlewares/X-CUBE-TOF1/Documentation/LXReleaseNotes.txt</name>

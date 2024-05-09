@@ -292,6 +292,8 @@ int32_t LSM6DSO16IS_FIFO_ACC_Get_Axis(LSM6DSO16IS_Object_t *pObj, int32_t *Accel
 int32_t LSM6DSO16IS_FIFO_GYRO_Set_Decimation(LSM6DSO16IS_Object_t *pObj, uint8_t Decimation);
 int32_t LSM6DSO16IS_FIFO_GYRO_Get_Axis(LSM6DSO16IS_Object_t *pObj, int32_t *AngularVelocity);
 
+int32_t LSM6DSO16IS_Set_Mem_Bank(LSM6DSO16IS_Object_t *pObj, uint8_t Val);
+
 /**
   * @}
   */

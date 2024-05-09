@@ -212,7 +212,8 @@ typedef union
 int32_t LIS2DUXS12_RegisterBusIO(LIS2DUXS12_Object_t *pObj, LIS2DUXS12_IO_t *pIO);
 int32_t LIS2DUXS12_Init(LIS2DUXS12_Object_t *pObj);
 int32_t LIS2DUXS12_DeInit(LIS2DUXS12_Object_t *pObj);
-int32_t LIS2DUXS12_DisableI3C(LIS2DUXS12_Object_t *pObj);
+int32_t LIS2DUXS12_ExitDeepPowerDownI2C(LIS2DUXS12_Object_t *pObj);
+int32_t LIS2DUXS12_ExitDeepPowerDownSPI(LIS2DUXS12_Object_t *pObj);
 int32_t LIS2DUXS12_ReadID(LIS2DUXS12_Object_t *pObj, uint8_t *Id);
 int32_t LIS2DUXS12_GetCapabilities(LIS2DUXS12_Object_t *pObj, LIS2DUXS12_Capabilities_t *Capabilities);
 

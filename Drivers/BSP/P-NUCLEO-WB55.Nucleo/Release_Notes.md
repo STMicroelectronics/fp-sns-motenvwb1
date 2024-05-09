@@ -29,7 +29,19 @@ This driver provides a set of functions to manage:
 # Update History
 
 ::: {.collapse}
-<input type="checkbox" id="collapse-section6" checked aria-hidden="true">
+<input type="checkbox" id="collapse-section7" checked aria-hidden="true">
+<label for="collapse-section7" aria-hidden="true">V1.0.6 / 8-February-2023</label>
+<div>
+
+## Main Changes
+
+ - printf() implementation change to be compliant with IAR EWARM V9.20.1
+
+</div>
+:::
+
+::: {.collapse}
+<input type="checkbox" id="collapse-section6" aria-hidden="true">
 <label for="collapse-section6" aria-hidden="true">V1.0.5 / 01-June-2022</label>
 <div>
 

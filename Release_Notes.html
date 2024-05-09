@@ -5,73 +5,140 @@
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
   <title>Release Notes for FP-SNS-MOTENVWB1 Function Pack</title>
-  <style type="text/css">
-      code{white-space: pre-wrap;}
-      span.smallcaps{font-variant: small-caps;}
-      span.underline{text-decoration: underline;}
-      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
   </style>
   <link rel="stylesheet" href="_htmresc/mini-st.css" />
+  <link rel="icon" type="image/x-icon" href="_htmresc/favicon.png" />
   <!--[if lt IE 9]>
     <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
   <![endif]-->
-  <link rel="icon" type="image/x-icon" href="_htmresc/favicon.png" />
 </head>
 <body>
 <div class="row">
 <div class="col-sm-12 col-lg-4">
 <center>
-<h1 id="release-notes-for-fp-sns-motenvwb1">Release Notes for <mark>FP-SNS-MOTENVWB1</mark></h1>
-<p>Copyright © 2023 STMicroelectronics<br />
+<h1 id="release-notes-for-fp-sns-motenvwb1">Release Notes for
+<mark>FP-SNS-MOTENVWB1</mark></h1>
+<p>Copyright © 2024 STMicroelectronics<br />
 </p>
-<a href="https://www.st.com" class="logo"><img src="_htmresc/st_logo.png" alt="ST logo" /></a>
+<a href="https://www.st.com" class="logo"><img
+src="_htmresc/st_logo.png" alt="ST logo" /></a>
 </center>
 <h1 id="purpose">Purpose</h1>
-<p>The <mark>FP-SNS-MOTENVWB1</mark> is an STM32Cube function pack which lets you connect your IoT node to a smartphone via BLE and use a suitable Android™ or iOS™ like the <a href="https://www.st.com/content/st_com/en/products/embedded-software/wireless-connectivity-software/stblesensor.html">ST BLE Sensor</a> app to view real-time environmental sensor data, motion sensor data and time-of-flight sensors data.</p>
-<p>The package also enables advanced functionality such as sensor data fusion and accelerometer-based real-time activity recognition, carry position, gesture recognition, pedometer, motion Intensity, campass and objects distance, and supports firmware update (FOTA). This package, together with the suggested combination of STM32WB and ST devices can be used to develop specific wearable applications, or smart things applications in general.</p>
-<p>The software runs on the STM32WB microcontroller and includes all the necessary drivers to recognize the devices on the STM32WB55 Nucleo-68 (<a href="https://www.st.com/en/evaluation-tools/p-nucleo-wb55.html">P-NUCLEO-WB55.Nucleo</a>) development board, MEMS expansion board (<a href="https://www.st.com/content/st_com/en/products/ecosystems/stm32-open-development-environment/stm32-nucleo-expansion-boards/stm32-ode-sense-hw/x-nucleo-iks01a3.html">X-NUCLEO-IKS01A3</a>), MEMS expansion board (<a href="https://www.st.com/content/st_com/en/products/ecosystems/stm32-open-development-environment/stm32-nucleo-expansion-boards/stm32-ode-sense-hw/x-nucleo-iks4a1.html">X-NUCLEO-IKS4A1</a>) and ToF expansion board (<a href="https://www.st.com/content/st_com/en/products/ecosystems/stm32-open-development-environment/stm32-nucleo-expansion-boards/stm32-ode-sense-hw/x-nucleo-53l3a2.html">X-NUCLEO-53L3A2</a>).</p>
+<p>The <mark>FP-SNS-MOTENVWB1</mark> is an STM32Cube function pack which
+lets you connect your IoT node to a smartphone via BLE and use a
+suitable Android™ or iOS™ like the <a
+href="https://www.st.com/content/st_com/en/products/embedded-software/wireless-connectivity-software/stblesensor.html">ST
+BLE Sensor</a> app to view real-time environmental sensor data, motion
+sensor data and time-of-flight sensors data.</p>
+<p>The package also enables advanced functionality such as sensor data
+fusion and accelerometer-based real-time activity recognition, carry
+position, gesture recognition, pedometer, motion Intensity, campass and
+objects distance, and supports firmware update (FOTA). This package,
+together with the suggested combination of STM32WB and ST devices can be
+used to develop specific wearable applications, or smart things
+applications in general.</p>
+<p>The software runs on the STM32WB microcontroller and includes all the
+necessary drivers to recognize the devices on the STM32WB55 Nucleo-68
+(<a
+href="https://www.st.com/en/evaluation-tools/p-nucleo-wb55.html">P-NUCLEO-WB55.Nucleo</a>)
+development board, MEMS expansion board (<a
+href="https://www.st.com/content/st_com/en/products/ecosystems/stm32-open-development-environment/stm32-nucleo-expansion-boards/stm32-ode-sense-hw/x-nucleo-iks01a3.html">X-NUCLEO-IKS01A3</a>),
+MEMS expansion board (<a
+href="https://www.st.com/content/st_com/en/products/ecosystems/stm32-open-development-environment/stm32-nucleo-expansion-boards/stm32-ode-sense-hw/x-nucleo-iks4a1.html">X-NUCLEO-IKS4A1</a>)
+and ToF expansion board (<a
+href="https://www.st.com/content/st_com/en/products/ecosystems/stm32-open-development-environment/stm32-nucleo-expansion-boards/stm32-ode-sense-hw/x-nucleo-53l3a2.html">X-NUCLEO-53L3A2</a>).</p>
+<figure>
 <img src="_htmresc/WB-MEMS.png" alt="HW Setup" />
+<figcaption aria-hidden="true">HW Setup</figcaption>
+</figure>
 </center>
-<p>The FP-SNS-MOTENVWB1 includes the STM32CubeMX project file (MOTENV1_IKS01A3_WB55RG.ioc) for the graphical visualization of the STM32WB MCU pins, peripherals and middleware configuration.</p>
-<p>Notice that when regenerating the projects with STM32CubeMX, you should have the .extSettings file specifying additional project settings at the same level of the MOTENV1_IKS01A3_WB55RG.ioc file Since Middleware libraries providing MEMS features come with different build for different toolchains, you need to use specific .extSetting file.</p>
-<h1 id="fp-sns-motenvwb1-software-features">FP-SNS-MOTENVWB1 software features:</h1>
+<p>The FP-SNS-MOTENVWB1 includes the STM32CubeMX project file for the
+graphical visualization of the STM32WB MCU pins, peripherals and
+middleware configuration.</p>
+<h1 id="fp-sns-motenvwb1-software-features">FP-SNS-MOTENVWB1 software
+features:</h1>
 <ul>
-<li>Complete firmware to develop an IoT node with BLE connectivity, environmental, motion and time-of-flight sensors</li>
-<li>middleware libraries for sensor data fusion and acelerometer-based real-time activity recognition, carry position, gesture recognition, motion intensity recognition and pedometer.</li>
-<li>Compatible with STBLESensor applications for Android/iOS to perform sensor data reading, motion algorithm feature demo, and firmware update (FOTA)</li>
-<li>Easy portability across different MCU families, thanks to STM32Cube</li>
+<li>Complete firmware to develop an IoT node with BLE connectivity,
+environmental, motion and time-of-flight sensors</li>
+<li>middleware libraries for sensor data fusion and acelerometer-based
+real-time activity recognition, carry position, gesture recognition,
+motion intensity recognition and pedometer.</li>
+<li>Compatible with STBLESensor applications for Android/iOS to perform
+sensor data reading, motion algorithm feature demo, and firmware update
+(FOTA)</li>
+<li>Easy portability across different MCU families, thanks to
+STM32Cube</li>
 </ul>
-<p>This firmware package includes Components Device Drivers, Board Support Package and example application for the STMicroelectronics:</p>
+<p>This firmware package includes Components Device Drivers, Board
+Support Package and example application for the STMicroelectronics:</p>
 <ul>
-<li>P-NUCLEO-WB55 Nucleo-68 board with STM32WB55 MCU supporting Bluetooth™ 5 and 802.15.4 connectivity</li>
-<li>X-NUCLEO-IKS01A3 Expansion board for six MEMS sensor devices:</li>
-<li>HTS221, LIS2DW12, LIS2MDL, LPS22HH, LSM5DSO</li>
-<li>X-NUCLEO-IKS4A1 Expansion board for six MEMS sensor devices:</li>
-<li>STTS22H, SHT40AD1B, LPS22DF, LSM6DSV16X, LIS2MDL</li>
-<li>X-NUCLEO-53L3A2 Multi-targets ranging sensor expansion board based on VL53L3CX for STM32 Nucleo (optional).</li>
+<li>P-NUCLEO-WB55 Nucleo-68 board with STM32WB55 MCU supporting
+Bluetooth™ 5 and 802.15.4 connectivity
+<ul>
+<li>Motion MEMS and environmental sensor expansion board
+(X-NUCLEO-IKS4A1) for seven MEMS sensor devices:
+<ul>
+<li>STTS22H, SHT40AD1B, LPS22DF, LSM6DSV16X, LIS2MDL, LSM6DSO16IS,
+LIS2DUXS12</li>
+</ul></li>
+<li>Motion MEMS and environmental sensor expansion board
+(X-NUCLEO-IKS01A3) for six MEMS sensor devices:
+<ul>
+<li>HTS221, LPS22HH, STTS751, LSM6DSO, LIS2MDL, LIS2DW12</li>
+</ul></li>
+</ul></li>
+<li>X-NUCLEO-53L3A2 Multi-targets ranging sensor expansion board based
+on VL53L3CX for STM32 Nucleo (optional).</li>
 </ul>
-<img src="_htmresc/FP-SNS-MOTENVWB1_Software_Architecture.png" alt="SW Archi" />
+<figure>
+<img src="_htmresc/FP-SNS-MOTENVWB1_Software_Architecture.png"
+alt="SW Archi" />
+<figcaption aria-hidden="true">SW Archi</figcaption>
+</figure>
 </center>
 <p>Here is the list of references to user documents:</p>
 <ul>
-<li><a href="https://www.st.com/content/ccc/resource/technical/document/user_manual/group1/13/58/22/1a/f2/ff/43/5c/DM00517423/files/DM00517423.pdf/jcr:content/translations/en.DM00517423.pdf">UM2435</a> : Bluetooth® Low Energy and 802.15.4 Nucleo pack based on STM32WB Series microcontrollers</li>
-<li><a href="http://www.st.com/stm32cube/">stm32cube</a> : STM32Cube</li>
-<li><a href="http://www.st.com/stm32nucleo/">stm32nucleo</a> : STM32 Nucleo boards</li>
-<li><a href="http://www.st.com/x-nucleo/">x-nucleo</a> : STM32 Nucleo expansion boards</li>
+<li><a
+href="https://www.st.com/content/ccc/resource/technical/document/user_manual/group1/13/58/22/1a/f2/ff/43/5c/DM00517423/files/DM00517423.pdf/jcr:content/translations/en.DM00517423.pdf">UM2435</a>
+: Bluetooth® Low Energy and 802.15.4 Nucleo pack based on STM32WB Series
+microcontrollers</li>
+<li><a href="http://www.st.com/stm32cube/">stm32cube</a> :
+STM32Cube</li>
+<li><a href="http://www.st.com/stm32nucleo/">stm32nucleo</a> : STM32
+Nucleo boards</li>
+<li><a href="http://www.st.com/x-nucleo/">x-nucleo</a> : STM32 Nucleo
+expansion boards</li>
 </ul>
 </div>
-<div class="col-sm-12 col-lg-8">
-<h1 id="update-history">Update History</h1>
+<section id="update-history" class="col-sm-12 col-lg-8">
+<h1>Update History</h1>
 <div class="collapse">
-<input type="checkbox" id="collapse-section5" checked aria-hidden="true"> <label for="collapse-section5" aria-hidden="true"><strong>V1.3.1 / 27-November-2023</strong></label>
+<input type="checkbox" id="collapse-section6" checked aria-hidden="true">
+<label for="collapse-section6" aria-hidden="true"><strong>V1.4.0 /
+01-March-2024</strong></label>
 <div>
 <h2 id="main-changes">Main Changes</h2>
 <h3 id="maintenance-release">Maintenance release</h3>
 <ul>
-<li>Bugfix</li>
+<li>Fixed for new version of the STM32WPAN</li>
 </ul>
 <h2 id="contents">Contents</h2>
-<p><small>The components flagged by “<span class="icon-st-update"></span>” have changed since the previous release. “<span class="icon-st-add"></span>” are new.</small></p>
+<p><small>The components flagged by “<span
+class="icon-st-update"></span>” have changed since the previous release.
+“<span class="icon-st-add"></span>” are new.</small></p>
 <table>
 <caption>Documentation<br />
 </caption>
@@ -85,13 +152,15 @@
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">FP-SNS-MOTENVWB1 API Description</td>
-<td style="text-align: left;">V1.3.1</td>
-<td style="text-align: left;"><a href="Documentation\FP-SNS-MOTENVWB1.chm">CHM</a></td>
+<td style="text-align: left;">V1.4.0</td>
+<td style="text-align: left;"><a
+href="Documentation\FP-SNS-MOTENVWB1.chm">CHM</a></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Quick Start Guide</td>
-<td style="text-align: left;">V1.3.1</td>
-<td style="text-align: left;"><a href="Documentation\FP-SNS-MOTENVWB1_QSG.htm">HTM</a></td>
+<td style="text-align: left;">V1.4.0</td>
+<td style="text-align: left;"><a
+href="Documentation\FP-SNS-MOTENVWB1_QSG.htm">HTM</a></td>
 </tr>
 </tbody>
 </table>
@@ -107,24 +176,36 @@
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;">P-NUCLEO-WB55-NUCLEO/Applications/IKS01A3/MOTENV1</td>
-<td style="text-align: left;">1.3.1</td>
-<td style="text-align: left;"><a href="Projects/P-NUCLEO-WB55-NUCLEO/Applications/IKS01A3/MOTENV1/readme.html">readme</a></td>
+<td
+style="text-align: left;">P-NUCLEO-WB55-NUCLEO/Applications/IKS01A3/MOTENV1</td>
+<td style="text-align: left;">1.4.0 <span
+class="icon-st-update"></span></td>
+<td style="text-align: left;"><a
+href="Projects/P-NUCLEO-WB55-NUCLEO/Applications/IKS01A3/MOTENV1/readme.html">readme</a></td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">P-NUCLEO-WB55-NUCLEO/Applications/IKS01A3/MOTENV1_OTA</td>
-<td style="text-align: left;">1.3.1</td>
-<td style="text-align: left;"><a href="Projects/P-NUCLEO-WB55-NUCLEO/Applications/IKS01A3/MOTENV1_OTA/readme.html">readme</a></td>
+<td
+style="text-align: left;">P-NUCLEO-WB55-NUCLEO/Applications/IKS01A3/MOTENV1_OTA</td>
+<td style="text-align: left;">1.4.0 <span
+class="icon-st-update"></span></td>
+<td style="text-align: left;"><a
+href="Projects/P-NUCLEO-WB55-NUCLEO/Applications/IKS01A3/MOTENV1_OTA/readme.html">readme</a></td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">P-NUCLEO-WB55-NUCLEO/Applications/IKS4A1/MOTENV1</td>
-<td style="text-align: left;">1.3.1</td>
-<td style="text-align: left;"><a href="Projects/P-NUCLEO-WB55-NUCLEO/Applications/IKS4A1/MOTENV1/readme.html">readme</a></td>
+<td
+style="text-align: left;">P-NUCLEO-WB55-NUCLEO/Applications/IKS4A1/MOTENV1</td>
+<td style="text-align: left;">1.4.0 <span
+class="icon-st-update"></span></td>
+<td style="text-align: left;"><a
+href="Projects/P-NUCLEO-WB55-NUCLEO/Applications/IKS4A1/MOTENV1/readme.html">readme</a></td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">P-NUCLEO-WB55-NUCLEO/Applications/IKS4A1/MOTENV1_OTA</td>
-<td style="text-align: left;">1.3.1</td>
-<td style="text-align: left;"><a href="Projects/P-NUCLEO-WB55-NUCLEO/Applications/IKS4A1/MOTENV1_OTA/readme.html">readme</a></td>
+<td
+style="text-align: left;">P-NUCLEO-WB55-NUCLEO/Applications/IKS4A1/MOTENV1_OTA</td>
+<td style="text-align: left;">1.4.0 <span
+class="icon-st-update"></span></td>
+<td style="text-align: left;"><a
+href="Projects/P-NUCLEO-WB55-NUCLEO/Applications/IKS4A1/MOTENV1_OTA/readme.html">readme</a></td>
 </tr>
 </tbody>
 </table>
@@ -142,37 +223,417 @@
 <tr class="odd">
 <td style="text-align: left;">MotionAR Activity Recognition Library</td>
 <td style="text-align: left;">V3.2.1</td>
-<td style="text-align: left;"><a href="Middlewares/ST/STM32_MotionAR_Library/Release_Notes.html">Release Notes</a></td>
+<td style="text-align: left;"><a
+href="Middlewares/ST/STM32_MotionAR_Library/Release_Notes.html">Release
+Notes</a></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">MotionCP Carry Position Library</td>
 <td style="text-align: left;">V2.2.1</td>
-<td style="text-align: left;"><a href="Middlewares/ST/STM32_MotionCP_Library/Release_Notes.html">Release Notes</a></td>
+<td style="text-align: left;"><a
+href="Middlewares/ST/STM32_MotionCP_Library/Release_Notes.html">Release
+Notes</a></td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">MotionFX Motion Sensor Data Fusion Library</td>
+<td style="text-align: left;">MotionFX Motion Sensor Data Fusion
+Library</td>
 <td style="text-align: left;">V2.8.0</td>
-<td style="text-align: left;"><a href="Middlewares/ST/STM32_MotionFX_Library/Release_Notes.html">Release Notes</a></td>
+<td style="text-align: left;"><a
+href="Middlewares/ST/STM32_MotionFX_Library/Release_Notes.html">Release
+Notes</a></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">MotionGR Gesture Recognition Library</td>
 <td style="text-align: left;">V2.2.1</td>
-<td style="text-align: left;"><a href="Middlewares/ST/STM32_MotionGR_Library/Release_Notes.html">Release Notes</a></td>
+<td style="text-align: left;"><a
+href="Middlewares/ST/STM32_MotionGR_Library/Release_Notes.html">Release
+Notes</a></td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">MotionID Motion Intensity Detection Library</td>
+<td style="text-align: left;">MotionID Motion Intensity Detection
+Library</td>
 <td style="text-align: left;">V2.4.1</td>
-<td style="text-align: left;"><a href="Middlewares/ST/STM32_MotionID_Library/Release_Notes.html">Release Notes</a></td>
+<td style="text-align: left;"><a
+href="Middlewares/ST/STM32_MotionID_Library/Release_Notes.html">Release
+Notes</a></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">MotionPM PPedometer Library</td>
 <td style="text-align: left;">V2.4.1</td>
-<td style="text-align: left;"><a href="Middlewares/ST/STM32_MotionPM_Library/Release_Notes.html">Release Notes</a></td>
+<td style="text-align: left;"><a
+href="Middlewares/ST/STM32_MotionPM_Library/Release_Notes.html">Release
+Notes</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32 Middleware WPAN</td>
+<td style="text-align: left;">V1.18.0 <span
+class="icon-st-update"></span></td>
+<td style="text-align: left;"><a
+href="Middlewares/ST/STM32_WPAN/Release_Notes.html">Release
+Notes</a></td>
+</tr>
+</tbody>
+</table>
+<table>
+<caption>Drivers<br />
+</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Name</th>
+<th style="text-align: left;">Version</th>
+<th style="text-align: left;">Release note</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">BSP IKS01A3</td>
+<td style="text-align: left;">V1.12.0 <span
+class="icon-st-update"></span></td>
+<td style="text-align: left;"><a
+href="Drivers/BSP/IKS01A3/Release_Notes.html">Release Notes</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">BSP IKS4A1</td>
+<td style="text-align: left;">V1.0.0</td>
+<td style="text-align: left;"><a
+href="Drivers/BSP/IKS4A1/Release_Notes.html">Release Notes</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">BSP 53L3A2</td>
+<td style="text-align: left;">V2.0.4 <span
+class="icon-st-update"></span></td>
+<td style="text-align: left;"><a
+href="Drivers/BSP/53L3A2/Release_Notes.html">Release Notes</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">BSP P-NUCLEO-WB55.Nucleo</td>
+<td style="text-align: left;">V1.0.6</td>
+<td style="text-align: left;"><a
+href="Drivers/BSP/P-NUCLEO-WB55.Nucleo/Release_Notes.html">Release
+Notes</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32WBxx CMSIS</td>
+<td style="text-align: left;">V1.12.0</td>
+<td style="text-align: left;"><a
+href="Drivers/CMSIS/Device/ST/STM32WBxx/Release_Notes.html">Release
+Notes</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32WBxx HAL</td>
+<td style="text-align: left;">V1.14.1 <span
+class="icon-st-update"></span></td>
+<td style="text-align: left;"><a
+href="Drivers/STM32WBxx_HAL_Driver/Release_Notes.html">Release
+Notes</a></td>
+</tr>
+</tbody>
+</table>
+<table>
+<caption>Components<br />
+</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Name</th>
+<th style="text-align: left;">Version</th>
+<th style="text-align: center;">Document</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">lps22df</td>
+<td style="text-align: left;">1.3.0</td>
+<td style="text-align: center;"><a
+href="Drivers\BSP\Components\lps22df\Release_Notes.html">release
+notes</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">lsm6dsv16x</td>
+<td style="text-align: left;">1.4.0</td>
+<td style="text-align: center;"><a
+href="Drivers\BSP\Components\lsm6dsv16x\Release_Notes.html">release
+notes</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">stts22h</td>
+<td style="text-align: left;">1.5.0 <span
+class="icon-st-update"></span></td>
+<td style="text-align: center;"><a
+href="Drivers\BSP\Components\stts22h\Release_Notes.html">release
+notes</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">sht40ad1b</td>
+<td style="text-align: left;">1.2.0 <span
+class="icon-st-update"></span></td>
+<td style="text-align: center;"><a
+href="Drivers\BSP\Components\sht40ad1b\Release_Notes.html">release
+notes</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">stts751</td>
+<td style="text-align: left;">1.4.0 <span
+class="icon-st-update"></span></td>
+<td style="text-align: center;"><a
+href="Drivers\BSP\Components\stts751\Release_Notes.html">release
+notes</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">lsm6dso</td>
+<td style="text-align: left;">1.8.0</td>
+<td style="text-align: center;"><a
+href="Drivers\BSP\Components\lsm6dso\Release_Notes.html">release
+notes</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">lps22hh</td>
+<td style="text-align: left;">1.5.0</td>
+<td style="text-align: center;"><a
+href="Drivers\BSP\Components\lps22hh\Release_Notes.html">release
+notes</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">lis2mdl</td>
+<td style="text-align: left;">1.6.0</td>
+<td style="text-align: center;"><a
+href="Drivers\BSP\Components\lis2mdl\Release_Notes.html">release
+notes</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">lis2dw12</td>
+<td style="text-align: left;">1.4.0</td>
+<td style="text-align: center;"><a
+href="Drivers\BSP\Components\lis2dw12\Release_Notes.html">release
+notes</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">hts221</td>
+<td style="text-align: left;">5.6.0 <span
+class="icon-st-update"></span></td>
+<td style="text-align: center;"><a
+href="Drivers\BSP\Components\hts221\Release_Notes.html">release
+notes</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">lis2duxs12</td>
+<td style="text-align: left;">1.2.0</td>
+<td style="text-align: center;"><a
+href="Drivers\BSP\Components\lis2duxs12\Release_Notes.html">release
+notes</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">lsm6dso16is</td>
+<td style="text-align: left;">1.2.0 <span
+class="icon-st-update"></span></td>
+<td style="text-align: center;"><a
+href="Drivers\BSP\Components\lsm6dso16is\Release_Notes.html">release
+notes</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">vl53l3cx</td>
+<td style="text-align: left;">2.0.5 <span
+class="icon-st-update"></span></td>
+<td style="text-align: center;"><a
+href="Drivers\BSP\Components\vl53l3cx\Release_Notes.html">release
+notes</a></td>
+</tr>
+</tbody>
+</table>
+<h2 id="development-toolchains-and-compilers">Development Toolchains and
+Compilers</h2>
+<ul>
+<li>IAR Embedded Workbench for ARM (EWARM) toolchain V9.20.1 +
+ST-Link</li>
+<li>RealView Microcontroller Development Kit (MDK-ARM) toolchain V5.37.0
++ ST-LINK</li>
+<li>STM32CubeIDE V1.14.0 + ST-LINK</li>
+</ul>
+<h2 id="supported-devices-and-boards">Supported Devices and Boards</h2>
+<ul>
+<li>P-NUCLEO-WB55 Bluetooth 5 and 802.15.4 Nucleo Pack including USB
+dongle and Nucleo-64 with STM32WB55 MCUs, supports Arduino, ST Morpho
+connectivity [<a
+href="https://www.st.com/en/evaluation-tools/p-nucleo-wb55.html">P-NUCLEO-WB55</a>]</li>
+<li>NUCLEO-WB55RG STM32 Nucleo-64 development board with STM32WB55RG
+MCU, supports Arduino, ST Morpho connectivity [<a
+href="https://www.st.com/en/evaluation-tools/nucleo-wb55rg.html">NUCLEO-WB55RG</a>]</li>
+</ul>
+<h2 id="issues">Issues</h2>
+<ul>
+<li><p>After code generation MOTENV1 from STM32CubeMX tool for
+STM32CubeIDE toolchain, after building if the generated binary doesn’t
+work, replace the linker scripts with the scripts in the folder
+LinkerScript.</p></li>
+<li><p>After code generation MOTENV1_OTA from STM32CubeMX software
+before building:</p>
+<ul>
+<li>for IAR, Keil and STM32CubeIDE replace the linker scripts with the
+scripts in the folder LinkerScript</li>
+<li>for Keil, open the “Options for Target” and in the tab “Target” set
+start= 0x8007000 and sixe= 0x79000.</li>
+<li>for Keil, open the “Options for Target” and in the tab “Linker” in
+“Misc controls” insert:
+<ul>
+<li>–keep *.o(TAG_OTA_START)</li>
+<li>–keep *.o(TAG_OTA_END)</li>
+</ul></li>
+</ul></li>
+</ul>
+<h2 id="backward-compatibility">Backward Compatibility</h2>
+<p>None</p>
+<h2 id="dependencies">Dependencies</h2>
+<p>This software release is compatible with:</p>
+<ul>
+<li><a
+href="https://play.google.com/store/apps/details?id=com.st.bluems"><strong>ST
+BLE Sensor Android application</strong></a> V5.0.0 (or higher)</li>
+<li><a
+href="https://apps.apple.com/it/app/st-ble-sensor/id993670214"><strong>ST
+BLE Sensor iOS application</strong></a> V5.0.0 (or higher)</li>
+</ul>
+</div>
+</div>
+<div class="collapse">
+<input type="checkbox" id="collapse-section5" aria-hidden="true">
+<label for="collapse-section5" aria-hidden="true"><strong>V1.3.1 /
+27-November-2023</strong></label>
+<div>
+<h2 id="main-changes-1">Main Changes</h2>
+<h3 id="maintenance-release-1">Maintenance release</h3>
+<ul>
+<li>Bugfix</li>
+</ul>
+<h2 id="contents-1">Contents</h2>
+<p><small>The components flagged by “<span
+class="icon-st-update"></span>” have changed since the previous release.
+“<span class="icon-st-add"></span>” are new.</small></p>
+<table>
+<caption>Documentation<br />
+</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Name</th>
+<th style="text-align: left;">Version</th>
+<th style="text-align: left;">Release note</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">FP-SNS-MOTENVWB1 API Description</td>
+<td style="text-align: left;">V1.3.1</td>
+<td style="text-align: left;"><a
+href="Documentation\FP-SNS-MOTENVWB1.chm">CHM</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Quick Start Guide</td>
+<td style="text-align: left;">V1.3.1</td>
+<td style="text-align: left;"><a
+href="Documentation\FP-SNS-MOTENVWB1_QSG.htm">HTM</a></td>
+</tr>
+</tbody>
+</table>
+<table>
+<caption>Projects<br />
+</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Name</th>
+<th style="text-align: left;">Version</th>
+<th style="text-align: left;">Document</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td
+style="text-align: left;">P-NUCLEO-WB55-NUCLEO/Applications/IKS01A3/MOTENV1</td>
+<td style="text-align: left;">1.3.1</td>
+<td style="text-align: left;"><a
+href="Projects/P-NUCLEO-WB55-NUCLEO/Applications/IKS01A3/MOTENV1/readme.html">readme</a></td>
+</tr>
+<tr class="even">
+<td
+style="text-align: left;">P-NUCLEO-WB55-NUCLEO/Applications/IKS01A3/MOTENV1_OTA</td>
+<td style="text-align: left;">1.3.1</td>
+<td style="text-align: left;"><a
+href="Projects/P-NUCLEO-WB55-NUCLEO/Applications/IKS01A3/MOTENV1_OTA/readme.html">readme</a></td>
+</tr>
+<tr class="odd">
+<td
+style="text-align: left;">P-NUCLEO-WB55-NUCLEO/Applications/IKS4A1/MOTENV1</td>
+<td style="text-align: left;">1.3.1</td>
+<td style="text-align: left;"><a
+href="Projects/P-NUCLEO-WB55-NUCLEO/Applications/IKS4A1/MOTENV1/readme.html">readme</a></td>
+</tr>
+<tr class="even">
+<td
+style="text-align: left;">P-NUCLEO-WB55-NUCLEO/Applications/IKS4A1/MOTENV1_OTA</td>
+<td style="text-align: left;">1.3.1</td>
+<td style="text-align: left;"><a
+href="Projects/P-NUCLEO-WB55-NUCLEO/Applications/IKS4A1/MOTENV1_OTA/readme.html">readme</a></td>
+</tr>
+</tbody>
+</table>
+<table>
+<caption>Middlewares<br />
+</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Name</th>
+<th style="text-align: left;">Version</th>
+<th style="text-align: left;">Release note</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">MotionAR Activity Recognition Library</td>
+<td style="text-align: left;">V3.2.1</td>
+<td style="text-align: left;"><a
+href="Middlewares/ST/STM32_MotionAR_Library/Release_Notes.html">Release
+Notes</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">MotionCP Carry Position Library</td>
+<td style="text-align: left;">V2.2.1</td>
+<td style="text-align: left;"><a
+href="Middlewares/ST/STM32_MotionCP_Library/Release_Notes.html">Release
+Notes</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">MotionFX Motion Sensor Data Fusion
+Library</td>
+<td style="text-align: left;">V2.8.0</td>
+<td style="text-align: left;"><a
+href="Middlewares/ST/STM32_MotionFX_Library/Release_Notes.html">Release
+Notes</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">MotionGR Gesture Recognition Library</td>
+<td style="text-align: left;">V2.2.1</td>
+<td style="text-align: left;"><a
+href="Middlewares/ST/STM32_MotionGR_Library/Release_Notes.html">Release
+Notes</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">MotionID Motion Intensity Detection
+Library</td>
+<td style="text-align: left;">V2.4.1</td>
+<td style="text-align: left;"><a
+href="Middlewares/ST/STM32_MotionID_Library/Release_Notes.html">Release
+Notes</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">MotionPM PPedometer Library</td>
+<td style="text-align: left;">V2.4.1</td>
+<td style="text-align: left;"><a
+href="Middlewares/ST/STM32_MotionPM_Library/Release_Notes.html">Release
+Notes</a></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">STM32 Middleware WPAN</td>
 <td style="text-align: left;">V1.17.0</td>
-<td style="text-align: left;"><a href="Middlewares/ST/STM32_WPAN/Release_Notes.html">Release Notes</a></td>
+<td style="text-align: left;"><a
+href="Middlewares/ST/STM32_WPAN/Release_Notes.html">Release
+Notes</a></td>
 </tr>
 </tbody>
 </table>
@@ -190,32 +651,41 @@
 <tr class="odd">
 <td style="text-align: left;">BSP IKS01A3</td>
 <td style="text-align: left;">V1.11.0</td>
-<td style="text-align: left;"><a href="Drivers/BSP/IKS01A3/Release_Notes.html">Release Notes</a></td>
+<td style="text-align: left;"><a
+href="Drivers/BSP/IKS01A3/Release_Notes.html">Release Notes</a></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">BSP IKS4A1</td>
 <td style="text-align: left;">V1.0.0</td>
-<td style="text-align: left;"><a href="Drivers/BSP/IKS4A1/Release_Notes.html">Release Notes</a></td>
+<td style="text-align: left;"><a
+href="Drivers/BSP/IKS4A1/Release_Notes.html">Release Notes</a></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">BSP 53L3A2</td>
 <td style="text-align: left;">V2.0.2</td>
-<td style="text-align: left;"><a href="Drivers/BSP/53L3A2/Release_Notes.html">Release Notes</a></td>
+<td style="text-align: left;"><a
+href="Drivers/BSP/53L3A2/Release_Notes.html">Release Notes</a></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">BSP P-NUCLEO-WB55.Nucleo</td>
 <td style="text-align: left;">V1.0.6</td>
-<td style="text-align: left;"><a href="Drivers/BSP/P-NUCLEO-WB55.Nucleo/Release_Notes.html">Release Notes</a></td>
+<td style="text-align: left;"><a
+href="Drivers/BSP/P-NUCLEO-WB55.Nucleo/Release_Notes.html">Release
+Notes</a></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">STM32WBxx CMSIS</td>
 <td style="text-align: left;">V1.12.0</td>
-<td style="text-align: left;"><a href="Drivers/CMSIS/Device/ST/STM32WBxx/Release_Notes.html">Release Notes</a></td>
+<td style="text-align: left;"><a
+href="Drivers/CMSIS/Device/ST/STM32WBxx/Release_Notes.html">Release
+Notes</a></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">STM32WBxx HAL</td>
 <td style="text-align: left;">V1.14.0</td>
-<td style="text-align: left;"><a href="Drivers/STM32WBxx_HAL_Driver/Release_Notes.html">Release Notes</a></td>
+<td style="text-align: left;"><a
+href="Drivers/STM32WBxx_HAL_Driver/Release_Notes.html">Release
+Notes</a></td>
 </tr>
 </tbody>
 </table>
@@ -233,111 +703,161 @@
 <tr class="odd">
 <td style="text-align: left;">lps22df</td>
 <td style="text-align: left;">1.3.0</td>
-<td style="text-align: center;"><a href="Drivers\BSP\Components\lps22df\Release_Notes.html">release notes</a></td>
+<td style="text-align: center;"><a
+href="Drivers\BSP\Components\lps22df\Release_Notes.html">release
+notes</a></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">lsm6dsv16x</td>
 <td style="text-align: left;">1.4.0</td>
-<td style="text-align: center;"><a href="Drivers\BSP\Components\lsm6dsv16x\Release_Notes.html">release notes</a></td>
+<td style="text-align: center;"><a
+href="Drivers\BSP\Components\lsm6dsv16x\Release_Notes.html">release
+notes</a></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">stts22h</td>
 <td style="text-align: left;">1.4.0</td>
-<td style="text-align: center;"><a href="Drivers\BSP\Components\stts22h\Release_Notes.html">release notes</a></td>
+<td style="text-align: center;"><a
+href="Drivers\BSP\Components\stts22h\Release_Notes.html">release
+notes</a></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">sht40ad1b</td>
 <td style="text-align: left;">1.1.0</td>
-<td style="text-align: center;"><a href="Drivers\BSP\Components\sht40ad1b\Release_Notes.html">release notes</a></td>
+<td style="text-align: center;"><a
+href="Drivers\BSP\Components\sht40ad1b\Release_Notes.html">release
+notes</a></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">stts751</td>
 <td style="text-align: left;">1.3.0</td>
-<td style="text-align: center;"><a href="Drivers\BSP\Components\stts751\Release_Notes.html">release notes</a></td>
+<td style="text-align: center;"><a
+href="Drivers\BSP\Components\stts751\Release_Notes.html">release
+notes</a></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">lsm6dso</td>
 <td style="text-align: left;">1.8.0</td>
-<td style="text-align: center;"><a href="Drivers\BSP\Components\lsm6dso\Release_Notes.html">release notes</a></td>
+<td style="text-align: center;"><a
+href="Drivers\BSP\Components\lsm6dso\Release_Notes.html">release
+notes</a></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">lps22hh</td>
 <td style="text-align: left;">1.5.0</td>
-<td style="text-align: center;"><a href="Drivers\BSP\Components\lps22hh\Release_Notes.html">release notes</a></td>
+<td style="text-align: center;"><a
+href="Drivers\BSP\Components\lps22hh\Release_Notes.html">release
+notes</a></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">lis2mdl</td>
 <td style="text-align: left;">1.6.0</td>
-<td style="text-align: center;"><a href="Drivers\BSP\Components\lis2mdl\Release_Notes.html">release notes</a></td>
+<td style="text-align: center;"><a
+href="Drivers\BSP\Components\lis2mdl\Release_Notes.html">release
+notes</a></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">lis2dw12</td>
 <td style="text-align: left;">1.4.0</td>
-<td style="text-align: center;"><a href="Drivers\BSP\Components\lis2dw12\Release_Notes.html">release notes</a></td>
+<td style="text-align: center;"><a
+href="Drivers\BSP\Components\lis2dw12\Release_Notes.html">release
+notes</a></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">hts221</td>
 <td style="text-align: left;">5.5.0</td>
-<td style="text-align: center;"><a href="Drivers\BSP\Components\hts221\Release_Notes.html">release notes</a></td>
+<td style="text-align: center;"><a
+href="Drivers\BSP\Components\hts221\Release_Notes.html">release
+notes</a></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">lis2duxs12</td>
 <td style="text-align: left;">1.2.0</td>
-<td style="text-align: center;"><a href="Drivers\BSP\Components\lis2duxs12\Release_Notes.html">release notes</a></td>
+<td style="text-align: center;"><a
+href="Drivers\BSP\Components\lis2duxs12\Release_Notes.html">release
+notes</a></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">lsm6dso16is</td>
 <td style="text-align: left;">1.1.0</td>
-<td style="text-align: center;"><a href="Drivers\BSP\Components\lsm6dso16is\Release_Notes.html">release notes</a></td>
+<td style="text-align: center;"><a
+href="Drivers\BSP\Components\lsm6dso16is\Release_Notes.html">release
+notes</a></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">vl53l3cx</td>
 <td style="text-align: left;">2.0.3</td>
-<td style="text-align: center;"><a href="Drivers\BSP\Components\vl53l3cx\Release_Notes.html">release notes</a></td>
+<td style="text-align: center;"><a
+href="Drivers\BSP\Components\vl53l3cx\Release_Notes.html">release
+notes</a></td>
 </tr>
 </tbody>
 </table>
-<h2 id="development-toolchains-and-compilers">Development Toolchains and Compilers</h2>
+<h2 id="development-toolchains-and-compilers-1">Development Toolchains
+and Compilers</h2>
 <ul>
-<li>IAR Embedded Workbench for ARM (EWARM) toolchain V9.20.1 + ST-Link</li>
-<li>RealView Microcontroller Development Kit (MDK-ARM) toolchain V5.37.0 + ST-LINK</li>
+<li>IAR Embedded Workbench for ARM (EWARM) toolchain V9.20.1 +
+ST-Link</li>
+<li>RealView Microcontroller Development Kit (MDK-ARM) toolchain V5.37.0
++ ST-LINK</li>
 <li>STM32CubeIDE V1.12.1 + ST-LINK</li>
 </ul>
-<h2 id="supported-devices-and-boards">Supported Devices and Boards</h2>
+<h2 id="supported-devices-and-boards-1">Supported Devices and
+Boards</h2>
 <ul>
-<li>P-NUCLEO-WB55 Bluetooth 5 and 802.15.4 Nucleo Pack including USB dongle and Nucleo-64 with STM32WB55 MCUs, supports Arduino, ST Morpho connectivity [<a href="https://www.st.com/en/evaluation-tools/p-nucleo-wb55.html">P-NUCLEO-WB55</a>]</li>
-<li>NUCLEO-WB55RG STM32 Nucleo-64 development board with STM32WB55RG MCU, supports Arduino, ST Morpho connectivity [<a href="https://www.st.com/en/evaluation-tools/nucleo-wb55rg.html">NUCLEO-WB55RG</a>]</li>
+<li>P-NUCLEO-WB55 Bluetooth 5 and 802.15.4 Nucleo Pack including USB
+dongle and Nucleo-64 with STM32WB55 MCUs, supports Arduino, ST Morpho
+connectivity [<a
+href="https://www.st.com/en/evaluation-tools/p-nucleo-wb55.html">P-NUCLEO-WB55</a>]</li>
+<li>NUCLEO-WB55RG STM32 Nucleo-64 development board with STM32WB55RG
+MCU, supports Arduino, ST Morpho connectivity [<a
+href="https://www.st.com/en/evaluation-tools/nucleo-wb55rg.html">NUCLEO-WB55RG</a>]</li>
 </ul>
-<h2 id="issues">Issues</h2>
+<h2 id="issues-1">Issues</h2>
 <ul>
-<li><p>After code generation MOTENV1 from STM32CubeMX tool for STM32CubeIDE toolchain, after building if the generated binary doesn’t work, replace the linker scripts with the scripts in the folder LinkerScript.</p></li>
-<li><p>After code generation MOTENV1_OTA from STM32CubeMX software before building:</p>
+<li><p>After code generation MOTENV1 from STM32CubeMX tool for
+STM32CubeIDE toolchain, after building if the generated binary doesn’t
+work, replace the linker scripts with the scripts in the folder
+LinkerScript.</p></li>
+<li><p>After code generation MOTENV1_OTA from STM32CubeMX software
+before building:</p>
 <ul>
-<li>for IAR, Keil and STM32CubeIDE replace the linker scripts with the scripts in the folder LinkerScript</li>
-<li>for Keil, open the “Options for Target” and in the tab “Target” set start= 0x8007000 and sixe= 0x79000.</li>
+<li>for IAR, Keil and STM32CubeIDE replace the linker scripts with the
+scripts in the folder LinkerScript</li>
+<li>for Keil, open the “Options for Target” and in the tab “Target” set
+start= 0x8007000 and sixe= 0x79000.</li>
 </ul></li>
 </ul>
-<h2 id="backward-compatibility">Backward Compatibility</h2>
+<h2 id="backward-compatibility-1">Backward Compatibility</h2>
 <p>None</p>
-<h2 id="dependencies">Dependencies</h2>
+<h2 id="dependencies-1">Dependencies</h2>
 <p>This software release is compatible with:</p>
 <ul>
-<li><a href="https://play.google.com/store/apps/details?id=com.st.bluems"><strong>ST BLE Sensor Android application</strong></a> V4.20.0 (or higher)</li>
-<li><a href="https://apps.apple.com/it/app/st-ble-sensor/id993670214"><strong>ST BLE Sensor iOS application</strong></a> V4.20.0 (or higher)</li>
+<li><a
+href="https://play.google.com/store/apps/details?id=com.st.bluems"><strong>ST
+BLE Sensor Android application</strong></a> V4.20.0 (or higher)</li>
+<li><a
+href="https://apps.apple.com/it/app/st-ble-sensor/id993670214"><strong>ST
+BLE Sensor iOS application</strong></a> V4.20.0 (or higher)</li>
 </ul>
 </div>
 </div>
 <div class="collapse">
-<input type="checkbox" id="collapse-section4" aria-hidden="true"> <label for="collapse-section4" aria-hidden="true"><strong>V1.3.0 / 10-July-2023</strong></label>
+<input type="checkbox" id="collapse-section4" aria-hidden="true">
+<label for="collapse-section4" aria-hidden="true"><strong>V1.3.0 /
+10-July-2023</strong></label>
 <div>
-<h2 id="main-changes-1">Main Changes</h2>
-<h3 id="maintenance-release-1">Maintenance release</h3>
+<h2 id="main-changes-2">Main Changes</h2>
+<h3 id="maintenance-release-2">Maintenance release</h3>
 <ul>
-<li>Added support for X-NUCLEO-IKS4A1 Motion MEMS and environmental sensor expansion board for STM32 Nucleo</li>
+<li>Added support for X-NUCLEO-IKS4A1 Motion MEMS and environmental
+sensor expansion board for STM32 Nucleo</li>
 <li>Updated HAL, BSP and middlewares version</li>
 </ul>
-<h2 id="contents-1">Contents</h2>
-<p><small>The components flagged by “<span class="icon-st-update"></span>” have changed since the previous release. “<span class="icon-st-add"></span>” are new.</small></p>
+<h2 id="contents-2">Contents</h2>
+<p><small>The components flagged by “<span
+class="icon-st-update"></span>” have changed since the previous release.
+“<span class="icon-st-add"></span>” are new.</small></p>
 <table>
 <caption>Documentation<br />
 </caption>
@@ -351,13 +871,17 @@
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">FP-SNS-MOTENVWB1 API Description</td>
-<td style="text-align: left;">V1.3.0<span class="icon-st-update"></span></td>
-<td style="text-align: left;"><a href="Documentation\FP-SNS-MOTENVWB1.chm">CHM</a></td>
+<td style="text-align: left;">V1.3.0<span
+class="icon-st-update"></span></td>
+<td style="text-align: left;"><a
+href="Documentation\FP-SNS-MOTENVWB1.chm">CHM</a></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Quick Start Guide</td>
-<td style="text-align: left;">V1.3.0<span class="icon-st-update"></span></td>
-<td style="text-align: left;"><a href="Documentation\FP-SNS-MOTENVWB1_QSG.htm">HTM</a></td>
+<td style="text-align: left;">V1.3.0<span
+class="icon-st-update"></span></td>
+<td style="text-align: left;"><a
+href="Documentation\FP-SNS-MOTENVWB1_QSG.htm">HTM</a></td>
 </tr>
 </tbody>
 </table>
@@ -373,24 +897,36 @@
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;">P-NUCLEO-WB55-NUCLEO/Applications/IKS01A3/MOTENV1</td>
-<td style="text-align: left;">1.3.0 <span class="icon-st-update"></span></td>
-<td style="text-align: left;"><a href="Projects/P-NUCLEO-WB55-NUCLEO/Applications/IKS01A3/MOTENV1/readme.html">readme</a></td>
+<td
+style="text-align: left;">P-NUCLEO-WB55-NUCLEO/Applications/IKS01A3/MOTENV1</td>
+<td style="text-align: left;">1.3.0 <span
+class="icon-st-update"></span></td>
+<td style="text-align: left;"><a
+href="Projects/P-NUCLEO-WB55-NUCLEO/Applications/IKS01A3/MOTENV1/readme.html">readme</a></td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">P-NUCLEO-WB55-NUCLEO/Applications/IKS01A3/MOTENV1_OTA</td>
-<td style="text-align: left;">1.3.0 <span class="icon-st-update"></span></td>
-<td style="text-align: left;"><a href="Projects/P-NUCLEO-WB55-NUCLEO/Applications/IKS01A3/MOTENV1_OTA/readme.html">readme</a></td>
+<td
+style="text-align: left;">P-NUCLEO-WB55-NUCLEO/Applications/IKS01A3/MOTENV1_OTA</td>
+<td style="text-align: left;">1.3.0 <span
+class="icon-st-update"></span></td>
+<td style="text-align: left;"><a
+href="Projects/P-NUCLEO-WB55-NUCLEO/Applications/IKS01A3/MOTENV1_OTA/readme.html">readme</a></td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">P-NUCLEO-WB55-NUCLEO/Applications/IKS4A1/MOTENV1</td>
-<td style="text-align: left;">1.3.0 <span class="icon-st-add"></span></td>
-<td style="text-align: left;"><a href="Projects/P-NUCLEO-WB55-NUCLEO/Applications/IKS4A1/MOTENV1/readme.html">readme</a></td>
+<td
+style="text-align: left;">P-NUCLEO-WB55-NUCLEO/Applications/IKS4A1/MOTENV1</td>
+<td style="text-align: left;">1.3.0 <span
+class="icon-st-add"></span></td>
+<td style="text-align: left;"><a
+href="Projects/P-NUCLEO-WB55-NUCLEO/Applications/IKS4A1/MOTENV1/readme.html">readme</a></td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">P-NUCLEO-WB55-NUCLEO/Applications/IKS4A1/MOTENV1_OTA</td>
-<td style="text-align: left;">1.3.0 <span class="icon-st-add"></span></td>
-<td style="text-align: left;"><a href="Projects/P-NUCLEO-WB55-NUCLEO/Applications/IKS4A1/MOTENV1_OTA/readme.html">readme</a></td>
+<td
+style="text-align: left;">P-NUCLEO-WB55-NUCLEO/Applications/IKS4A1/MOTENV1_OTA</td>
+<td style="text-align: left;">1.3.0 <span
+class="icon-st-add"></span></td>
+<td style="text-align: left;"><a
+href="Projects/P-NUCLEO-WB55-NUCLEO/Applications/IKS4A1/MOTENV1_OTA/readme.html">readme</a></td>
 </tr>
 </tbody>
 </table>
@@ -408,37 +944,55 @@
 <tr class="odd">
 <td style="text-align: left;">MotionAR Activity Recognition Library</td>
 <td style="text-align: left;">V3.2.1</td>
-<td style="text-align: left;"><a href="Middlewares/ST/STM32_MotionAR_Library/Release_Notes.html">Release Notes</a></td>
+<td style="text-align: left;"><a
+href="Middlewares/ST/STM32_MotionAR_Library/Release_Notes.html">Release
+Notes</a></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">MotionCP Carry Position Library</td>
 <td style="text-align: left;">V2.2.1</td>
-<td style="text-align: left;"><a href="Middlewares/ST/STM32_MotionCP_Library/Release_Notes.html">Release Notes</a></td>
+<td style="text-align: left;"><a
+href="Middlewares/ST/STM32_MotionCP_Library/Release_Notes.html">Release
+Notes</a></td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">MotionFX Motion Sensor Data Fusion Library</td>
-<td style="text-align: left;">V2.8.0<span class="icon-st-update"></span></td>
-<td style="text-align: left;"><a href="Middlewares/ST/STM32_MotionFX_Library/Release_Notes.html">Release Notes</a></td>
+<td style="text-align: left;">MotionFX Motion Sensor Data Fusion
+Library</td>
+<td style="text-align: left;">V2.8.0<span
+class="icon-st-update"></span></td>
+<td style="text-align: left;"><a
+href="Middlewares/ST/STM32_MotionFX_Library/Release_Notes.html">Release
+Notes</a></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">MotionGR Gesture Recognition Library</td>
 <td style="text-align: left;">V2.2.1</td>
-<td style="text-align: left;"><a href="Middlewares/ST/STM32_MotionGR_Library/Release_Notes.html">Release Notes</a></td>
+<td style="text-align: left;"><a
+href="Middlewares/ST/STM32_MotionGR_Library/Release_Notes.html">Release
+Notes</a></td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">MotionID Motion Intensity Detection Library</td>
+<td style="text-align: left;">MotionID Motion Intensity Detection
+Library</td>
 <td style="text-align: left;">V2.4.1</td>
-<td style="text-align: left;"><a href="Middlewares/ST/STM32_MotionID_Library/Release_Notes.html">Release Notes</a></td>
+<td style="text-align: left;"><a
+href="Middlewares/ST/STM32_MotionID_Library/Release_Notes.html">Release
+Notes</a></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">MotionPM PPedometer Library</td>
 <td style="text-align: left;">V2.4.1</td>
-<td style="text-align: left;"><a href="Middlewares/ST/STM32_MotionPM_Library/Release_Notes.html">Release Notes</a></td>
+<td style="text-align: left;"><a
+href="Middlewares/ST/STM32_MotionPM_Library/Release_Notes.html">Release
+Notes</a></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">STM32 Middleware WPAN</td>
-<td style="text-align: left;">V1.17.0<span class="icon-st-update"></span></td>
-<td style="text-align: left;"><a href="Middlewares/ST/STM32_WPAN/Release_Notes.html">Release Notes</a></td>
+<td style="text-align: left;">V1.17.0<span
+class="icon-st-update"></span></td>
+<td style="text-align: left;"><a
+href="Middlewares/ST/STM32_WPAN/Release_Notes.html">Release
+Notes</a></td>
 </tr>
 </tbody>
 </table>
@@ -455,33 +1009,47 @@
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">BSP IKS01A3</td>
-<td style="text-align: left;">V1.11.0<span class="icon-st-update"></span></td>
-<td style="text-align: left;"><a href="Drivers/BSP/IKS01A3/Release_Notes.html">Release Notes</a></td>
+<td style="text-align: left;">V1.11.0<span
+class="icon-st-update"></span></td>
+<td style="text-align: left;"><a
+href="Drivers/BSP/IKS01A3/Release_Notes.html">Release Notes</a></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">BSP IKS4A1</td>
-<td style="text-align: left;">V1.0.0 <span class="icon-st-add"></span></td>
-<td style="text-align: left;"><a href="Drivers/BSP/IKS4A1/Release_Notes.html">Release Notes</a></td>
+<td style="text-align: left;">V1.0.0 <span
+class="icon-st-add"></span></td>
+<td style="text-align: left;"><a
+href="Drivers/BSP/IKS4A1/Release_Notes.html">Release Notes</a></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">BSP 53L3A2</td>
 <td style="text-align: left;">V2.0.2</td>
-<td style="text-align: left;"><a href="Drivers/BSP/53L3A2/Release_Notes.html">Release Notes</a></td>
+<td style="text-align: left;"><a
+href="Drivers/BSP/53L3A2/Release_Notes.html">Release Notes</a></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">BSP P-NUCLEO-WB55.Nucleo</td>
-<td style="text-align: left;">V1.0.6 <span class="icon-st-update"></span></td>
-<td style="text-align: left;"><a href="Drivers/BSP/P-NUCLEO-WB55.Nucleo/Release_Notes.html">Release Notes</a></td>
+<td style="text-align: left;">V1.0.6 <span
+class="icon-st-update"></span></td>
+<td style="text-align: left;"><a
+href="Drivers/BSP/P-NUCLEO-WB55.Nucleo/Release_Notes.html">Release
+Notes</a></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">STM32WBxx CMSIS</td>
-<td style="text-align: left;">V1.12.0<span class="icon-st-update"></span></td>
-<td style="text-align: left;"><a href="Drivers/CMSIS/Device/ST/STM32WBxx/Release_Notes.html">Release Notes</a></td>
+<td style="text-align: left;">V1.12.0<span
+class="icon-st-update"></span></td>
+<td style="text-align: left;"><a
+href="Drivers/CMSIS/Device/ST/STM32WBxx/Release_Notes.html">Release
+Notes</a></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">STM32WBxx HAL</td>
-<td style="text-align: left;">V1.14.0<span class="icon-st-update"></span></td>
-<td style="text-align: left;"><a href="Drivers/STM32WBxx_HAL_Driver/Release_Notes.html">Release Notes</a></td>
+<td style="text-align: left;">V1.14.0<span
+class="icon-st-update"></span></td>
+<td style="text-align: left;"><a
+href="Drivers/STM32WBxx_HAL_Driver/Release_Notes.html">Release
+Notes</a></td>
 </tr>
 </tbody>
 </table>
@@ -498,106 +1066,166 @@
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">lps22df</td>
-<td style="text-align: left;">1.3.0 <span class="icon-st-add"></span></td>
-<td style="text-align: center;"><a href="Drivers\BSP\Components\lps22df\Release_Notes.html">release notes</a></td>
+<td style="text-align: left;">1.3.0 <span
+class="icon-st-add"></span></td>
+<td style="text-align: center;"><a
+href="Drivers\BSP\Components\lps22df\Release_Notes.html">release
+notes</a></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">lsm6dsv16x</td>
-<td style="text-align: left;">1.4.0 <span class="icon-st-add"></span></td>
-<td style="text-align: center;"><a href="Drivers\BSP\Components\lsm6dsv16x\Release_Notes.html">release notes</a></td>
+<td style="text-align: left;">1.4.0 <span
+class="icon-st-add"></span></td>
+<td style="text-align: center;"><a
+href="Drivers\BSP\Components\lsm6dsv16x\Release_Notes.html">release
+notes</a></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">stts22h</td>
-<td style="text-align: left;">1.4.0 <span class="icon-st-add"></span></td>
-<td style="text-align: center;"><a href="Drivers\BSP\Components\stts22h\Release_Notes.html">release notes</a></td>
+<td style="text-align: left;">1.4.0 <span
+class="icon-st-add"></span></td>
+<td style="text-align: center;"><a
+href="Drivers\BSP\Components\stts22h\Release_Notes.html">release
+notes</a></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">sht40ad1b</td>
-<td style="text-align: left;">1.1.0 <span class="icon-st-add"></span></td>
-<td style="text-align: center;"><a href="Drivers\BSP\Components\sht40ad1b\Release_Notes.html">release notes</a></td>
+<td style="text-align: left;">1.1.0 <span
+class="icon-st-add"></span></td>
+<td style="text-align: center;"><a
+href="Drivers\BSP\Components\sht40ad1b\Release_Notes.html">release
+notes</a></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">stts751</td>
-<td style="text-align: left;">1.3.0 <span class="icon-st-update"></span></td>
-<td style="text-align: center;"><a href="Drivers\BSP\Components\stts751\Release_Notes.html">release notes</a></td>
+<td style="text-align: left;">1.3.0 <span
+class="icon-st-update"></span></td>
+<td style="text-align: center;"><a
+href="Drivers\BSP\Components\stts751\Release_Notes.html">release
+notes</a></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">lsm6dso</td>
-<td style="text-align: left;">1.8.0 <span class="icon-st-update"></span></td>
-<td style="text-align: center;"><a href="Drivers\BSP\Components\lsm6dso\Release_Notes.html">release notes</a></td>
+<td style="text-align: left;">1.8.0 <span
+class="icon-st-update"></span></td>
+<td style="text-align: center;"><a
+href="Drivers\BSP\Components\lsm6dso\Release_Notes.html">release
+notes</a></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">lps22hh</td>
-<td style="text-align: left;">1.5.0 <span class="icon-st-update"></span></td>
-<td style="text-align: center;"><a href="Drivers\BSP\Components\lps22hh\Release_Notes.html">release notes</a></td>
+<td style="text-align: left;">1.5.0 <span
+class="icon-st-update"></span></td>
+<td style="text-align: center;"><a
+href="Drivers\BSP\Components\lps22hh\Release_Notes.html">release
+notes</a></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">lis2mdl</td>
-<td style="text-align: left;">1.6.0 <span class="icon-st-update"></span></td>
-<td style="text-align: center;"><a href="Drivers\BSP\Components\lis2mdl\Release_Notes.html">release notes</a></td>
+<td style="text-align: left;">1.6.0 <span
+class="icon-st-update"></span></td>
+<td style="text-align: center;"><a
+href="Drivers\BSP\Components\lis2mdl\Release_Notes.html">release
+notes</a></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">lis2dw12</td>
-<td style="text-align: left;">1.4.0 <span class="icon-st-update"></span></td>
-<td style="text-align: center;"><a href="Drivers\BSP\Components\lis2dw12\Release_Notes.html">release notes</a></td>
+<td style="text-align: left;">1.4.0 <span
+class="icon-st-update"></span></td>
+<td style="text-align: center;"><a
+href="Drivers\BSP\Components\lis2dw12\Release_Notes.html">release
+notes</a></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">hts221</td>
-<td style="text-align: left;">5.5.0 <span class="icon-st-update"></span></td>
-<td style="text-align: center;"><a href="Drivers\BSP\Components\hts221\Release_Notes.html">release notes</a></td>
+<td style="text-align: left;">5.5.0 <span
+class="icon-st-update"></span></td>
+<td style="text-align: center;"><a
+href="Drivers\BSP\Components\hts221\Release_Notes.html">release
+notes</a></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">lis2duxs12</td>
-<td style="text-align: left;">1.2.0 <span class="icon-st-add"></span></td>
-<td style="text-align: center;"><a href="Drivers\BSP\Components\lis2duxs12\Release_Notes.html">release notes</a></td>
+<td style="text-align: left;">1.2.0 <span
+class="icon-st-add"></span></td>
+<td style="text-align: center;"><a
+href="Drivers\BSP\Components\lis2duxs12\Release_Notes.html">release
+notes</a></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">lsm6dso16is</td>
-<td style="text-align: left;">1.1.0 <span class="icon-st-add"></span></td>
-<td style="text-align: center;"><a href="Drivers\BSP\Components\lsm6dso16is\Release_Notes.html">release notes</a></td>
+<td style="text-align: left;">1.1.0 <span
+class="icon-st-add"></span></td>
+<td style="text-align: center;"><a
+href="Drivers\BSP\Components\lsm6dso16is\Release_Notes.html">release
+notes</a></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">vl53l3cx</td>
-<td style="text-align: left;">2.0.3 <span class="icon-st-update"></span></td>
-<td style="text-align: center;"><a href="Drivers\BSP\Components\vl53l3cx\Release_Notes.html">release notes</a></td>
+<td style="text-align: left;">2.0.3 <span
+class="icon-st-update"></span></td>
+<td style="text-align: center;"><a
+href="Drivers\BSP\Components\vl53l3cx\Release_Notes.html">release
+notes</a></td>
 </tr>
 </tbody>
 </table>
-<h2 id="development-toolchains-and-compilers-1">Development Toolchains and Compilers</h2>
+<h2 id="development-toolchains-and-compilers-2">Development Toolchains
+and Compilers</h2>
 <ul>
-<li>IAR Embedded Workbench for ARM (EWARM) toolchain V9.20.1 + ST-Link</li>
-<li>RealView Microcontroller Development Kit (MDK-ARM) toolchain V5.37.0 + ST-LINK</li>
+<li>IAR Embedded Workbench for ARM (EWARM) toolchain V9.20.1 +
+ST-Link</li>
+<li>RealView Microcontroller Development Kit (MDK-ARM) toolchain V5.37.0
++ ST-LINK</li>
 <li>STM32CubeIDE V1.12.1 + ST-LINK</li>
 </ul>
-<h2 id="supported-devices-and-boards-1">Supported Devices and Boards</h2>
+<h2 id="supported-devices-and-boards-2">Supported Devices and
+Boards</h2>
 <ul>
-<li>P-NUCLEO-WB55 Bluetooth 5 and 802.15.4 Nucleo Pack including USB dongle and Nucleo-64 with STM32WB55 MCUs, supports Arduino, ST Morpho connectivity [<a href="https://www.st.com/en/evaluation-tools/p-nucleo-wb55.html">P-NUCLEO-WB55</a>]</li>
-<li>NUCLEO-WB55RG STM32 Nucleo-64 development board with STM32WB55RG MCU, supports Arduino, ST Morpho connectivity [<a href="https://www.st.com/en/evaluation-tools/nucleo-wb55rg.html">NUCLEO-WB55RG</a>]</li>
+<li>P-NUCLEO-WB55 Bluetooth 5 and 802.15.4 Nucleo Pack including USB
+dongle and Nucleo-64 with STM32WB55 MCUs, supports Arduino, ST Morpho
+connectivity [<a
+href="https://www.st.com/en/evaluation-tools/p-nucleo-wb55.html">P-NUCLEO-WB55</a>]</li>
+<li>NUCLEO-WB55RG STM32 Nucleo-64 development board with STM32WB55RG
+MCU, supports Arduino, ST Morpho connectivity [<a
+href="https://www.st.com/en/evaluation-tools/nucleo-wb55rg.html">NUCLEO-WB55RG</a>]</li>
 </ul>
-<h2 id="issues-1">Issues</h2>
+<h2 id="issues-2">Issues</h2>
 <ul>
-<li><p>After code generation MOTENV1 from STM32CubeMX tool for STM32CubeIDE toolchain, after building if the generated binary doesn’t work, replace the linker scripts with the scripts in the folder LinkerScript.</p></li>
-<li><p>After code generation MOTENV1_OTA from STM32CubeMX software before building:</p>
+<li><p>After code generation MOTENV1 from STM32CubeMX tool for
+STM32CubeIDE toolchain, after building if the generated binary doesn’t
+work, replace the linker scripts with the scripts in the folder
+LinkerScript.</p></li>
+<li><p>After code generation MOTENV1_OTA from STM32CubeMX software
+before building:</p>
 <ul>
-<li>for IAR, Keil and STM32CubeIDE replace the linker scripts with the scripts in the folder LinkerScript</li>
-<li>for Keil, open the “Options for Target” and in the tab “Target” set start= 0x8007000 and sixe= 0x79000.</li>
+<li>for IAR, Keil and STM32CubeIDE replace the linker scripts with the
+scripts in the folder LinkerScript</li>
+<li>for Keil, open the “Options for Target” and in the tab “Target” set
+start= 0x8007000 and sixe= 0x79000.</li>
 </ul></li>
 </ul>
-<h2 id="backward-compatibility-1">Backward Compatibility</h2>
+<h2 id="backward-compatibility-2">Backward Compatibility</h2>
 <p>None</p>
-<h2 id="dependencies-1">Dependencies</h2>
+<h2 id="dependencies-2">Dependencies</h2>
 <p>This software release is compatible with:</p>
 <ul>
-<li><a href="https://play.google.com/store/apps/details?id=com.st.bluems"><strong>ST BLE Sensor Android application</strong></a> V4.20.0 (or higher)</li>
-<li><a href="https://apps.apple.com/it/app/st-ble-sensor/id993670214"><strong>ST BLE Sensor iOS application</strong></a> V4.20.0 (or higher)</li>
+<li><a
+href="https://play.google.com/store/apps/details?id=com.st.bluems"><strong>ST
+BLE Sensor Android application</strong></a> V4.20.0 (or higher)</li>
+<li><a
+href="https://apps.apple.com/it/app/st-ble-sensor/id993670214"><strong>ST
+BLE Sensor iOS application</strong></a> V4.20.0 (or higher)</li>
 </ul>
 </div>
 </div>
 <div class="collapse">
-<input type="checkbox" id="collapse-section4" aria-hidden="true"> <label for="collapse-section4" aria-hidden="true"><strong>V1.2.0 / 29-July-2022</strong></label>
+<input type="checkbox" id="collapse-section4" aria-hidden="true">
+<label for="collapse-section4" aria-hidden="true"><strong>V1.2.0 /
+29-July-2022</strong></label>
 <div>
-<h2 id="main-changes-2">Main Changes</h2>
-<h3 id="maintenance-release-2">Maintenance release</h3>
+<h2 id="main-changes-3">Main Changes</h2>
+<h3 id="maintenance-release-3">Maintenance release</h3>
 <table>
 <thead>
 <tr class="header">
@@ -609,15 +1237,19 @@
 <td style="text-align: left;">Add support for X-NUCLEO-53L3A2</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">Added objects distance bluetooth feature</td>
+<td style="text-align: left;">Added objects distance bluetooth
+feature</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">Updated HAL, BSP and middlewares version</td>
+<td style="text-align: left;">Updated HAL, BSP and middlewares
+version</td>
 </tr>
 </tbody>
 </table>
-<h2 id="contents-2">Contents</h2>
-<p><small>The components flagged by “<span class="icon-st-update"></span>” have changed since the previous release. “<span class="icon-st-add"></span>” are new.</small></p>
+<h2 id="contents-3">Contents</h2>
+<p><small>The components flagged by “<span
+class="icon-st-update"></span>” have changed since the previous release.
+“<span class="icon-st-add"></span>” are new.</small></p>
 <p>Documentation</p>
 <table>
 <thead>
@@ -630,13 +1262,17 @@
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">FP-SNS-MOTENVWB1 API Description</td>
-<td style="text-align: left;">V1.2.0<span class="icon-st-update"></span></td>
-<td style="text-align: left;"><a href="Documentation\FP-SNS-MOTENVWB1.chm">CHM</a></td>
+<td style="text-align: left;">V1.2.0<span
+class="icon-st-update"></span></td>
+<td style="text-align: left;"><a
+href="Documentation\FP-SNS-MOTENVWB1.chm">CHM</a></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Quick Start Guide</td>
-<td style="text-align: left;">V1.2.0<span class="icon-st-update"></span></td>
-<td style="text-align: left;"><a href="Documentation\FP-SNS-MOTENVWB1_QSG.htm">HTM</a></td>
+<td style="text-align: left;">V1.2.0<span
+class="icon-st-update"></span></td>
+<td style="text-align: left;"><a
+href="Documentation\FP-SNS-MOTENVWB1_QSG.htm">HTM</a></td>
 </tr>
 </tbody>
 </table>
@@ -652,28 +1288,41 @@
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">BSP IKS01A3</td>
-<td style="text-align: left;">V1.8.0<span class="icon-st-update"></span></td>
-<td style="text-align: left;"><a href="Drivers/BSP/IKS01A3/Release_Notes.html">Release Notes</a></td>
+<td style="text-align: left;">V1.8.0<span
+class="icon-st-update"></span></td>
+<td style="text-align: left;"><a
+href="Drivers/BSP/IKS01A3/Release_Notes.html">Release Notes</a></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">BSP 53L3A2</td>
-<td style="text-align: left;">V2.0.2<span class="icon-st-add"></span></td>
-<td style="text-align: left;"><a href="Drivers/BSP/53L3A2/Release_Notes.html">Release Notes</a></td>
+<td style="text-align: left;">V2.0.2<span
+class="icon-st-add"></span></td>
+<td style="text-align: left;"><a
+href="Drivers/BSP/53L3A2/Release_Notes.html">Release Notes</a></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">BSP P-NUCLEO-WB55.Nucleo</td>
-<td style="text-align: left;">V1.0.5<span class="icon-st-update"></span></td>
-<td style="text-align: left;"><a href="Drivers/BSP/P-NUCLEO-WB55.Nucleo/Release_Notes.html">Release Notes</a></td>
+<td style="text-align: left;">V1.0.5<span
+class="icon-st-update"></span></td>
+<td style="text-align: left;"><a
+href="Drivers/BSP/P-NUCLEO-WB55.Nucleo/Release_Notes.html">Release
+Notes</a></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">STM32WBxx CMSIS</td>
-<td style="text-align: left;">V1.11.0<span class="icon-st-update"></span></td>
-<td style="text-align: left;"><a href="Drivers/CMSIS/Device/ST/STM32WBxx/Release_Notes.html">Release Notes</a></td>
+<td style="text-align: left;">V1.11.0<span
+class="icon-st-update"></span></td>
+<td style="text-align: left;"><a
+href="Drivers/CMSIS/Device/ST/STM32WBxx/Release_Notes.html">Release
+Notes</a></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">STM32WBxx HAL</td>
-<td style="text-align: left;">V1.11.0<span class="icon-st-update"></span></td>
-<td style="text-align: left;"><a href="Drivers/STM32WBxx_HAL_Driver/Release_Notes.html">Release Notes</a></td>
+<td style="text-align: left;">V1.11.0<span
+class="icon-st-update"></span></td>
+<td style="text-align: left;"><a
+href="Drivers/STM32WBxx_HAL_Driver/Release_Notes.html">Release
+Notes</a></td>
 </tr>
 </tbody>
 </table>
@@ -689,38 +1338,61 @@
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">MotionAR Activity Recognition Library</td>
-<td style="text-align: left;">V3.2.1<span class="icon-st-update"></span></td>
-<td style="text-align: left;"><a href="Middlewares/ST/STM32_MotionAR_Library/Release_Notes.html">Release Notes</a></td>
+<td style="text-align: left;">V3.2.1<span
+class="icon-st-update"></span></td>
+<td style="text-align: left;"><a
+href="Middlewares/ST/STM32_MotionAR_Library/Release_Notes.html">Release
+Notes</a></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">MotionCP Carry Position Library</td>
-<td style="text-align: left;">V2.2.1<span class="icon-st-update"></span></td>
-<td style="text-align: left;"><a href="Middlewares/ST/STM32_MotionCP_Library/Release_Notes.html">Release Notes</a></td>
+<td style="text-align: left;">V2.2.1<span
+class="icon-st-update"></span></td>
+<td style="text-align: left;"><a
+href="Middlewares/ST/STM32_MotionCP_Library/Release_Notes.html">Release
+Notes</a></td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">MotionFX Motion Sensor Data Fusion Library</td>
-<td style="text-align: left;">V2.6.1<span class="icon-st-update"></span></td>
-<td style="text-align: left;"><a href="Middlewares/ST/STM32_MotionFX_Library/Release_Notes.html">Release Notes</a></td>
+<td style="text-align: left;">MotionFX Motion Sensor Data Fusion
+Library</td>
+<td style="text-align: left;">V2.6.1<span
+class="icon-st-update"></span></td>
+<td style="text-align: left;"><a
+href="Middlewares/ST/STM32_MotionFX_Library/Release_Notes.html">Release
+Notes</a></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">MotionGR Gesture Recognition Library</td>
-<td style="text-align: left;">V2.2.1<span class="icon-st-update"></span></td>
-<td style="text-align: left;"><a href="Middlewares/ST/STM32_MotionGR_Library/Release_Notes.html">Release Notes</a></td>
+<td style="text-align: left;">V2.2.1<span
+class="icon-st-update"></span></td>
+<td style="text-align: left;"><a
+href="Middlewares/ST/STM32_MotionGR_Library/Release_Notes.html">Release
+Notes</a></td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">MotionID Motion Intensity Detection Library</td>
-<td style="text-align: left;">V2.4.1<span class="icon-st-update"></span></td>
-<td style="text-align: left;"><a href="Middlewares/ST/STM32_MotionID_Library/Release_Notes.html">Release Notes</a></td>
+<td style="text-align: left;">MotionID Motion Intensity Detection
+Library</td>
+<td style="text-align: left;">V2.4.1<span
+class="icon-st-update"></span></td>
+<td style="text-align: left;"><a
+href="Middlewares/ST/STM32_MotionID_Library/Release_Notes.html">Release
+Notes</a></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">MotionPM PPedometer Library</td>
-<td style="text-align: left;">V2.4.1<span class="icon-st-update"></span></td>
-<td style="text-align: left;"><a href="Middlewares/ST/STM32_MotionPM_Library/Release_Notes.html">Release Notes</a></td>
+<td style="text-align: left;">V2.4.1<span
+class="icon-st-update"></span></td>
+<td style="text-align: left;"><a
+href="Middlewares/ST/STM32_MotionPM_Library/Release_Notes.html">Release
+Notes</a></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">STM32 Middleware WPAN</td>
-<td style="text-align: left;">V1.14.1<span class="icon-st-update"></span></td>
-<td style="text-align: left;"><a href="Middlewares/ST/STM32_WPAN/Release_Notes.html">Release Notes</a></td>
+<td style="text-align: left;">V1.14.1<span
+class="icon-st-update"></span></td>
+<td style="text-align: left;"><a
+href="Middlewares/ST/STM32_WPAN/Release_Notes.html">Release
+Notes</a></td>
 </tr>
 </tbody>
 </table>
@@ -736,35 +1408,44 @@
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">Projects</td>
-<td style="text-align: left;">V1.2.0<span class="icon-st-update"></span></td>
-<td style="text-align: left;">Refer to Release Notes in project sub folders</td>
+<td style="text-align: left;">V1.2.0<span
+class="icon-st-update"></span></td>
+<td style="text-align: left;">Refer to Release Notes in project sub
+folders</td>
 </tr>
 </tbody>
 </table>
-<h2 id="development-toolchains-and-compilers-2">Development Toolchains and Compilers</h2>
+<h2 id="development-toolchains-and-compilers-3">Development Toolchains
+and Compilers</h2>
 <ul>
-<li>IAR Embedded Workbench for ARM (EWARM) toolchain V9.20.1 + ST-Link</li>
-<li>RealView Microcontroller Development Kit (MDK-ARM) toolchain V5.37.0 + ST-LINK</li>
+<li>IAR Embedded Workbench for ARM (EWARM) toolchain V9.20.1 +
+ST-Link</li>
+<li>RealView Microcontroller Development Kit (MDK-ARM) toolchain V5.37.0
++ ST-LINK</li>
 <li>STM32CubeIDE V1.10.1 + ST-LINK</li>
 </ul>
-<h2 id="supported-devices-and-boards-2">Supported Devices and Boards</h2>
+<h2 id="supported-devices-and-boards-3">Supported Devices and
+Boards</h2>
 <ul>
 <li>P-NUCLEO-WB55.Nucleo</li>
 <li>X-NUCLEO-IKS01A3</li>
 <li>X-NUCLEO-53L3A2 (Optional)</li>
 </ul>
-<h2 id="issues-2">Issues</h2>
+<h2 id="issues-3">Issues</h2>
 <p>Related to Keil µVision 5:</p>
 <ul>
-<li>If the constant CFG_DEBUG_APP_TRACE is egual to 1 for enabling the printf, the application doesnt’t work</li>
+<li>If the constant CFG_DEBUG_APP_TRACE is egual to 1 for enabling the
+printf, the application doesnt’t work</li>
 </ul>
 </div>
 </div>
 <div class="collapse">
-<input type="checkbox" id="collapse-section3" aria-hidden="true"> <label for="collapse-section3" aria-hidden="true"><strong>V1.1.0 / 12-November-2021</strong></label>
+<input type="checkbox" id="collapse-section3" aria-hidden="true">
+<label for="collapse-section3" aria-hidden="true"><strong>V1.1.0 /
+12-November-2021</strong></label>
 <div>
-<h2 id="main-changes-3">Main Changes</h2>
-<h3 id="maintenance-release-3">Maintenance release</h3>
+<h2 id="main-changes-4">Main Changes</h2>
+<h3 id="maintenance-release-4">Maintenance release</h3>
 <table>
 <thead>
 <tr class="header">
@@ -773,23 +1454,29 @@
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;">Add support for Over The Air (OTA) functionality</td>
+<td style="text-align: left;">Add support for Over The Air (OTA)
+functionality</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">Compatibility with the ST BLE Sensor Android/iOS application (Version 4.9.0 or later)</td>
+<td style="text-align: left;">Compatibility with the ST BLE Sensor
+Android/iOS application (Version 4.9.0 or later)</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">Compatibility with Unicleo-GUI for X-CUBE-MEMS1, motion MEMS and environmental sensor software expansion for STM32Cube (Version 1.17.0 or later)</td>
+<td style="text-align: left;">Compatibility with Unicleo-GUI for
+X-CUBE-MEMS1, motion MEMS and environmental sensor software expansion
+for STM32Cube (Version 1.17.0 or later)</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">Use X-NUCLEO-IKS01A3 drivers from X-CUBE-MEMS1 V9.0.0</td>
+<td style="text-align: left;">Use X-NUCLEO-IKS01A3 drivers from
+X-CUBE-MEMS1 V9.0.0</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">Use STM32WB55 drivers and middlewares from STM32CubeWB V1.12.0</td>
+<td style="text-align: left;">Use STM32WB55 drivers and middlewares from
+STM32CubeWB V1.12.0</td>
 </tr>
 </tbody>
 </table>
-<h2 id="contents-3">Contents</h2>
+<h2 id="contents-4">Contents</h2>
 <p>Documentation</p>
 <table>
 <thead>
@@ -803,12 +1490,14 @@
 <tr class="odd">
 <td style="text-align: left;">FP-SNS-MOTENVWB1 API Description</td>
 <td style="text-align: left;">V1.1.0</td>
-<td style="text-align: left;"><a href="Documentation\FP-SNS-MOTENVWB1.chm">CHM</a></td>
+<td style="text-align: left;"><a
+href="Documentation\FP-SNS-MOTENVWB1.chm">CHM</a></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Quick Start Guide</td>
 <td style="text-align: left;">V1.1.0</td>
-<td style="text-align: left;"><a href="Documentation\FP-SNS-MOTENVWB1_QSG.htm">HTM</a></td>
+<td style="text-align: left;"><a
+href="Documentation\FP-SNS-MOTENVWB1_QSG.htm">HTM</a></td>
 </tr>
 </tbody>
 </table>
@@ -825,22 +1514,29 @@
 <tr class="odd">
 <td style="text-align: left;">BSP IKS01A3</td>
 <td style="text-align: left;">V1.6.0</td>
-<td style="text-align: left;"><a href="Drivers/BSP/IKS01A3/Release_Notes.html">Release Notes</a></td>
+<td style="text-align: left;"><a
+href="Drivers/BSP/IKS01A3/Release_Notes.html">Release Notes</a></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">BSP P-NUCLEO-WB55.Nucleo</td>
 <td style="text-align: left;">V1.0.3</td>
-<td style="text-align: left;"><a href="Drivers/BSP/P-NUCLEO-WB55.Nucleo/Release_Notes.html">Release Notes</a></td>
+<td style="text-align: left;"><a
+href="Drivers/BSP/P-NUCLEO-WB55.Nucleo/Release_Notes.html">Release
+Notes</a></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">STM32WBxx CMSIS</td>
 <td style="text-align: left;">V1.9.0</td>
-<td style="text-align: left;"><a href="Drivers/CMSIS/Device/ST/STM32WBxx/Release_Notes.html">Release Notes</a></td>
+<td style="text-align: left;"><a
+href="Drivers/CMSIS/Device/ST/STM32WBxx/Release_Notes.html">Release
+Notes</a></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">STM32WBxx HAL</td>
 <td style="text-align: left;">V1.9.0</td>
-<td style="text-align: left;"><a href="Drivers/STM32WBxx_HAL_Driver/Release_Notes.html">Release Notes</a></td>
+<td style="text-align: left;"><a
+href="Drivers/STM32WBxx_HAL_Driver/Release_Notes.html">Release
+Notes</a></td>
 </tr>
 </tbody>
 </table>
@@ -857,37 +1553,53 @@
 <tr class="odd">
 <td style="text-align: left;">MotionAR Activity Recognition Library</td>
 <td style="text-align: left;">V3.2.0</td>
-<td style="text-align: left;"><a href="Middlewares/ST/STM32_MotionAR_Library/Release_Notes.html">Release Notes</a></td>
+<td style="text-align: left;"><a
+href="Middlewares/ST/STM32_MotionAR_Library/Release_Notes.html">Release
+Notes</a></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">MotionCP Carry Position Library</td>
 <td style="text-align: left;">V2.2.0</td>
-<td style="text-align: left;"><a href="Middlewares/ST/STM32_MotionCP_Library/Release_Notes.html">Release Notes</a></td>
+<td style="text-align: left;"><a
+href="Middlewares/ST/STM32_MotionCP_Library/Release_Notes.html">Release
+Notes</a></td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">MotionFX Motion Sensor Data Fusion Library</td>
+<td style="text-align: left;">MotionFX Motion Sensor Data Fusion
+Library</td>
 <td style="text-align: left;">V2.6.0</td>
-<td style="text-align: left;"><a href="Middlewares/ST/STM32_MotionFX_Library/Release_Notes.html">Release Notes</a></td>
+<td style="text-align: left;"><a
+href="Middlewares/ST/STM32_MotionFX_Library/Release_Notes.html">Release
+Notes</a></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">MotionGR Gesture Recognition Library</td>
 <td style="text-align: left;">V2.2.0</td>
-<td style="text-align: left;"><a href="Middlewares/ST/STM32_MotionGR_Library/Release_Notes.html">Release Notes</a></td>
+<td style="text-align: left;"><a
+href="Middlewares/ST/STM32_MotionGR_Library/Release_Notes.html">Release
+Notes</a></td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">MotionID Motion Intensity Detection Library</td>
+<td style="text-align: left;">MotionID Motion Intensity Detection
+Library</td>
 <td style="text-align: left;">V2.4.0</td>
-<td style="text-align: left;"><a href="Middlewares/ST/STM32_MotionID_Library/Release_Notes.html">Release Notes</a></td>
+<td style="text-align: left;"><a
+href="Middlewares/ST/STM32_MotionID_Library/Release_Notes.html">Release
+Notes</a></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">MotionPM PPedometer Library</td>
 <td style="text-align: left;">V2.4.0</td>
-<td style="text-align: left;"><a href="Middlewares/ST/STM32_MotionPM_Library/Release_Notes.html">Release Notes</a></td>
+<td style="text-align: left;"><a
+href="Middlewares/ST/STM32_MotionPM_Library/Release_Notes.html">Release
+Notes</a></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">STM32 Middleware WPAN</td>
 <td style="text-align: left;">V1.12.0</td>
-<td style="text-align: left;"><a href="Middlewares/ST/STM32_WPAN/Release_Notes.html">Release Notes</a></td>
+<td style="text-align: left;"><a
+href="Middlewares/ST/STM32_WPAN/Release_Notes.html">Release
+Notes</a></td>
 </tr>
 </tbody>
 </table>
@@ -903,18 +1615,24 @@
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">Projects</td>
-<td style="text-align: left;">V1.1.0<span class="icon-st-update"></span></td>
-<td style="text-align: left;">Refer to Release Notes in project sub folders</td>
+<td style="text-align: left;">V1.1.0<span
+class="icon-st-update"></span></td>
+<td style="text-align: left;">Refer to Release Notes in project sub
+folders</td>
 </tr>
 </tbody>
 </table>
-<h2 id="development-toolchains-and-compilers-3">Development Toolchains and Compilers</h2>
+<h2 id="development-toolchains-and-compilers-4">Development Toolchains
+and Compilers</h2>
 <ul>
-<li>IAR Embedded Workbench for ARM (EWARM) toolchain V8.50.9 + ST-Link</li>
-<li>RealView Microcontroller Development Kit (MDK-ARM) toolchain V5.32.0 + ST-LINK</li>
+<li>IAR Embedded Workbench for ARM (EWARM) toolchain V8.50.9 +
+ST-Link</li>
+<li>RealView Microcontroller Development Kit (MDK-ARM) toolchain V5.32.0
++ ST-LINK</li>
 <li>STM32CubeIDE V1.7.0 + ST-LINK</li>
 </ul>
-<h2 id="supported-devices-and-boards-3">Supported Devices and Boards</h2>
+<h2 id="supported-devices-and-boards-4">Supported Devices and
+Boards</h2>
 <ul>
 <li>P-NUCLEO-WB55.Nucleo</li>
 <li>X-NUCLEO-IKS01A3</li>
@@ -922,9 +1640,11 @@
 </div>
 </div>
 <div class="collapse">
-<input type="checkbox" id="collapse-section2" aria-hidden="true"> <label for="collapse-section2" aria-hidden="true"><strong>V1.0.1 / 26-November-2019</strong></label>
+<input type="checkbox" id="collapse-section2" aria-hidden="true">
+<label for="collapse-section2" aria-hidden="true"><strong>V1.0.1 /
+26-November-2019</strong></label>
 <div>
-<h2 id="main-changes-4">Main Changes</h2>
+<h2 id="main-changes-5">Main Changes</h2>
 <h3 id="patch-release">Patch release</h3>
 <table>
 <thead>
@@ -934,21 +1654,31 @@
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;">Compatibility with the ST BLE Sensor Android/iOS application (Version 4.4.3 or later)</td>
+<td style="text-align: left;">Compatibility with the ST BLE Sensor
+Android/iOS application (Version 4.4.3 or later)</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">Compatibility with Unicleo-GUI for X-CUBE-MEMS1, motion MEMS and environmental sensor software expansion for STM32Cube</td>
+<td style="text-align: left;">Compatibility with Unicleo-GUI for
+X-CUBE-MEMS1, motion MEMS and environmental sensor software expansion
+for STM32Cube</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">Use X-NUCLEO-IKS01A3 drivers from X-CUBE-MEMS1 V6.2.0 <a href="Drivers/BSP/IKS01A3/Release_Notes.html">Release Notes</a></td>
+<td style="text-align: left;">Use X-NUCLEO-IKS01A3 drivers from
+X-CUBE-MEMS1 V6.2.0 <a
+href="Drivers/BSP/IKS01A3/Release_Notes.html">Release Notes</a></td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">Use STM32WB55 drivers and middlewares from STM32CubeWB V1.2.0 <a href="Middlewares/ST/STM32_WPAN/Release_Notes.html">Release Notes</a></td>
+<td style="text-align: left;">Use STM32WB55 drivers and middlewares from
+STM32CubeWB V1.2.0 <a
+href="Middlewares/ST/STM32_WPAN/Release_Notes.html">Release
+Notes</a></td>
 </tr>
 </tbody>
 </table>
-<h2 id="contents-4">Contents</h2>
-<p><small>The components flagged by “<span class="icon-st-update"></span>” have changed since the previous release. “<span class="icon-st-add"></span>” are new.</small></p>
+<h2 id="contents-5">Contents</h2>
+<p><small>The components flagged by “<span
+class="icon-st-update"></span>” have changed since the previous release.
+“<span class="icon-st-add"></span>” are new.</small></p>
 <p>Documentation</p>
 <table>
 <thead>
@@ -962,12 +1692,15 @@
 <tr class="odd">
 <td style="text-align: left;">FP-SNS-MOTENVWB1 API Description</td>
 <td style="text-align: left;">V1.0.0</td>
-<td style="text-align: left;"><a href="Documentation\FP-SNS-MOTENVWB1.chm">CHM</a></td>
+<td style="text-align: left;"><a
+href="Documentation\FP-SNS-MOTENVWB1.chm">CHM</a></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Quick Start Guide</td>
-<td style="text-align: left;">V1.1.0<span class="icon-st-update"></span></td>
-<td style="text-align: left;"><a href="Documentation\FP-SNS-MOTENVWB1_QSG.htm">HTM</a></td>
+<td style="text-align: left;">V1.1.0<span
+class="icon-st-update"></span></td>
+<td style="text-align: left;"><a
+href="Documentation\FP-SNS-MOTENVWB1_QSG.htm">HTM</a></td>
 </tr>
 </tbody>
 </table>
@@ -984,22 +1717,29 @@
 <tr class="odd">
 <td style="text-align: left;">BSP IKS01A3</td>
 <td style="text-align: left;">V1.1.0</td>
-<td style="text-align: left;"><a href="Drivers/BSP/IKS01A3/Release_Notes.html">Release Notes</a></td>
+<td style="text-align: left;"><a
+href="Drivers/BSP/IKS01A3/Release_Notes.html">Release Notes</a></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">BSP P-NUCLEO-WB55.Nucleo</td>
 <td style="text-align: left;">V1.0.0</td>
-<td style="text-align: left;"><a href="Drivers/BSP/P-NUCLEO-WB55.Nucleo/Release_Notes.html">Release Notes</a></td>
+<td style="text-align: left;"><a
+href="Drivers/BSP/P-NUCLEO-WB55.Nucleo/Release_Notes.html">Release
+Notes</a></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">STM32WBxx CMSIS</td>
 <td style="text-align: left;">V1.2.0</td>
-<td style="text-align: left;"><a href="Drivers/CMSIS/Device/ST/STM32WBxx/Release_Notes.html">Release Notes</a></td>
+<td style="text-align: left;"><a
+href="Drivers/CMSIS/Device/ST/STM32WBxx/Release_Notes.html">Release
+Notes</a></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">STM32WBxx HAL</td>
 <td style="text-align: left;">V1.2.0</td>
-<td style="text-align: left;"><a href="Drivers/STM32WBxx_HAL_Driver/Release_Notes.html">Release Notes</a></td>
+<td style="text-align: left;"><a
+href="Drivers/STM32WBxx_HAL_Driver/Release_Notes.html">Release
+Notes</a></td>
 </tr>
 </tbody>
 </table>
@@ -1016,37 +1756,53 @@
 <tr class="odd">
 <td style="text-align: left;">MotionAR Activity Recognition Library</td>
 <td style="text-align: left;">V3.0.1</td>
-<td style="text-align: left;"><a href="Middlewares/ST/STM32_MotionAR_Library/Release_Notes.html">Release Notes</a></td>
+<td style="text-align: left;"><a
+href="Middlewares/ST/STM32_MotionAR_Library/Release_Notes.html">Release
+Notes</a></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">MotionCP Carry Position Library</td>
 <td style="text-align: left;">V2.0.2</td>
-<td style="text-align: left;"><a href="Middlewares/ST/STM32_MotionCP_Library/Release_Notes.html">Release Notes</a></td>
+<td style="text-align: left;"><a
+href="Middlewares/ST/STM32_MotionCP_Library/Release_Notes.html">Release
+Notes</a></td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">MotionFX Motion Sensor Data Fusion Library</td>
+<td style="text-align: left;">MotionFX Motion Sensor Data Fusion
+Library</td>
 <td style="text-align: left;">V2.3.1</td>
-<td style="text-align: left;"><a href="Middlewares/ST/STM32_MotionFX_Library/Release_Notes.html">Release Notes</a></td>
+<td style="text-align: left;"><a
+href="Middlewares/ST/STM32_MotionFX_Library/Release_Notes.html">Release
+Notes</a></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">MotionGR Gesture Recognition Library</td>
 <td style="text-align: left;">V2.0.2</td>
-<td style="text-align: left;"><a href="Middlewares/ST/STM32_MotionGR_Library/Release_Notes.html">Release Notes</a></td>
+<td style="text-align: left;"><a
+href="Middlewares/ST/STM32_MotionGR_Library/Release_Notes.html">Release
+Notes</a></td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">MotionID Motion Intensity Detection Library</td>
+<td style="text-align: left;">MotionID Motion Intensity Detection
+Library</td>
 <td style="text-align: left;">V2.1.1</td>
-<td style="text-align: left;"><a href="Middlewares/ST/STM32_MotionID_Library/Release_Notes.html">Release Notes</a></td>
+<td style="text-align: left;"><a
+href="Middlewares/ST/STM32_MotionID_Library/Release_Notes.html">Release
+Notes</a></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">MotionPM PPedometer Library</td>
 <td style="text-align: left;">V2.1.1</td>
-<td style="text-align: left;"><a href="Middlewares/ST/STM32_MotionPM_Library/Release_Notes.html">Release Notes</a></td>
+<td style="text-align: left;"><a
+href="Middlewares/ST/STM32_MotionPM_Library/Release_Notes.html">Release
+Notes</a></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">STM32 Middleware WPAN</td>
 <td style="text-align: left;">V1.2.0</td>
-<td style="text-align: left;"><a href="Middlewares/ST/STM32_WPAN/Release_Notes.html">Release Notes</a></td>
+<td style="text-align: left;"><a
+href="Middlewares/ST/STM32_WPAN/Release_Notes.html">Release
+Notes</a></td>
 </tr>
 </tbody>
 </table>
@@ -1063,17 +1819,22 @@
 <tr class="odd">
 <td style="text-align: left;">Projects</td>
 <td style="text-align: left;">V1.0.0</td>
-<td style="text-align: left;"><a href="Projects/P-NUCLEO-WB55.Nucleo/Applications/MOTENV1/readme.txt">Readme</a></td>
+<td style="text-align: left;"><a
+href="Projects/P-NUCLEO-WB55.Nucleo/Applications/MOTENV1/readme.txt">Readme</a></td>
 </tr>
 </tbody>
 </table>
-<h2 id="development-toolchains-and-compilers-4">Development Toolchains and Compilers</h2>
+<h2 id="development-toolchains-and-compilers-5">Development Toolchains
+and Compilers</h2>
 <ul>
-<li>IAR Embedded Workbench for ARM (EWARM) toolchain V8.32.3 + ST-Link</li>
-<li>RealView Microcontroller Development Kit (MDK-ARM) toolchain V5.27.0 + ST-LINK</li>
+<li>IAR Embedded Workbench for ARM (EWARM) toolchain V8.32.3 +
+ST-Link</li>
+<li>RealView Microcontroller Development Kit (MDK-ARM) toolchain V5.27.0
++ ST-LINK</li>
 <li>STM32CubeIDE V1.0.2 + ST-LINK</li>
 </ul>
-<h2 id="supported-devices-and-boards-4">Supported Devices and Boards</h2>
+<h2 id="supported-devices-and-boards-5">Supported Devices and
+Boards</h2>
 <ul>
 <li>P-NUCLEO-WB55.Nucleo</li>
 <li>X-NUCLEO-IKS01A3</li>
@@ -1081,9 +1842,11 @@
 </div>
 </div>
 <div class="collapse">
-<input type="checkbox" id="collapse-section1" aria-hidden="true"> <label for="collapse-section1" aria-hidden="true"><strong>V1.0.0 / 26-July-2019</strong></label>
+<input type="checkbox" id="collapse-section1" aria-hidden="true">
+<label for="collapse-section1" aria-hidden="true"><strong>V1.0.0 /
+26-July-2019</strong></label>
 <div>
-<h2 id="main-changes-5">Main Changes</h2>
+<h2 id="main-changes-6">Main Changes</h2>
 <h3 id="first-release">First release</h3>
 <table>
 <thead>
@@ -1093,18 +1856,26 @@
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;">Compatibility with the ST BLE Sensor Android/iOS application (Version 4.4.3 or later)</td>
+<td style="text-align: left;">Compatibility with the ST BLE Sensor
+Android/iOS application (Version 4.4.3 or later)</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">Use X-NUCLEO-IKS01A3 drivers from X-CUBE-MEMS1 V6.2.0 <a href="Drivers/BSP/IKS01A3/Release_Notes.html">Release Notes</a></td>
+<td style="text-align: left;">Use X-NUCLEO-IKS01A3 drivers from
+X-CUBE-MEMS1 V6.2.0 <a
+href="Drivers/BSP/IKS01A3/Release_Notes.html">Release Notes</a></td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">Use STM32WB55 drivers and middlewares from STM32CubeWB V1.2.0 <a href="Middlewares/ST/STM32_WPAN/Release_Notes.html">Release Notes</a></td>
+<td style="text-align: left;">Use STM32WB55 drivers and middlewares from
+STM32CubeWB V1.2.0 <a
+href="Middlewares/ST/STM32_WPAN/Release_Notes.html">Release
+Notes</a></td>
 </tr>
 </tbody>
 </table>
-<h2 id="contents-5">Contents</h2>
-<p><small>The components flagged by “<span class="icon-st-update"></span>” have changed since the previous release. “<span class="icon-st-add"></span>” are new.</small></p>
+<h2 id="contents-6">Contents</h2>
+<p><small>The components flagged by “<span
+class="icon-st-update"></span>” have changed since the previous release.
+“<span class="icon-st-add"></span>” are new.</small></p>
 <p>Documentation</p>
 <table>
 <thead>
@@ -1118,12 +1889,14 @@
 <tr class="odd">
 <td style="text-align: left;">FP-SNS-MOTENVWB1 API Description</td>
 <td style="text-align: left;">V1.0.0</td>
-<td style="text-align: left;"><a href="Documentation\FP-SNS-MOTENVWB1.chm">CHM</a></td>
+<td style="text-align: left;"><a
+href="Documentation\FP-SNS-MOTENVWB1.chm">CHM</a></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Quick Start Guide</td>
 <td style="text-align: left;">V1.0.0</td>
-<td style="text-align: left;"><a href="Documentation\FP-SNS-MOTENVWB1_QSG.htm">HTM</a></td>
+<td style="text-align: left;"><a
+href="Documentation\FP-SNS-MOTENVWB1_QSG.htm">HTM</a></td>
 </tr>
 </tbody>
 </table>
@@ -1140,22 +1913,29 @@
 <tr class="odd">
 <td style="text-align: left;">BSP IKS01A3</td>
 <td style="text-align: left;">V1.1.0</td>
-<td style="text-align: left;"><a href="Drivers/BSP/IKS01A3/Release_Notes.html">Release Notes</a></td>
+<td style="text-align: left;"><a
+href="Drivers/BSP/IKS01A3/Release_Notes.html">Release Notes</a></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">BSP P-NUCLEO-WB55.Nucleo</td>
 <td style="text-align: left;">V1.0.0</td>
-<td style="text-align: left;"><a href="Drivers/BSP/P-NUCLEO-WB55.Nucleo/Release_Notes.html">Release Notes</a></td>
+<td style="text-align: left;"><a
+href="Drivers/BSP/P-NUCLEO-WB55.Nucleo/Release_Notes.html">Release
+Notes</a></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">STM32WBxx CMSIS</td>
 <td style="text-align: left;">V1.2.0</td>
-<td style="text-align: left;"><a href="Drivers/CMSIS/Device/ST/STM32WBxx/Release_Notes.html">Release Notes</a></td>
+<td style="text-align: left;"><a
+href="Drivers/CMSIS/Device/ST/STM32WBxx/Release_Notes.html">Release
+Notes</a></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">STM32WBxx HAL</td>
 <td style="text-align: left;">V1.2.0</td>
-<td style="text-align: left;"><a href="Drivers/STM32WBxx_HAL_Driver/Release_Notes.html">Release Notes</a></td>
+<td style="text-align: left;"><a
+href="Drivers/STM32WBxx_HAL_Driver/Release_Notes.html">Release
+Notes</a></td>
 </tr>
 </tbody>
 </table>
@@ -1172,37 +1952,53 @@
 <tr class="odd">
 <td style="text-align: left;">MotionAR Activity Recognition Library</td>
 <td style="text-align: left;">V3.0.1</td>
-<td style="text-align: left;"><a href="Middlewares/ST/STM32_MotionAR_Library/Release_Notes.html">Release Notes</a></td>
+<td style="text-align: left;"><a
+href="Middlewares/ST/STM32_MotionAR_Library/Release_Notes.html">Release
+Notes</a></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">MotionCP Carry Position Library</td>
 <td style="text-align: left;">V2.0.2</td>
-<td style="text-align: left;"><a href="Middlewares/ST/STM32_MotionCP_Library/Release_Notes.html">Release Notes</a></td>
+<td style="text-align: left;"><a
+href="Middlewares/ST/STM32_MotionCP_Library/Release_Notes.html">Release
+Notes</a></td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">MotionFX Motion Sensor Data Fusion Library</td>
+<td style="text-align: left;">MotionFX Motion Sensor Data Fusion
+Library</td>
 <td style="text-align: left;">V2.3.1</td>
-<td style="text-align: left;"><a href="Middlewares/ST/STM32_MotionFX_Library/Release_Notes.html">Release Notes</a></td>
+<td style="text-align: left;"><a
+href="Middlewares/ST/STM32_MotionFX_Library/Release_Notes.html">Release
+Notes</a></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">MotionGR Gesture Recognition Library</td>
 <td style="text-align: left;">V2.0.2</td>
-<td style="text-align: left;"><a href="Middlewares/ST/STM32_MotionGR_Library/Release_Notes.html">Release Notes</a></td>
+<td style="text-align: left;"><a
+href="Middlewares/ST/STM32_MotionGR_Library/Release_Notes.html">Release
+Notes</a></td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">MotionID Motion Intensity Detection Library</td>
+<td style="text-align: left;">MotionID Motion Intensity Detection
+Library</td>
 <td style="text-align: left;">V2.1.1</td>
-<td style="text-align: left;"><a href="Middlewares/ST/STM32_MotionID_Library/Release_Notes.html">Release Notes</a></td>
+<td style="text-align: left;"><a
+href="Middlewares/ST/STM32_MotionID_Library/Release_Notes.html">Release
+Notes</a></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">MotionPM PPedometer Library</td>
 <td style="text-align: left;">V2.1.1</td>
-<td style="text-align: left;"><a href="Middlewares/ST/STM32_MotionPM_Library/Release_Notes.html">Release Notes</a></td>
+<td style="text-align: left;"><a
+href="Middlewares/ST/STM32_MotionPM_Library/Release_Notes.html">Release
+Notes</a></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">STM32 Middleware WPAN</td>
 <td style="text-align: left;">V1.2.0</td>
-<td style="text-align: left;"><a href="Middlewares/ST/STM32_WPAN/Release_Notes.html">Release Notes</a></td>
+<td style="text-align: left;"><a
+href="Middlewares/ST/STM32_WPAN/Release_Notes.html">Release
+Notes</a></td>
 </tr>
 </tbody>
 </table>
@@ -1219,29 +2015,36 @@
 <tr class="odd">
 <td style="text-align: left;">Projects</td>
 <td style="text-align: left;">V1.0.0</td>
-<td style="text-align: left;"><a href="Projects/P-NUCLEO-WB55.Nucleo/Applications/MOTENV1/readme.txt">Readme</a></td>
+<td style="text-align: left;"><a
+href="Projects/P-NUCLEO-WB55.Nucleo/Applications/MOTENV1/readme.txt">Readme</a></td>
 </tr>
 </tbody>
 </table>
-<h2 id="development-toolchains-and-compilers-5">Development Toolchains and Compilers</h2>
+<h2 id="development-toolchains-and-compilers-6">Development Toolchains
+and Compilers</h2>
 <ul>
-<li>IAR Embedded Workbench for ARM (EWARM) toolchain V8.32.3 + ST-Link</li>
-<li>RealView Microcontroller Development Kit (MDK-ARM) toolchain V5.27.0 + ST-LINK</li>
+<li>IAR Embedded Workbench for ARM (EWARM) toolchain V8.32.3 +
+ST-Link</li>
+<li>RealView Microcontroller Development Kit (MDK-ARM) toolchain V5.27.0
++ ST-LINK</li>
 <li>STM32CubeIDE V1.0.2 + ST-LINK</li>
 </ul>
-<h2 id="supported-devices-and-boards-5">Supported Devices and Boards</h2>
+<h2 id="supported-devices-and-boards-6">Supported Devices and
+Boards</h2>
 <ul>
 <li>P-NUCLEO-WB55.Nucleo</li>
 <li>X-NUCLEO-IKS01A3</li>
 </ul>
 </div>
 </div>
-</div>
+</section>
 </div>
 <footer class="sticky">
 <div class="columns">
 <div class="column" style="width:95%;">
-<p>For complete documentation on <strong>FP-SNS-MOTENVWB1</strong>, visit: <a href="https://www.st.com/en/embedded-software/fp-sns-motenvwb1.html">www.st.com</a></p>
+<p>For complete documentation on <strong>FP-SNS-MOTENVWB1</strong>,
+visit: <a
+href="https://www.st.com/en/embedded-software/fp-sns-motenvwb1.html">www.st.com</a></p>
 </div><div class="column" style="width:5%;">
 <p><abbr title="Based on template cx566953 version 2.0">Info</abbr></p>
 </div>

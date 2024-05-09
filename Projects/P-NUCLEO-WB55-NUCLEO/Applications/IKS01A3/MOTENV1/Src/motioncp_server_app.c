@@ -1,4 +1,4 @@
-
+/* USER CODE BEGIN Header */
 /**
   ******************************************************************************
   * @file    motioncp_server_app.c
@@ -6,7 +6,7 @@
   ******************************************************************************
   * @attention
   *
-  * Copyright (c) 2023 STMicroelectronics.
+  * Copyright (c) 2024 STMicroelectronics.
   * All rights reserved.
   *
   * This software is licensed under terms that can be found in the LICENSE file
@@ -15,6 +15,9 @@
   *
   ******************************************************************************
   */
+
+/* USER CODE END Header */
+
 /* Includes ------------------------------------------------------------------*/
 #include "app_common.h"
 #include "ble.h"
@@ -31,8 +34,8 @@
 
 /* Private typedef -----------------------------------------------------------*/
 /**
- * @brief  SW/Activity Recognition Service/Char Context structure definition
- */
+  * @brief  SW/Activity Recognition Service/Char Context structure definition
+  */
 typedef struct
 {
   uint8_t  NotificationStatus;
@@ -58,11 +61,11 @@ static void CarryPosition_Update(MCP_output_t CarryPositionCode);
 /* Public functions ----------------------------------------------------------*/
 
 /**
- * @brief  Init the SW/Carry Position Service/Char Context
- *         and update the ADV data accordingly
- * @param  None
- * @retval None
- */
+  * @brief  Init the SW/Carry Position Service/Char Context
+  *         and update the ADV data accordingly
+  * @param  None
+  * @retval None
+  */
 void MOTIONCP_Context_Init(void)
 {
   /* CarryPosition API initialization function */
@@ -77,14 +80,14 @@ void MOTIONCP_Context_Init(void)
 }
 
 /**
- * @brief  Set the notification status (enabled/disabled) and full scale
- * @param  status The new notification status
- * @retval None
- */
+  * @brief  Set the notification status (enabled/disabled) and full scale
+  * @param  status The new notification status
+  * @retval None
+  */
 void MOTIONCP_Set_Notification_Status(uint8_t status)
 {
   MOTIONCP_Server_App_Context.NotificationStatus = status;
-  if(status == 1)
+  if (status == 1)
   {
     /* Set accelerometer:
      *   - FS   = <-4g, 4g>
@@ -101,20 +104,20 @@ void MOTIONCP_Set_Notification_Status(uint8_t status)
 }
 
 /**
- * @brief  Send a notification for Carry Position events
- * @param  None
- * @retval None
- */
+  * @brief  Send a notification for Carry Position events
+  * @param  None
+  * @retval None
+  */
 void MOTIONCP_Send_Notification_Task(void)
 {
   ComputeMotionCP();
 }
 
 /**
- * @brief  Update the Carry Position char value
- * @param  None
- * @retval None
- */
+  * @brief  Update the Carry Position char value
+  * @param  None
+  * @retval None
+  */
 void MOTIONCP_CarryPosition_Update(void)
 {
   CarryPosition_Update(MOTIONCP_Server_App_Context.CarryPositionCode);
@@ -123,10 +126,10 @@ void MOTIONCP_CarryPosition_Update(void)
 /* Private functions ---------------------------------------------------------*/
 
 /**
- * @brief  Run the CP Manager and update the Carry Position char value
- * @param  None
- * @retval None
- */
+  * @brief  Run the CP Manager and update the Carry Position char value
+  * @param  None
+  * @retval None
+  */
 static void ComputeMotionCP(void)
 {
   MOTION_SENSOR_Axes_t ACC_Value;
@@ -143,41 +146,40 @@ static void ComputeMotionCP(void)
 
   MotionCP_manager_run(&data_in, &MOTIONCP_Server_App_Context.CarryPositionCode);
 
-  if(CarryPositionCodePrev != MOTIONCP_Server_App_Context.CarryPositionCode)
+  if (CarryPositionCodePrev != MOTIONCP_Server_App_Context.CarryPositionCode)
   {
     CarryPositionCodePrev = MOTIONCP_Server_App_Context.CarryPositionCode;
-    if(MOTIONCP_Server_App_Context.NotificationStatus)
+    if (MOTIONCP_Server_App_Context.NotificationStatus)
     {
       CarryPosition_Update(MOTIONCP_Server_App_Context.CarryPositionCode);
     }
     else
     {
-#if(CFG_DEBUG_APP_TRACE != 0)
+#if (CFG_DEBUG_APP_TRACE != 0)
       APP_DBG_MSG("-- MOTIONCP APPLICATION SERVER : CAN'T INFORM CLIENT - NOTIFICATION DISABLED\n ");
-#endif
+#endif /* CFG_DEBUG_APP_TRACE != 0 */
     }
   }
 }
 
 /**
- * @brief  Update the Carry Position char value
- * @param  CarryPositionCode Carry Position Recognized
- * @retval None
- */
+  * @brief  Update the Carry Position char value
+  * @param  CarryPositionCode Carry Position Recognized
+  * @retval None
+  */
 static void CarryPosition_Update(MCP_output_t CarryPositionCode)
 {
   uint8_t value[VALUE_LEN_CP];
 
   /* Timestamp */
-  STORE_LE_16(value, (HAL_GetTick()>>3));
+  STORE_LE_16(value, (HAL_GetTick() >> 3));
   value[2] = CarryPositionCode;
 
-#if(CFG_DEBUG_APP_TRACE != 0)
+#if (CFG_DEBUG_APP_TRACE != 0)
   APP_DBG_MSG("-- MOTIONCP APPLICATION SERVER : NOTIFY CLIENT WITH NEW PARAMETER VALUE \n ");
   APP_DBG_MSG(" \n\r");
-#endif
+#endif /* CFG_DEBUG_APP_TRACE != 0 */
   MOTENV_STM_App_Update_Char(CARRY_POSITION_CHAR_UUID, VALUE_LEN_CP, (uint8_t *)&value);
 
   return;
 }
-

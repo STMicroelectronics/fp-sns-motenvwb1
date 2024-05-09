@@ -98,7 +98,23 @@ Note:
 # Update History
 
 ::: {.collapse}
-<input type="checkbox" id="collapse-section13" checked aria-hidden="true">
+<input type="checkbox" id="collapse-section14" checked aria-hidden="true">
+<label for="collapse-section14" aria-hidden="true">V1.12.1 / 07-February-2024</label>
+<div>
+
+## Main Changes
+
+- Update declaration of g_pfnVectors size in gcc/startup files
+
+## Supported Devices and boards
+
+- STM32WB55xx, STM32WB5Mxx, STM32WB50xx, STM32WB35xx, STM32WB30xx, STM32WB15xx, STM32WB10xx and STM32WB1Mxx devices.
+
+</div>
+:::
+
+::: {.collapse}
+<input type="checkbox" id="collapse-section13" aria-hidden="true">
 <label for="collapse-section13" aria-hidden="true">V1.12.0 / 09-November-2022</label>
 <div>
 

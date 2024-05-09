@@ -1,4 +1,4 @@
-
+/* USER CODE BEGIN Header */
 /**
   ******************************************************************************
   * @file    motion_server_app.h
@@ -6,7 +6,7 @@
   ******************************************************************************
   * @attention
   *
-  * Copyright (c) 2023 STMicroelectronics.
+  * Copyright (c) 2024 STMicroelectronics.
   * All rights reserved.
   *
   * This software is licensed under terms that can be found in the LICENSE file
@@ -15,6 +15,9 @@
   *
   ******************************************************************************
   */
+
+/* USER CODE END Header */
+
 /* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef MOTION_SERVER_APP_H
 #define MOTION_SERVER_APP_H
@@ -28,8 +31,8 @@ extern "C" {
 /* Exported types ------------------------------------------------------------*/
 
 /**
- * @brief  Motion Service/Char Context structure definition
- */
+  * @brief  Motion Service/Char Context structure definition
+  */
 typedef struct
 {
   uint8_t  NotificationStatus;
@@ -40,7 +43,6 @@ typedef struct
   uint8_t hasAcc;
   uint8_t hasGyro;
   uint8_t hasMag;
-//  float sensitivity_Mul;
 } MOTION_Server_App_Context_t;
 
 /* Exported constants --------------------------------------------------------*/

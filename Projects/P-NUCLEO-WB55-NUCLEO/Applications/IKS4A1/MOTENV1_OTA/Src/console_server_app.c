@@ -1,4 +1,4 @@
-
+/* USER CODE BEGIN Header */
 /**
   ******************************************************************************
   * @file    console_server_app.c
@@ -6,7 +6,7 @@
   ******************************************************************************
   * @attention
   *
-  * Copyright (c) 2023 STMicroelectronics.
+  * Copyright (c) 2024 STMicroelectronics.
   * All rights reserved.
   *
   * This software is licensed under terms that can be found in the LICENSE file
@@ -15,6 +15,9 @@
   *
   ******************************************************************************
   */
+
+/* USER CODE END Header */
+
 /* Includes ------------------------------------------------------------------*/
 #include "app_common.h"
 #include "ble.h"
@@ -29,8 +32,8 @@
 /* Private typedef -----------------------------------------------------------*/
 
 /**
- * @brief  Console Service Context structure definition
- */
+  * @brief  Console Service Context structure definition
+  */
 typedef struct
 {
   uint8_t TermNotificationStatus;
@@ -56,10 +59,10 @@ PLACE_IN_SECTION("BLE_APP_CONTEXT") static CONSOLE_Server_App_Context_t CONSOLE_
 /* Public functions ----------------------------------------------------------*/
 
 /**
- * @brief  Init the Console Service/Chars Context
- * @param  None
- * @retval None
- */
+  * @brief  Init the Console Service/Chars Context
+  * @param  None
+  * @retval None
+  */
 void CONSOLE_Context_Init(void)
 {
   CONSOLE_Set_Term_Notification_Status(0);
@@ -67,53 +70,53 @@ void CONSOLE_Context_Init(void)
 }
 
 /**
- * @brief  Set the Term notification status (enabled/disabled)
- * @param  status The new notification status
- * @retval None
- */
+  * @brief  Set the Term notification status (enabled/disabled)
+  * @param  status The new notification status
+  * @retval None
+  */
 void CONSOLE_Set_Term_Notification_Status(uint8_t status)
 {
   CONSOLE_Server_App_Context.TermNotificationStatus = status;
 }
 
 /**
- * @brief  Set the Stderr notification status (enabled/disabled)
- * @param  status The new notification status
- * @retval None
- */
+  * @brief  Set the Stderr notification status (enabled/disabled)
+  * @param  status The new notification status
+  * @retval None
+  */
 void CONSOLE_Set_Stderr_Notification_Status(uint8_t status)
 {
   CONSOLE_Server_App_Context.StderrNotificationStatus = status;
 }
 
 /**
- * @brief  Send a notification for Terminal char
- * @param  data String to write
- * @param  lenght Lengt of string to write
- * @retval None
- */
+  * @brief  Send a notification for Terminal char
+  * @param  data String to write
+  * @param  length Length of string to write
+  * @retval None
+  */
 void CONSOLE_Term_Update(uint8_t *data, uint8_t length)
 {
   uint8_t Offset;
   uint8_t DataToSend;
 
-  if(CONSOLE_Server_App_Context.TermNotificationStatus)
+  if (CONSOLE_Server_App_Context.TermNotificationStatus)
   {
     /* Split the code in packages */
-    for(Offset =0; Offset<length; Offset += CONSOLE_MAX_CHAR_LEN)
+    for (Offset = 0; Offset < length; Offset += CONSOLE_MAX_CHAR_LEN)
     {
-      DataToSend = (length-Offset);
-      DataToSend = (DataToSend>CONSOLE_MAX_CHAR_LEN) ?  CONSOLE_MAX_CHAR_LEN : DataToSend;
+      DataToSend = (length - Offset);
+      DataToSend = (DataToSend > CONSOLE_MAX_CHAR_LEN) ?  CONSOLE_MAX_CHAR_LEN : DataToSend;
 
       /* keep a copy */
-      memcpy(CONSOLE_Server_App_Context.LastTermBuffer,data+Offset,DataToSend);
+      memcpy(CONSOLE_Server_App_Context.LastTermBuffer, data + Offset, DataToSend);
       CONSOLE_Server_App_Context.LastTermLen = DataToSend;
 
-#if(CFG_DEBUG_APP_TRACE != 0)
+#if (CFG_DEBUG_APP_TRACE != 0)
       APP_DBG_MSG("-- CONSOLE APPLICATION SERVER : NOTIFY CLIENT WITH NEW TERM PARAMETER VALUE \n ");
       APP_DBG_MSG(" \n\r");
-#endif
-      MOTENV_STM_App_Update_Char(CONSOLE_TERM_CHAR_UUID, DataToSend, data+Offset);
+#endif /* CFG_DEBUG_APP_TRACE != 0 */
+      MOTENV_STM_App_Update_Char(CONSOLE_TERM_CHAR_UUID, DataToSend, data + Offset);
 
       HAL_Delay(20);
     }
@@ -123,52 +126,53 @@ void CONSOLE_Term_Update(uint8_t *data, uint8_t length)
 }
 
 /**
- * @brief Send a notification for Terminal char value after a read request
- * @param None
- * @retval None
- */
+  * @brief Send a notification for Terminal char value after a read request
+  * @param None
+  * @retval None
+  */
 void CONSOLE_Term_Update_AfterRead(void)
 {
-  if(CONSOLE_Server_App_Context.TermNotificationStatus)
+  if (CONSOLE_Server_App_Context.TermNotificationStatus)
   {
-#if(CFG_DEBUG_APP_TRACE != 0)
-      APP_DBG_MSG("-- CONSOLE APPLICATION SERVER : NOTIFY CLIENT WITH NEW TERM PARAMETER VALUE \n ");
-      APP_DBG_MSG(" \n\r");
-#endif
-      MOTENV_STM_App_Update_Char(CONSOLE_TERM_CHAR_UUID, CONSOLE_Server_App_Context.LastTermLen, CONSOLE_Server_App_Context.LastTermBuffer);
+#if (CFG_DEBUG_APP_TRACE != 0)
+    APP_DBG_MSG("-- CONSOLE APPLICATION SERVER : NOTIFY CLIENT WITH NEW TERM PARAMETER VALUE \n ");
+    APP_DBG_MSG(" \n\r");
+#endif /* CFG_DEBUG_APP_TRACE != 0 */
+    MOTENV_STM_App_Update_Char(CONSOLE_TERM_CHAR_UUID, CONSOLE_Server_App_Context.LastTermLen,
+                               CONSOLE_Server_App_Context.LastTermBuffer);
   }
 
   return;
 }
 
 /**
- * @brief  Send a notification for Stderr char
- * @param  data String to write
- * @param  lenght Lengt of string to write
- * @retval None
- */
+  * @brief  Send a notification for Stderr char
+  * @param  data String to write
+  * @param  length Length of string to write
+  * @retval None
+  */
 void CONSOLE_Stderr_Update(uint8_t *data, uint8_t length)
 {
   uint8_t Offset;
   uint8_t DataToSend;
 
-  if(CONSOLE_Server_App_Context.StderrNotificationStatus)
+  if (CONSOLE_Server_App_Context.StderrNotificationStatus)
   {
     /* Split the code in packages */
-    for(Offset =0; Offset<length; Offset += CONSOLE_MAX_CHAR_LEN)
+    for (Offset = 0; Offset < length; Offset += CONSOLE_MAX_CHAR_LEN)
     {
-      DataToSend = (length-Offset);
-      DataToSend = (DataToSend>CONSOLE_MAX_CHAR_LEN) ?  CONSOLE_MAX_CHAR_LEN : DataToSend;
+      DataToSend = (length - Offset);
+      DataToSend = (DataToSend > CONSOLE_MAX_CHAR_LEN) ?  CONSOLE_MAX_CHAR_LEN : DataToSend;
 
       /* keep a copy */
-      memcpy(CONSOLE_Server_App_Context.LastTermBuffer,data+Offset,DataToSend);
+      memcpy(CONSOLE_Server_App_Context.LastTermBuffer, data + Offset, DataToSend);
       CONSOLE_Server_App_Context.LastTermLen = DataToSend;
 
-#if(CFG_DEBUG_APP_TRACE != 0)
+#if (CFG_DEBUG_APP_TRACE != 0)
       APP_DBG_MSG("-- CONSOLE APPLICATION SERVER : NOTIFY CLIENT WITH NEW STDERR PARAMETER VALUE \n ");
       APP_DBG_MSG(" \n\r");
-#endif
-      MOTENV_STM_App_Update_Char(CONSOLE_STDERR_CHAR_UUID, DataToSend, data+Offset);
+#endif /* CFG_DEBUG_APP_TRACE != 0 */
+      MOTENV_STM_App_Update_Char(CONSOLE_STDERR_CHAR_UUID, DataToSend, data + Offset);
 
       HAL_Delay(10);
     }
@@ -178,23 +182,21 @@ void CONSOLE_Stderr_Update(uint8_t *data, uint8_t length)
 }
 
 /**
- * @brief Send a notification for Stderr char value after a read request
- * @param None
- * @retval None
- */
+  * @brief Send a notification for Stderr char value after a read request
+  * @param None
+  * @retval None
+  */
 void CONSOLE_Stderr_Update_AfterRead(void)
 {
-  if(CONSOLE_Server_App_Context.StderrNotificationStatus)
+  if (CONSOLE_Server_App_Context.StderrNotificationStatus)
   {
-#if(CFG_DEBUG_APP_TRACE != 0)
-      APP_DBG_MSG("-- CONSOLE APPLICATION SERVER : NOTIFY CLIENT WITH NEW STDERR PARAMETER VALUE \n ");
-      APP_DBG_MSG(" \n\r");
-#endif
-      MOTENV_STM_App_Update_Char(CONSOLE_TERM_CHAR_UUID, CONSOLE_Server_App_Context.LastTermLen, CONSOLE_Server_App_Context.LastTermBuffer);
+#if (CFG_DEBUG_APP_TRACE != 0)
+    APP_DBG_MSG("-- CONSOLE APPLICATION SERVER : NOTIFY CLIENT WITH NEW STDERR PARAMETER VALUE \n ");
+    APP_DBG_MSG(" \n\r");
+#endif /* CFG_DEBUG_APP_TRACE != 0 */
+    MOTENV_STM_App_Update_Char(CONSOLE_TERM_CHAR_UUID, CONSOLE_Server_App_Context.LastTermLen,
+                               CONSOLE_Server_App_Context.LastTermBuffer);
   }
 
   return;
 }
-
-/* Private functions ---------------------------------------------------------*/
-

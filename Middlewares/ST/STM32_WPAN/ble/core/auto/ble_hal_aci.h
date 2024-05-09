@@ -6,7 +6,7 @@
  *****************************************************************************
  * @attention
  *
- * Copyright (c) 2018-2023 STMicroelectronics.
+ * Copyright (c) 2018-2024 STMicroelectronics.
  * All rights reserved.
  *
  * This software is licensed under terms that can be found in the LICENSE file
@@ -36,8 +36,7 @@ tBleStatus aci_hal_get_fw_build_number( uint16_t* Build_Number );
  * @brief ACI_HAL_WRITE_CONFIG_DATA
  * This command writes a value to a configure data structure. It is useful to
  * setup directly some parameters for the BLE stack.
- * Note: the static random address set by this command is taken into account by
- * the GAP only when it receives the ACI_GAP_INIT command.
+ * Note: the HCI_RESET command resets the configure data structure.
  * 
  * @param Offset Offset of the element in the configuration data structure
  *        which has to be written.
@@ -48,11 +47,11 @@ tBleStatus aci_hal_get_fw_build_number( uint16_t* Build_Number );
  *          Encryption root key used to derive LTK (legacy) and CSRK; 16 bytes
  *        - 0x18: CONFIG_DATA_IR_OFFSET;
  *          Identity root key used to derive DHK (legacy) and IRK; 16 bytes
- *        - 0x2E: CONFIG_DATA_RANDOM_ADDRESS_OFFSET;
+ *        - 0x2E: CONFIG_DATA_RANDOM_ADDRESS_OFFSET (Host only);
  *          Static Random Address; 6 bytes
  *        - 0x34: CONFIG_DATA_GAP_ADD_REC_NBR_OFFSET;
  *          GAP service additional record number
- *        - 0x35: CONFIG_DATA_SC_KEY_TYPE_OFFSET;
+ *        - 0x35: CONFIG_DATA_SC_KEY_TYPE_OFFSET (Host only);
  *          Secure Connections key type (0: "normal", 1: "debug"); 1 byte
  *        - 0xB0: CONFIG_DATA_SMP_MODE_OFFSET;
  *          SMP mode (0: "normal", 1: "bypass", 2: "no blacklist"); 1 byte
@@ -96,17 +95,20 @@ tBleStatus aci_hal_read_config_data( uint8_t Offset,
 
 /**
  * @brief ACI_HAL_SET_TX_POWER_LEVEL
- * This command sets the TX power level of the device. By controlling the
- * PA_LEVEL, that determines the output power level (dBm) at the IC pin.
- * When the system starts up or reboots, the default TX power level will be
- * used, which is the maximum value of 6 dBm. Once this command is given, the
- * output power will be changed instantly, regardless if there is Bluetooth
- * communication going on or not. For example, for debugging purpose, the
- * device can be set to advertise all the time. And use this command to observe
- * the signal strength changing.
- * The system will keep the last received TX power level from the command, i.e.
- * the 2nd command overwrites the previous TX power level. The new TX power
- * level remains until another Set TX Power command, or the system reboots.
+ * This command sets the TX power level of the device. By controlling the PA
+ * level, that determines the output power level (dBm) at the IC pin.
+ * When the system starts up or reboots, the default TX power level is used,
+ * which is the maximum value. Once this command is given, the output power
+ * changes instantly, regardless if there is Bluetooth communication going on
+ * or not. For example, for debugging purpose, the device can be set to
+ * advertise all the time. By using this command, one can then observe the
+ * evolution of the TX signal strength.
+ * The system keeps the last received TX power level from the command, i.e. the
+ * 2nd command overwrites the previous TX power level. The new TX power level
+ * remains until another ACI_HAL_SET_TX_POWER_LEVEL command, or the system
+ * reboots. However, note that the advertising extensions commands allow, per
+ * advertising set, to override the value of TX power determined by
+ * ACI_HAL_SET_TX_POWER_LEVEL command (e.g. see ACI_GAP_ADV_SET_CONFIGURATION).
  * Refer to Annex for the dBm corresponding values of PA_Level parameter.
  * 
  * @param En_High_Power Enable High Power mode - Deprecated and ignored
@@ -175,7 +177,7 @@ tBleStatus aci_hal_tone_stop( void );
 /**
  * @brief ACI_HAL_GET_LINK_STATUS
  * This command returns the status of the 8 Bluetooth Low Energy links managed
- * by the device
+ * by the device.
  * 
  * @param[out] Link_Status Array of link status (8 links). Each link status is
  *        1 byte.

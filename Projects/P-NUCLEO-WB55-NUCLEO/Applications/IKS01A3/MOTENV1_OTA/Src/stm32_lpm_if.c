@@ -7,7 +7,7 @@
   ***************************************************************************************
   * @attention
   *
-  * Copyright (c) 2023 STMicroelectronics.
+  * Copyright (c) 2024 STMicroelectronics.
   * All rights reserved.
   *
   * This software is licensed under terms that can be found in the LICENSE file
@@ -101,7 +101,7 @@ void PWR_EnterOffMode(void)
   /**
    * This option is used to ensure that store operations are completed
    */
-#if defined (__CC_ARM)
+#if defined (__CC_ARM) || defined (__ARMCC_VERSION)
   __force_stores();
 #endif
 
@@ -166,7 +166,7 @@ void PWR_EnterStopMode(void)
   /**
    * This option is used to ensure that store operations are completed
    */
-#if defined (__CC_ARM)
+#if defined (__CC_ARM) || defined (__ARMCC_VERSION)
   __force_stores();
 #endif
 
@@ -223,7 +223,7 @@ void PWR_EnterSleepMode(void)
   /**
    * This option is used to ensure that store operations are completed
    */
-#if defined (__CC_ARM)
+#if defined (__CC_ARM) || defined (__ARMCC_VERSION)
   __force_stores();
 #endif
 

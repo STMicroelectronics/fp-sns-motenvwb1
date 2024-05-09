@@ -1,4 +1,4 @@
-
+/* USER CODE BEGIN Header */
 /**
   ******************************************************************************
   * @file    MotionGR_Manager.h
@@ -7,7 +7,7 @@
   ******************************************************************************
   * @attention
   *
-  * Copyright (c) 2023 STMicroelectronics.
+  * Copyright (c) 2024 STMicroelectronics.
   * All rights reserved.
   *
   * This software is licensed under terms that can be found in the LICENSE file
@@ -16,6 +16,8 @@
   *
   ******************************************************************************
   */
+
+/* USER CODE END Header */
 
 /* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef MOTIONGR_MANAGER_H
@@ -36,7 +38,7 @@ extern "C" {
 /* Exported Functions Prototypes ---------------------------------------------*/
 void MotionGR_manager_init(void);
 void MotionGR_manager_run(MGR_input_t *data_in, MGR_output_t *data_out);
-void MotionGR_manager_get_version(char *version, int *length);
+void MotionGR_manager_get_version(char *version, uint8_t *length);
 
 #ifdef __cplusplus
 }

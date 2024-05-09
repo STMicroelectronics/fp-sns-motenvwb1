@@ -23,7 +23,25 @@ This directory contains the SHT40-AD1B component drivers.
 # Update history
 
 ::: {.collapse}
-<input type="checkbox" id="collapse-section2" checked aria-hidden="true">
+<input type="checkbox" id="collapse-section3" checked aria-hidden="true">
+<label for="collapse-section3" aria-hidden="true">V1.2.0 / 18-August-2023</label>
+<div>
+
+## Main changes
+
+### Maintenance release
+
+- Add Gas to Capability struct
+- Remove Read/Write functions since the device doesn't have registers
+- Update some APIs
+
+##
+
+</div>
+:::
+
+::: {.collapse}
+<input type="checkbox" id="collapse-section2" aria-hidden="true">
 <label for="collapse-section2" aria-hidden="true">V1.1.0 / 28-March-2023</label>
 <div>
 
