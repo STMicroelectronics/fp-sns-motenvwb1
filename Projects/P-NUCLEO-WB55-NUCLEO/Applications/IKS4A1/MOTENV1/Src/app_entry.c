@@ -7,7 +7,7 @@
   ******************************************************************************
   * @attention
   *
-  * Copyright (c) 2024 STMicroelectronics.
+  * Copyright (c) 2025 STMicroelectronics.
   * All rights reserved.
   *
   * This software is licensed under terms that can be found in the LICENSE file
@@ -562,19 +562,6 @@ void UTIL_SEQ_Idle(void)
 #if (CFG_LPM_SUPPORTED == 1)
   UTIL_LPM_EnterLowPower();
 #endif /* CFG_LPM_SUPPORTED == 1 */
-  return;
-}
-
-/**
-  * @brief  This function is called by the scheduler each time an event
-  *         is pending.
-  *
-  * @param  evt_waited_bm : Event pending.
-  * @retval None
-  */
-void UTIL_SEQ_EvtIdle(UTIL_SEQ_bm_t task_id_bm, UTIL_SEQ_bm_t evt_waited_bm)
-{
-  UTIL_SEQ_Run(UTIL_SEQ_DEFAULT);
   return;
 }
 

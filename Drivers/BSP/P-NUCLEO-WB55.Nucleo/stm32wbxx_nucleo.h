@@ -28,13 +28,10 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32wbxx_nucleo_errno.h"
+#include "stm32wbxx_nucleo_conf.h"
 
 #if (USE_BSP_COM_FEATURE > 0)
-  #if (USE_COM_LOG > 0)
-    #ifndef __GNUC__
-      #include "stdio.h"
-    #endif /* !__GNUC__ */
-  #endif /* USE_COM_LOG */
+#include "stdio.h"
 #endif /* USE_BSP_COM_FEATURE */
    
 /** @addtogroup BSP

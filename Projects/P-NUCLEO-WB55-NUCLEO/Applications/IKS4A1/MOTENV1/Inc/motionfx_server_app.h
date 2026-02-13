@@ -6,7 +6,7 @@
   ******************************************************************************
   * @attention
   *
-  * Copyright (c) 2024 STMicroelectronics.
+  * Copyright (c) 2025 STMicroelectronics.
   * All rights reserved.
   *
   * This software is licensed under terms that can be found in the LICENSE file
@@ -40,7 +40,7 @@ void MOTIONFX_Send_Quat_Notification_Task(void);
 void MOTIONFX_Send_ECompass_Notification_Task(void);
 
 uint8_t MOTIONFX_Get_MagCalStatus(void);
-MOTION_SENSOR_Axes_t *MOTIONFX_Get_MAG_Offset(void);
+MOTION_SENSOR_AXES_T *MOTIONFX_Get_MAG_Offset(void);
 
 void MOTIONFX_ReCalibration(void);
 

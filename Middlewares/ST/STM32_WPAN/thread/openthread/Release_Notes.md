@@ -83,21 +83,7 @@ Update History
 ==============
 
 ::: {.collapse}
-<input type="checkbox" id="collapse-section6" checked aria-hidden="true">
-<label for="collapse-section6" aria-hidden="false">V1.6.0 / 29-Jan-2024</label>
-<div>
-
-## Main Changes
-
-OpenThread version based on commit :
-
--   SHA-1: 8bc25042ba5cde20605eec2a329c0dff575303f4 (July 7th 2023)
-
-</div>
-:::
-
-::: {.collapse}
-<input type="checkbox" id="collapse-section5" aria-hidden="true">
+<input type="checkbox" id="collapse-section5" checked aria-hidden="true">
 <label for="collapse-section5" aria-hidden="false">V1.5.0 / 13-September-2023</label>
 <div>
 

@@ -23,7 +23,39 @@ This directory contains the SHT40-AD1B component drivers.
 # Update history
 
 ::: {.collapse}
-<input type="checkbox" id="collapse-section3" checked aria-hidden="true">
+<input type="checkbox" id="collapse-section5" checked aria-hidden="true">
+<label for="collapse-section5" aria-hidden="true">V1.4.0 / 22-September-2025</label>
+<div>
+
+## Main changes
+
+### Maintenance release
+
+- Unify stmdev_ctx_t
+
+##
+
+</div>
+:::
+
+::: {.collapse}
+<input type="checkbox" id="collapse-section4" aria-hidden="true">
+<label for="collapse-section4" aria-hidden="true">V1.3.0 / 02-November-2023</label>
+<div>
+
+## Main changes
+
+### Maintenance release
+
+- Add function to read serial ID
+
+##
+
+</div>
+:::
+
+::: {.collapse}
+<input type="checkbox" id="collapse-section3" aria-hidden="true">
 <label for="collapse-section3" aria-hidden="true">V1.2.0 / 18-August-2023</label>
 <div>
 

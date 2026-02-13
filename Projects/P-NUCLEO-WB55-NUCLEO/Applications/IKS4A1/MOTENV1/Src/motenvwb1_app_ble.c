@@ -7,7 +7,7 @@
   ******************************************************************************
   * @attention
   *
-  * Copyright (c) 2024 STMicroelectronics.
+  * Copyright (c) 2025 STMicroelectronics.
   * All rights reserved.
   *
   * This software is licensed under terms that can be found in the LICENSE file
@@ -768,10 +768,6 @@ SVCCTL_UserEvtFlowStatus_t SVCCTL_App_Notification(void *p_Pckt)
           APP_DBG_MSG(">>== ACI_GAP_AUTHORIZATION_REQ_VSEVT_CODE\n");
           break; /* ACI_GAP_AUTHORIZATION_REQ_VSEVT_CODE */
 
-        case ACI_GAP_SLAVE_SECURITY_INITIATED_VSEVT_CODE:
-          APP_DBG_MSG("==>> ACI_GAP_SLAVE_SECURITY_INITIATED_VSEVT_CODE \n");
-          break; /* ACI_GAP_SLAVE_SECURITY_INITIATED_VSEVT_CODE */
-
         case ACI_GAP_BOND_LOST_VSEVT_CODE:
           APP_DBG_MSG("==>> ACI_GAP_BOND_LOST_VSEVT_CODE \n");
           ret = aci_gap_allow_rebond(BleApplicationContext.BleApplicationContext_legacy.connectionHandle);
@@ -1184,8 +1180,6 @@ static void Ble_Hci_Gap_Gatt_Init(void)
     CFG_ENCRYPTION_KEY_SIZE_MIN;
   BleApplicationContext.BleApplicationContext_legacy.bleSecurityParam.encryptionKeySizeMax =
     CFG_ENCRYPTION_KEY_SIZE_MAX;
-  BleApplicationContext.BleApplicationContext_legacy.bleSecurityParam.Use_Fixed_Pin = CFG_USED_FIXED_PIN;
-  BleApplicationContext.BleApplicationContext_legacy.bleSecurityParam.Fixed_Pin = CFG_FIXED_PIN;
   BleApplicationContext.BleApplicationContext_legacy.bleSecurityParam.bonding_mode = CFG_BONDING_MODE;
   /* USER CODE BEGIN Ble_Hci_Gap_Gatt_Init_1*/
 
@@ -1198,8 +1192,8 @@ static void Ble_Hci_Gap_Gatt_Init(void)
          CFG_KEYPRESS_NOTIFICATION_SUPPORT,
          BleApplicationContext.BleApplicationContext_legacy.bleSecurityParam.encryptionKeySizeMin,
          BleApplicationContext.BleApplicationContext_legacy.bleSecurityParam.encryptionKeySizeMax,
-         BleApplicationContext.BleApplicationContext_legacy.bleSecurityParam.Use_Fixed_Pin,
-         BleApplicationContext.BleApplicationContext_legacy.bleSecurityParam.Fixed_Pin,
+         USE_FIXED_PIN_FOR_PAIRING_FORBIDDEN, /* deprecated feature */
+         0,                                   /* deprecated feature */
          CFG_IDENTITY_ADDRESS);
   if (ret != BLE_STATUS_SUCCESS)
   {

@@ -6,7 +6,7 @@
   ******************************************************************************
   * @attention
   *
-  * Copyright (c) 2024 STMicroelectronics.
+  * Copyright (c) 2025 STMicroelectronics.
   * All rights reserved.
   *
   * This software is licensed under terms that can be found in the LICENSE file
@@ -27,7 +27,7 @@
 #include "motionar_server_app.h"
 #include "remap_conf.h"
 
-#include "MotionAR_Manager.h"
+#include "motion_ar_manager.h"
 
 /* Private defines -----------------------------------------------------------*/
 #define MOTIONAR_ALGO_FREQ      16U               /* Algorithm frequency [Hz] */
@@ -97,14 +97,14 @@ void MOTIONAR_Set_Notification_Status(uint8_t status)
     /* Set accelerometer:
      *   - FS   = <-4g, 4g>
      */
-    (void)MOTION_SENSOR_SetFullScale(ACCELERO_INSTANCE, MOTION_ACCELERO, 4);
+    (void)MOTION_SENSOR_SET_FULL_SCALE(ACCELERO_INSTANCE, MOTION_ACCELERO, 4);
   }
   else
   {
     /* Set accelerometer:
      *   - FS   = <-2g, 2g>
      */
-    (void)MOTION_SENSOR_SetFullScale(ACCELERO_INSTANCE, MOTION_ACCELERO, 2);
+    (void)MOTION_SENSOR_SET_FULL_SCALE(ACCELERO_INSTANCE, MOTION_ACCELERO, 2);
   }
 }
 
@@ -138,12 +138,12 @@ void MOTIONAR_ActivityRec_Update(void)
   */
 static void ComputeMotionAR(void)
 {
-  MOTION_SENSOR_Axes_t ACC_Value;
+  MOTION_SENSOR_AXES_T ACC_Value;
   MAR_input_t data_in = {.acc_x = 0.0f, .acc_y = 0.0f, .acc_z = 0.0f};
   static MAR_output_t ActivityCodePrev = MAR_NOACTIVITY;
 
   /* Read the Acc values */
-  (void)MOTION_SENSOR_GetAxes(ACCELERO_INSTANCE, MOTION_ACCELERO, &ACC_Value);
+  (void)MOTION_SENSOR_GET_AXES(ACCELERO_INSTANCE, MOTION_ACCELERO, &ACC_Value);
 
   /* Convert acceleration from [mg] to [g] */
   data_in.acc_x = (float)ACC_Value.x * FROM_MG_TO_G;

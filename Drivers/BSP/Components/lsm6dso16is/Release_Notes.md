@@ -9,7 +9,7 @@ header-includes: <link rel="icon" type="image/x-icon" href="_htmresc/favicon.png
 
 <center>
 # Release Notes for LSM6DSO16IS Component Driver
-Copyright &copy; 2022 STMicroelectronics\
+Copyright &copy; 2024 STMicroelectronics\
 
 [![ST logo](_htmresc/st_logo_2020.png)](https://www.st.com){.logo}
 </center>
@@ -22,8 +22,73 @@ This directory contains the LSM6DSO16IS component drivers.
 ::: {.col-sm-12 .col-lg-8}
 # Update history
 
+
 ::: {.collapse}
-<input type="checkbox" id="collapse-section3" checked aria-hidden="true">
+<input type="checkbox" id="collapse-section7" checked aria-hidden="true">
+<label for="collapse-section7" aria-hidden="true">V1.6.0 / 15-September-2025</label>
+<div>
+
+## Main changes
+
+### Maintenance release
+
+- Update to latest ST GitHub version, add private data to context
+
+##
+
+</div>
+:::
+
+::: {.collapse}
+<input type="checkbox" id="collapse-section6" aria-hidden="true">
+<label for="collapse-section6" aria-hidden="true">V1.5.0 / 19-August-2024</label>
+<div>
+
+## Main changes
+
+### Maintenance release
+
+- Update PID from ST GitHub
+
+##
+
+</div>
+:::
+
+::: {.collapse}
+<input type="checkbox" id="collapse-section5" aria-hidden="true">
+<label for="collapse-section5" aria-hidden="true">V1.4.0 / 4-June-2024</label>
+<div>
+
+## Main changes
+
+### Maintenance release
+
+- Add Memory bank function
+
+##
+
+</div>
+:::
+
+::: {.collapse}
+<input type="checkbox" id="collapse-section4" aria-hidden="true">
+<label for="collapse-section4" aria-hidden="true">V1.3.0 / 02-November-2023</label>
+<div>
+
+## Main changes
+
+### Maintenance release
+
+- Extend GetOutputDataRate function to decode all available ODR settings
+
+##
+
+</div>
+:::
+
+::: {.collapse}
+<input type="checkbox" id="collapse-section3" aria-hidden="true">
 <label for="collapse-section3" aria-hidden="true">V1.2.0 / 18-August-2023</label>
 <div>
 

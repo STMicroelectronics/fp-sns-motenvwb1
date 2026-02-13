@@ -6,7 +6,7 @@
   ******************************************************************************
   * @attention
   *
-  * Copyright (c) 2024 STMicroelectronics.
+  * Copyright (c) 2025 STMicroelectronics.
   * All rights reserved.
   *
   * This software is licensed under terms that can be found in the LICENSE file
@@ -188,7 +188,6 @@ int32_t BSP_LED_GetState(Led_TypeDef Led)
   * @brief
   * @retval None
   */
-
 /**
   * @brief
   * @retval None

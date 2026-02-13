@@ -51,6 +51,8 @@
  */
 otError otPlatRadioGetTransmitPower(otInstance *aInstance, int8_t *aPower)
 {
+   otError rspData;
+   
    Pre_OtCmdProcessing();
    /* prepare buffer */
    Thread_OT_Cmd_Request_t* p_ot_req = THREAD_Get_OTCmdPayloadBuffer();
@@ -63,7 +65,11 @@ otError otPlatRadioGetTransmitPower(otInstance *aInstance, int8_t *aPower)
    Ot_Cmd_Transfer();
 
    p_ot_req = THREAD_Get_OTCmdRspPayloadBuffer();
-   return (otError) p_ot_req->Data[0];
+   rspData = (otError)p_ot_req->Data[0];
+  
+   Post_OtCmdProcessing();
+  
+   return rspData;
 }
 
 /**
@@ -78,6 +84,8 @@ otError otPlatRadioGetTransmitPower(otInstance *aInstance, int8_t *aPower)
  */
 otError otPlatRadioSetTransmitPower(otInstance *aInstance, int8_t aPower)
 {
+    otError rspData;
+	
     Pre_OtCmdProcessing();
     /* prepare buffer */
     Thread_OT_Cmd_Request_t* p_ot_req = THREAD_Get_OTCmdPayloadBuffer();
@@ -90,6 +98,67 @@ otError otPlatRadioSetTransmitPower(otInstance *aInstance, int8_t aPower)
     Ot_Cmd_Transfer();
 
     p_ot_req = THREAD_Get_OTCmdRspPayloadBuffer();
-    return (otError) p_ot_req->Data[0];
+    rspData = (otError)p_ot_req->Data[0];
+  
+    Post_OtCmdProcessing();
+  
+    return rspData;
 }
 
+/*
+ * @param[in]  aInstance     The OpenThread instance structure.
+ * @param[in]  aChannel      The radio channel.
+ * @param[in]  aTargetPower  The target power in 0.01dBm.
+ *
+ * @retval  OT_ERROR_NONE             Successfully set the target power.
+ * @retval  OT_ERROR_INVALID_ARGS     The @p aChannel is invalid.
+ * @retval  OT_ERROR_NOT_IMPLEMENTED  The feature is not implemented.
+ */
+otError otPlatRadioSetChannelTargetPower(otInstance *aInstance, uint8_t aChannel, int16_t aTargetPower)
+{
+  return OT_ERROR_NOT_IMPLEMENTED;
+}
+
+uint8_t otPlatRadioGetCslAccuracy(otInstance *aInstance)
+{
+    uint8_t rspData;
+	
+    Pre_OtCmdProcessing();
+    /* prepare buffer */
+    Thread_OT_Cmd_Request_t* p_ot_req = THREAD_Get_OTCmdPayloadBuffer();
+
+    p_ot_req->ID = MSG_M4ToM0_RADIO_GET_CSL_ACCURACY;
+
+    p_ot_req->Size=0;
+
+    Ot_Cmd_Transfer();
+
+    p_ot_req = THREAD_Get_OTCmdRspPayloadBuffer();
+    rspData = (uint8_t)p_ot_req->Data[0];
+  
+    Post_OtCmdProcessing();
+  
+    return rspData;
+}
+
+uint8_t otPlatRadioGetCslUncertainty(otInstance *aInstance)
+{
+    uint8_t rspData;
+	
+    Pre_OtCmdProcessing();
+    /* prepare buffer */
+    Thread_OT_Cmd_Request_t* p_ot_req = THREAD_Get_OTCmdPayloadBuffer();
+
+    p_ot_req->ID = MSG_M4ToM0_RADIO_GET_CSL_UNCERTAINITY;
+
+    p_ot_req->Size=0;
+
+    Ot_Cmd_Transfer();
+
+    p_ot_req = THREAD_Get_OTCmdRspPayloadBuffer();
+    rspData = (uint8_t)p_ot_req->Data[0];
+  
+    Post_OtCmdProcessing();
+  
+    return rspData;
+}

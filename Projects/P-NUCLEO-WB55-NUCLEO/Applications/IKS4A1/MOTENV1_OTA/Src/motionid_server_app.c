@@ -6,7 +6,7 @@
   ******************************************************************************
   * @attention
   *
-  * Copyright (c) 2024 STMicroelectronics.
+  * Copyright (c) 2025 STMicroelectronics.
   * All rights reserved.
   *
   * This software is licensed under terms that can be found in the LICENSE file
@@ -27,7 +27,7 @@
 #include "motionid_server_app.h"
 #include "remap_conf.h"
 
-#include "MotionID_Manager.h"
+#include "motion_id_manager.h"
 
 /* Private defines -----------------------------------------------------------*/
 #define VALUE_LEN_ID    (2+1)
@@ -92,14 +92,14 @@ void MOTIONID_Set_Notification_Status(uint8_t status)
     /* Set accelerometer:
      *   - FS   = <-4g, 4g>
      */
-    (void)MOTION_SENSOR_SetFullScale(ACCELERO_INSTANCE, MOTION_ACCELERO, 4);
+    (void)MOTION_SENSOR_SET_FULL_SCALE(ACCELERO_INSTANCE, MOTION_ACCELERO, 4);
   }
   else
   {
     /* Set accelerometer:
      *   - FS   = <-2g, 2g>
      */
-    (void)MOTION_SENSOR_SetFullScale(ACCELERO_INSTANCE, MOTION_ACCELERO, 2);
+    (void)MOTION_SENSOR_SET_FULL_SCALE(ACCELERO_INSTANCE, MOTION_ACCELERO, 2);
   }
 }
 
@@ -132,12 +132,12 @@ void MOTIONID_IntensityDet_Update(void)
   */
 static void ComputeMotionID(void)
 {
-  MOTION_SENSOR_Axes_t ACC_Value;
+  MOTION_SENSOR_AXES_T ACC_Value;
   MID_input_t data_in = {.AccX = 0.0f, .AccY = 0.0f, .AccZ = 0.0f};
   static MID_output_t MIDCodePrev = MID_ON_DESK;
 
   /* Read the Acc values */
-  (void)MOTION_SENSOR_GetAxes(ACCELERO_INSTANCE, MOTION_ACCELERO, &ACC_Value);
+  (void)MOTION_SENSOR_GET_AXES(ACCELERO_INSTANCE, MOTION_ACCELERO, &ACC_Value);
 
   /* Convert acceleration from [mg] to [g] */
   data_in.AccX = (float)ACC_Value.x * FROM_MG_TO_G;

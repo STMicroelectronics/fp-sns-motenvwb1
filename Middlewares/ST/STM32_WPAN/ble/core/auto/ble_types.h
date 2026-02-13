@@ -1,12 +1,11 @@
 /*****************************************************************************
  * @file    ble_types.h
- * @author  MDG
  * @brief   STM32WB BLE command/event types
  *          Auto-generated file: do not edit!
  *****************************************************************************
  * @attention
  *
- * Copyright (c) 2018-2024 STMicroelectronics.
+ * Copyright (c) 2018-2025 STMicroelectronics.
  * All rights reserved.
  *
  * This software is licensed under terms that can be found in the LICENSE file
@@ -30,7 +29,7 @@ typedef uint8_t tBleStatus;
 typedef __PACKED_STRUCT
 {
   /**
-   * Connection_Handle[i]
+   * Connection_Handle[i].
    * Values:
    * - 0x0000 ... 0x0EFF
    */
@@ -89,16 +88,14 @@ typedef __PACKED_STRUCT
    * begins the subsequent scan on the primary advertising physical channel.
    * Time = N * 0.625 ms.
    * Values:
-   * - 0x0004 (2.500 ms)  ... 0x5DC0 (15000.000 ms) : STM32WB
-   * - 0x0004 (2.500 ms)  ... 0xFFFF (40959.375 ms) : STM32WBA
+   * - 0x0004 (2.500 ms)  ... 0x5DC0 (15000.000 ms) : only supported range
    */
   uint16_t Scan_Interval;
   /**
    * Duration of the scan on the primary advertising physical channel.
    * Time = N * 0.625 ms.
    * Values:
-   * - 0x0004 (2.500 ms)  ... 0x5DC0 (15000.000 ms) : STM32WB
-   * - 0x0004 (2.500 ms)  ... 0xFFFF (40959.375 ms) : STM32WBA
+   * - 0x0004 (2.500 ms)  ... 0x5DC0 (15000.000 ms) : only supported range
    */
   uint16_t Scan_Window;
 } Scan_Param_Phy_t;
@@ -111,16 +108,14 @@ typedef __PACKED_STRUCT
    * begins the subsequent scan on the primary advertising physical channel.
    * Time = N * 0.625 ms.
    * Values:
-   * - 0x0004 (2.500 ms)  ... 0x5DC0 (15000.000 ms) : STM32WB
-   * - 0x0004 (2.500 ms)  ... 0xFFFF (40959.375 ms) : STM32WBA
+   * - 0x0004 (2.500 ms)  ... 0x5DC0 (15000.000 ms) : only supported range
    */
   uint16_t Scan_Interval;
   /**
    * Duration of the scan on the primary advertising physical channel.
    * Time = N * 0.625 ms.
    * Values:
-   * - 0x0004 (2.500 ms)  ... 0x5DC0 (15000.000 ms) : STM32WB
-   * - 0x0004 (2.500 ms)  ... 0xFFFF (40959.375 ms) : STM32WBA
+   * - 0x0004 (2.500 ms)  ... 0x5DC0 (15000.000 ms) : only supported range
    */
   uint16_t Scan_Window;
   /**
@@ -202,22 +197,6 @@ typedef __PACKED_STRUCT
    */
   uint8_t Address[6];
 } Bonded_Device_Entry_t;
-
-/* Definition of Identity_Entry_t */
-typedef __PACKED_STRUCT
-{
-  /**
-   * Identity address type
-   * Values:
-   * - 0x00: Public Identity Address
-   * - 0x01: Random (static) Identity Address
-   */
-  uint8_t Peer_Identity_Address_Type;
-  /**
-   * Public or Random (static) Identity Address of the peer device
-   */
-  uint8_t Peer_Identity_Address[6];
-} Identity_Entry_t;
 
 /* Definition of List_Entry_t */
 typedef __PACKED_STRUCT
@@ -343,17 +322,14 @@ typedef __PACKED_STRUCT
    */
   uint8_t Event_Type;
   /**
-   * Address type
-   * 0x00 Public Device Address
-   * 0x01 Random Device Address
-   * 0x02 Public Identity Address (Corresponds to Resolved Private Address)
-   * 0x03 Random (Static) Identity Address (Corresponds to Resolved Private
-   * Address)
+   * Address type.
    * Values:
    * - 0x00: Public Device Address
    * - 0x01: Random Device Address
-   * - 0x02: Public Identity Address
-   * - 0x03: Random (Static) Identity Address
+   * - 0x02: Public Identity Address (corresponds to the Resolved Private
+   *   Address)
+   * - 0x03: Random (static) Identity Address (corresponds to the Resolved
+   *   Private Address)
    */
   uint8_t Address_Type;
   /**
@@ -368,8 +344,8 @@ typedef __PACKED_STRUCT
    */
   uint8_t Length_Data;
   /**
-   * Octets of advertising or scan response data formatted as defined in
-   * Bluetooth spec. v.5.4 [Vol 3, Part C, 11].
+   * Octets of advertising or scan response data formatted as defined in Core
+   * Specification [Vol 3, Part C, 11].
    */
   const uint8_t* Data;
   /**
@@ -392,17 +368,14 @@ typedef __PACKED_STRUCT
    */
   uint8_t Event_Type;
   /**
-   * Address type
-   * 0x00 Public Device Address
-   * 0x01 Random Device Address
-   * 0x02 Public Identity Address (Corresponds to Resolved Private Address)
-   * 0x03 Random (Static) Identity Address (Corresponds to Resolved Private
-   * Address)
+   * Address type.
    * Values:
    * - 0x00: Public Device Address
    * - 0x01: Random Device Address
-   * - 0x02: Public Identity Address
-   * - 0x03: Random (Static) Identity Address
+   * - 0x02: Public Identity Address (corresponds to the Resolved Private
+   *   Address)
+   * - 0x03: Random (static) Identity Address (corresponds to the Resolved
+   *   Private Address)
    */
   uint8_t Address_Type;
   /**
@@ -595,7 +568,7 @@ typedef __PACKED_STRUCT
 {
   uint8_t Status;
   uint8_t LE_Features[8];
-} hci_le_read_local_supported_features_rp0;
+} hci_le_read_local_supported_features_page_0_rp0;
 
 typedef __PACKED_STRUCT
 {
@@ -787,12 +760,12 @@ typedef __PACKED_STRUCT
 typedef __PACKED_STRUCT
 {
   uint16_t Connection_Handle;
-} hci_le_read_remote_features_cp0;
+} hci_le_read_remote_features_page_0_cp0;
 
 typedef __PACKED_STRUCT
 {
   uint8_t Status;
-} hci_le_read_remote_features_rp0;
+} hci_le_read_remote_features_page_0_rp0;
 
 typedef __PACKED_STRUCT
 {
@@ -1274,9 +1247,14 @@ typedef __PACKED_STRUCT
 
 typedef __PACKED_STRUCT
 {
+  uint16_t RPA_Timeout_Min;
+  uint16_t RPA_Timeout_Max;
+} hci_le_set_resolvable_private_address_timeout_v2_cp0;
+
+typedef __PACKED_STRUCT
+{
   uint8_t Status;
-  uint16_t Build_Number;
-} aci_hal_get_fw_build_number_rp0;
+} hci_le_set_resolvable_private_address_timeout_v2_rp0;
 
 typedef __PACKED_STRUCT
 {
@@ -1371,14 +1349,6 @@ typedef __PACKED_STRUCT
 
 typedef __PACKED_STRUCT
 {
-  uint8_t Status;
-  uint8_t Allocated_For_TX;
-  uint8_t Allocated_For_RX;
-  uint8_t Allocated_MBlocks;
-} aci_hal_get_pm_debug_info_rp0;
-
-typedef __PACKED_STRUCT
-{
   uint8_t Enable;
 } aci_hal_set_peripheral_latency_cp0;
 
@@ -1392,6 +1362,22 @@ typedef __PACKED_STRUCT
   uint8_t Status;
   uint8_t RSSI;
 } aci_hal_read_rssi_rp0;
+
+typedef __PACKED_STRUCT
+{
+  uint8_t Mode;
+  uint8_t Key[16];
+  uint8_t IV[8];
+  uint16_t In_Data_Length;
+  uint8_t In_Data[BLE_CMD_MAX_PARAM_LEN - 27];
+} aci_hal_ead_encrypt_decrypt_cp0;
+
+typedef __PACKED_STRUCT
+{
+  uint8_t Status;
+  uint16_t Out_Data_Length;
+  uint8_t Out_Data[(BLE_EVT_MAX_PARAM_LEN - 3) - 3];
+} aci_hal_ead_encrypt_decrypt_rp0;
 
 typedef __PACKED_STRUCT
 {
@@ -1435,11 +1421,6 @@ typedef __PACKED_STRUCT
 {
   uint8_t Status;
 } aci_hal_rx_stop_rp0;
-
-typedef __PACKED_STRUCT
-{
-  uint8_t Status;
-} aci_hal_stack_reset_rp0;
 
 typedef __PACKED_STRUCT
 {
@@ -1838,17 +1819,6 @@ typedef __PACKED_STRUCT
 
 typedef __PACKED_STRUCT
 {
-  uint8_t Address[6];
-} aci_gap_resolve_private_addr_cp0;
-
-typedef __PACKED_STRUCT
-{
-  uint8_t Status;
-  uint8_t Actual_Address[6];
-} aci_gap_resolve_private_addr_rp0;
-
-typedef __PACKED_STRUCT
-{
   uint16_t Advertising_Interval_Min;
   uint16_t Advertising_Interval_Max;
   uint8_t Advertising_Type;
@@ -1894,12 +1864,14 @@ typedef __PACKED_STRUCT
 {
   uint8_t Peer_Address_Type;
   uint8_t Peer_Address[6];
-} aci_gap_is_device_bonded_cp0;
+} aci_gap_check_bonded_device_cp0;
 
 typedef __PACKED_STRUCT
 {
   uint8_t Status;
-} aci_gap_is_device_bonded_rp0;
+  uint8_t Id_Address_Type;
+  uint8_t Id_Address[6];
+} aci_gap_check_bonded_device_rp0;
 
 typedef __PACKED_STRUCT
 {
@@ -1955,22 +1927,6 @@ typedef __PACKED_STRUCT
 
 typedef __PACKED_STRUCT
 {
-  uint8_t Num_of_Resolving_list_Entries;
-  Identity_Entry_t Identity_Entry[(BLE_CMD_MAX_PARAM_LEN - 2)/sizeof(Identity_Entry_t)];
-} aci_gap_add_devices_to_resolving_list_cp0;
-
-typedef __PACKED_STRUCT
-{
-  uint8_t Clear_Resolving_List;
-} aci_gap_add_devices_to_resolving_list_cp1;
-
-typedef __PACKED_STRUCT
-{
-  uint8_t Status;
-} aci_gap_add_devices_to_resolving_list_rp0;
-
-typedef __PACKED_STRUCT
-{
   uint8_t Peer_Identity_Address_Type;
   uint8_t Peer_Identity_Address[6];
 } aci_gap_remove_bonded_device_cp0;
@@ -1995,6 +1951,17 @@ typedef __PACKED_STRUCT
 {
   uint8_t Status;
 } aci_gap_add_devices_to_list_rp0;
+
+typedef __PACKED_STRUCT
+{
+  uint16_t Connection_Handle;
+  uint8_t Accept;
+} aci_gap_pairing_request_reply_cp0;
+
+typedef __PACKED_STRUCT
+{
+  uint8_t Status;
+} aci_gap_pairing_request_reply_rp0;
 
 typedef __PACKED_STRUCT
 {
@@ -2557,56 +2524,6 @@ typedef __PACKED_STRUCT
 {
   uint16_t Connection_Handle;
   uint16_t Attr_Handle;
-  uint16_t Val_Offset;
-  uint8_t Attribute_Val_Length;
-  uint8_t Attribute_Val[BLE_CMD_MAX_PARAM_LEN - 7];
-} aci_gatt_write_long_char_desc_cp0;
-
-typedef __PACKED_STRUCT
-{
-  uint8_t Status;
-} aci_gatt_write_long_char_desc_rp0;
-
-typedef __PACKED_STRUCT
-{
-  uint16_t Connection_Handle;
-  uint16_t Attr_Handle;
-  uint16_t Val_Offset;
-} aci_gatt_read_long_char_desc_cp0;
-
-typedef __PACKED_STRUCT
-{
-  uint8_t Status;
-} aci_gatt_read_long_char_desc_rp0;
-
-typedef __PACKED_STRUCT
-{
-  uint16_t Connection_Handle;
-  uint16_t Attr_Handle;
-  uint8_t Attribute_Val_Length;
-  uint8_t Attribute_Val[BLE_CMD_MAX_PARAM_LEN - 5];
-} aci_gatt_write_char_desc_cp0;
-
-typedef __PACKED_STRUCT
-{
-  uint8_t Status;
-} aci_gatt_write_char_desc_rp0;
-
-typedef __PACKED_STRUCT
-{
-  uint16_t Connection_Handle;
-  uint16_t Attr_Handle;
-} aci_gatt_read_char_desc_cp0;
-
-typedef __PACKED_STRUCT
-{
-  uint8_t Status;
-} aci_gatt_read_char_desc_rp0;
-
-typedef __PACKED_STRUCT
-{
-  uint16_t Connection_Handle;
-  uint16_t Attr_Handle;
   uint8_t Attribute_Val_Length;
   uint8_t Attribute_Val[BLE_CMD_MAX_PARAM_LEN - 5];
 } aci_gatt_write_without_resp_cp0;
@@ -2647,22 +2564,25 @@ typedef __PACKED_STRUCT
   uint8_t Error_Code;
   uint8_t Attribute_Val_Length;
   uint8_t Attribute_Val[BLE_CMD_MAX_PARAM_LEN - 7];
-} aci_gatt_write_resp_cp0;
+} aci_gatt_permit_write_cp0;
 
 typedef __PACKED_STRUCT
 {
   uint8_t Status;
-} aci_gatt_write_resp_rp0;
+} aci_gatt_permit_write_rp0;
 
 typedef __PACKED_STRUCT
 {
   uint16_t Connection_Handle;
-} aci_gatt_allow_read_cp0;
+  uint8_t Read_status;
+  uint8_t Error_Code;
+  uint16_t Attr_Handle;
+} aci_gatt_permit_read_cp0;
 
 typedef __PACKED_STRUCT
 {
   uint8_t Status;
-} aci_gatt_allow_read_rp0;
+} aci_gatt_permit_read_rp0;
 
 typedef __PACKED_STRUCT
 {
@@ -2725,17 +2645,6 @@ typedef __PACKED_STRUCT
 
 typedef __PACKED_STRUCT
 {
-  uint16_t Connection_Handle;
-  uint8_t Error_Code;
-} aci_gatt_deny_read_cp0;
-
-typedef __PACKED_STRUCT
-{
-  uint8_t Status;
-} aci_gatt_deny_read_rp0;
-
-typedef __PACKED_STRUCT
-{
   uint16_t Serv_Handle;
   uint16_t Attr_Handle;
   uint8_t Access_Permissions;
@@ -2774,6 +2683,35 @@ typedef __PACKED_STRUCT
 {
   uint8_t Status;
 } aci_gatt_read_multiple_var_char_value_rp0;
+
+typedef __PACKED_STRUCT
+{
+  uint16_t Connection_Handle;
+  uint16_t Attr_Handle;
+  uint8_t Signed_Mode;
+  uint16_t Data_Length;
+  uint32_t Data_Pointer;
+} aci_gatt_write_without_resp_ext_cp0;
+
+typedef __PACKED_STRUCT
+{
+  uint8_t Status;
+} aci_gatt_write_without_resp_ext_rp0;
+
+typedef __PACKED_STRUCT
+{
+  uint16_t Connection_Handle;
+  uint16_t Attr_Handle;
+  uint8_t Write_Mode;
+  uint16_t Val_Offset;
+  uint16_t Data_Length;
+  uint32_t Data_Pointer;
+} aci_gatt_write_with_resp_ext_cp0;
+
+typedef __PACKED_STRUCT
+{
+  uint8_t Status;
+} aci_gatt_write_with_resp_ext_rp0;
 
 typedef __PACKED_STRUCT
 {
@@ -2829,6 +2767,7 @@ typedef __PACKED_STRUCT
   uint16_t MPS;
   uint16_t Initial_Credits;
   uint16_t Result;
+  uint8_t Max_Channel_Number;
 } aci_l2cap_coc_connect_confirm_cp0;
 
 typedef __PACKED_STRUCT
@@ -2895,6 +2834,49 @@ typedef __PACKED_STRUCT
 {
   uint8_t Status;
 } aci_l2cap_coc_tx_data_rp0;
+
+typedef __PACKED_STRUCT
+{
+  uint8_t Mode;
+  uint32_t Options;
+} aci_reset_cp0;
+
+typedef __PACKED_STRUCT
+{
+  uint8_t Status;
+} aci_reset_rp0;
+
+typedef __PACKED_STRUCT
+{
+  uint8_t Status;
+  uint32_t Version[2];
+  uint32_t Options;
+  uint32_t Debug_Info[3];
+} aci_get_information_rp0;
+
+typedef __PACKED_STRUCT
+{
+  uint8_t Offset;
+  uint8_t Length;
+  uint8_t Value[BLE_CMD_MAX_PARAM_LEN - 2];
+} aci_write_config_data_cp0;
+
+typedef __PACKED_STRUCT
+{
+  uint8_t Status;
+} aci_write_config_data_rp0;
+
+typedef __PACKED_STRUCT
+{
+  uint8_t Offset;
+} aci_read_config_data_cp0;
+
+typedef __PACKED_STRUCT
+{
+  uint8_t Status;
+  uint8_t Data_Length;
+  uint8_t Data[(BLE_EVT_MAX_PARAM_LEN - 3) - 2];
+} aci_read_config_data_rp0;
 
 typedef __PACKED_STRUCT
 {
@@ -2969,7 +2951,7 @@ typedef __PACKED_STRUCT
   uint8_t Status;
   uint16_t Connection_Handle;
   uint8_t LE_Features[8];
-} hci_le_read_remote_features_complete_event_rp0;
+} hci_le_read_remote_features_page_0_complete_event_rp0;
 
 typedef __PACKED_STRUCT
 {
@@ -3069,26 +3051,10 @@ typedef __PACKED_STRUCT
 
 typedef __PACKED_STRUCT
 {
-  uint8_t Last_State;
-  uint8_t Next_State;
-  uint32_t Next_State_SysTime;
-  uint8_t Last_State_Slot;
-  uint8_t Next_State_Slot;
-} aci_hal_end_of_radio_activity_event_rp0;
-
-typedef __PACKED_STRUCT
-{
-  uint8_t RSSI;
-  uint8_t Peer_Address_Type;
-  uint8_t Peer_Address[6];
-} aci_hal_scan_req_report_event_rp0;
-
-typedef __PACKED_STRUCT
-{
-  uint8_t FW_Error_Type;
+  uint8_t Warning_Type;
   uint8_t Data_Length;
   uint8_t Data[(BLE_EVT_MAX_PARAM_LEN - 2) - 2];
-} aci_hal_fw_error_event_rp0;
+} aci_warning_event_rp0;
 
 typedef __PACKED_STRUCT
 {
@@ -3106,6 +3072,11 @@ typedef __PACKED_STRUCT
 {
   uint16_t Connection_Handle;
 } aci_gap_authorization_req_event_rp0;
+
+typedef __PACKED_STRUCT
+{
+  uint16_t Connection_Handle;
+} aci_gap_bond_lost_event_rp0;
 
 typedef __PACKED_STRUCT
 {
@@ -3131,6 +3102,13 @@ typedef __PACKED_STRUCT
   uint16_t Connection_Handle;
   uint8_t Notification_Type;
 } aci_gap_keypress_notification_event_rp0;
+
+typedef __PACKED_STRUCT
+{
+  uint16_t Connection_Handle;
+  uint8_t Bonded;
+  uint8_t Auth_Req;
+} aci_gap_pairing_request_event_rp0;
 
 typedef __PACKED_STRUCT
 {
@@ -3387,9 +3365,10 @@ typedef __PACKED_STRUCT
 
 typedef __PACKED_STRUCT
 {
+  uint16_t Connection_Handle;
   uint8_t Channel_Index;
   uint8_t EAB_State;
-  uint8_t Status;
+  uint16_t MTU;
 } aci_gatt_eatt_bearer_event_rp0;
 
 typedef __PACKED_STRUCT
@@ -3430,6 +3409,22 @@ typedef __PACKED_STRUCT
   uint16_t Attribute_Value_Length;
   uint8_t Attribute_Value[(BLE_EVT_MAX_PARAM_LEN - 2) - 8];
 } aci_gatt_notification_ext_event_rp0;
+
+typedef __PACKED_STRUCT
+{
+  uint8_t Last_State;
+  uint8_t Next_State;
+  uint32_t Next_State_SysTime;
+  uint8_t Last_State_Slot;
+  uint8_t Next_State_Slot;
+} aci_hal_end_of_radio_activity_event_rp0;
+
+typedef __PACKED_STRUCT
+{
+  uint8_t RSSI;
+  uint8_t Peer_Address_Type;
+  uint8_t Peer_Address[6];
+} aci_hal_scan_req_report_event_rp0;
 
 
 #endif /* BLE_TYPES_H__ */

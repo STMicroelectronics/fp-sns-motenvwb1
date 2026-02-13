@@ -6,7 +6,7 @@
   ******************************************************************************
   * @attention
   *
-  * Copyright (c) 2024 STMicroelectronics.
+  * Copyright (c) 2025 STMicroelectronics.
   * All rights reserved.
   *
   * This software is licensed under terms that can be found in the LICENSE file
@@ -87,7 +87,7 @@ void MOTION_Send_Notification_Task(void)
 {
   uint8_t value[VALUE_LEN_MOTION];
 
-  MOTION_SENSOR_Axes_t AXIS;
+  MOTION_SENSOR_AXES_T AXIS;
 
   /* Read Motion values */
   MOTION_Handle_Sensor();

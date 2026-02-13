@@ -6,7 +6,7 @@
   ******************************************************************************
   * @attention
   *
-  * Copyright (c) 2024 STMicroelectronics.
+  * Copyright (c) 2025 STMicroelectronics.
   * All rights reserved.
   *
   * This software is licensed under terms that can be found in the LICENSE file
@@ -27,7 +27,7 @@
 #include "motionfx_server_app.h"
 #include "config_server_app.h"
 
-#include "MotionFX_Manager.h"
+#include "motion_fx_manager.h"
 
 /* Private defines -----------------------------------------------------------*/
 /**
@@ -57,11 +57,11 @@ typedef struct
   uint8_t  QuatNotificationStatus;
   uint8_t  ECompassNotificationStatus;
 
-  MOTION_SENSOR_Axes_t MAG_Offset;
+  MOTION_SENSOR_AXES_T MAG_Offset;
   uint32_t MagTimeStamp;
   uint8_t MagCalStatus;
 
-  MOTION_SENSOR_Axes_t quat_axes[SEND_N_QUATERNIONS];
+  MOTION_SENSOR_AXES_T quat_axes[SEND_N_QUATERNIONS];
   uint16_t Angle; /* ECompass */
 
 } MOTIONFX_Server_App_Context_t;
@@ -78,12 +78,12 @@ extern uint8_t a_ManufData[14];
 /* Private function prototypes -----------------------------------------------*/
 static void MagCalibTest(void);
 static void ComputeQuaternions(void);
-static void Quat_Update(MOTION_SENSOR_Axes_t *data);
+static void Quat_Update(MOTION_SENSOR_AXES_T *data);
 static void ECompass_Update(uint16_t Angle);
 
-static void Accelero_Sensor_Handler(MOTION_SENSOR_Axes_t *ACC_Value);
-static void Gyro_Sensor_Handler(MOTION_SENSOR_Axes_t *GYR_Value);
-static void Magneto_Sensor_Handler(MOTION_SENSOR_Axes_t *MAG_Value);
+static void Accelero_Sensor_Handler(MOTION_SENSOR_AXES_T *ACC_Value);
+static void Gyro_Sensor_Handler(MOTION_SENSOR_AXES_T *GYR_Value);
+static void Magneto_Sensor_Handler(MOTION_SENSOR_AXES_T *MAG_Value);
 
 /* Functions Definition ------------------------------------------------------*/
 
@@ -170,7 +170,7 @@ uint8_t MOTIONFX_Get_MagCalStatus(void)
   * @param  None
   * @retval Magneto Calibration offset
   */
-MOTION_SENSOR_Axes_t *MOTIONFX_Get_MAG_Offset(void)
+MOTION_SENSOR_AXES_T *MOTIONFX_Get_MAG_Offset(void)
 {
   return &(MOTIONFX_Server_App_Context.MAG_Offset);
 }
@@ -208,9 +208,9 @@ static void ComputeQuaternions(void)
 
   static int32_t CounterFX = 0;
   static int32_t CounterEC = 0;
-  MOTION_SENSOR_Axes_t ACC_Value;
-  MOTION_SENSOR_Axes_t GYR_Value;
-  MOTION_SENSOR_Axes_t MAG_Value;
+  MOTION_SENSOR_AXES_T ACC_Value;
+  MOTION_SENSOR_AXES_T GYR_Value;
+  MOTION_SENSOR_AXES_T MAG_Value;
 
   /* Increment the Counter */
   if (MOTIONFX_Server_App_Context.QuatNotificationStatus)
@@ -277,7 +277,7 @@ static void ComputeQuaternions(void)
     /* E-Compass Updated every 0.1 Seconds*/
     if (CounterEC == 10)
     {
-      MOTIONFX_Server_App_Context.Angle = (uint16_t)trunc(100 * pdata_out->heading);
+      MOTIONFX_Server_App_Context.Angle = (uint16_t)trunc(100 * (double)pdata_out->heading);
       ECompass_Update(MOTIONFX_Server_App_Context.Angle);
       CounterEC = 0;
     }
@@ -289,9 +289,9 @@ static void ComputeQuaternions(void)
   * @param  ACC_Value Accelerometer value to be read
   * @retval None
   */
-static void Accelero_Sensor_Handler(MOTION_SENSOR_Axes_t *ACC_Value)
+static void Accelero_Sensor_Handler(MOTION_SENSOR_AXES_T *ACC_Value)
 {
-  (void)MOTION_SENSOR_GetAxes(ACCELERO_INSTANCE, MOTION_ACCELERO, ACC_Value);
+  (void)MOTION_SENSOR_GET_AXES(ACCELERO_INSTANCE, MOTION_ACCELERO, ACC_Value);
 }
 
 /**
@@ -299,9 +299,9 @@ static void Accelero_Sensor_Handler(MOTION_SENSOR_Axes_t *ACC_Value)
   * @param  GYR_Value Gyro value to be read
   * @retval None
   */
-static void Gyro_Sensor_Handler(MOTION_SENSOR_Axes_t *GYR_Value)
+static void Gyro_Sensor_Handler(MOTION_SENSOR_AXES_T *GYR_Value)
 {
-  (void)MOTION_SENSOR_GetAxes(GYRO_INSTANCE, MOTION_GYRO, GYR_Value);
+  (void)MOTION_SENSOR_GET_AXES(GYRO_INSTANCE, MOTION_GYRO, GYR_Value);
 }
 
 /**
@@ -309,14 +309,14 @@ static void Gyro_Sensor_Handler(MOTION_SENSOR_Axes_t *GYR_Value)
   * @param  MAG_Value Magneto value to be read
   * @retval None
   */
-static void Magneto_Sensor_Handler(MOTION_SENSOR_Axes_t *MAG_Value)
+static void Magneto_Sensor_Handler(MOTION_SENSOR_AXES_T *MAG_Value)
 {
   float ans_float;
   MFX_MagCal_input_t mag_data_in;
   MFX_MagCal_output_t mag_data_out;
   static int32_t calibIndex = 0;
 
-  MOTION_SENSOR_GetAxes(MAGNETO_INSTANCE, MOTION_MAGNETO, MAG_Value);
+  MOTION_SENSOR_GET_AXES(MAGNETO_INSTANCE, MOTION_MAGNETO, MAG_Value);
 
   if (MOTIONFX_Server_App_Context.MagCalStatus == 0U)
   {
@@ -378,7 +378,7 @@ static void Magneto_Sensor_Handler(MOTION_SENSOR_Axes_t *MAG_Value)
   * @param  data Structure containing the quaterions
   * @retval None
   */
-static void Quat_Update(MOTION_SENSOR_Axes_t *data)
+static void Quat_Update(MOTION_SENSOR_AXES_T *data)
 {
   uint8_t value[VALUE_LEN_QUAT];
 

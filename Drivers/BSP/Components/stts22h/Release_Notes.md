@@ -22,8 +22,57 @@ This directory contains the STTS22H component drivers.
 ::: {.col-sm-12 .col-lg-8}
 # Update history
 
+
 ::: {.collapse}
-<input type="checkbox" id="collapse-section8" checked aria-hidden="true">
+<input type="checkbox" id="collapse-section11" checked aria-hidden="true">
+<label for="collapse-section11" aria-hidden="true">V1.8.0 / 15-September-2025</label>
+<div>
+
+## Main changes
+
+### Maintenance release
+
+- Update to latest ST GitHub version, add private data to context
+
+##
+
+</div>
+:::
+
+::: {.collapse}
+<input type="checkbox" id="collapse-section10" aria-hidden="true">
+<label for="collapse-section10" aria-hidden="true">V1.7.0 / 14-August-2024</label>
+<div>
+
+## Main changes
+
+### Maintenance release
+
+- Update PID from ST GitHub
+
+##
+
+</div>
+:::
+
+::: {.collapse}
+<input type="checkbox" id="collapse-section9"  aria-hidden="true">
+<label for="collapse-section9" aria-hidden="true">V1.6.0 / 31-May-2024</label>
+<div>
+
+## Main changes
+
+### Maintenance release
+
+- Synchronize PID with currently latest version on ST GitHub
+
+##
+
+</div>
+:::
+
+::: {.collapse}
+<input type="checkbox" id="collapse-section8" aria-hidden="true">
 <label for="collapse-section8" aria-hidden="true">V1.5.0 / 18-August-2023</label>
 <div>
 

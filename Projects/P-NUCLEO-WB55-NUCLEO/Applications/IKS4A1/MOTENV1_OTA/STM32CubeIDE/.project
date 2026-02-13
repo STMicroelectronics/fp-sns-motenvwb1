@@ -46,41 +46,6 @@
 			<locationURI>PARENT-6-PROJECT_LOC/Utilities/sequencer/stm32_seq.c</locationURI>
 		</link>
 		<link>
-			<name>Application/User/MotionAR_Manager.c</name>
-			<type>1</type>
-			<locationURI>PARENT-1-PROJECT_LOC/Src/MotionAR_Manager.c</locationURI>
-		</link>
-		<link>
-			<name>Application/User/MotionCP_Manager.c</name>
-			<type>1</type>
-			<locationURI>PARENT-1-PROJECT_LOC/Src/MotionCP_Manager.c</locationURI>
-		</link>
-		<link>
-			<name>Application/User/MotionFX_Manager.c</name>
-			<type>1</type>
-			<locationURI>PARENT-1-PROJECT_LOC/Src/MotionFX_Manager.c</locationURI>
-		</link>
-		<link>
-			<name>Application/User/MotionGR_Manager.c</name>
-			<type>1</type>
-			<locationURI>PARENT-1-PROJECT_LOC/Src/MotionGR_Manager.c</locationURI>
-		</link>
-		<link>
-			<name>Application/User/MotionID_Manager.c</name>
-			<type>1</type>
-			<locationURI>PARENT-1-PROJECT_LOC/Src/MotionID_Manager.c</locationURI>
-		</link>
-		<link>
-			<name>Application/User/MotionPM_Manager.c</name>
-			<type>1</type>
-			<locationURI>PARENT-1-PROJECT_LOC/Src/MotionPM_Manager.c</locationURI>
-		</link>
-		<link>
-			<name>Application/User/ToF_server_app.c</name>
-			<type>1</type>
-			<locationURI>PARENT-1-PROJECT_LOC/Src/ToF_server_app.c</locationURI>
-		</link>
-		<link>
 			<name>Application/User/app_debug.c</name>
 			<type>1</type>
 			<locationURI>PARENT-1-PROJECT_LOC/Src/app_debug.c</locationURI>
@@ -146,9 +111,39 @@
 			<locationURI>PARENT-1-PROJECT_LOC/Src/motenvwb1_p2p_server_app.c</locationURI>
 		</link>
 		<link>
+			<name>Application/User/motion_ar_manager.c</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/Src/motion_ar_manager.c</locationURI>
+		</link>
+		<link>
+			<name>Application/User/motion_cp_manager.c</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/Src/motion_cp_manager.c</locationURI>
+		</link>
+		<link>
 			<name>Application/User/motion_ext_server_app.c</name>
 			<type>1</type>
 			<locationURI>PARENT-1-PROJECT_LOC/Src/motion_ext_server_app.c</locationURI>
+		</link>
+		<link>
+			<name>Application/User/motion_fx_manager.c</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/Src/motion_fx_manager.c</locationURI>
+		</link>
+		<link>
+			<name>Application/User/motion_gr_manager.c</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/Src/motion_gr_manager.c</locationURI>
+		</link>
+		<link>
+			<name>Application/User/motion_id_manager.c</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/Src/motion_id_manager.c</locationURI>
+		</link>
+		<link>
+			<name>Application/User/motion_pm_manager.c</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/Src/motion_pm_manager.c</locationURI>
 		</link>
 		<link>
 			<name>Application/User/motion_server_app.c</name>
@@ -209,6 +204,11 @@
 			<name>Application/User/stm32wbxx_nucleo_bus.c</name>
 			<type>1</type>
 			<locationURI>PARENT-1-PROJECT_LOC/Src/stm32wbxx_nucleo_bus.c</locationURI>
+		</link>
+		<link>
+			<name>Application/User/tof_server_app.c</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/Src/tof_server_app.c</locationURI>
 		</link>
 		<link>
 			<name>Drivers/CMSIS/system_stm32wbxx.c</name>
@@ -319,16 +319,6 @@
 			<name>Drivers/STM32WBxx_HAL_Driver/stm32wbxx_hal_rtc_ex.c</name>
 			<type>1</type>
 			<locationURI>PARENT-6-PROJECT_LOC/Drivers/STM32WBxx_HAL_Driver/Src/stm32wbxx_hal_rtc_ex.c</locationURI>
-		</link>
-		<link>
-			<name>Drivers/STM32WBxx_HAL_Driver/stm32wbxx_hal_tim.c</name>
-			<type>1</type>
-			<locationURI>PARENT-6-PROJECT_LOC/Drivers/STM32WBxx_HAL_Driver/Src/stm32wbxx_hal_tim.c</locationURI>
-		</link>
-		<link>
-			<name>Drivers/STM32WBxx_HAL_Driver/stm32wbxx_hal_tim_ex.c</name>
-			<type>1</type>
-			<locationURI>PARENT-6-PROJECT_LOC/Drivers/STM32WBxx_HAL_Driver/Src/stm32wbxx_hal_tim_ex.c</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32WBxx_HAL_Driver/stm32wbxx_hal_uart.c</name>

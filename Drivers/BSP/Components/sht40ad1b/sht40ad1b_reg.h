@@ -121,6 +121,9 @@ typedef struct
   stmdev_mdelay_ptr   mdelay;
   /** Customizable optional pointer **/
   void *handle;
+
+  /** private data **/
+  void *priv_data;
 } stmdev_ctx_t;
 
 /**
@@ -175,6 +178,7 @@ int32_t sht40ad1b_write_reg(stmdev_ctx_t *ctx, uint8_t reg,
                             uint8_t *data, uint16_t len);
 
 int32_t sht40ad1b_data_get(stmdev_ctx_t *ctx, float *buffer);
+int32_t sht40ad1b_serial_get(stmdev_ctx_t *ctx, uint32_t *buffer);
 int32_t sht40ad1b_device_id_get(stmdev_ctx_t *ctx, uint8_t *buff);
 
 /**

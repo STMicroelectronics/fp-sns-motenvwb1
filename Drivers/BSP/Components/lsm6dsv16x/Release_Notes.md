@@ -9,7 +9,7 @@ header-includes: <link rel="icon" type="image/x-icon" href="_htmresc/favicon.png
 
 <center>
 # Release Notes for LSM6DSV16X Component Driver
-Copyright &copy; 2022 STMicroelectronics\
+Copyright &copy; 2024 STMicroelectronics\
 
 [![ST logo](_htmresc/st_logo_2020.png)](https://www.st.com){.logo}
 </center>
@@ -22,8 +22,73 @@ This directory contains the LSM6DSV16X component drivers.
 ::: {.col-sm-12 .col-lg-8}
 # Update history
 
+
 ::: {.collapse}
-<input type="checkbox" id="collapse-section5" checked aria-hidden="true">
+<input type="checkbox" id="collapse-section9" checked aria-hidden="true">
+<label for="collapse-section9" aria-hidden="true">V1.8.0 / 15-September-2025</label>
+<div>
+
+## Main changes
+
+### Maintenance release
+
+- Update to latest ST GitHub version, add private data to context
+
+##
+
+</div>
+:::
+
+::: {.collapse}
+<input type="checkbox" id="collapse-section8" aria-hidden="true">
+<label for="collapse-section8" aria-hidden="true">V1.7.0 / 26-February-2025</label>
+<div>
+
+## Main changes
+
+### Maintenance release
+
+- Fix 'data ready' status read
+
+##
+
+</div>
+:::
+
+::: {.collapse}
+<input type="checkbox" id="collapse-section7" aria-hidden="true">
+<label for="collapse-section7" aria-hidden="true">V1.6.0 / 4-September-2024</label>
+<div>
+
+## Main changes
+
+### Maintenance release
+
+- Synchronized PID with currently latest version on ST GitHub
+
+##
+
+</div>
+:::
+
+::: {.collapse}
+<input type="checkbox" id="collapse-section6" aria-hidden="true">
+<label for="collapse-section6" aria-hidden="true">V1.5.0 / 4-June-2024</label>
+<div>
+
+## Main changes
+
+### Maintenance release
+
+- Add Memory bank function
+
+##
+
+</div>
+:::
+
+::: {.collapse}
+<input type="checkbox" id="collapse-section5" aria-hidden="true">
 <label for="collapse-section5" aria-hidden="true">V1.4.0 / 18-August-2023</label>
 <div>
 

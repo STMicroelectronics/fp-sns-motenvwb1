@@ -64,12 +64,12 @@ ADDITIONAL_COMP : STTS22H https://www.st.com/en/mems-and-sensors/stts22h.html
 
 STM32Cube packages:
 
-  - STM32WBxx drivers from STM32ubeWB V1.19.0
+  - STM32WBxx drivers from STM32ubeWB V1.24.0
   
 X-CUBE packages:
 
-  - X-CUBE-MEMS1 V10.0.0
-  - X-CUBE-TOF1 V3.4.0
+  - X-CUBE-MEMS1 V12.0.0
+  - X-CUBE-TOF1 V3.4.3
 
 ### <b>How to use it?</b>
 
@@ -82,19 +82,19 @@ In order to make the  program work, you must do the following:
 
 For IAR:
 
- - Open IAR toolchain (this firmware has been successfully tested with Embedded Workbench V9.20.1).
+ - Open IAR toolchain (this firmware has been successfully tested with Embedded Workbench V9.60.3).
  - Open the IAR project file EWARM/Project.eww
  - Rebuild all files
 
 For Keil µVision 5:
 
- - Open Keil µVision 5 toolchain (this firmware has been successfully tested with MDK-ARM Professional Version: 5.37.0).
+ - Open Keil µVision 5 toolchain (this firmware has been successfully tested with MDK-ARM Professional Version: 5.38.0).
  - Open the µVision project file MDK-ARM/MOTENV1.uvprojx
  - Rebuild all files
  
 For Integrated Development Environment for STM32:
 
- - Open STM32CubeIDE (this firmware has been successfully tested with Version 1.14.0).
+ - Open STM32CubeIDE (this firmware has been successfully tested with Version 2.0.0).
  - Set the default workspace proposed by the IDE (please be sure that there are not spaces in the workspace path).
  - Press "File" -> "Import" -> "Existing Projects into Workspace"; press "Browse" in the "Select root directory" and choose the path where the System
    Workbench project is located (it should be STM32CubeIDE). 
@@ -106,7 +106,7 @@ SRA Application Team
 
 ### <b>License</b>
 
-Copyright (c) 2024 STMicroelectronics.
+Copyright (c) 2025 STMicroelectronics.
 All rights reserved.
 
 This software is licensed under terms that can be found in the LICENSE file

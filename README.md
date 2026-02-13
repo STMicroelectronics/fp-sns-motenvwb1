@@ -25,8 +25,6 @@ The expansion is built on STM32Cube software technology to ease portability acro
 This firmware package includes Components Device Drivers, Board Support Package and example application for the STMicroelectronics:
 
 - P-NUCLEO-WB55 Nucleo-68 board with STM32WB55 MCU supporting Bluetooth™ 5 and 802.15.4 connectivity
-- X-NUCLEO-IKS01A3 Expansion board for six MEMS sensor devices:
- - HTS221, LIS2DW12, LIS2MDL, LPS22HH, LSM5DSO
 - X-NUCLEO-IKS4A1 Expansion board for six MEMS sensor devices:
  - STTS22H, SHT40AD1B, LPS22DF, LSM6DSV16X, LIS2MDL
 - X-NUCLEO-53L3A2  Multi-targets ranging sensor expansion board based on VL53L3CX for STM32 Nucleo (optional).
@@ -42,7 +40,6 @@ Here is the list of references to user documents:
 ## Supported Devices and Boards
 
 - P-NUCLEO-WB55 Bluetooth 5 and 802.15.4 Nucleo Pack including USB dongle and Nucleo-64 with STM32WB55 MCUs, supports Arduino and ST morpho connectivity \[[P-NUCLEO-WB55](https://www.st.com/content/st_com/en/products/evaluation-tools/product-evaluation-tools/mcu-mpu-eval-tools/stm32-mcu-mpu-eval-tools/stm32-nucleo-boards/p-nucleo-wb55.html)\]
-- X-NUCLEO-IKS01A3 Motion MEMS and environmental sensor expansion board for STM32 Nucleo \[[X-NUCLEO-IKS01A3](https://www.st.com/en/ecosystems/x-nucleo-iks01a3.html)]
 - X-NUCLEO-IKS4A1 Motion MEMS and environmental sensor expansion board for STM32 Nucleo \[[X-NUCLEO-IKS4A1](https://www.st.com/en/ecosystems/x-nucleo-iks4a1.html)]
 - X-NUCLEO-53L3A2 Motion MEMS and environmental sensor expansion board for STM32 Nucleo \[[X-NUCLEO-53L3A2](https://www.st.com/en/evaluation-tools/x-nucleo-53l3a2.html)\]
 
@@ -54,9 +51,9 @@ Related to Keil µVision 5:
 	
 ## Development Toolchains and Compilers
 
--   IAR Embedded Workbench for ARM (EWARM) toolchain V9.20.1 + STLink/V2
--   RealView Microcontroller Development Kit (MDK-ARM) toolchain V5.37.0 + ST-LINK/V2
--   Integrated Development Environment for STM32 (STM32CubeIDE) V1.14.0 + ST-LINK
+-   IAR Embedded Workbench for ARM (EWARM) toolchain V9.60.3 + STLink/V2
+-   RealView Microcontroller Development Kit (MDK-ARM) toolchain V5.38.0 + ST-LINK/V2
+-   Integrated Development Environment for STM32 (STM32CubeIDE) V2.0.0 + ST-LINK
 	
 ## Dependencies 
 

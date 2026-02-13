@@ -3,7 +3,7 @@
  * @heading Zigbee Utilities
  * @brief Zigbee header file.
  * @author Exegin Technologies
- * @copyright Copyright [2009 - 2023] Exegin Technologies Limited. All rights reserved.
+ * @copyright Copyright [2009 - 2025] Exegin Technologies Limited. All rights reserved.
  *
  * This file groups global/external definitions from all the layer specific header files
  * e.g, aps, nwk, zdo etc... into a single place, so that one can just include zigbee.h for
@@ -58,6 +58,7 @@ struct WpanPublicT;
 #define ZB_CHANNELMASK(mask, page)      ((page != 0U) ? \
                                          ((mask) | ((((uint32_t)page) & 0x1FU) << WPAN_PAGE_CHANNELS_MAX)) : (mask))
 
+#define ZB_PANID_MIN                    0x0000U
 /* A value of 0xffff means the device is not associated. */
 #define ZB_PANID_MAX                    0xfffeU
 
@@ -203,6 +204,14 @@ enum ZbTcsoStatusT {
  * Stack Logging
  *---------------------------------------------------------------
  */
+#define LOGFMTx64                  "0x%08x%08x"
+#define LOGVALx64(val)             (uint32_t)(val >> 32U), (uint32_t)(val)
+
+/* E.g. PRIu64 */
+#ifndef LOGFMTu64
+# define LOGFMTu64                  "%lu"
+#endif
+
 /* Debugging log mask. */
 #define ZB_LOG_MASK_FATAL               0x00000001U /* Unrecoverable errors. */
 #define ZB_LOG_MASK_ERROR               0x00000002U /* Recoverable internal errors. */
@@ -441,6 +450,20 @@ void ZbZclBasicServerResetCmdConfig(struct ZigBeeT *zb, bool allow_reset);
 enum ZclStatusCodeT ZbZclBasicWriteDirect(struct ZigBeeT *zb, uint8_t endpoint,
     uint16_t attributeId, const uint8_t *ptr, unsigned int len);
 
+/**
+ * Read a Basic Server attribute
+ * @param zb Zigbee instance
+ * @param endpoint Specify the endpoint of the Basic Server, or use ZB_ENDPOINT_BCAST to find and use
+ * the first endpoint that contains a Basic Server. Since the attributes are shared between all
+ * instances of the Basic Server, it doesn't matter which endpoint is chosen.
+ * @param attributeId The attribute Id to read
+ * @param buf Pointer to the attribute data, in the ZCL defined format.
+ * @param max_len Maximum length of the attribute data. May exceed the length of the particular attribute.
+ * @return ZCL Status Code
+ */
+enum ZclStatusCodeT ZbZclBasicReadDirect(struct ZigBeeT *zb, uint8_t endpoint,
+    uint16_t attributeId, void *buf, unsigned int max_len);
+
 /* Post an alarm code to the Basic Cluster */
 bool ZbZclBasicPostAlarm(struct ZigBeeT *zb, uint8_t endpoint, uint8_t alarm_code);
 
@@ -480,7 +503,7 @@ unsigned int ZbTimerRemaining(struct ZbTimerT *timer);
 #define ZB_MSG_FILTER_VERIFY_KEY_IND            0x00000100U /* APSME-VERIFY-KEY.indication (struct ZbApsmeVerifyKeyIndT) */
 #define ZB_MSG_FILTER_CONFIRM_KEY_IND           0x00000200U /* APSME-CONFIRM-KEY.indication (struct ZbApsmeConfirmKeyIndT) */
 /* Data Indications */
-#define ZB_MSG_FILTER_MCPS_DATA_IND             0x00000400U /* MCPS-DATA.indication (struct wpan_data_ind) */
+#define ZB_MSG_FILTER_MCPS_DATA_IND_EXT         0x00000400U /* MCPS-DATA.indication (struct ZbMcpsDataIndT) */
 #define ZB_MSG_FILTER_NLDE_DATA_IND             0x00000800U /* NLDE-DATA.indication (struct ZbNldeDataIndT) */
 #define ZB_MSG_FILTER_APSDE_DATA_IND            0x00001000U /* APSDE-DATA.indication (struct ZbApsdeDataIndT) */
 /* Startup Indications */
@@ -521,6 +544,35 @@ struct ZbMsgStartupInd {
 };
 
 /*---------------------------------------------------------
+ * ZB_MSG_FILTER_MCPS_DATA_IND_EXT
+ *---------------------------------------------------------
+ */
+enum ZbMcpsAddrModeT {
+    ZB_MCPS_ADDRMODE_NONE = 0,
+    ZB_MCPS_ADDRMODE_SHORT = 2,
+    ZB_MCPS_ADDRMODE_LONG = 3
+};
+
+struct ZbMcpsDataIndT {
+    struct WpanPublicT *publicPtr;
+    /* Source info */
+    uint16_t src_panid;
+    enum ZbMcpsAddrModeT src_mode;
+    uint64_t src_addr;
+    /* Destination info */
+    uint16_t dst_panid;
+    enum ZbMcpsAddrModeT dst_mode;
+    uint64_t dst_addr;
+    /* Info */
+    uint8_t lqi; /* Link Quality Indication */
+    int8_t rssi; /* RSSI */
+    uint8_t dsn; /* DSN (sequence number) */
+    /* MSDU */
+    uint16_t len;
+    uint8_t msdu[WPAN_CONST_MAX_PHY_PACKET_SIZE];
+};
+
+/*---------------------------------------------------------
  * Persistence
  *---------------------------------------------------------
  */
@@ -553,7 +605,6 @@ void ZbShutdown(struct ZigBeeT *zb);
 enum ZbStatusCodeT ZbStatePause(struct ZigBeeT *zb, void (*callback)(void *arg), void *arg);
 enum ZbStatusCodeT ZbStateResume(struct ZigBeeT *zb);
 
-
 /*---------------------------------------------------------------
  * Misc. Helper Functions
  *---------------------------------------------------------------
@@ -583,12 +634,6 @@ unsigned int zb_hex_bin_to_str(const uint8_t *in_data, unsigned int in_len, char
 void ZbDebugMemory(struct ZigBeeT *zb);
 void ZbDebugInfo(struct ZigBeeT *zb);
 
-/*---------------------------------------------------------------
- * Misc Debug (may not be available on all platforms)
- *---------------------------------------------------------------
- */
-
-uint8_t  MacSetPropStrictDataPollReq(uint8_t val);
 /*---------------------------------------------------------------
  * Additional Layer Includes
  *---------------------------------------------------------------

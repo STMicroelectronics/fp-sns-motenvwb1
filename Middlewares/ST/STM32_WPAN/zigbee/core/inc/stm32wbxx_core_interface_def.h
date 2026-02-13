@@ -136,6 +136,10 @@ typedef enum {
     MSG_M4TOM0_SHA256_HMAC_RESET = 0x0047, /* hmacReset */
     MSG_M4TOM0_SHA256_HMAC_INPUT = 0x0048, /* hmacInput */
     MSG_M4TOM0_SHA256_HMAC_RESULT = 0x0049, /* hmacResult */
+
+    /* Startup Additions */
+    MSG_M4TOM0_STARTUP_FINDBIND_EP = 0x004a, /* ZbStartupFindBindStartEndpoint */
+    MSG_M0TOM4_STARTUP_FINDBIND_EP_CB = 0x004b,
     /* Reserved to 0x00ff for Future Use */
 
     /* ZDO Commands */
@@ -316,6 +320,12 @@ typedef enum {
     MSG_M4TOM0_ZCL_DEVICE_LOG_ENABLE =, /* ZbZclDeviceLogEnable */
     MSG_M4TOM0_ZCL_DEVICE_LOG_REMOVE =, /* ZbZclDeviceLogRemove */
 #endif
+    /* discontinuity */
+
+    /* ZCL Basic Server (cont'd, custom attributes) */
+    MSG_M4TOM0_ZCL_BASIC_SERVER_LOCAL_READ = 0x0430, /* ZbZclBasicReadDirect */
+    MSG_M4TOM0_ZCL_BASIC_SERVER_APPEND_CUSTOM_ATTR = 0x0431, /* ZbZclBasicServerAppendCustomAttr */
+
     /* Reserved to 0x04ff for Future Use */
 
     /* Reserved to 0x0fff for Future Use */
@@ -339,7 +349,7 @@ typedef enum {
 
     /* MAC */
     MSG_M4TOM0_MAC_SET_PROP_STRICT_DATA_POLL_REQ = 0x3000, /* MacSetPropStrictDataPollReq / g_MAC_PROP_STRICT_DATA_POLL_REQ_c */
-    
+
     /* PHY */
     MSG_M4TOM0_PHY_TEST_MODE = 0x4000,
     MSG_M4TOM0_PHY_SET_CHANNEL = 0x4001,
@@ -348,6 +358,9 @@ typedef enum {
     MSG_M4TOM0_PHY_TX_START = 0x4004,
     MSG_M4TOM0_PHY_RX_START = 0x4005,
     MSG_M4TOM0_PHY_RX_STOP = 0x4006,
+    MSG_M4TOM0_PHY_CONTINUOUS_TX_START = 0x4007,
+    MSG_M4TOM0_PHY_CONTINUOUS_TX_STOP = 0x4008,
+    MSG_M4TOM0_PHY_SET_TX_POWER = 0x4009,
 } MsgId_Zigbee_Enum_t;
 
 /* List of errors returned by the interface  */

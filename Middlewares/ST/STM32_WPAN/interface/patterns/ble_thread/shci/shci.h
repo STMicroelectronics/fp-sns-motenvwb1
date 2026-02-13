@@ -35,6 +35,8 @@ extern "C" {
   {
     WIRELESS_FW_RUNNING = 0x00,
     FUS_FW_RUNNING = 0x01,
+    NVM_BACKUP_RUNNING = 0x10,
+    NVM_RESTORE_RUNNING = 0x11
   } SHCI_SysEvt_Ready_Rsp_t;
 
   /* ERROR CODES
@@ -197,7 +199,7 @@ extern "C" {
     SHCI_OCF_C2_FUS_STORE_USR_KEY,
     SHCI_OCF_C2_FUS_LOAD_USR_KEY,
     SHCI_OCF_C2_FUS_START_WS,
-    SHCI_OCF_C2_FUS_RESERVED2,
+    SHCI_OCF_C2_FUS_FW_PURGE,
     SHCI_OCF_C2_FUS_RESERVED3,
     SHCI_OCF_C2_FUS_LOCK_USR_KEY,
     SHCI_OCF_C2_FUS_UNLOAD_USR_KEY,
@@ -276,6 +278,10 @@ extern "C" {
 /** No command parameters */
 /** No response parameters*/
 
+#define SHCI_OPCODE_C2_FUS_FW_PURGE   (( SHCI_OGF << 10) + SHCI_OCF_C2_FUS_FW_PURGE)
+/** No command parameters */
+/** No response parameters*/
+
 #define SHCI_OPCODE_C2_FUS_UPDATE_AUTH_KEY    (( SHCI_OGF << 10) + SHCI_OCF_C2_FUS_UPDATE_AUTH_KEY)
   typedef PACKED_STRUCT{
   uint8_t KeySize;
@@ -304,6 +310,7 @@ extern "C" {
   {
     KEYSIZE_16 =  16,
     KEYSIZE_32 = 32,
+    KEYSIZE_64 = 64
   };
 
   typedef PACKED_STRUCT{
@@ -610,9 +617,31 @@ extern "C" {
    * - other bits: reserved ( shall be set to 0)
    */
   uint8_t Options_extension;
-
-      } SHCI_C2_Ble_Init_Cmd_Param_t;
-
+   
+   /**
+   * MaxAddEattBearers
+   *
+  * Maximum number of bearers that can be created for Enhanced ATT
+  * in addition to the number of links
+  *     - Range: 0 .. 4
+  */
+  uint8_t MaxAddEattBearers;
+  
+  /**
+  * Address of the RAM buffer allocated for the extension of Host commands.
+  * This buffer is referred as the "extra data" buffer in the BLE Wireless
+  * Interface document. If the commands that need this extension are never
+  * used, this parameter can be set to NULL.
+  */
+  uint8_t* extra_data_buffer;
+  
+  /**
+  * Size of the RAM buffer allocated for the extension of Host commands.
+  */
+  uint32_t extra_data_buffer_size;
+  
+  } SHCI_C2_Ble_Init_Cmd_Param_t;
+   
   typedef PACKED_STRUCT{
     SHCI_Header_t Header;       /** Does not need to be initialized by the user */
     SHCI_C2_Ble_Init_Cmd_Param_t Param;
@@ -882,6 +911,7 @@ extern "C" {
 #define SHCI_C2_CONFIG_CONFIG1_BIT0_BLE_NVM_DATA_TO_SRAM              (1<<0)
 #define SHCI_C2_CONFIG_CONFIG1_BIT1_THREAD_NVM_DATA_TO_INTERNAL_FLASH (0<<1)
 #define SHCI_C2_CONFIG_CONFIG1_BIT1_THREAD_NVM_DATA_TO_SRAM           (1<<1)
+#define SHCI_C2_CONFIG_CONFIG1_BIT2_SET_EUI64_FORMAT                  (1<<2)
 
 /**
  * EvtMask1
@@ -990,7 +1020,9 @@ extern "C" {
 #define INFO_STACK_TYPE_BLE_ZIGBEE_RFD_DYNAMIC      0x79
 #define INFO_STACK_TYPE_RLV                         0x80
 #define INFO_STACK_TYPE_BLE_MAC_STATIC              0x90
-
+#define INFO_STACK_TYPE_NVM_BACKUP                  0xF0
+#define INFO_STACK_TYPE_NVM_RESTORE                 0xF1
+  
 typedef struct {
 /**
  * Wireless Info
@@ -1054,6 +1086,16 @@ typedef struct {
   * @retval Status
   */
   SHCI_CmdStatus_t SHCI_C2_FUS_FwDelete( void );
+
+  /**
+  * SHCI_C2_FUS_FwPurge
+  * @brief Delete the wireless stack on CPU2 and the NVM section (if any)
+  *        Note:  This command is only supported by the FUS.
+  *
+  * @param  None
+  * @retval Status
+  */
+ SHCI_CmdStatus_t SHCI_C2_FUS_FwPurge( void );
 
   /**
   * SHCI_C2_FUS_UpdateAuthKey
@@ -1340,7 +1382,9 @@ typedef struct {
   *                               1 - BLE NVM Data are written in SRAM cache pointed by BleNvmRamAddress
   *                     - bit1 :  0 - THREAD NVM Data  data are flushed in internal secure flash
   *                               1 - THREAD NVM Data are written in SRAM cache pointed by ThreadNvmRamAddress
-  *                     - bit2 to bit7 : Unused, shall be set to 0
+  *                     - bit2 :  0 - Thread EUI64 is set to new (and current) format
+  *                               1 - Thread EUI64 is set to old format
+  *                     - bit3 to bit7 : Unused, shall be set to 0
   *                    uint8_t EvtMask1 :
   *                            When a bit is set to 0, the event is not reported
   *                            bit0 : Asynchronous Event with Sub Evt Code 0x9201 (= SHCI_SUB_EVT_ERROR_NOTIF)

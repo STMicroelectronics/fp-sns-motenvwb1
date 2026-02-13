@@ -6,7 +6,7 @@
   ******************************************************************************
   * @attention
   *
-  * Copyright (c) 2024 STMicroelectronics.
+  * Copyright (c) 2025 STMicroelectronics.
   * All rights reserved.
   *
   * This software is licensed under terms that can be found in the LICENSE file
@@ -130,7 +130,7 @@ void ENV_Update(void)
   uint8_t BuffPos = 2;
 
   /* Timestamp */
-  STORE_LE_16(value, (HAL_GetTick() >> 3));
+  STORE_LE_16(value, (HAL_GetTick() / 10));
 
   if (ENV_Server_App_Context.hasPressure == 1)
   {

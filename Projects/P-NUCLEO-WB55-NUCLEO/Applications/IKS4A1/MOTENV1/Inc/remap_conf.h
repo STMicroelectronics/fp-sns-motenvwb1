@@ -7,7 +7,7 @@
   ******************************************************************************
   * @attention
   *
-  * Copyright (c) 2024 STMicroelectronics.
+  * Copyright (c) 2025 STMicroelectronics.
   * All rights reserved.
   *
   * This software is licensed under terms that can be found in the LICENSE file
@@ -31,16 +31,16 @@ extern "C" {
 #include "iks4a1_motion_sensors.h"
 #include "iks4a1_motion_sensors_ex.h"
 /*************************************/
-/*  Remapping istance sensor defines */
+/*  Remapping Instance sensor defines */
 /*************************************/
-/* Motion Sensor Istance */
+/* Motion Sensor Instance */
 #define ACCELERO_AND_GYRO_INSTANCE        IKS4A1_LSM6DSV16X_0
 #define ACCELERO_INSTANCE                 IKS4A1_LSM6DSV16X_0
 #define GYRO_INSTANCE                     IKS4A1_LSM6DSV16X_0
 #define ACCELERO_INSTANCE_2               IKS4A1_LIS2DUXS12_0
 #define MAGNETO_INSTANCE                  IKS4A1_LIS2MDL_0
 
-/* Environmental Sensor Istance */
+/* Environmental Sensor Instance */
 #define TEMPERATURE_INSTANCE_1            IKS4A1_STTS22H_0
 #define HUMIDITY_INSTANCE                 IKS4A1_SHT40AD1B_0
 #define TEMPERATURE_INSTANCE_2            IKS4A1_LPS22DF_0
@@ -53,49 +53,49 @@ extern "C" {
 /*  Remapping APIsensor defines */
 /********************************/
 /* Environmental Sensor API */
-#define ENV_SENSOR_Init                                 IKS4A1_ENV_SENSOR_Init
-#define ENV_SENSOR_Get_Value                            IKS4A1_ENV_SENSOR_GetValue
+#define ENV_SENSOR_INIT                                 IKS4A1_ENV_SENSOR_Init
+#define ENV_SENSOR_GET_VALUE                            IKS4A1_ENV_SENSOR_GetValue
 
 /* Motion Sensor API */
-#define MOTION_SENSOR_Init                              IKS4A1_MOTION_SENSOR_Init
+#define MOTION_SENSOR_INIT                              IKS4A1_MOTION_SENSOR_Init
 
-#define MOTION_SENSOR_Axes_t                            IKS4A1_MOTION_SENSOR_Axes_t
-#define MOTION_SENSOR_Event_Status_t                    IKS4A1_MOTION_SENSOR_Event_Status_t
+#define MOTION_SENSOR_AXES_T                            IKS4A1_MOTION_SENSOR_Axes_t
+#define MOTION_SENSOR_EVENT_STATUS_T                    IKS4A1_MOTION_SENSOR_Event_Status_t
 
-#define MOTION_SENSOR_GetAxes                           IKS4A1_MOTION_SENSOR_GetAxes
-#define MOTION_SENSOR_Get_Event_Status                  IKS4A1_MOTION_SENSOR_Get_Event_Status
+#define MOTION_SENSOR_GET_AXES                          IKS4A1_MOTION_SENSOR_GetAxes
+#define MOTION_SENSOR_GET_EVENT_STATUS                  IKS4A1_MOTION_SENSOR_Get_Event_Status
 
-#define MOTION_SENSOR_SetFullScale                      IKS4A1_MOTION_SENSOR_SetFullScale
+#define MOTION_SENSOR_SET_FULL_SCALE                    IKS4A1_MOTION_SENSOR_SetFullScale
 
-#define MOTION_SENSOR_SetOutputDataRate                 IKS4A1_MOTION_SENSOR_SetOutputDataRate
-#define MOTION_SENSOR_GetOutputDataRate                 IKS4A1_MOTION_SENSOR_GetOutputDataRate
+#define MOTION_SENSOR_SET_OUTPUT_DATA_RATE              IKS4A1_MOTION_SENSOR_SetOutputDataRate
+#define MOTION_SENSOR_GET_OUTPUT_DATA_RATE              IKS4A1_MOTION_SENSOR_GetOutputDataRate
 
-#define MOTION_SENSOR_Enable_Tilt_Detection             IKS4A1_MOTION_SENSOR_Enable_Tilt_Detection
-#define MOTION_SENSOR_Disable_Tilt_Detection            IKS4A1_MOTION_SENSOR_Disable_Tilt_Detection
-#define MOTION_SENSOR_Enable_Wake_Up_Detection          IKS4A1_MOTION_SENSOR_Enable_Wake_Up_Detection
-#define MOTION_SENSOR_Disable_Wake_Up_Detection         IKS4A1_MOTION_SENSOR_Disable_Wake_Up_Detection
-#define MOTION_SENSOR_Enable_Double_Tap_Detection       IKS4A1_MOTION_SENSOR_Enable_Double_Tap_Detection
-#define MOTION_SENSOR_Disable_Double_Tap_Detection      IKS4A1_MOTION_SENSOR_Disable_Double_Tap_Detection
-#define MOTION_SENSOR_Enable_Single_Tap_Detection       IKS4A1_MOTION_SENSOR_Enable_Single_Tap_Detection
-#define MOTION_SENSOR_Disable_Single_Tap_Detection      IKS4A1_MOTION_SENSOR_Disable_Single_Tap_Detection
-#define MOTION_SENSOR_Enable_Pedometer                  IKS4A1_MOTION_SENSOR_Enable_Pedometer
-#define MOTION_SENSOR_Disable_Pedometer                 IKS4A1_MOTION_SENSOR_Disable_Pedometer
-#define MOTION_SENSOR_Reset_Step_Counter                IKS4A1_MOTION_SENSOR_Reset_Step_Counter
-#define MOTION_SENSOR_Get_Step_Count                    IKS4A1_MOTION_SENSOR_Get_Step_Count
-#define MOTION_SENSOR_Enable_Free_Fall_Detection        IKS4A1_MOTION_SENSOR_Enable_Free_Fall_Detection
-#define MOTION_SENSOR_Set_Tap_Threshold                 IKS4A1_MOTION_SENSOR_Set_Tap_Threshold
-#define MOTION_SENSOR_Set_Tap_Duration_Time             IKS4A1_MOTION_SENSOR_Set_Tap_Duration_Time
-#define MOTION_SENSOR_Set_Wake_Up_Threshold             IKS4A1_MOTION_SENSOR_Set_Wake_Up_Threshold
-#define MOTION_SENSOR_Disable_Free_Fall_Detection       IKS4A1_MOTION_SENSOR_Disable_Free_Fall_Detection
-#define MOTION_SENSOR_Set_Free_Fall_Threshold           IKS4A1_MOTION_SENSOR_Set_Free_Fall_Threshold
-#define MOTION_SENSOR_Enable_6D_Orientation             IKS4A1_MOTION_SENSOR_Enable_6D_Orientation
-#define MOTION_SENSOR_Disable_6D_Orientation            IKS4A1_MOTION_SENSOR_Disable_6D_Orientation
-#define MOTION_SENSOR_Get_6D_Orientation_XL             IKS4A1_MOTION_SENSOR_Get_6D_Orientation_XL
-#define MOTION_SENSOR_Get_6D_Orientation_XH             IKS4A1_MOTION_SENSOR_Get_6D_Orientation_XH
-#define MOTION_SENSOR_Get_6D_Orientation_YL             IKS4A1_MOTION_SENSOR_Get_6D_Orientation_YL
-#define MOTION_SENSOR_Get_6D_Orientation_YH             IKS4A1_MOTION_SENSOR_Get_6D_Orientation_YH
-#define MOTION_SENSOR_Get_6D_Orientation_ZL             IKS4A1_MOTION_SENSOR_Get_6D_Orientation_ZL
-#define MOTION_SENSOR_Get_6D_Orientation_ZH             IKS4A1_MOTION_SENSOR_Get_6D_Orientation_ZH
+#define MOTION_SENSOR_ENABLE_TILT_DETECTION             IKS4A1_MOTION_SENSOR_Enable_Tilt_Detection
+#define MOTION_SENSOR_DISABLE_TILT_DETECTION            IKS4A1_MOTION_SENSOR_Disable_Tilt_Detection
+#define MOTION_SENSOR_ENABLE_WAKE_UP_DETECTION          IKS4A1_MOTION_SENSOR_Enable_Wake_Up_Detection
+#define MOTION_SENSOR_DISABLE_WAKE_UP_DETECTION         IKS4A1_MOTION_SENSOR_Disable_Wake_Up_Detection
+#define MOTION_SENSOR_ENABLE_DOUBLE_TAP_DETECTION       IKS4A1_MOTION_SENSOR_Enable_Double_Tap_Detection
+#define MOTION_SENSOR_DISABLE_DOUBLE_TAP_DETECTION      IKS4A1_MOTION_SENSOR_Disable_Double_Tap_Detection
+#define MOTION_SENSOR_ENABLE_SINGLE_TAP_DETECTION       IKS4A1_MOTION_SENSOR_Enable_Single_Tap_Detection
+#define MOTION_SENSOR_DISABLE_SINGLE_TAP_DETECTION      IKS4A1_MOTION_SENSOR_Disable_Single_Tap_Detection
+#define MOTION_SENSOR_ENABLE_PEDOMETER                  IKS4A1_MOTION_SENSOR_Enable_Pedometer
+#define MOTION_SENSOR_DISABLE_PEDOMETER                 IKS4A1_MOTION_SENSOR_Disable_Pedometer
+#define MOTION_SENSOR_RESET_STEP_COUNTER                IKS4A1_MOTION_SENSOR_Reset_Step_Counter
+#define MOTION_SENSOR_GET_STEP_COUNT                    IKS4A1_MOTION_SENSOR_Get_Step_Count
+#define MOTION_SENSOR_ENABLE_FREE_FALL_DETECTION        IKS4A1_MOTION_SENSOR_Enable_Free_Fall_Detection
+#define MOTION_SENSOR_SET_TAP_THRESHOLD                 IKS4A1_MOTION_SENSOR_Set_Tap_Threshold
+#define MOTION_SENSOR_SET_TAP_DURATION_TIME             IKS4A1_MOTION_SENSOR_Set_Tap_Duration_Time
+#define MOTION_SENSOR_SET_WAKE_UP_THRESHOLD             IKS4A1_MOTION_SENSOR_Set_Wake_Up_Threshold
+#define MOTION_SENSOR_DISABLE_FREE_FALL_DETECTION       IKS4A1_MOTION_SENSOR_Disable_Free_Fall_Detection
+#define MOTION_SENSOR_SET_FREE_FALL_THRESHOLD           IKS4A1_MOTION_SENSOR_Set_Free_Fall_Threshold
+#define MOTION_SENSOR_ENABLE_6D_ORIENTATION             IKS4A1_MOTION_SENSOR_Enable_6D_Orientation
+#define MOTION_SENSOR_DISABLE_6D_ORIENTATION            IKS4A1_MOTION_SENSOR_Disable_6D_Orientation
+#define MOTION_SENSOR_GET_6D_ORIENTATION_XL             IKS4A1_MOTION_SENSOR_Get_6D_Orientation_XL
+#define MOTION_SENSOR_GET_6D_ORIENTATION_XH             IKS4A1_MOTION_SENSOR_Get_6D_Orientation_XH
+#define MOTION_SENSOR_GET_6D_ORIENTATION_YL             IKS4A1_MOTION_SENSOR_Get_6D_Orientation_YL
+#define MOTION_SENSOR_GET_6D_ORIENTATION_YH             IKS4A1_MOTION_SENSOR_Get_6D_Orientation_YH
+#define MOTION_SENSOR_GET_6D_ORIENTATION_ZL             IKS4A1_MOTION_SENSOR_Get_6D_Orientation_ZL
+#define MOTION_SENSOR_GET_6D_ORIENTATION_ZH             IKS4A1_MOTION_SENSOR_Get_6D_Orientation_ZH
 
 #ifdef __cplusplus
 }

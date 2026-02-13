@@ -22,8 +22,41 @@ This directory contains the LPS22DF component drivers.
 ::: {.col-sm-12 .col-lg-8}
 # Update history
 
+
 ::: {.collapse}
-<input type="checkbox" id="collapse-section4" checked aria-hidden="true">
+<input type="checkbox" id="collapse-section6" checked aria-hidden="true">
+<label for="collapse-section6" aria-hidden="true">V1.5.0 / 15-September-2025</label>
+<div>
+
+## Main changes
+
+### Maintenance release
+
+- Update to latest ST GitHub version, add private data to context
+
+##
+
+</div>
+:::
+
+::: {.collapse}
+<input type="checkbox" id="collapse-section5" aria-hidden="true">
+<label for="collapse-section5" aria-hidden="true">V1.4.0 / 14-August-2024</label>
+<div>
+
+## Main changes
+
+### Maintenance release
+
+- Update PID from ST GitHub and adapt HLD to it
+
+##
+
+</div>
+:::
+
+::: {.collapse}
+<input type="checkbox" id="collapse-section4" aria-hidden="true">
 <label for="collapse-section4" aria-hidden="true">V1.3.0 / 18-August-2023</label>
 <div>
 

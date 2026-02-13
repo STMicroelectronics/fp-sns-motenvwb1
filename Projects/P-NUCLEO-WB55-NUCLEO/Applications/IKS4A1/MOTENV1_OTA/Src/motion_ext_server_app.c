@@ -6,7 +6,7 @@
   ******************************************************************************
   * @attention
   *
-  * Copyright (c) 2024 STMicroelectronics.
+  * Copyright (c) 2025 STMicroelectronics.
   * All rights reserved.
   *
   * This software is licensed under terms that can be found in the LICENSE file
@@ -31,16 +31,11 @@
 #include "remap_conf.h"
 
 /* Private defines -----------------------------------------------------------*/
-
 #define EXT_CHECK_HW_FEATURE(Feature) ((HWExtFeaturesStatus&(Feature)) ? 1 : 0)
 #define EXT_ON_HW_FEATURE(Feature)    (HWExtFeaturesStatus|=(Feature))
 #define EXT_OFF_HW_FEATURE(Feature)   (HWExtFeaturesStatus&=(~Feature))
 
-#define VALUE_LEN_SMALL (2+2)
-#define VALUE_LEN_LARGE (2+3)
-
 /* Private typedef -----------------------------------------------------------*/
-
 /**
   * @brief  Enumerate the Acc event type
   */
@@ -66,27 +61,20 @@ typedef enum
 typedef struct
 {
   uint8_t NotificationStatus;
-
   uint8_t MultiEventEnabled;
   uint16_t PedometerStepCount;
-
   float defaultODR;
 } MOTION_EXT_Server_App_Context_t;
 
-/* Private macros ------------------------------------------------------------*/
-
 /* Private variables ---------------------------------------------------------*/
-
 PLACE_IN_SECTION("BLE_APP_CONTEXT") static MOTION_EXT_Server_App_Context_t MOTION_EXT_Server_App_Context;
 
 static uint32_t HWExtFeaturesStatus = 0;
 
-/* Global variables ----------------------------------------------------------*/
-
 /* Private function prototypes -----------------------------------------------*/
 static void EnableExtFeatures(void);
 static void DisableExtFeatures(void);
-static void AccEvent_Notify(uint16_t Command, uint8_t dimByte);
+static void AccEvent_Notify(uint8_t acc_events, uint16_t num_steps);
 static void Enable_Pedometer(void);
 static void Disable_Pedometer(void);
 static void Enable_FreeFall(void);
@@ -108,7 +96,6 @@ static MOTION_EXT_Server_App_AccEvent_t GetHWOrientation6D(void);
 /* Functions Definition ------------------------------------------------------*/
 
 /* Public functions ----------------------------------------------------------*/
-
 /**
   * @brief  Init the HW/Motion Extended (Acc Events) Service/Char Context
   * @param  None
@@ -120,7 +107,7 @@ void MOTION_EXT_Context_Init(void)
   int32_t intPart;
 
   /* Save the initial Output Data Rate */
-  MOTION_SENSOR_GetOutputDataRate(ACCELERO_INSTANCE, MOTION_ACCELERO, &MOTION_EXT_Server_App_Context.defaultODR);
+  MOTION_SENSOR_GET_OUTPUT_DATA_RATE(ACCELERO_INSTANCE, MOTION_ACCELERO, &MOTION_EXT_Server_App_Context.defaultODR);
   MCR_BLUEMS_F2I_2D(MOTION_EXT_Server_App_Context.defaultODR, intPart, decPart);
   MOTION_EXT_Server_App_Context.defaultODR = intPart * 100 + decPart;
 
@@ -142,14 +129,10 @@ void MOTION_EXT_Context_Init(void)
 void MOTION_EXT_Set_Notification_Status(uint8_t status)
 {
   MOTION_EXT_Server_App_Context.NotificationStatus = status;
-  if (status == 1)
+
+  if (!MOTION_EXT_Server_App_Context.NotificationStatus)
   {
-    Enable_MultiEvent();
-    CONFIG_Send_Notification(FEATURE_MASK_ACC_EVENTS, 'm', 1);
-  }
-  else if (status == 0)
-  {
-    Disable_MultiEvent();
+    DisableExtFeatures();
   }
 }
 
@@ -256,9 +239,9 @@ void MOTION_EXT_ReadCB(void)
 
   if (EXT_CHECK_HW_FEATURE(EXT_HWF_PEDOMETER))
   {
-    MOTION_SENSOR_Get_Step_Count(ACCELERO_INSTANCE, &StepCount);
+    MOTION_SENSOR_GET_STEP_COUNT(ACCELERO_INSTANCE, &StepCount);
   }
-  AccEvent_Notify(StepCount, 2);
+  AccEvent_Notify(0, StepCount);
 }
 
 /**
@@ -268,14 +251,22 @@ void MOTION_EXT_ReadCB(void)
   */
 void MOTION_EXT_Handle_IT(void)
 {
-  MOTION_SENSOR_Event_Status_t status;
+  MOTION_SENSOR_EVENT_STATUS_T status;
 
-  if (MOTION_SENSOR_Get_Event_Status(ACCELERO_INSTANCE, &status) != BSP_ERROR_NONE)
+  uint8_t AccEvents = 0;
+  uint8_t NeedToSend = 0;
+
+  if (MOTION_SENSOR_GET_EVENT_STATUS(ACCELERO_INSTANCE, &status) != BSP_ERROR_NONE)
   {
 #if (CFG_DEBUG_APP_TRACE != 0)
     APP_DBG_MSG("-- MOTION EXT APPLICATION SERVER : ERROR GETTING EVENT STATUS\n ");
 #endif /* CFG_DEBUG_APP_TRACE != 0 */
     return;
+  }
+
+  if (!EXT_CHECK_HW_FEATURE(EXT_HWF_PEDOMETER))
+  {
+    MOTION_EXT_Server_App_Context.PedometerStepCount = 0;
   }
 
   if ((EXT_CHECK_HW_FEATURE(EXT_HWF_PEDOMETER)) ||
@@ -284,11 +275,8 @@ void MOTION_EXT_Handle_IT(void)
     /* Check if the interrupt is due to Pedometer */
     if (status.StepStatus != 0)
     {
-      MOTION_SENSOR_Get_Step_Count(ACCELERO_INSTANCE, &MOTION_EXT_Server_App_Context.PedometerStepCount);
-      if (EXT_CHECK_HW_FEATURE(EXT_HWF_PEDOMETER))
-      {
-        AccEvent_Notify(MOTION_EXT_Server_App_Context.PedometerStepCount, 2);
-      }
+      MOTION_SENSOR_GET_STEP_COUNT(ACCELERO_INSTANCE, &MOTION_EXT_Server_App_Context.PedometerStepCount);
+      NeedToSend = 1;
     }
   }
 
@@ -298,7 +286,8 @@ void MOTION_EXT_Handle_IT(void)
     /* Check if the interrupt is due to Free Fall */
     if (status.FreeFallStatus != 0)
     {
-      AccEvent_Notify(ACC_FREE_FALL, 2);
+      NeedToSend = 1;
+      AccEvents |= ACC_FREE_FALL;
     }
   }
 
@@ -308,7 +297,8 @@ void MOTION_EXT_Handle_IT(void)
     /* Check if the interrupt is due to Single Tap */
     if (status.TapStatus != 0)
     {
-      AccEvent_Notify(ACC_SINGLE_TAP, 2);
+      NeedToSend = 1;
+      AccEvents |= ACC_SINGLE_TAP;
     }
   }
 
@@ -318,7 +308,8 @@ void MOTION_EXT_Handle_IT(void)
     /* Check if the interrupt is due to Double Tap */
     if (status.DoubleTapStatus != 0)
     {
-      AccEvent_Notify(ACC_DOUBLE_TAP, 2);
+      NeedToSend = 1;
+      AccEvents |= ACC_DOUBLE_TAP;
     }
   }
 
@@ -328,7 +319,8 @@ void MOTION_EXT_Handle_IT(void)
     /* Check if the interrupt is due to Tilt */
     if (status.TiltStatus != 0)
     {
-      AccEvent_Notify(ACC_TILT, 2);
+      NeedToSend = 1;
+      AccEvents |= ACC_TILT;
     }
   }
 
@@ -339,7 +331,8 @@ void MOTION_EXT_Handle_IT(void)
     if (status.D6DOrientationStatus != 0)
     {
       MOTION_EXT_Server_App_AccEvent_t Orientation = GetHWOrientation6D();
-      AccEvent_Notify(Orientation, 2);
+      NeedToSend = 1;
+      AccEvents |= Orientation;
     }
   }
 
@@ -348,18 +341,18 @@ void MOTION_EXT_Handle_IT(void)
     /* Check if the interrupt is due to Wake Up */
     if (status.WakeUpStatus != 0)
     {
-      AccEvent_Notify(ACC_WAKE_UP, 2);
+      NeedToSend = 1;
+      AccEvents |= ACC_WAKE_UP;
     }
   }
 
-  if (EXT_CHECK_HW_FEATURE(EXT_HWF_MULTIPLE_EVENTS))
+  if (NeedToSend)
   {
-    AccEvent_Notify(MOTION_EXT_Server_App_Context.PedometerStepCount, 3);
+    AccEvent_Notify(AccEvents, MOTION_EXT_Server_App_Context.PedometerStepCount);
   }
 }
 
 /* Private functions ---------------------------------------------------------*/
-
 /**
   * @brief  Enable Pedometer Extended Feature
   * @param  None
@@ -367,7 +360,7 @@ void MOTION_EXT_Handle_IT(void)
   */
 static void Enable_Pedometer(void)
 {
-  if (MOTION_SENSOR_Enable_Pedometer(ACCELERO_INSTANCE, MOTION_SENSOR_INT_PIN) != BSP_ERROR_NONE)
+  if (MOTION_SENSOR_ENABLE_PEDOMETER(ACCELERO_INSTANCE, MOTION_SENSOR_INT_PIN) != BSP_ERROR_NONE)
   {
 #if (CFG_DEBUG_APP_TRACE != 0)
     APP_DBG_MSG("-- MOTION EXT APPLICATION SERVER : ERROR ENABLING PEDOMETER\n ");
@@ -377,7 +370,7 @@ static void Enable_Pedometer(void)
   {
     EXT_ON_HW_FEATURE(EXT_HWF_PEDOMETER);
   }
-  MOTION_SENSOR_Reset_Step_Counter(ACCELERO_INSTANCE);
+  MOTION_SENSOR_RESET_STEP_COUNTER(ACCELERO_INSTANCE);
 }
 
 /**
@@ -387,7 +380,7 @@ static void Enable_Pedometer(void)
   */
 static void Disable_Pedometer(void)
 {
-  if (MOTION_SENSOR_Disable_Pedometer(ACCELERO_INSTANCE) != BSP_ERROR_NONE)
+  if (MOTION_SENSOR_DISABLE_PEDOMETER(ACCELERO_INSTANCE) != BSP_ERROR_NONE)
   {
 #if (CFG_DEBUG_APP_TRACE != 0)
     APP_DBG_MSG("-- MOTION EXT APPLICATION SERVER : ERROR DISABLING PEDOMETER\n ");
@@ -397,8 +390,8 @@ static void Disable_Pedometer(void)
   {
     EXT_OFF_HW_FEATURE(EXT_HWF_PEDOMETER);
   }
-  if (MOTION_SENSOR_SetOutputDataRate(ACCELERO_INSTANCE, MOTION_ACCELERO,
-                                      MOTION_EXT_Server_App_Context.defaultODR) != BSP_ERROR_NONE)
+  if (MOTION_SENSOR_SET_OUTPUT_DATA_RATE(ACCELERO_INSTANCE, MOTION_ACCELERO,
+                                         MOTION_EXT_Server_App_Context.defaultODR) != BSP_ERROR_NONE)
   {
 #if (CFG_DEBUG_APP_TRACE != 0)
     APP_DBG_MSG("-- MOTION EXT APPLICATION SERVER : ERROR SETTING DEFAULT ODR\n ");
@@ -413,7 +406,7 @@ static void Disable_Pedometer(void)
   */
 static void Enable_FreeFall(void)
 {
-  if (MOTION_SENSOR_Enable_Free_Fall_Detection(ACCELERO_INSTANCE, MOTION_SENSOR_INT_PIN) != BSP_ERROR_NONE)
+  if (MOTION_SENSOR_ENABLE_FREE_FALL_DETECTION(ACCELERO_INSTANCE, MOTION_SENSOR_INT_PIN) != BSP_ERROR_NONE)
   {
 #if (CFG_DEBUG_APP_TRACE != 0)
     APP_DBG_MSG("-- MOTION EXT APPLICATION SERVER : ERROR ENABLING FREE FALL\n ");
@@ -423,7 +416,7 @@ static void Enable_FreeFall(void)
   {
     EXT_ON_HW_FEATURE(EXT_HWF_FREE_FALL);
   }
-  if (MOTION_SENSOR_Set_Free_Fall_Threshold(ACCELERO_INSTANCE, FF_THRESHOLD) != BSP_ERROR_NONE)
+  if (MOTION_SENSOR_SET_FREE_FALL_THRESHOLD(ACCELERO_INSTANCE, FF_THRESHOLD) != BSP_ERROR_NONE)
   {
 #if (CFG_DEBUG_APP_TRACE != 0)
     APP_DBG_MSG("-- MOTION EXT APPLICATION SERVER : ERROR SETTING FF_TSH\n ");
@@ -438,7 +431,7 @@ static void Enable_FreeFall(void)
   */
 static void Disable_FreeFall(void)
 {
-  if (MOTION_SENSOR_Disable_Free_Fall_Detection(ACCELERO_INSTANCE) != BSP_ERROR_NONE)
+  if (MOTION_SENSOR_DISABLE_FREE_FALL_DETECTION(ACCELERO_INSTANCE) != BSP_ERROR_NONE)
   {
 #if (CFG_DEBUG_APP_TRACE != 0)
     APP_DBG_MSG("-- MOTION EXT APPLICATION SERVER : ERROR DISABLING FREE FALL\n ");
@@ -448,8 +441,8 @@ static void Disable_FreeFall(void)
   {
     EXT_OFF_HW_FEATURE(EXT_HWF_FREE_FALL);
   }
-  if (MOTION_SENSOR_SetOutputDataRate(ACCELERO_INSTANCE, MOTION_ACCELERO,
-                                      MOTION_EXT_Server_App_Context.defaultODR) != BSP_ERROR_NONE)
+  if (MOTION_SENSOR_SET_OUTPUT_DATA_RATE(ACCELERO_INSTANCE, MOTION_ACCELERO,
+                                         MOTION_EXT_Server_App_Context.defaultODR) != BSP_ERROR_NONE)
   {
 #if (CFG_DEBUG_APP_TRACE != 0)
     APP_DBG_MSG("-- MOTION EXT APPLICATION SERVER : ERROR SETTING DEFAULT ODR\n ");
@@ -464,7 +457,7 @@ static void Disable_FreeFall(void)
   */
 static void Enable_DoubleTap(void)
 {
-  if (MOTION_SENSOR_Enable_Double_Tap_Detection(ACCELERO_INSTANCE, MOTION_SENSOR_INT_PIN) != BSP_ERROR_NONE)
+  if (MOTION_SENSOR_ENABLE_DOUBLE_TAP_DETECTION(ACCELERO_INSTANCE, MOTION_SENSOR_INT_PIN) != BSP_ERROR_NONE)
   {
 #if (CFG_DEBUG_APP_TRACE != 0)
     APP_DBG_MSG("-- MOTION EXT APPLICATION SERVER : ERROR ENABLING DOUBLE TAP\n ");
@@ -474,13 +467,13 @@ static void Enable_DoubleTap(void)
   {
     EXT_ON_HW_FEATURE(EXT_HWF_DOUBLE_TAP);
   }
-  if (MOTION_SENSOR_Set_Tap_Threshold(ACCELERO_INSTANCE, TAP_THRESHOLD) != BSP_ERROR_NONE)
+  if (MOTION_SENSOR_SET_TAP_THRESHOLD(ACCELERO_INSTANCE, TAP_THRESHOLD) != BSP_ERROR_NONE)
   {
 #if (CFG_DEBUG_APP_TRACE != 0)
     APP_DBG_MSG("-- MOTION EXT APPLICATION SERVER : ERROR SETTING TAP_TSH\n ");
 #endif /* CFG_DEBUG_APP_TRACE != 0 */
   }
-  if (MOTION_SENSOR_Set_Tap_Duration_Time(ACCELERO_INSTANCE, TAP_DURATION) != BSP_ERROR_NONE)
+  if (MOTION_SENSOR_SET_TAP_DURATION_TIME(ACCELERO_INSTANCE, TAP_DURATION) != BSP_ERROR_NONE)
   {
 #if (CFG_DEBUG_APP_TRACE != 0)
     APP_DBG_MSG("-- MOTION EXT APPLICATION SERVER : ERROR SETTING TAP_DUR\n ");
@@ -495,7 +488,7 @@ static void Enable_DoubleTap(void)
   */
 static void Disable_DoubleTap(void)
 {
-  if (MOTION_SENSOR_Disable_Double_Tap_Detection(ACCELERO_INSTANCE) != BSP_ERROR_NONE)
+  if (MOTION_SENSOR_DISABLE_DOUBLE_TAP_DETECTION(ACCELERO_INSTANCE) != BSP_ERROR_NONE)
   {
 #if (CFG_DEBUG_APP_TRACE != 0)
     APP_DBG_MSG("-- MOTION EXT APPLICATION SERVER : ERROR DISABLING DOUBLE TAP\n ");
@@ -505,8 +498,8 @@ static void Disable_DoubleTap(void)
   {
     EXT_OFF_HW_FEATURE(EXT_HWF_DOUBLE_TAP);
   }
-  if (MOTION_SENSOR_SetOutputDataRate(ACCELERO_INSTANCE, MOTION_ACCELERO,
-                                      MOTION_EXT_Server_App_Context.defaultODR) != BSP_ERROR_NONE)
+  if (MOTION_SENSOR_SET_OUTPUT_DATA_RATE(ACCELERO_INSTANCE, MOTION_ACCELERO,
+                                         MOTION_EXT_Server_App_Context.defaultODR) != BSP_ERROR_NONE)
   {
 #if (CFG_DEBUG_APP_TRACE != 0)
     APP_DBG_MSG("-- MOTION EXT APPLICATION SERVER : ERROR SETTING DEFAULT ODR\n ");
@@ -521,7 +514,7 @@ static void Disable_DoubleTap(void)
   */
 static void Enable_SingleTap(void)
 {
-  if (MOTION_SENSOR_Enable_Single_Tap_Detection(ACCELERO_INSTANCE, MOTION_SENSOR_INT_PIN) != BSP_ERROR_NONE)
+  if (MOTION_SENSOR_ENABLE_SINGLE_TAP_DETECTION(ACCELERO_INSTANCE, MOTION_SENSOR_INT_PIN) != BSP_ERROR_NONE)
   {
 #if (CFG_DEBUG_APP_TRACE != 0)
     APP_DBG_MSG("-- MOTION EXT APPLICATION SERVER : ERROR ENABLING SINGLE TAP\n ");
@@ -540,7 +533,7 @@ static void Enable_SingleTap(void)
   */
 static void Disable_SingleTap(void)
 {
-  if (MOTION_SENSOR_Disable_Single_Tap_Detection(ACCELERO_INSTANCE) != BSP_ERROR_NONE)
+  if (MOTION_SENSOR_DISABLE_SINGLE_TAP_DETECTION(ACCELERO_INSTANCE) != BSP_ERROR_NONE)
   {
 #if (CFG_DEBUG_APP_TRACE != 0)
     APP_DBG_MSG("-- MOTION EXT APPLICATION SERVER : ERROR DISABLING SINGLE TAP\n ");
@@ -550,8 +543,8 @@ static void Disable_SingleTap(void)
   {
     EXT_OFF_HW_FEATURE(EXT_HWF_SINGLE_TAP);
   }
-  if (MOTION_SENSOR_SetOutputDataRate(ACCELERO_INSTANCE, MOTION_ACCELERO,
-                                      MOTION_EXT_Server_App_Context.defaultODR) != BSP_ERROR_NONE)
+  if (MOTION_SENSOR_SET_OUTPUT_DATA_RATE(ACCELERO_INSTANCE, MOTION_ACCELERO,
+                                         MOTION_EXT_Server_App_Context.defaultODR) != BSP_ERROR_NONE)
   {
 #if (CFG_DEBUG_APP_TRACE != 0)
     APP_DBG_MSG("-- MOTION EXT APPLICATION SERVER : ERROR SETTING DEFAULT ODR\n ");
@@ -566,7 +559,7 @@ static void Disable_SingleTap(void)
   */
 static void Enable_WakeUp(void)
 {
-  if (MOTION_SENSOR_Enable_Wake_Up_Detection(ACCELERO_INSTANCE, MOTION_SENSOR_INT_PIN) != BSP_ERROR_NONE)
+  if (MOTION_SENSOR_ENABLE_WAKE_UP_DETECTION(ACCELERO_INSTANCE, MOTION_SENSOR_INT_PIN) != BSP_ERROR_NONE)
   {
 #if (CFG_DEBUG_APP_TRACE != 0)
     APP_DBG_MSG("-- MOTION EXT APPLICATION SERVER : ERROR ENABLING WAKE UP\n ");
@@ -576,7 +569,7 @@ static void Enable_WakeUp(void)
   {
     EXT_ON_HW_FEATURE(EXT_HWF_WAKE_UP);
   }
-  if (MOTION_SENSOR_Set_Wake_Up_Threshold(ACCELERO_INSTANCE, WAKE_UP_THRESHOLD) != BSP_ERROR_NONE)
+  if (MOTION_SENSOR_SET_WAKE_UP_THRESHOLD(ACCELERO_INSTANCE, WAKE_UP_THRESHOLD) != BSP_ERROR_NONE)
   {
 #if (CFG_DEBUG_APP_TRACE != 0)
     APP_DBG_MSG("-- MOTION EXT APPLICATION SERVER : ERROR SETTING WAKE_UP_THS\n ");
@@ -591,7 +584,7 @@ static void Enable_WakeUp(void)
   */
 static void Disable_WakeUp(void)
 {
-  if (MOTION_SENSOR_Disable_Wake_Up_Detection(ACCELERO_INSTANCE) != BSP_ERROR_NONE)
+  if (MOTION_SENSOR_DISABLE_WAKE_UP_DETECTION(ACCELERO_INSTANCE) != BSP_ERROR_NONE)
   {
 #if (CFG_DEBUG_APP_TRACE != 0)
     APP_DBG_MSG("-- MOTION EXT APPLICATION SERVER : ERROR DISABLING WAKE UP\n ");
@@ -601,8 +594,8 @@ static void Disable_WakeUp(void)
   {
     EXT_OFF_HW_FEATURE(EXT_HWF_WAKE_UP);
   }
-  if (MOTION_SENSOR_SetOutputDataRate(ACCELERO_INSTANCE, MOTION_ACCELERO,
-                                      MOTION_EXT_Server_App_Context.defaultODR) != BSP_ERROR_NONE)
+  if (MOTION_SENSOR_SET_OUTPUT_DATA_RATE(ACCELERO_INSTANCE, MOTION_ACCELERO,
+                                         MOTION_EXT_Server_App_Context.defaultODR) != BSP_ERROR_NONE)
   {
 #if (CFG_DEBUG_APP_TRACE != 0)
     APP_DBG_MSG("-- MOTION EXT APPLICATION SERVER : ERROR SETTING DEFAULT ODR\n ");
@@ -617,7 +610,7 @@ static void Disable_WakeUp(void)
   */
 static void Enable_Tilt(void)
 {
-  if (MOTION_SENSOR_Enable_Tilt_Detection(ACCELERO_INSTANCE, MOTION_SENSOR_INT_PIN) != BSP_ERROR_NONE)
+  if (MOTION_SENSOR_ENABLE_TILT_DETECTION(ACCELERO_INSTANCE, MOTION_SENSOR_INT_PIN) != BSP_ERROR_NONE)
   {
 #if (CFG_DEBUG_APP_TRACE != 0)
     APP_DBG_MSG("-- MOTION EXT APPLICATION SERVER : ERROR ENABLING TILT\n ");
@@ -636,7 +629,7 @@ static void Enable_Tilt(void)
   */
 static void Disable_Tilt(void)
 {
-  if (MOTION_SENSOR_Disable_Tilt_Detection(ACCELERO_INSTANCE) != BSP_ERROR_NONE)
+  if (MOTION_SENSOR_DISABLE_TILT_DETECTION(ACCELERO_INSTANCE) != BSP_ERROR_NONE)
   {
 #if (CFG_DEBUG_APP_TRACE != 0)
     APP_DBG_MSG("-- MOTION EXT APPLICATION SERVER : ERROR DISABLING TILT\n ");
@@ -646,8 +639,8 @@ static void Disable_Tilt(void)
   {
     EXT_OFF_HW_FEATURE(EXT_HWF_TILT);
   }
-  if (MOTION_SENSOR_SetOutputDataRate(ACCELERO_INSTANCE, MOTION_ACCELERO,
-                                      MOTION_EXT_Server_App_Context.defaultODR) != BSP_ERROR_NONE)
+  if (MOTION_SENSOR_SET_OUTPUT_DATA_RATE(ACCELERO_INSTANCE, MOTION_ACCELERO,
+                                         MOTION_EXT_Server_App_Context.defaultODR) != BSP_ERROR_NONE)
   {
 #if (CFG_DEBUG_APP_TRACE != 0)
     APP_DBG_MSG("-- MOTION EXT APPLICATION SERVER : ERROR SETTING DEFAULT ODR\n ");
@@ -662,7 +655,7 @@ static void Disable_Tilt(void)
   */
 static void Enable_6D_Orientation(void)
 {
-  if (MOTION_SENSOR_Enable_6D_Orientation(ACCELERO_INSTANCE, MOTION_SENSOR_INT_PIN) != BSP_ERROR_NONE)
+  if (MOTION_SENSOR_ENABLE_6D_ORIENTATION(ACCELERO_INSTANCE, MOTION_SENSOR_INT_PIN) != BSP_ERROR_NONE)
   {
 #if (CFG_DEBUG_APP_TRACE != 0)
     APP_DBG_MSG("-- MOTION EXT APPLICATION SERVER : ERROR ENABLING 6D ORIENTATION\n ");
@@ -681,7 +674,7 @@ static void Enable_6D_Orientation(void)
   */
 static void Disable_6D_Orientation(void)
 {
-  if (MOTION_SENSOR_Disable_6D_Orientation(ACCELERO_INSTANCE) != BSP_ERROR_NONE)
+  if (MOTION_SENSOR_DISABLE_6D_ORIENTATION(ACCELERO_INSTANCE) != BSP_ERROR_NONE)
   {
 #if (CFG_DEBUG_APP_TRACE != 0)
     APP_DBG_MSG("-- MOTION EXT APPLICATION SERVER : ERROR DISABLING 6D ORIENTATION\n ");
@@ -691,8 +684,8 @@ static void Disable_6D_Orientation(void)
   {
     EXT_OFF_HW_FEATURE(EXT_HWF_6D_ORIENTATION);
   }
-  if (MOTION_SENSOR_SetOutputDataRate(ACCELERO_INSTANCE, MOTION_ACCELERO,
-                                      MOTION_EXT_Server_App_Context.defaultODR) != BSP_ERROR_NONE)
+  if (MOTION_SENSOR_SET_OUTPUT_DATA_RATE(ACCELERO_INSTANCE, MOTION_ACCELERO,
+                                         MOTION_EXT_Server_App_Context.defaultODR) != BSP_ERROR_NONE)
   {
 #if (CFG_DEBUG_APP_TRACE != 0)
     APP_DBG_MSG("-- MOTION EXT APPLICATION SERVER : ERROR SETTING DEFAULT ODR\n ");
@@ -708,15 +701,12 @@ static void Disable_6D_Orientation(void)
 static void Enable_MultiEvent(void)
 {
   DisableExtFeatures();
-
   EnableExtFeatures();
 
   MOTION_EXT_Server_App_Context.PedometerStepCount = 0;
-  AccEvent_Notify(MOTION_EXT_Server_App_Context.PedometerStepCount, 3);
-
+  AccEvent_Notify(0, MOTION_EXT_Server_App_Context.PedometerStepCount);
   EXT_ON_HW_FEATURE(EXT_HWF_MULTIPLE_EVENTS);
-
-  MOTION_SENSOR_Reset_Step_Counter(ACCELERO_INSTANCE);
+  MOTION_SENSOR_RESET_STEP_COUNTER(ACCELERO_INSTANCE);
 }
 
 /**
@@ -756,36 +746,43 @@ static void EnableExtFeatures(void)
   */
 static void DisableExtFeatures(void)
 {
+  /* Disable Pedometer */
   if (EXT_CHECK_HW_FEATURE(EXT_HWF_PEDOMETER))
   {
     Disable_Pedometer();
   }
 
+  /* Disable Free Fall */
   if (EXT_CHECK_HW_FEATURE(EXT_HWF_FREE_FALL))
   {
     Disable_FreeFall();
   }
 
+  /* Disable Double Tap */
   if (EXT_CHECK_HW_FEATURE(EXT_HWF_DOUBLE_TAP))
   {
     Disable_DoubleTap();
   }
 
+  /* Disable Single Tap */
   if (EXT_CHECK_HW_FEATURE(EXT_HWF_SINGLE_TAP))
   {
     Disable_SingleTap();
   }
 
+  /* Disable Wake Up */
   if (EXT_CHECK_HW_FEATURE(EXT_HWF_WAKE_UP))
   {
     Disable_WakeUp();
   }
 
+  /* Disable Tilt */
   if (EXT_CHECK_HW_FEATURE(EXT_HWF_TILT))
   {
     Disable_Tilt();
   }
 
+  /* Disable 6D Orientation */
   if (EXT_CHECK_HW_FEATURE(EXT_HWF_6D_ORIENTATION))
   {
     Disable_6D_Orientation();
@@ -810,35 +807,42 @@ static MOTION_EXT_Server_App_AccEvent_t GetHWOrientation6D(void)
   uint8_t zl = 0;
   uint8_t zh = 0;
 
-  if (MOTION_SENSOR_Get_6D_Orientation_XL(ACCELERO_INSTANCE, &xl) != BSP_ERROR_NONE)
+  if (MOTION_SENSOR_GET_6D_ORIENTATION_XL(ACCELERO_INSTANCE, &xl) != BSP_ERROR_NONE)
+  {
+#if (CFG_DEBUG_APP_TRACE != 0)
+    APP_DBG_MSG("-- MOTION EXT APPLICATION SERVER : Error getting 6D orientation XL axis from sensor "
+                "- accelerometer.\r\n");
+#endif /* CFG_DEBUG_APP_TRACE != 0 */
+  }
+  if (MOTION_SENSOR_GET_6D_ORIENTATION_XH(ACCELERO_INSTANCE, &xh) != BSP_ERROR_NONE)
   {
 #if (CFG_DEBUG_APP_TRACE != 0)
     APP_DBG_MSG("-- MOTION EXT APPLICATION SERVER : Error getting 6D orientation XH axis from sensor "
                 "- accelerometer.\r\n");
 #endif /* CFG_DEBUG_APP_TRACE != 0 */
   }
-  if (MOTION_SENSOR_Get_6D_Orientation_YL(ACCELERO_INSTANCE, &yl) != BSP_ERROR_NONE)
+  if (MOTION_SENSOR_GET_6D_ORIENTATION_YL(ACCELERO_INSTANCE, &yl) != BSP_ERROR_NONE)
   {
 #if (CFG_DEBUG_APP_TRACE != 0)
     APP_DBG_MSG("-- MOTION EXT APPLICATION SERVER : Error getting 6D orientation YL axis from sensor "
                 "- accelerometer.\r\n");
 #endif /* CFG_DEBUG_APP_TRACE != 0 */
   }
-  if (MOTION_SENSOR_Get_6D_Orientation_YH(ACCELERO_INSTANCE, &yh) != BSP_ERROR_NONE)
+  if (MOTION_SENSOR_GET_6D_ORIENTATION_YH(ACCELERO_INSTANCE, &yh) != BSP_ERROR_NONE)
   {
 #if (CFG_DEBUG_APP_TRACE != 0)
     APP_DBG_MSG("-- MOTION EXT APPLICATION SERVER : Error getting 6D orientation YH axis from sensor "
                 "- accelerometer.\r\n");
 #endif /* CFG_DEBUG_APP_TRACE != 0 */
   }
-  if (MOTION_SENSOR_Get_6D_Orientation_ZL(ACCELERO_INSTANCE, &zl) != BSP_ERROR_NONE)
+  if (MOTION_SENSOR_GET_6D_ORIENTATION_ZL(ACCELERO_INSTANCE, &zl) != BSP_ERROR_NONE)
   {
 #if (CFG_DEBUG_APP_TRACE != 0)
     APP_DBG_MSG("-- MOTION EXT APPLICATION SERVER : Error getting 6D orientation ZL axis from sensor "
                 "- accelerometer.\r\n");
 #endif /* CFG_DEBUG_APP_TRACE != 0 */
   }
-  if (MOTION_SENSOR_Get_6D_Orientation_ZH(ACCELERO_INSTANCE, &zh) != BSP_ERROR_NONE)
+  if (MOTION_SENSOR_GET_6D_ORIENTATION_ZH(ACCELERO_INSTANCE, &zh) != BSP_ERROR_NONE)
   {
 #if (CFG_DEBUG_APP_TRACE != 0)
     APP_DBG_MSG("-- MOTION EXT APPLICATION SERVER : Error getting 6D orientation ZH axis from sensor "
@@ -850,32 +854,26 @@ static MOTION_EXT_Server_App_AccEvent_t GetHWOrientation6D(void)
   {
     OrientationResult = ACC_6D_OR_RIGTH;
   }
-
   else if (xl == 1U && yl == 0U && zl == 0U && xh == 0U && yh == 0U && zh == 0U)
   {
     OrientationResult = ACC_6D_OR_TOP;
   }
-
   else if (xl == 0U && yl == 0U && zl == 0U && xh == 1U && yh == 0U && zh == 0U)
   {
     OrientationResult = ACC_6D_OR_BOTTOM;
   }
-
   else if (xl == 0U && yl == 1U && zl == 0U && xh == 0U && yh == 0U && zh == 0U)
   {
     OrientationResult = ACC_6D_OR_LEFT;
   }
-
   else if (xl == 0U && yl == 0U && zl == 0U && xh == 0U && yh == 0U && zh == 1U)
   {
     OrientationResult = ACC_6D_OR_UP;
   }
-
   else if (xl == 0U && yl == 0U && zl == 1U && xh == 0U && yh == 0U && zh == 0U)
   {
     OrientationResult = ACC_6D_OR_DOWN;
   }
-
   else
   {
 #if (CFG_DEBUG_APP_TRACE != 0)
@@ -892,23 +890,12 @@ static MOTION_EXT_Server_App_AccEvent_t GetHWOrientation6D(void)
   * @param  dimByte Num of Command bytes
   * @retval None
   */
-static void AccEvent_Notify(uint16_t Command, uint8_t dimByte)
+static void AccEvent_Notify(uint8_t acc_events, uint16_t num_steps)
 {
-  uint8_t valueSmall[VALUE_LEN_SMALL];
-  uint8_t valueLarge[VALUE_LEN_LARGE];
-
-  switch (dimByte)
-  {
-    case 2:
-      STORE_LE_16(valueSmall, (HAL_GetTick() >> 3));
-      STORE_LE_16(valueSmall + 2, Command);
-      break;
-    case 3:
-      STORE_LE_16(valueLarge, (HAL_GetTick() >> 3));
-      valueLarge[2] = 0;
-      STORE_LE_16(valueLarge + 3, Command);
-      break;
-  }
+  uint8_t buff[2 + 3];
+  STORE_LE_16(buff, (HAL_GetTick() / 10U));
+  buff[2] = acc_events;
+  STORE_LE_16(buff + 3, num_steps);
 
   if (MOTION_EXT_Server_App_Context.NotificationStatus)
   {
@@ -916,15 +903,8 @@ static void AccEvent_Notify(uint16_t Command, uint8_t dimByte)
     APP_DBG_MSG("-- MOTION EXT APPLICATION SERVER : NOTIFY CLIENT WITH NEW MOTION PARAMETER VALUE \n ");
     APP_DBG_MSG(" \n\r");
 #endif /* CFG_DEBUG_APP_TRACE != 0 */
-    switch (dimByte)
-    {
-      case 2:
-        MOTENV_STM_App_Update_Char(ACC_EVENT_CHAR_UUID, VALUE_LEN_SMALL, (uint8_t *)&valueSmall);
-        break;
-      case 3:
-        MOTENV_STM_App_Update_Char(ACC_EVENT_CHAR_UUID, VALUE_LEN_LARGE, (uint8_t *)&valueLarge);
-        break;
-    }
+
+    MOTENV_STM_App_Update_Char(ACC_EVENT_CHAR_UUID, 2 + 3, (uint8_t *)&buff);
   }
   else
   {

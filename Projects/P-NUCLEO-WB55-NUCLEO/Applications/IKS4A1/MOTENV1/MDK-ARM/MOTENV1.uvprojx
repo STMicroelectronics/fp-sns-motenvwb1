@@ -10,15 +10,14 @@
       <TargetName>MOTENV1</TargetName>
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
-      <pCCUsed>6180000::V6.18::ARMCLANG</pCCUsed>
       <uAC6>1</uAC6>
       <TargetOption>
         <TargetCommonOption>
           <Device>STM32WB55RGVx</Device>
           <Vendor>STMicroelectronics</Vendor>
-          <PackID>Keil.STM32WBxx_DFP.1.2.0</PackID>
-          <PackURL>http://www.keil.com/pack/</PackURL>
-          <Cpu>IRAM(0x20000008-0x2002FC07) IROM(0x08000000-0x807FFFF) IRAM2(0x20030000-0x200323FF) CLOCK(8000000) FPU2 CPUTYPE("Cortex-M4") TZ</Cpu>
+          <PackID>Keil.STM32WBxx_DFP.1.4.0</PackID>
+          <PackURL>https://www.keil.com/pack/</PackURL>
+          <Cpu>IRAM(0x20000000-0x2002FFFF) IROM(0x08000000-0x807FFFF) IRAM2(0x20030000-0x200323FF) CLOCK(8000000) FPU2 CPUTYPE("Cortex-M4") TZ</Cpu>
           <FlashUtilSpec></FlashUtilSpec>
           <StartupFile></StartupFile>
           <FlashDriverDll></FlashDriverDll>
@@ -246,8 +245,8 @@
               </Ocm6>
               <IRAM>
                 <Type>0</Type>
-                <StartAddress>0x20000008</StartAddress>
-                <Size>0x2fc00</Size>
+                <StartAddress>0x20000000</StartAddress>
+                <Size>0x30000</Size>
               </IRAM>
               <IROM>
                 <Type>1</Type>
@@ -301,8 +300,8 @@
               </OCR_RVCT8>
               <OCR_RVCT9>
                 <Type>0</Type>
-                <StartAddress>0x20000008</StartAddress>
-                <Size>0x2fc00</Size>
+                <StartAddress>0x20000000</StartAddress>
+                <Size>0x30000</Size>
               </OCR_RVCT9>
               <OCR_RVCT10>
                 <Type>0</Type>
@@ -461,9 +460,9 @@
               <FilePath>../Src/motion_server_app.c</FilePath>
             </File>
             <File>
-              <FileName>MotionAR_Manager.c</FileName>
+              <FileName>motion_ar_manager.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../Src/MotionAR_Manager.c</FilePath>
+              <FilePath>../Src/motion_ar_manager.c</FilePath>
             </File>
             <File>
               <FileName>motionar_server_app.c</FileName>
@@ -471,9 +470,9 @@
               <FilePath>../Src/motionar_server_app.c</FilePath>
             </File>
             <File>
-              <FileName>MotionCP_Manager.c</FileName>
+              <FileName>motion_cp_manager.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../Src/MotionCP_Manager.c</FilePath>
+              <FilePath>../Src/motion_cp_manager.c</FilePath>
             </File>
             <File>
               <FileName>motioncp_server_app.c</FileName>
@@ -481,9 +480,9 @@
               <FilePath>../Src/motioncp_server_app.c</FilePath>
             </File>
             <File>
-              <FileName>MotionFX_Manager.c</FileName>
+              <FileName>motion_fx_manager.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../Src/MotionFX_Manager.c</FilePath>
+              <FilePath>../Src/motion_fx_manager.c</FilePath>
             </File>
             <File>
               <FileName>motionfx_server_app.c</FileName>
@@ -491,9 +490,9 @@
               <FilePath>../Src/motionfx_server_app.c</FilePath>
             </File>
             <File>
-              <FileName>MotionGR_Manager.c</FileName>
+              <FileName>motion_gr_manager.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../Src/MotionGR_Manager.c</FilePath>
+              <FilePath>../Src/motion_gr_manager.c</FilePath>
             </File>
             <File>
               <FileName>motiongr_server_app.c</FileName>
@@ -501,9 +500,9 @@
               <FilePath>../Src/motiongr_server_app.c</FilePath>
             </File>
             <File>
-              <FileName>MotionID_Manager.c</FileName>
+              <FileName>motion_id_manager.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../Src/MotionID_Manager.c</FilePath>
+              <FilePath>../Src/motion_id_manager.c</FilePath>
             </File>
             <File>
               <FileName>motionid_server_app.c</FileName>
@@ -511,9 +510,9 @@
               <FilePath>../Src/motionid_server_app.c</FilePath>
             </File>
             <File>
-              <FileName>MotionPM_Manager.c</FileName>
+              <FileName>motion_pm_manager.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../Src/MotionPM_Manager.c</FilePath>
+              <FilePath>../Src/motion_pm_manager.c</FilePath>
             </File>
             <File>
               <FileName>motionpm_server_app.c</FileName>
@@ -521,9 +520,9 @@
               <FilePath>../Src/motionpm_server_app.c</FilePath>
             </File>
             <File>
-              <FileName>ToF_server_app.c</FileName>
+              <FileName>tof_server_app.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../Src/ToF_server_app.c</FilePath>
+              <FilePath>../Src/tof_server_app.c</FilePath>
             </File>
             <File>
               <FileName>motenvwb1_app_ble.c</FileName>
@@ -919,16 +918,6 @@
               <FileName>stm32wbxx_hal_rtc_ex.c</FileName>
               <FileType>1</FileType>
               <FilePath>../../../../../../Drivers/STM32WBxx_HAL_Driver/Src/stm32wbxx_hal_rtc_ex.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32wbxx_hal_tim.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>../../../../../../Drivers/STM32WBxx_HAL_Driver/Src/stm32wbxx_hal_tim.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32wbxx_hal_tim_ex.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>../../../../../../Drivers/STM32WBxx_HAL_Driver/Src/stm32wbxx_hal_tim_ex.c</FilePath>
             </File>
           </Files>
         </Group>

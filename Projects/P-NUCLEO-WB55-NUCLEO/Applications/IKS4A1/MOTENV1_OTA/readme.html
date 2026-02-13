@@ -75,7 +75,7 @@ the FLASH (address 0x08000000)</li>
 <li>flash user application from 0x8007000</li>
 </ol>
 <h3 id="issue"><b>Issue</b></h3>
-<p>After code generation from STM32CubeMX software before building:
+<ul><li>After code generation from STM32CubeMX software before building:</li>
 <ul>
 <li>for IAR, Keil and STM32CubeIDE replace the linker scripts with the scripts in the folder LinkerScript</li>
 <li>for Keil, open the “Options for Target” and in the tab “Target” set start= 0x8007000 and size = 0x79000</li>
@@ -85,7 +85,9 @@ the FLASH (address 0x08000000)</li>
 <li>--keep *.o(TAG_OTA_END)</li>
 </ul>
 </ul>
-</p>
+</ul>
+<ul><li>Compiler warning "BootLoader.elf has a LOAD segment with RWX permissions" is generated with STM32CubeIDE.
+<p>It doesn’t affect application performances.</p></li></ul>
 <h3 id="keywords"><b>Keywords</b></h3>
 <p>BLE, SPI, UART, MEMS</p>
 <h3 id="hardware-and-software-environment"><b>Hardware and Software
@@ -117,12 +119,12 @@ on VL53L3CX for STM32 Nucleo.</li>
 <h3 id="dependencies"><b>Dependencies</b></h3>
 <p>STM32Cube packages:</p>
 <ul>
-<li>STM32WBxx drivers from STM32ubeWB V1.19.0</li>
+<li>STM32WBxx drivers from STM32ubeWB V1.24.0</li>
 </ul>
 <p>X-CUBE packages:</p>
 <ul>
-<li>X-CUBE-MEMS1 V10.0.0</li>
-<li>X-CUBE-TOF1 V3.4.0</li>
+<li>X-CUBE-MEMS1 V12.0.0</li>
+<li>X-CUBE-TOF1 V3.4.3</li>
 </ul>
 <h3 id="how-to-use-it"><b>How to use it?</b></h3>
 <p>This package contains projects for 3 IDEs viz. IAR, Keil µVision 5
@@ -136,21 +138,21 @@ report errors after building.</li>
 <p>For IAR:</p>
 <ul>
 <li>Open IAR toolchain (this firmware has been successfully tested with
-Embedded Workbench V9.20.1).</li>
+Embedded Workbench V9.60.3).</li>
 <li>Open the IAR project file EWARM/Project.eww</li>
 <li>Rebuild all files</li>
 </ul>
 <p>For Keil µVision 5:</p>
 <ul>
 <li>Open Keil µVision 5 toolchain (this firmware has been successfully
-tested with MDK-ARM Professional Version: 5.37.0).</li>
+tested with MDK-ARM Professional Version: 5.38.0).</li>
 <li>Open the µVision project file MDK-ARM/MOTENV1.uvprojx</li>
 <li>Rebuild all files</li>
 </ul>
 <p>For Integrated Development Environment for STM32:</p>
 <ul>
 <li>Open STM32CubeIDE (this firmware has been successfully tested with
-Version 1.14.0).</li>
+Version 2.0.0).</li>
 <li>Set the default workspace proposed by the IDE (please be sure that
 there are not spaces in the workspace path).</li>
 <li>Press “File” -&gt; “Import” -&gt; “Existing Projects into
@@ -162,7 +164,7 @@ STM32CubeIDE).</li>
 <h3 id="author"><b>Author</b></h3>
 <p>SRA Application Team</p>
 <h3 id="license"><b>License</b></h3>
-<p>Copyright (c) 2024 STMicroelectronics. All rights reserved.</p>
+<p>Copyright (c) 2025 STMicroelectronics. All rights reserved.</p>
 <p>This software is licensed under terms that can be found in the
 LICENSE file in the root directory of this software component. If no
 LICENSE file comes with this software, it is provided AS-IS.</p>

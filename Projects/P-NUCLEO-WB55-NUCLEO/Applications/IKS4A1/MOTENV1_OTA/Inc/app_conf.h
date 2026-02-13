@@ -7,7 +7,7 @@
   ******************************************************************************
   * @attention
   *
-  * Copyright (c) 2024 STMicroelectronics.
+  * Copyright (c) 2025 STMicroelectronics.
   * All rights reserved.
   *
   * This software is licensed under terms that can be found in the LICENSE file
@@ -53,8 +53,6 @@
  * Define IO Authentication
  */
 #define CFG_BONDING_MODE                 (1)
-#define CFG_FIXED_PIN                    (111111)
-#define CFG_USED_FIXED_PIN               (0)
 #define CFG_ENCRYPTION_KEY_SIZE_MAX      (16)
 #define CFG_ENCRYPTION_KEY_SIZE_MIN      (8)
 
@@ -312,6 +310,13 @@
 #define CFG_BLE_MIN_TX_POWER            (-40)
 
 #define CFG_BLE_MAX_TX_POWER            (6)
+
+/**
+ * BLE stack Maximum number of created Enhanced ATT bearers to be configured
+ * in addition to the number of links
+ *     - Range: 0 .. 4
+ */
+#define CFG_BLE_MAX_ADD_EATT_BEARERS            (4)
 
 /**
  * BLE Rx model configuration flags to be configured with:
@@ -662,6 +667,7 @@ typedef enum
   /* USER CODE BEGIN CFG_SCH_Prio_Id_t */
 
   /* USER CODE END CFG_SCH_Prio_Id_t */
+  CFG_SCH_PRIO_NBR
 } CFG_SCH_Prio_Id_t;
 
 /**

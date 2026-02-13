@@ -7,7 +7,7 @@
   ******************************************************************************
   * @attention
   *
-  * Copyright (c) 2024 STMicroelectronics.
+  * Copyright (c) 2025 STMicroelectronics.
   * All rights reserved.
   *
   * This software is licensed under terms that can be found in the LICENSE file
@@ -22,11 +22,11 @@
 #define  __RTE_COMPONENTS_H__
 
 /* Defines ------------------------------------------------------------------*/
-/* STMicroelectronics.FP-SNS-MOTENVWB1.1.4.0 */
+/* STMicroelectronics.FP-SNS-MOTENVWB1.1.5.0 */
 #define MOTENV_OTA 1
-/* STMicroelectronics.X-CUBE-MEMS1.10.0.0 */
+/* STMicroelectronics.X-CUBE-MEMS1.12.0.0 */
 #define IKS4A1
-/* STMicroelectronics.X-CUBE-TOF1.3.4.0 */
+/* STMicroelectronics.X-CUBE-TOF1.3.4.3 */
 #define _53L3A2
 
 #endif /* __RTE_COMPONENTS_H__ */

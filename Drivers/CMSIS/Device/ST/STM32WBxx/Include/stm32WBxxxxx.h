@@ -42,6 +42,17 @@ extern "C" {
 /** @addtogroup Configuration_section_for_CMSIS
   * @{
   */
+#ifdef CORE_CM0PLUS
+/**
+  * @brief Configuration of the Cortex-M0+ Processor and Core Peripherals
+  */
+#define __CM0PLUS_REV             1U /*!< Core Revision r0p1                            */
+#define __VTOR_PRESENT            1U /*!< Vector Table Register supported               */
+#define __NVIC_PRIO_BITS          2U /*!< M0 core uses 2 Bits for the Priority Levels   */
+#define __Vendor_SysTickConfig    0U /*!< Set to 1 if different SysTick Config is used  */
+#define __FPU_PRESENT             0U /*!< FPU not present                               */
+
+#else /* CORE_CM4*/
 /**
   * @brief Configuration of the Cortex-M4 Processor and Core Peripherals
   */
@@ -51,6 +62,7 @@ extern "C" {
 #define __NVIC_PRIO_BITS          4U /*!< STM32WBxx uses 4 Bits for the Priority Levels */
 #define __Vendor_SysTickConfig    0U /*!< Set to 1 if different SysTick Config is used  */
 #define __FPU_PRESENT             1U /*!< FPU present                                   */
+#endif
 /**
   * @}
   */
@@ -63,6 +75,92 @@ extern "C" {
   * @brief $PRODUCTNAME_LC$ Interrupt Number Definition, according to the selected device
   *        in @ref Library_configuration_section
   */
+#ifdef CORE_CM0PLUS
+/*!< Interrupt Number Definition for M0 */
+typedef enum
+{
+  /******  Cortex-M0 Processor Exceptions Numbers ****************************************************************/
+  NonMaskableInt_IRQn          = -14,    /*!< Non Maskable Interrupt                                            */
+  HardFault_IRQn               = -13,    /*!< Cortex-M0+ Hard Fault Interrupt                                   */
+  SVC_IRQn                     = -5,     /*!< Cortex-M0+ SV Call Interrupt                                      */
+  PendSV_IRQn                  = -2,     /*!< Cortex-M0+ Pend SV Interrupt                                      */
+  SysTick_IRQn                 = -1,     /*!< Cortex-M0+ System Tick Interrupt                                  */
+
+  /*************  STM32WBxx specific Interrupt Numbers on M0 core ************************************************/
+  RESERVED                     = 0,      /*!< Reserved                                                          */
+  PVD_PVM_IRQn                 = 1,      /*!< PVD and PVM detector                                              */
+  RTC_LSECSS_IRQn              = 2,      /*!< RTC Wakeup + RTC Tamper and RTC TimeStamp + RTC Alarms (A & B) and*/
+  /*!< LSECSS Interrupts                                                 */
+#if defined (STM32WB55xx) || defined (STM32WB35xx) || defined(STM32WB5Mxx) || defined (STM32WB25xx)
+  USB_CRS_IRQn                 = 3,      /*!< USB High Priority, Low Priority (including USB wakeup) and CRS    */
+  /*!< Interrupt                                                         */
+#endif
+  RCC_FLASH_C1SEV_IRQn         = 4,      /*!< RCC Interrupt, FLASH interrupt and CPU1 SEV                       */
+  EXTI1_0_IRQn                 = 5,      /*!< EXTI Line 1:0 Interrupt                                           */
+  EXTI3_2_IRQn                 = 6,      /*!< EXTI Line 3:2 Interrupt                                           */
+  EXTI15_4_IRQn                = 7,      /*!< EXTI Line 15:4 interrupt                                          */
+#if defined(STM32WB55xx) || defined(STM32WB5Mxx) || defined(STM32WB50xx) || defined(STM32WB25xx)
+  TSC_802_0_IRQn               = 8,      /*!< TSC Interrupt and 802.15.4 interrupt 0                            */
+#elif defined (STM32WB35xx) || defined (STM32WB30xx)
+  _802_0_IRQn                  = 8,      /*!< 802.15.4 interrupt 0                                              */
+#elif defined(STM32WB15xx) || defined(STM32WB10xx) || defined(STM32WB10xx) || defined(STM32WB1Mxx)
+  TSC_IRQn                     = 8,      /*!< TSC Interrupt                                                     */
+#endif
+  DMA1_Channel1_2_3_IRQn       = 9,      /*!< DMA1 Channels 1,2,3 Interrupt                                     */
+  DMA1_Channel4_5_6_7_IRQn     = 10,     /*!< DMA1 Channels 4,5,6,7 Interrupt                                   */
+#if defined (STM32WB55xx) || defined (STM32WB35xx) || defined(STM32WB5Mxx) || defined (STM32WB25xx)
+  DMA2_DMAMUX1_OVR_IRQn        = 11,     /*!< DMA2 Channels[1..7] and DMAMUX1 Overrun Interrupt                 */
+#elif defined (STM32WB50xx) || defined (STM32WB30xx) || defined (STM32WB20xx) || defined(STM32WB15xx) || defined(STM32WB10xx) || defined(STM32WB1Mxx)
+  DMAMUX1_OVR_IRQn             = 11,     /*!< DMAMUX1 Overrun Interrupt                                         */
+#endif
+#if defined (STM32WB55xx) || defined (STM32WB35xx) || defined(STM32WB5Mxx) || defined (STM32WB25xx)
+  ADC1_COMP_IRQn               = 12,     /*!< ADC1, COMP1, COMP2 interrupts                                     */
+#elif defined (STM32WB50xx) || defined (STM32WB30xx) || defined (STM32WB20xx) || defined(STM32WB10xx)
+  ADC1_IRQn                    = 12,     /*!< ADC1 interrupt                                                    */
+#elif defined(STM32WB15xx) || defined(STM32WB1Mxx)
+  ADC1_COMP_IRQn               = 12,     /*!< ADC1, COMP1 interrupts                                            */
+#endif
+  LPTIM1_IRQn                  = 13,     /*!< LPTIM1 Interrupt                                                  */
+  LPTIM2_IRQn                  = 14,     /*!< LPTIM2 Interrupt                                                  */
+  TIM1_IRQn                    = 15,     /*!< TIM1 Interrupt                                                    */
+  TIM2_IRQn                    = 16,     /*!< TIM2 Interrupt                                                    */
+#if defined(STM32WB55xx) || defined (STM32WB35xx) || defined(STM32WB5Mxx) || defined(STM32WB50xx) || defined (STM32WB30xx) || defined(STM32WB25xx) || defined(STM32WB20xx)
+  TIM16_IRQn                   = 17,     /*!< TIM16 Interrupt                                                   */
+  TIM17_IRQn                   = 18,     /*!< TIM17 Interrupt                                                   */
+#endif
+  IPCC_C2_RX_C2_TX_HSEM_IRQn   = 19,     /*!< IPCC RX Occupied and TX Free Interrupt and Semaphore Interrupt    */
+#if defined(STM32WB15xx) || defined(STM32WB10xx) || defined(STM32WB1Mxx)
+  RNG_PKA_IRQn                 = 20,     /*!< RNG and PKA Interrupt                                             */
+#else
+  AES1_RNG_PKA_IRQn            = 20,     /*!< AES1,RNG and PKA Interrupt                                        */
+#endif
+  AES2_IRQn                    = 21,     /*!< AES2 Interrupt                                                    */
+#if defined (STM32WB55xx) || defined(STM32WB5Mxx)
+  LCD_802_1_IRQn               = 22,     /*!< LCD Interrupt and 802.15.4 interrupt 1                            */
+#elif defined(STM32WB50xx) || defined (STM32WB35xx)  || defined (STM32WB30xx) || defined(STM32WB25xx) || defined(STM32WB20xx)
+  _802_1_IRQn                  = 22,     /*!< 802.15.4 interrupt 1                                              */
+#endif
+  I2C1_IRQn                    = 23,     /*!< I2C1 Event and Error Interrupt                                    */
+#if defined (STM32WB55xx) || defined (STM32WB35xx) || defined(STM32WB5Mxx) || defined (STM32WB25xx)
+  I2C3_IRQn                    = 24,     /*!< I2C3 Event and Error Interrupt                                    */
+#endif
+  SPI1_IRQn                    = 25,     /*!< SPI1 Interrupts                                                   */
+#if defined (STM32WB55xx) || defined(STM32WB5Mxx) || defined (STM32WB25xx)
+  SPI2_IRQn                    = 26,     /*!< SPI2 Interrupt                                                    */
+#endif
+  USART1_IRQn                  = 27,     /*!< USART1 Interrupt                                                  */
+#if defined (STM32WB55xx) || defined (STM32WB35xx) || defined(STM32WB5Mxx) || defined (STM32WB25xx) || defined (STM32WB15xx) || defined(STM32WB1Mxx)
+  LPUART1_IRQn                 = 28,     /*!< LPUART1 Interrupt                                                 */
+#endif
+#if defined (STM32WB55xx) || defined (STM32WB35xx) || defined(STM32WB5Mxx)
+  SAI1_IRQn                    = 29,     /*!< SAI1 A and B global interrupt                                     */
+#endif
+  BLE_IRQn                     = 30,     /*!< BLE Interrupt                                                     */
+#if defined(STM32WB55xx) || defined (STM32WB35xx) || defined(STM32WB5Mxx) || defined(STM32WB50xx) || defined (STM32WB30xx) || defined(STM32WB25xx) || defined(STM32WB20xx)
+  _802_2_HOST_WKUP_IRQn        = 31      /*!< 802.15.4 interrupt 2 and host wakeup interrupt                    */
+#endif
+} IRQn_Type;
+#else /* CORE_CM4 */
 /*!< Interrupt Number Definition for M4 */
 typedef enum
 {
@@ -183,8 +281,13 @@ typedef enum
 /**
   * @}
   */
+#endif
 
+#ifdef CORE_CM0PLUS
+#include "core_cm0plus.h"            /* Cortex-M0+ processor and core peripherals */
+#else /*CORE_CM4 */
 #include "core_cm4.h"                /* Cortex-M4 processor and core peripherals */
+#endif
 #include "system_stm32wbxx.h"
 #include <stdint.h>
 
@@ -1281,6 +1384,13 @@ typedef struct
 /* Debug MCU registers base address */
 #define DBGMCU_BASE           (0xE0042000UL)
 
+#ifdef CORE_CM0PLUS
+/*!< APB3 RF peripherals */
+#define BLE_WKUP_BASE      (0x62000000UL)
+#define BLE_CORE_BASE      (0x65000000UL)
+#define BLE_RCC_BASE       (0x66000000UL)
+#define B_15_4_CORE_BASE   (0x67000000UL)
+#endif /* CORE_CM0PLUS */
 
 /*!< AHB3 peripherals */
 #if defined (STM32WB55xx) || defined (STM32WB35xx) || defined(STM32WB5Mxx) || defined (STM32WB25xx)
@@ -1434,7 +1544,11 @@ typedef struct
 #define IPCC_C2             ((IPCC_CommonTypeDef *) (IPCC_BASE + 0x10U))
 #define RNG                 ((RNG_TypeDef *) RNG_BASE)
 #define HSEM                ((HSEM_TypeDef *) HSEM_BASE)
+#if defined(CORE_CM0PLUS)
+#define HSEM_COMMON         ((HSEM_Common_TypeDef *) (HSEM_BASE + 0x110U))
+#else
 #define HSEM_COMMON         ((HSEM_Common_TypeDef *) (HSEM_BASE + 0x100U))
+#endif
 #define AES2                ((AES_TypeDef *) AES2_BASE)
 #define PKA                 ((PKA_TypeDef *) PKA_BASE)
 #define FLASH               ((FLASH_TypeDef *) FLASH_REG_BASE)
@@ -7050,7 +7164,11 @@ typedef struct
 #define HSEM_CR_COREID           HSEM_CR_COREID_Msk                            /*!<CoreID of semaphores to be cleared. */
 #define HSEM_CR_COREID_CPU1      (0x4U << HSEM_CR_COREID_Pos)
 #define HSEM_CR_COREID_CPU2      (0x8U << HSEM_CR_COREID_Pos)
+#if defined(CORE_CM0PLUS)
+#define HSEM_CR_COREID_CURRENT   HSEM_CR_COREID_CPU2
+#else
 #define HSEM_CR_COREID_CURRENT   HSEM_CR_COREID_CPU1
+#endif
 #define HSEM_CR_KEY_Pos          (16U)
 #define HSEM_CR_KEY_Msk          (0xFFFFUL << HSEM_CR_KEY_Pos)                 /*!< 0xFFFF0000 */
 #define HSEM_CR_KEY              HSEM_CR_KEY_Msk                               /*!<semaphores clear key. */
@@ -13345,7 +13463,7 @@ typedef struct
 
 /*******************  Bit definition for TIM_CCR5 register  *******************/
 #define TIM_CCR5_CCR5_Pos         (0U)
-#define TIM_CCR5_CCR5_Msk         (0xFFFFFFFFUL << TIM_CCR5_CCR5_Pos)          /*!< 0xFFFFFFFF */
+#define TIM_CCR5_CCR5_Msk         (0xFFFFUL << TIM_CCR5_CCR5_Pos)          /*!< 0xFFFF */
 #define TIM_CCR5_CCR5             TIM_CCR5_CCR5_Msk                            /*!<Capture/Compare 5 Value */
 #define TIM_CCR5_GC5C1_Pos        (29U)
 #define TIM_CCR5_GC5C1_Msk        (0x1UL << TIM_CCR5_GC5C1_Pos)                /*!< 0x20000000 */

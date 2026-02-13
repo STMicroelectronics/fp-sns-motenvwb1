@@ -7,7 +7,7 @@
   ******************************************************************************
   * @attention
   *
-  * Copyright (c) 2024 STMicroelectronics.
+  * Copyright (c) 2025 STMicroelectronics.
   * All rights reserved.
   *
   * This software is licensed under terms that can be found in the LICENSE file
@@ -34,9 +34,9 @@ extern "C" {
 #include "hw_if.h"
 
 /**
- * Enable or Disable traces
- * The raw data output is the hci binary packet format as specified by the BT specification *
- */
+  * Enable or Disable traces
+  * The raw data output is the hci binary packet format as specified by the BT specification *
+  */
 #define TL_SHCI_CMD_DBG_EN      0   /* Reports System commands sent to CPU2 and the command response */
 #define TL_SHCI_CMD_DBG_RAW_EN  0   /* Reports raw data System commands sent to CPU2 and the command response */
 #define TL_SHCI_EVT_DBG_EN      0   /* Reports System Asynchronous Events received from CPU2 */
@@ -50,12 +50,12 @@ extern "C" {
 #define TL_MM_DBG_EN            0   /* Reports the information of the buffer released to CPU2 */
 
 /**
- * Macro definition
- */
+  * Macro definition
+  */
 
 /**
- * System Transport Layer
- */
+  * System Transport Layer
+  */
 #if (TL_SHCI_CMD_DBG_EN != 0)
 #define TL_SHCI_CMD_DBG_MSG             PRINT_MESG_DBG
 #define TL_SHCI_CMD_DBG_BUF             PRINT_LOG_BUFF_DBG
@@ -85,8 +85,8 @@ extern "C" {
 #endif
 
 /**
- * BLE Transport Layer
- */
+  * BLE Transport Layer
+  */
 #if (TL_HCI_CMD_DBG_EN != 0)
 #define TL_HCI_CMD_DBG_MSG             PRINT_MESG_DBG
 #define TL_HCI_CMD_DBG_BUF             PRINT_LOG_BUFF_DBG
@@ -116,8 +116,8 @@ extern "C" {
 #endif
 
 /**
- * Memory Manager - Released buffer tracing
- */
+  * Memory Manager - Released buffer tracing
+  */
 #if (TL_MM_DBG_EN != 0)
 #define TL_MM_DBG_MSG             PRINT_MESG_DBG
 #else

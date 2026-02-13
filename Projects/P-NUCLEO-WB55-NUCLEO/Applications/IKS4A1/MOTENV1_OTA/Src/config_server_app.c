@@ -6,7 +6,7 @@
   ******************************************************************************
   * @attention
   *
-  * Copyright (c) 2024 STMicroelectronics.
+  * Copyright (c) 2025 STMicroelectronics.
   * All rights reserved.
   *
   * This software is licensed under terms that can be found in the LICENSE file
@@ -120,7 +120,7 @@ void CONFIG_Send_Notification(uint32_t Feature, uint8_t Command, uint8_t data)
   uint8_t value[VALUE_LEN_CONFIG];
 
   /* Timestamp */
-  STORE_LE_16(value, (HAL_GetTick() >> 3));
+  STORE_LE_16(value, (HAL_GetTick() / 10));
   STORE_BE_32(value + 2, Feature);
   value[6] = Command;
   value[7] = data;

@@ -98,7 +98,40 @@ Note:
 # Update History
 
 ::: {.collapse}
-<input type="checkbox" id="collapse-section14" checked aria-hidden="true">
+<input type="checkbox" id="collapse-section16" checked aria-hidden="true">
+<label for="collapse-section16" aria-hidden="true">V1.12.3/ 04-June-2025</label>
+<div>
+
+## Main Changes
+
+- Fix Capture Compare register TIMx_CCR5 defintion
+- Allow redefinition of the macro 'VECT_TAB_OFFSET' externally from the IDE, makefile, or command line.
+
+## Supported Devices and boards
+
+- STM32WB55xx, STM32WB5Mxx, STM32WB50xx, STM32WB35xx, STM32WB30xx, STM32WB15xx, STM32WB10xx and STM32WB1Mxx devices.
+
+</div>
+:::
+
+::: {.collapse}
+<input type="checkbox" id="collapse-section15" aria-hidden="true">
+<label for="collapse-section15" aria-hidden="true">V1.12.2/ 05-June-2024</label>
+<div>
+
+## Main Changes
+
+- Properly mark sections readonly for GCC
+
+## Supported Devices and boards
+
+- STM32WB55xx, STM32WB5Mxx, STM32WB50xx, STM32WB35xx, STM32WB30xx, STM32WB15xx, STM32WB10xx and STM32WB1Mxx devices.
+
+</div>
+:::
+
+::: {.collapse}
+<input type="checkbox" id="collapse-section14" aria-hidden="true">
 <label for="collapse-section14" aria-hidden="true">V1.12.1 / 07-February-2024</label>
 <div>
 

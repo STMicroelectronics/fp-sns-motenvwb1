@@ -1,12 +1,12 @@
 /* USER CODE BEGIN Header */
 /**
   ******************************************************************************
-  * @file    ToF_server_app.c
+  * @file    tof_server_app.c
   * @brief   Handle HW/ToF/Char
   ******************************************************************************
   * @attention
   *
-  * Copyright (c) 2024 STMicroelectronics.
+  * Copyright (c) 2025 STMicroelectronics.
   * All rights reserved.
   *
   * This software is licensed under terms that can be found in the LICENSE file
@@ -24,7 +24,7 @@
 #include "dbg_trace.h"
 
 #include "motenv_server_app.h"
-#include "ToF_server_app.h"
+#include "tof_server_app.h"
 #include "config_server_app.h"
 
 uint8_t ToFMObjPresence = 0;

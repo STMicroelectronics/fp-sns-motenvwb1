@@ -1,11 +1,11 @@
 /*****************************************************************************
  * @file    ble_bufsize.h
- * @author  MDG
+ *
  * @brief   Definition of BLE stack buffers size
  *****************************************************************************
  * @attention
  *
- * Copyright (c) 2018-2024 STMicroelectronics.
+ * Copyright (c) 2018-2025 STMicroelectronics.
  * All rights reserved.
  *
  * This software is licensed under terms that can be found in the LICENSE file
@@ -49,7 +49,7 @@
  */
 #define BLE_MEM_BLOCK_SIZE                   32
 
-#if (SLAVE_ONLY != 0) ||(BASIC_FEATURES != 0)
+#if (SLAVE_ONLY != 0) || (BASIC_FEATURES != 0)
 #define BLE_MEM_BLOCK_X_PTX(n_link)           0
 #else
 #define BLE_MEM_BLOCK_X_PTX(n_link)           (n_link)
@@ -97,24 +97,24 @@
  *   mentioned parameters.
 */
 #if (BEACON_ONLY != 0)
-#define BLE_FIXED_BUFFER_SIZE_BYTES  4100   /* Beacon only */
+#define BLE_FIXED_BUFFER_SIZE_BYTES  4200   /* Beacon only */
 #elif (LL_ONLY_BASIC != 0)
-#define BLE_FIXED_BUFFER_SIZE_BYTES  6040   /* LL only Basic*/
+#define BLE_FIXED_BUFFER_SIZE_BYTES  5960   /* LL only Basic*/
 #elif (LL_ONLY != 0)
 #define BLE_FIXED_BUFFER_SIZE_BYTES  6288   /* LL only Full */
 #elif (SLAVE_ONLY != 0)
 #define BLE_FIXED_BUFFER_SIZE_BYTES  6408   /* Peripheral only */
 #elif (BASIC_FEATURES != 0)
-#define BLE_FIXED_BUFFER_SIZE_BYTES  7184   /* Basic Features */
+#define BLE_FIXED_BUFFER_SIZE_BYTES  6928   /* Basic Features */
 #else
-#define BLE_FIXED_BUFFER_SIZE_BYTES  7468   /* Full stack */
+#define BLE_FIXED_BUFFER_SIZE_BYTES  7212   /* Full stack */
 #endif
 
 /*
  * BLE_PER_LINK_SIZE_BYTES: additional memory size used per link
  */
 #if (BEACON_ONLY != 0)
-#define BLE_PER_LINK_SIZE_BYTES       108   /* Beacon only */
+#define BLE_PER_LINK_SIZE_BYTES        76   /* Beacon only */
 #elif (LL_ONLY_BASIC != 0)
 #define BLE_PER_LINK_SIZE_BYTES       244   /* LL only Basic */
 #elif (LL_ONLY != 0)

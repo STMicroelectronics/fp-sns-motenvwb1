@@ -96,6 +96,9 @@
 /* Define to 1 to enable Mle Link Metrics Subject */
 #define OPENTHREAD_CONFIG_MLE_LINK_METRICS_SUBJECT_ENABLE 1
 
+/* Define to 1 to support CSL feature */
+#define OPENTHREAD_CONFIG_MAC_CSL_RECEIVER_ENABLE 1
+
 /* Define to 1 if you want to enable microsecond backoff timer implemented in platform. */
 #define OPENTHREAD_CONFIG_PLATFORM_USEC_TIMER_ENABLE 1
 
@@ -164,5 +167,17 @@
 
 /* Define to 1 to enable CONFIG MLE PARENT RESPONSE CALLBACK mode support */
 #define OPENTHREAD_CONFIG_MLE_PARENT_RESPONSE_CALLBACK_API_ENABLE 1
+
+/* Define to 1 to enable vendor info set api */
+#define OPENTHREAD_CONFIG_NET_DIAG_VENDOR_INFO_SET_API_ENABLE 1
+
+/* Define to 1 to enable border agent apis */
+#define OPENTHREAD_CONFIG_BORDER_AGENT_ENABLE 0
+
+/* Define to 1 to enable ephemeral key mechanism and its APIs in Border Agent */
+#define OPENTHREAD_CONFIG_BORDER_AGENT_EPHEMERAL_KEY_ENABLE 0
+
+/* Define to 1 to get the current device properties */
+#define OPENTHREAD_CONFIG_MLE_DEVICE_PROPERTY_LEADER_WEIGHT_ENABLE 0
 
 #endif /* OPENTHREAD_API_CONFIG_FTD_FULL_H_ */

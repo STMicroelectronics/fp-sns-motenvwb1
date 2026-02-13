@@ -39,15 +39,19 @@ To support OTA you need:
 
 ### <b>Issue</b>
 
-After code generation from STM32CubeMX software before building:
+1) After code generation from STM32CubeMX software before building:
 
- - for IAR, Keil and STM32CubeIDE replace the linker scripts with the scripts in the folder LinkerScript
- - for Keil, open the "Options for Target" and in the tab "Target" set start= 0x8007000 and size= 0x79000.
- - for Keil, open the "Options for Target" and in the tab "Linker" in "Misc controls" insert:
+   - for IAR, Keil and STM32CubeIDE replace the linker scripts with the scripts in the folder LinkerScript
+   - replace the startup_stm32wb55rgvx.s with the startup_stm32wb55rgvx.s in the folder LinkerScript
+   - for Keil, open the "Options for Target" and in the tab "Target" set start= 0x8007000 and size= 0x79000.
+   - for Keil, open the "Options for Target" and in the tab "Linker" in "Misc controls" insert:
  
-   --keep *.o(TAG_OTA_START)
+     --keep *.o(TAG_OTA_START)
    
-   --keep *.o(TAG_OTA_END)
+     --keep *.o(TAG_OTA_END)
+   
+2) Compiler warning "BootLoader.elf has a LOAD segment with RWX permissions" is generated with STM32CubeIDE.
+It doesn’t affect application performances.
    
 ### <b>Keywords</b>
 
@@ -82,12 +86,12 @@ ADDITIONAL_COMP : STTS22H https://www.st.com/en/mems-and-sensors/stts22h.html
 
 STM32Cube packages:
 
-  - STM32WBxx drivers from STM32ubeWB V1.19.0
+  - STM32WBxx drivers from STM32ubeWB V1.24.0
   
 X-CUBE packages:
 
-  - X-CUBE-MEMS1 V10.0.0
-  - X-CUBE-TOF1 V3.4.0
+  - X-CUBE-MEMS1 V12.0.0
+  - X-CUBE-TOF1 V3.4.3
 
 ### <b>How to use it?</b>
 
@@ -100,19 +104,19 @@ In order to make the  program work, you must do the following:
 
 For IAR:
 
- - Open IAR toolchain (this firmware has been successfully tested with Embedded Workbench V9.20.1).
+ - Open IAR toolchain (this firmware has been successfully tested with Embedded Workbench V9.60.3).
  - Open the IAR project file EWARM/Project.eww
  - Rebuild all files
 
 For Keil µVision 5:
 
- - Open Keil µVision 5 toolchain (this firmware has been successfully tested with MDK-ARM Professional Version: 5.37.0).
+ - Open Keil µVision 5 toolchain (this firmware has been successfully tested with MDK-ARM Professional Version: 5.38.0).
  - Open the µVision project file MDK-ARM/MOTENV1.uvprojx
  - Rebuild all files
  
 For Integrated Development Environment for STM32:
 
- - Open STM32CubeIDE (this firmware has been successfully tested with Version 1.14.0).
+ - Open STM32CubeIDE (this firmware has been successfully tested with Version 2.2.0).
  - Set the default workspace proposed by the IDE (please be sure that there are not spaces in the workspace path).
  - Press "File" -> "Import" -> "Existing Projects into Workspace"; press "Browse" in the "Select root directory" and choose the path where the System
    Workbench project is located (it should be STM32CubeIDE). 
@@ -124,7 +128,7 @@ SRA Application Team
 
 ### <b>License</b>
 
-Copyright (c) 2024 STMicroelectronics.
+Copyright (c) 2025 STMicroelectronics.
 All rights reserved.
 
 This software is licensed under terms that can be found in the LICENSE file

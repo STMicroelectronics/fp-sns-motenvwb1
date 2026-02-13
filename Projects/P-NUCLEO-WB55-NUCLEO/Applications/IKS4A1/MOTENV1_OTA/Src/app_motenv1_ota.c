@@ -8,7 +8,7 @@
   ******************************************************************************
   * @attention
   *
-  * Copyright (c) 2024 STMicroelectronics.
+  * Copyright (c) 2025 STMicroelectronics.
   * All rights reserved.
   *
   * This software is licensed under terms that can be found in the LICENSE file
@@ -28,7 +28,7 @@
 #include "stm32_lpm.h"
 #include "stm32_seq.h"
 #include "dbg_trace.h"
-#include "ToF_server_app.h"
+#include "tof_server_app.h"
 
 #include "remap_conf.h"
 #include "env_server_app.h"
@@ -237,26 +237,26 @@ static void User_Init(void)
 
   APP_DBG_MSG("\033[2J\033[1;1f");
   APP_DBG_MSG("\r\nSTMicroelectronics %s:\r\n"
-                 "\tVersion 1.4.0\r\n"
-                 "\t%s board"
-                 "\r\n",
-                 "FP-SNS-MOTENVWB1",
-                 "NUCLEO-WB55RG");
+              "\tVersion 1.5.0\r\n"
+              "\t%s board"
+              "\r\n",
+              "FP-SNS-MOTENVWB1",
+              "NUCLEO-WB55RG");
 
   APP_DBG_MSG("\n\t(HAL %ld.%ld.%ld_%ld)\r\n"
-                 "\tCompiled %s %s"
+              "\tCompiled %s %s"
 #if defined (__IAR_SYSTEMS_ICC__)
-                 " (IAR)\r\n\n",
+              " (IAR)\r\n\n",
 #elif defined (__CC_ARM) || (defined(__ARMCC_VERSION) && (__ARMCC_VERSION >= 6010050)) /* For ARM Compiler 5 and 6 */
-                 " (KEIL)\r\n\n",
+              " (KEIL)\r\n\n",
 #elif defined (__GNUC__)
-                 " (STM32CubeIDE)\r\n\n",
+              " (STM32CubeIDE)\r\n\n",
 #endif /* IDE */
-                 HAL_GetHalVersion() >> 24,
-                 (HAL_GetHalVersion() >> 16) & 0xFF,
-                 (HAL_GetHalVersion() >> 8) & 0xFF,
-                 HAL_GetHalVersion()      & 0xFF,
-                 __DATE__, __TIME__);
+              HAL_GetHalVersion() >> 24,
+              (HAL_GetHalVersion() >> 16) & 0xFF,
+              (HAL_GetHalVersion() >> 8) & 0xFF,
+              HAL_GetHalVersion()      & 0xFF,
+              __DATE__, __TIME__);
 
   /* Initialize 53L3A2 board */
   HW_ToF_Init();
@@ -290,16 +290,16 @@ static void Sensors_Init(void)
   ENV_Server_App_Context.hasHumidity = 0;
   ENV_Server_App_Context.hasTemperature = 0;
 
-  if( ENV_SENSOR_Init(TEMPERATURE_INSTANCE_1, ENV_TEMPERATURE) == BSP_ERROR_NONE)
+  if (ENV_SENSOR_INIT(TEMPERATURE_INSTANCE_1, ENV_TEMPERATURE) == BSP_ERROR_NONE)
   {
     ENV_Server_App_Context.hasTemperature++;
   }
-  if( ENV_SENSOR_Init(HUMIDITY_INSTANCE, ENV_HUMIDITY) == BSP_ERROR_NONE)
+  if (ENV_SENSOR_INIT(HUMIDITY_INSTANCE, ENV_HUMIDITY) == BSP_ERROR_NONE)
   {
     ENV_Server_App_Context.hasHumidity = 1;
   }
 
-  if (ENV_SENSOR_Init(PRESS_AND_TEMP_INSTANCE, ENV_TEMPERATURE | ENV_PRESSURE) == BSP_ERROR_NONE)
+  if (ENV_SENSOR_INIT(PRESS_AND_TEMP_INSTANCE, ENV_TEMPERATURE | ENV_PRESSURE) == BSP_ERROR_NONE)
   {
     ENV_Server_App_Context.hasPressure = 1;
     ENV_Server_App_Context.hasTemperature++;
@@ -313,18 +313,18 @@ static void Sensors_Init(void)
 
   MOTION_Set2G_Accelerometer_FullScale();
 
-  if (MOTION_SENSOR_Init(ACCELERO_AND_GYRO_INSTANCE, MOTION_ACCELERO | MOTION_GYRO) == BSP_ERROR_NONE)
+  if (MOTION_SENSOR_INIT(ACCELERO_AND_GYRO_INSTANCE, MOTION_ACCELERO | MOTION_GYRO) == BSP_ERROR_NONE)
   {
     MOTION_Server_App_Context.hasGyro = 1;
     MOTION_Server_App_Context.hasAcc = 1;
   }
 
-  if (MOTION_SENSOR_Init(ACCELERO_INSTANCE_2, MOTION_ACCELERO) == BSP_ERROR_NONE)
+  if (MOTION_SENSOR_INIT(ACCELERO_INSTANCE_2, MOTION_ACCELERO) == BSP_ERROR_NONE)
   {
     MOTION_Server_App_Context.hasAcc = 1;
   }
 
-  if (MOTION_SENSOR_Init(MAGNETO_INSTANCE, MOTION_MAGNETO) == BSP_ERROR_NONE)
+  if (MOTION_SENSOR_INIT(MAGNETO_INSTANCE, MOTION_MAGNETO) == BSP_ERROR_NONE)
   {
     MOTION_Server_App_Context.hasMag = 1;
   }
@@ -354,7 +354,7 @@ void ENV_Handle_Sensor(void)
 
   if (ENV_Server_App_Context.hasPressure == 1)
   {
-    if (ENV_SENSOR_Get_Value(PRESSURE_INSTANCE, ENV_PRESSURE, &pressure) == BSP_ERROR_NONE)
+    if (ENV_SENSOR_GET_VALUE(PRESSURE_INSTANCE, ENV_PRESSURE, &pressure) == BSP_ERROR_NONE)
     {
       MCR_BLUEMS_F2I_2D(pressure, intPart, decPart);
       ENV_Server_App_Context.PressureValue = intPart * 100 + decPart;
@@ -363,7 +363,7 @@ void ENV_Handle_Sensor(void)
 
   if (ENV_Server_App_Context.hasHumidity == 1)
   {
-    if (ENV_SENSOR_Get_Value(HUMIDITY_INSTANCE, ENV_HUMIDITY, &humidity) == BSP_ERROR_NONE)
+    if (ENV_SENSOR_GET_VALUE(HUMIDITY_INSTANCE, ENV_HUMIDITY, &humidity) == BSP_ERROR_NONE)
     {
       MCR_BLUEMS_F2I_1D(humidity, intPart, decPart);
       ENV_Server_App_Context.HumidityValue = intPart * 10 + decPart;
@@ -372,14 +372,14 @@ void ENV_Handle_Sensor(void)
 
   if (ENV_Server_App_Context.hasTemperature >= 1)
   {
-    if (ENV_SENSOR_Get_Value(TEMPERATURE_INSTANCE_2, ENV_TEMPERATURE, &temperature) == BSP_ERROR_NONE)
+    if (ENV_SENSOR_GET_VALUE(TEMPERATURE_INSTANCE_2, ENV_TEMPERATURE, &temperature) == BSP_ERROR_NONE)
     {
       MCR_BLUEMS_F2I_1D(temperature, intPart, decPart);
       ENV_Server_App_Context.TemperatureValue[tempIndex] = intPart * 10 + decPart;
       tempIndex++;
     }
 
-    if (ENV_SENSOR_Get_Value(TEMPERATURE_INSTANCE_1, ENV_TEMPERATURE, &temperature) == BSP_ERROR_NONE)
+    if (ENV_SENSOR_GET_VALUE(TEMPERATURE_INSTANCE_1, ENV_TEMPERATURE, &temperature) == BSP_ERROR_NONE)
     {
       MCR_BLUEMS_F2I_1D(temperature, intPart, decPart);
       ENV_Server_App_Context.TemperatureValue[tempIndex] = intPart * 10 + decPart;
@@ -396,7 +396,7 @@ void ENV_Handle_Sensor(void)
 void MOTION_Set2G_Accelerometer_FullScale(void)
 {
   /* Set Full Scale to +/-2g */
-  MOTION_SENSOR_SetFullScale(ACCELERO_INSTANCE, MOTION_ACCELERO, 2);
+  MOTION_SENSOR_SET_FULL_SCALE(ACCELERO_INSTANCE, MOTION_ACCELERO, 2);
 }
 
 /**
@@ -407,17 +407,17 @@ void MOTION_Set2G_Accelerometer_FullScale(void)
 void MOTION_Handle_Sensor(void)
 {
 
-  MOTION_SENSOR_Axes_t acceleration;
-  MOTION_SENSOR_Axes_t angular_velocity;
-  MOTION_SENSOR_Axes_t magnetic_field;
+  MOTION_SENSOR_AXES_T acceleration;
+  MOTION_SENSOR_AXES_T angular_velocity;
+  MOTION_SENSOR_AXES_T magnetic_field;
 
   if (MOTION_Server_App_Context.hasAcc == 1)
   {
-    if (MOTION_SENSOR_GetAxes(ACCELERO_INSTANCE, MOTION_ACCELERO, &acceleration) == BSP_ERROR_NONE)
+    if (MOTION_SENSOR_GET_AXES(ACCELERO_INSTANCE, MOTION_ACCELERO, &acceleration) == BSP_ERROR_NONE)
     {
       MOTION_Server_App_Context.acceleration = acceleration;
     }
-    if (MOTION_SENSOR_GetAxes(ACCELERO_INSTANCE_2, MOTION_ACCELERO, &acceleration) == BSP_ERROR_NONE)
+    if (MOTION_SENSOR_GET_AXES(ACCELERO_INSTANCE_2, MOTION_ACCELERO, &acceleration) == BSP_ERROR_NONE)
     {
       MOTION_Server_App_Context.acceleration = acceleration;
     }
@@ -425,7 +425,7 @@ void MOTION_Handle_Sensor(void)
 
   if (MOTION_Server_App_Context.hasGyro == 1)
   {
-    if (MOTION_SENSOR_GetAxes(GYRO_INSTANCE, MOTION_GYRO, &angular_velocity) == BSP_ERROR_NONE)
+    if (MOTION_SENSOR_GET_AXES(GYRO_INSTANCE, MOTION_GYRO, &angular_velocity) == BSP_ERROR_NONE)
     {
       MOTION_Server_App_Context.angular_velocity = angular_velocity;
     }
@@ -433,7 +433,7 @@ void MOTION_Handle_Sensor(void)
 
   if (MOTION_Server_App_Context.hasMag == 1)
   {
-    if (MOTION_SENSOR_GetAxes(MAGNETO_INSTANCE, MOTION_MAGNETO, &magnetic_field) == BSP_ERROR_NONE)
+    if (MOTION_SENSOR_GET_AXES(MAGNETO_INSTANCE, MOTION_MAGNETO, &magnetic_field) == BSP_ERROR_NONE)
     {
       MOTION_Server_App_Context.magnetic_field = magnetic_field;
     }
